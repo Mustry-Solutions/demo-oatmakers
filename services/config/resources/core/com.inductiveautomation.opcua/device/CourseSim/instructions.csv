@@ -1,3 +1,0 @@
-Time Interval, Browse Path, Value Source, Data Type
-0,"Ramp","ramp(0,100,60,1)","Double"
-0,"Sine","sine(-50,50,30,1)","Double"
