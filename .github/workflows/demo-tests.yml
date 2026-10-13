@@ -3,16 +3,6 @@ name: Customer demo tests
   pull_request:
     branches:
     - main
-    paths:
-    - projects/oatmakers/**
-    - db-migration/**
-    - tools/demo/**
-    - tests/demo/**
-    - .github/workflows/demo-tests.yml
-    - ops/assemble-deploy.sh
-    - .github/workflows/deploy.yml
-    - compose.yml
-    - tests/test_deploy_payload.py
   workflow_dispatch: null
   workflow_call: {}
 permissions:
