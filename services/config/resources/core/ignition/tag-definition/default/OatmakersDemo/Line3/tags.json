@@ -1,0 +1,51 @@
+[
+  {
+    "dataType": "DateTime",
+    "defaultValue": null,
+    "name": "LastUpdate",
+    "tagType": "AtomicTag",
+    "valueSource": "memory"
+  },
+  {
+    "dataType": "Float8",
+    "defaultValue": 0.0,
+    "name": "Moisture",
+    "tagType": "AtomicTag",
+    "valueSource": "memory"
+  },
+  {
+    "dataType": "Float8",
+    "defaultValue": 0.0,
+    "name": "Power",
+    "tagType": "AtomicTag",
+    "valueSource": "memory"
+  },
+  {
+    "dataType": "Float8",
+    "defaultValue": 0.0,
+    "name": "Pressure",
+    "tagType": "AtomicTag",
+    "valueSource": "memory"
+  },
+  {
+    "dataType": "String",
+    "defaultValue": "Starting",
+    "name": "State",
+    "tagType": "AtomicTag",
+    "valueSource": "memory"
+  },
+  {
+    "dataType": "Float8",
+    "defaultValue": 0.0,
+    "name": "Temperature",
+    "tagType": "AtomicTag",
+    "valueSource": "memory"
+  },
+  {
+    "dataType": "Float8",
+    "defaultValue": 0.0,
+    "name": "Throughput",
+    "tagType": "AtomicTag",
+    "valueSource": "memory"
+  }
+]

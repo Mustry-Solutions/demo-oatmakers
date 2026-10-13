@@ -1,3 +1,10 @@
+# The custom self-hosted runner labels this repo's workflows target, so
+# actionlint does not flag them as unknown.
 self-hosted-runner:
   labels:
+    # The production runner next to the gateway behind cloud.mustrysolutions.com
+    # (ops/compose.runner.yml). Only deploy.yml may use it.
     - demo-oatmakers
+    # Lab 07 Part 0: every personal test runner is labelled <yourname>-local,
+    # so one glob covers every test-<yourname>.yml.
+    - "*-local"

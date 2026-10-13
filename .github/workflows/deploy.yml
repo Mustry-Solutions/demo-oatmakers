@@ -1,196 +1,448 @@
-name: Deploy Oatmakers
-'on':
+# Deploy to production: release.yaml is the ONLY trigger.
+#
+# main is the single long-lived branch, and merging a PR deploys nothing. What
+# runs on cloud.mustrysolutions.com is decided by one file, release.yaml:
+#
+#   gateway: oatmakers-site-7
+#   projects:
+#     oatmakers: v5.0.0        # each pin is a git tag "<project>@<version>"
+#     wout:      v1.0.0
+#
+# When a merge changes that file, this workflow makes it true:
+#
+#   1. every pinned project is taken FROM ITS OWN TAG (nothing is built; the
+#      deploy ships the files as they were at that tag). CI's validate-release
+#      job refuses a pin whose tag does not exist.
+#   2. the gateway-level payload (services/config, services/modules.json,
+#      third-party-modules/, jar-files/jar/, db-migration/) ships from the
+#      `oatmakers` pin: the shared project owns the gateway.
+#   3. migrations run BEFORE anything ships (old screens tolerate a new table;
+#      new screens do not tolerate a missing one).
+#   4. projects and config are replaced wholesale, except what the gateway
+#      itself owns (identity, users, API token, keys, tag values), and loaded
+#      hot through the scan API.
+#   5. boot-time payload (modules + JARs) restarts the gateway only when it
+#      actually changed.
+#   6. the demo's readiness check must pass, or the run fails.
+#
+# Rollback is `git revert` of the release PR: the file goes back and this same
+# workflow makes the old pins true again. There is no automatic rollback.
+# workflow_dispatch re-runs the deploy for the state of the chosen ref, and
+# with readiness_only it only checks the running demo, like the six-hourly
+# schedule does.
+#
+# The job runs on the self-hosted runner next to the production gateway
+# (ops/compose.runner.yml). It shares the gateway's Docker daemon, so files
+# ship via `docker cp`. One runner also means deploys serialize.
+#
+# Settings on GitHub (Settings -> Secrets and variables -> Actions):
+#   Secret:   IGNITION_API_KEY    The full header value the scan API expects,
+#                                 "CICD-APIKEY:<secret>". The token resource
+#                                 lives only on the gateway (never in git; the
+#                                 wipe below spares it). scripts/mint-api-key.sh
+#                                 installs it and sets this secret in one go.
+#   Variable: IGNITION_CONTAINER  Optional, default cicd-capstone-gateway.
+#   Variable: IGNITION_URL        Optional, default
+#                                 http://cicd-capstone-gateway:8088.
+#   Variable: POSTGRES_CONTAINER  Optional, default cicd-capstone-postgres.
+#   Variable: POSTGRES_DB         Optional, default ignition.
+# The database password is not a GitHub secret: the server stack mounts it
+# into the gateway, and tools/demo/database-credentials.sh reads it inside the
+# database container.
+
+name: Deploy
+
+on:
   push:
-    branches:
-    - main
+    branches: [main]
     paths:
-    - projects/oatmakers/**
-    - db-migration/**
-    - services/ignition/config/resources/core/ignition/database-connection/OatmakersDemo/**
-    - services/ignition/config/resources/core/ignition/secret-provider/DemoRuntime/**
-    - services/ignition/third-party-modules/**
-    - tools/demo/**
-    - ops/assemble-deploy.sh
-    - .github/workflows/deploy.yml
+      - "release.yaml"
   workflow_dispatch:
     inputs:
       readiness_only:
-        description: Verify the running cloud demo without deploying
+        description: Only check the running demo, deploy nothing
         type: boolean
         default: false
   schedule:
-  - cron: 17 */6 * * *
+    - cron: "17 */6 * * *"
+
+# Never cancel a deploy mid-ship; queue the next one.
+concurrency:
+  group: deploy-oatmakers-site-7
+  cancel-in-progress: false
+
 permissions:
   contents: read
-concurrency:
-  group: deploy-oatmakers-cloud
-  cancel-in-progress: false
-defaults:
-  run:
-    shell: bash
+
+env:
+  IGNITION_CONTAINER: ${{ vars.IGNITION_CONTAINER || 'cicd-capstone-gateway' }}
+  IGNITION_URL: ${{ vars.IGNITION_URL || 'http://cicd-capstone-gateway:8088' }}
+  POSTGRES_CONTAINER: ${{ vars.POSTGRES_CONTAINER || 'cicd-capstone-postgres' }}
+  POSTGRES_DB: ${{ vars.POSTGRES_DB || 'ignition' }}
+  PUBLIC_URL: https://cloud.mustrysolutions.com
+  GATEWAY_DATA_PATH: /usr/local/bin/ignition/data
+  GATEWAY_JAR_PATH: /usr/local/bin/ignition/lib/core/gateway
+  SITE: oatmakers-site-7
+
 jobs:
-  validate:
-    if: github.event_name != 'schedule' && inputs.readiness_only != true
-    uses: ./.github/workflows/demo-tests.yml
   deploy:
     if: github.event_name != 'schedule' && inputs.readiness_only != true
-    name: Deploy this repository to cloud.mustrysolutions.com
-    runs-on:
-    - self-hosted
-    - demo-oatmakers
+    name: Deploy release.yaml to production
+    runs-on: [self-hosted, demo-oatmakers]
     timeout-minutes: 30
     env:
-      IGNITION_CONTAINER: ${{ vars.IGNITION_CONTAINER || 'cicd-capstone-gateway' }}
-      IGNITION_URL: ${{ vars.IGNITION_URL || 'http://cicd-capstone-gateway:8088' }}
       IGNITION_API_KEY: ${{ secrets.IGNITION_API_KEY }}
-      PUBLIC_URL: https://cloud.mustrysolutions.com
-      GATEWAY_DATA_PATH: /usr/local/bin/ignition/data
-      GATEWAY_JAR_PATH: /usr/local/bin/ignition/lib/core/gateway
-      SITE: oatmakers-site-7
-      DEMO_SCOPED_DEPLOY: 'true'
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Assemble the committed Oatmakers payload
-      run: ops/assemble-deploy.sh payload
-    - name: Verify deploy prerequisites
-      run: |
-        set -euo pipefail
-        command -v docker > /dev/null || { echo "docker CLI not installed on runner" >&2; exit 1; }
-        test -n "$IGNITION_API_KEY" || { echo "IGNITION_API_KEY secret is missing" >&2; exit 1; }
-        if ! docker inspect "$IGNITION_CONTAINER" > /dev/null 2>&1; then
-          echo "Container '$IGNITION_CONTAINER' not found on this runner's Docker daemon" >&2
-          exit 1
-        fi
-        state="$(docker inspect -f '{{.State.Status}}' "$IGNITION_CONTAINER")"
-        if [ "$state" != "running" ]; then
-          echo "Container '$IGNITION_CONTAINER' is in state '$state', expected 'running'" >&2
-          exit 1
-        fi
-        echo "Prerequisites OK (container=$IGNITION_CONTAINER state=$state)."
-    - name: Verify demo hot-reload authorization
-      run: |
-        for resource in config projects; do
-          curl -fsS --connect-timeout 5 --max-time 30 -X POST \
-            -H "X-Ignition-API-Token: $IGNITION_API_KEY" \
-            "$IGNITION_URL/data/api/v1/scan/$resource" > /dev/null
-        done
-    - name: Resolve and verify managed demo database credentials
-      env:
-        POSTGRES_CONTAINER: ${{ vars.POSTGRES_CONTAINER || 'cicd-capstone-postgres' }}
-        POSTGRES_DB: ${{ vars.POSTGRES_DB || 'ignition' }}
-      run: tools/demo/database-credentials.sh
-    - name: Materialize durable demo database credentials
-      run: |
-        set -euo pipefail
-        export POSTGRES_USERNAME="${DEMO_POSTGRES_USERNAME:-$POSTGRES_USERNAME}"
-        export POSTGRES_PASSWORD="${DEMO_POSTGRES_PASSWORD:-$POSTGRES_PASSWORD}"
-        config=payload/services/ignition/config/resources/core/ignition/database-connection/OatmakersDemo/config.json
-        if [ -f "$config" ]; then
-          test -n "$POSTGRES_USERNAME" || { echo "POSTGRES_USERNAME is missing" >&2; exit 1; }
-          python3 - "$config" <<'PYCODE'
-        import json, os, pathlib, sys
-        path = pathlib.Path(sys.argv[1])
-        value = json.loads(path.read_text())
-        value["username"] = os.environ["POSTGRES_USERNAME"]
-        path.write_text(json.dumps(value, indent=2) + "\n")
-        PYCODE
-          test -n "$POSTGRES_PASSWORD" || { echo "POSTGRES_PASSWORD is missing" >&2; exit 1; }
-          docker exec -u root "$IGNITION_CONTAINER" install -d -o 2003 -g 0 -m 750 "$GATEWAY_DATA_PATH/demo-secrets"
-          printf '%s' "$POSTGRES_PASSWORD" | docker exec -i -u root "$IGNITION_CONTAINER" sh -c               'umask 077; cat > /usr/local/bin/ignition/data/demo-secrets/POSTGRES_PASSWORD; chown 2003:0 /usr/local/bin/ignition/data/demo-secrets/POSTGRES_PASSWORD; chmod 400 /usr/local/bin/ignition/data/demo-secrets/POSTGRES_PASSWORD'
-        fi
-    - name: Migrate database
-      env:
-        POSTGRES_CONTAINER: ${{ vars.POSTGRES_CONTAINER || 'cicd-capstone-postgres' }}
-        POSTGRES_DB: ${{ vars.POSTGRES_DB || 'ignition' }}
-        MIGRATE_IMAGE: migrate/migrate:v4.17.1
-      run: |
-        set -euo pipefail
-        if [ "${DEMO_SCOPED_DEPLOY:-false}" = true ]; then
-          POSTGRES_USERNAME="${DEMO_POSTGRES_USERNAME:?verified demo username required}"
-          POSTGRES_PASSWORD="${DEMO_POSTGRES_PASSWORD:?verified demo password required}"
-        fi
-        dir="payload/db-migration/migrate"
-        if [ -z "$(find "$dir" -name '*.sql' -print -quit 2>/dev/null)" ]; then
-          echo "No migrations in the payload - skipping."
-          exit 0
-        fi
-        if ! docker inspect "$POSTGRES_CONTAINER" > /dev/null 2>&1; then
-          echo "::error::Payload carries migrations but container '$POSTGRES_CONTAINER' does not exist" >&2
-          exit 1
-        fi
-        test -n "$POSTGRES_USERNAME" || { echo "POSTGRES_USERNAME secret is missing" >&2; exit 1; }
-        test -n "$POSTGRES_PASSWORD" || { echo "POSTGRES_PASSWORD secret is missing" >&2; exit 1; }
+      - name: Check out the repository with its tags
+        uses: actions/checkout@v4
+        with:
+          clean: true
+          fetch-depth: 0
+          fetch-tags: true
 
-        network="$(docker inspect "$POSTGRES_CONTAINER" \
-          --format '{{range $k, $_ := .NetworkSettings.Networks}}{{$k}}{{end}}')"
+      - name: Parse release.yaml
+        # Deliberately simple format, strictly validated by CI before the
+        # merge; this parser only needs to agree with validate-release.
+        run: |
+          set -euo pipefail
+          test -f release.yaml || { echo "::error::release.yaml not found at the repo root" >&2; exit 1; }
+          sed -e 's/#.*$//' -e 's/[[:space:]]*$//' release.yaml > "$RUNNER_TEMP/release.clean"
 
-        # Credentials go INTO a URL, so they must be percent-encoded: a
-        # password with ':' '@' '/' or '%' would otherwise break the URL
-        # parse - and the parser's error message echoes password fragments
-        # into a public log (GitHub only masks exact full-string matches).
-        urlenc() {
-          local s="$1" out='' c i
-          for ((i = 0; i < ${#s}; i++)); do
-            c="${s:i:1}"
-            case "$c" in
-              [a-zA-Z0-9.~_-]) out+="$c" ;;
-              *) printf -v c '%%%02X' "'$c"; out+="$c" ;;
-            esac
+          gateway="$(awk '$1 == "gateway:" { print $2; exit }' "$RUNNER_TEMP/release.clean")"
+          if [ "$gateway" != "$SITE" ]; then
+            echo "::error file=release.yaml::gateway is '$gateway' but this runner deploys '$SITE'" >&2
+            exit 1
+          fi
+
+          awk '
+            /^projects:$/                { inp = 1; next }
+            /^[^[:space:]]/              { inp = 0 }
+            inp && NF == 0               { next }
+            inp {
+              if ($0 !~ /^[[:space:]]+[A-Za-z][A-Za-z0-9_-]*:[[:space:]]*v[0-9]+\.[0-9]+\.[0-9]+$/) {
+                printf "::error file=release.yaml::cannot parse pin line: %s\n", $0 > "/dev/stderr"
+                bad = 1; next
+              }
+              name = $1; sub(/:$/, "", name)
+              print name "=" $2
+            }
+            END { exit bad }
+          ' "$RUNNER_TEMP/release.clean" > "$RUNNER_TEMP/pins.env"
+
+          test -s "$RUNNER_TEMP/pins.env" || { echo "::error file=release.yaml::no project pins found" >&2; exit 1; }
+          grep -q '^oatmakers=' "$RUNNER_TEMP/pins.env" || {
+            echo "::error file=release.yaml::the oatmakers pin is required (it carries the gateway config)" >&2
+            exit 1
+          }
+          echo "Release for $gateway:"
+          sed 's/^/  /' "$RUNNER_TEMP/pins.env"
+
+      - name: Assemble the payload from the pinned tags
+        # git archive per pin: projects/<name>/ exactly as it was at
+        # <name>@<version>. Nothing from the working tree ships except what a
+        # tag says.
+        run: |
+          set -euo pipefail
+          rm -rf payload && mkdir -p payload
+          while IFS='=' read -r name version; do
+            tag="$name@$version"
+            if ! git rev-parse -q --verify "refs/tags/$tag" > /dev/null; then
+              echo "::error file=release.yaml::pin $name: $version but tag '$tag' does not exist. Push the tag first." >&2
+              exit 1
+            fi
+            if [ -z "$(git ls-tree -d "refs/tags/$tag" -- "projects/$name")" ]; then
+              echo "::error file=release.yaml::tag '$tag' exists but contains no projects/$name/" >&2
+              exit 1
+            fi
+            git archive "refs/tags/$tag" -- "projects/$name" | tar -x -C payload
+            echo "  projects/$name <- $tag ($(git rev-parse --short "refs/tags/$tag^{commit}"))"
+          done < "$RUNNER_TEMP/pins.env"
+
+          # The gateway-level payload rides the shared project's tag.
+          oat_tag="oatmakers@$(grep '^oatmakers=' "$RUNNER_TEMP/pins.env" | cut -d= -f2)"
+          for path in services third-party-modules jar-files db-migration; do
+            if [ -n "$(git ls-tree "refs/tags/$oat_tag" -- "$path")" ]; then
+              git archive "refs/tags/$oat_tag" -- "$path" | tar -x -C payload
+              echo "  $path/ <- $oat_tag"
+            fi
           done
-          printf '%s' "$out"
-        }
-        db_url="postgres://$(urlenc "$POSTGRES_USERNAME"):$(urlenc "$POSTGRES_PASSWORD")@${POSTGRES_CONTAINER}:5432/${POSTGRES_DB}?sslmode=disable"
 
-        if [ "${DEMO_SCOPED_DEPLOY:-false}" = true ]; then
-          db_url="${db_url}&x-migrations-table=oat_demo_schema_migrations"
-        fi
+          # system-properties is per-gateway identity: the repo carries the
+          # LOCAL gateway's copy (systemName oatmakers-local), production keeps
+          # its own. Never ship it.
+          rm -rf payload/services/config/resources/core/ignition/system-properties
+          echo "  (system-properties stripped: per-gateway identity never ships)"
 
-        cid="$(docker create --network "$network" "$MIGRATE_IMAGE" \
-          -path=/migrations -database "$db_url" up)"
-        trap 'docker rm -f "$cid" > /dev/null 2>&1 || true' EXIT
-        docker cp "$dir/." "$cid:/migrations/" > /dev/null
-        echo "migrate up → $POSTGRES_DB (network: $network)"
-        docker start -a "$cid"
-    - name: Stage pinned Mustry UI without replacing other module registrations
-      run: python3 tools/demo/install-module.py payload
-    - name: Load Mustry UI when its binary or registration changed
-      run: bash tools/demo/restart-module.sh
-    - name: Back up and ship isolated customer demo
-      run: tools/demo/deploy-scoped.sh payload
-    - name: Reload the Oatmakers resources
-      run: |-
-        set -euo pipefail
-        for resource in config projects; do
-          curl -fsS --connect-timeout 5 --max-time 30 -X POST \
-            -H "X-Ignition-API-Token: $IGNITION_API_KEY" \
-            "$IGNITION_URL/data/api/v1/scan/$resource" > /dev/null
-        done
-    - name: Verify the public gateway
-      run: |
-        set -euo pipefail
-        for i in $(seq 1 30); do
-          if curl -fsS --max-time 5 "$PUBLIC_URL/StatusPing" | grep -q RUNNING; then
-            echo "Gateway RUNNING behind $PUBLIC_URL"
+      - name: Verify deploy prerequisites
+        run: |
+          set -euo pipefail
+          command -v docker > /dev/null || { echo "docker CLI not installed on runner" >&2; exit 1; }
+          test -n "$IGNITION_API_KEY" || { echo "IGNITION_API_KEY secret is missing" >&2; exit 1; }
+          for container in "$IGNITION_CONTAINER" "$POSTGRES_CONTAINER"; do
+            state="$(docker inspect -f '{{.State.Status}}' "$container" 2>/dev/null || echo missing)"
+            if [ "$state" != "running" ]; then
+              echo "Container '$container' is '$state', expected 'running'" >&2
+              exit 1
+            fi
+          done
+          echo "Prerequisites OK ($IGNITION_CONTAINER, $POSTGRES_CONTAINER running)."
+
+      - name: Align the database login with the repository
+        # Ensures the role `ignition` that every committed database connection
+        # uses, with the server's own database password, and exports the
+        # credentials for the migrations.
+        run: tools/demo/database-credentials.sh
+
+      - name: Migrate database
+        # BEFORE the ship steps, and never continue-on-error: a failed
+        # migration must stop the run before anything ships. golang-migrate
+        # runs from its own image on the stack's network and records its
+        # position in schema_migrations, the same table scripts/migrate.sh and
+        # the Part 0 test workflow use.
+        env:
+          MIGRATE_IMAGE: migrate/migrate:v4.17.1
+        run: |
+          set -euo pipefail
+          dir="payload/db-migration/migrate"
+          if [ -z "$(find "$dir" -name '*.sql' -print -quit 2>/dev/null)" ]; then
+            echo "No migrations in the payload, skipping."
             exit 0
           fi
-          echo "waiting ($i/30)…"; sleep 10
-        done
-        echo "Gateway did not come up within 5 minutes" >&2
-        exit 1
-    - name: Verify customer demo data and page routes
-      run: tools/demo/check-runtime.sh progress
-    - name: Restore previous demo resources if verification fails
-      run: tools/demo/rollback-scoped.sh
-      if: failure() && env.DEMO_BACKUP != ''
-    needs: validate
+          network="$(docker inspect "$POSTGRES_CONTAINER" \
+            --format '{{range $k, $_ := .NetworkSettings.Networks}}{{$k}}{{end}}')"
+
+          # Credentials go INTO a URL, so they must be percent-encoded: a
+          # password with ':' '@' '/' or '%' would otherwise break the URL
+          # parse, and the parser's error message echoes password fragments
+          # into a public log (GitHub only masks exact full-string matches).
+          urlenc() {
+            local s="$1" out='' c i
+            for ((i = 0; i < ${#s}; i++)); do
+              c="${s:i:1}"
+              case "$c" in
+                [a-zA-Z0-9.~_-]) out+="$c" ;;
+                *) printf -v c '%%%02X' "'$c"; out+="$c" ;;
+              esac
+            done
+            printf '%s' "$out"
+          }
+          db_url="postgres://$(urlenc "$POSTGRES_USERNAME"):$(urlenc "$POSTGRES_PASSWORD")@${POSTGRES_CONTAINER}:5432/${POSTGRES_DB}?sslmode=disable"
+
+          cid="$(docker create --network "$network" "$MIGRATE_IMAGE" \
+            -path=/migrations -database "$db_url" up)"
+          trap 'docker rm -f "$cid" > /dev/null 2>&1 || true' EXIT
+          docker cp "$dir/." "$cid:/migrations/" > /dev/null
+          echo "migrate up -> $POSTGRES_DB (network: $network)"
+          docker start -a "$cid"
+
+      - name: Ship projects and config into the gateway container
+        # Wipe-then-copy, so "removed from release.yaml" means "removed from
+        # production" for projects, and "deleted in the repo" means "deleted
+        # on the gateway" for config. What the payload can never restore is
+        # left alone:
+        #   config/resources/local/ and every collection other than core and
+        #     external: per-instance identity and machine-local settings
+        #   config/ignition/: the secrets-management keys and the tag VALUE
+        #     store (retained values; tag definitions ship as resources)
+        #   config/com.inductiveautomation.opcua/: OPC UA keystores
+        #   core/ignition/user-source/{default,opcua-module}/ and
+        #     identity-provider/default/: the internal users and the admin
+        #     login. Wiping them locks everyone out.
+        #   core/ignition/system-properties/: the gateway's NAME
+        #   core/ignition/api-token/: the scan-API token this workflow uses
+        run: |
+          set -euo pipefail
+          docker exec -u root "$IGNITION_CONTAINER" sh -c "
+            set -eu
+            d='$GATEWAY_DATA_PATH'
+            rm -rf \"\$d/projects/\"*
+            rm -rf \"\$d/config/resources/external\"
+            mkdir -p \"\$d/config/resources/core/ignition\"
+            find \"\$d/config/resources/core\" -mindepth 1 -maxdepth 1 \
+              ! -name ignition -exec rm -rf {} +
+            find \"\$d/config/resources/core/ignition\" -mindepth 1 -maxdepth 1 \
+              ! -name user-source ! -name identity-provider \
+              ! -name system-properties ! -name api-token -exec rm -rf {} +
+            if [ -d \"\$d/config/resources/core/ignition/user-source\" ]; then
+              find \"\$d/config/resources/core/ignition/user-source\" -mindepth 1 -maxdepth 1 \
+                ! -name default ! -name opcua-module -exec rm -rf {} +
+            fi
+            if [ -d \"\$d/config/resources/core/ignition/identity-provider\" ]; then
+              find \"\$d/config/resources/core/ignition/identity-provider\" -mindepth 1 -maxdepth 1 \
+                ! -name default -exec rm -rf {} +
+            fi
+          "
+          docker cp payload/projects/. "$IGNITION_CONTAINER:$GATEWAY_DATA_PATH/projects/"
+          docker cp payload/services/config/. "$IGNITION_CONTAINER:$GATEWAY_DATA_PATH/config/"
+          # docker cp writes as root, but the gateway runs as uid 2003: left
+          # root-owned, it cannot manage its own data dir.
+          docker exec -u root "$IGNITION_CONTAINER" sh -c "
+            set -eu
+            gid=\$(stat -c %g '$GATEWAY_DATA_PATH/config')
+            chown -R 2003:\"\$gid\" '$GATEWAY_DATA_PATH/projects' '$GATEWAY_DATA_PATH/config'
+            chmod -R g+w '$GATEWAY_DATA_PATH/projects' '$GATEWAY_DATA_PATH/config'
+          "
+          echo "Shipped project(s):"
+          find payload/projects -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sed 's/^/  /'
+
+      - name: Ship boot-time payload (modules + JARs), restart if changed
+        # Modules and library JARs only load at BOOT. Deliberately the LAST
+        # ship step: if this restarts the gateway, nothing may touch its file
+        # tree while it boots, and the scan step below rides out the 503s of a
+        # starting gateway.
+        run: |
+          set -euo pipefail
+          restart=0
+
+          # --- module manifest ---
+          # Compare against the last SHIPPED copy, not the live file: the
+          # gateway rewrites data/modules.json after boot, so the live file
+          # never matches the repo copy verbatim.
+          if [ -f payload/services/modules.json ]; then
+            shipped="$GATEWAY_DATA_PATH/modules.json.shipped"
+            before="$(docker exec "$IGNITION_CONTAINER" md5sum "$shipped" 2>/dev/null | cut -d' ' -f1 || true)"
+            local_sum="$(md5sum payload/services/modules.json | cut -d' ' -f1)"
+            if [ "$before" != "$local_sum" ]; then
+              docker exec -i "$IGNITION_CONTAINER" sh -c "cat > '$GATEWAY_DATA_PATH/modules.json'" < payload/services/modules.json
+              docker exec -i "$IGNITION_CONTAINER" sh -c "cat > '$shipped'" < payload/services/modules.json
+              echo "  modules.json changed"
+              restart=1
+            fi
+          fi
+
+          # --- third-party module binaries -> /third-party-modules ---
+          # mkdir as root: the gateway process (uid 2003) cannot create
+          # directories at the container root.
+          if find payload/third-party-modules -type f -name '*.modl' 2>/dev/null | grep -q .; then
+            docker exec -u root "$IGNITION_CONTAINER" \
+              sh -c 'mkdir -p /third-party-modules && chown 2003:0 /third-party-modules'
+            while IFS= read -r f; do
+              name="$(basename "$f")"
+              before="$(docker exec "$IGNITION_CONTAINER" md5sum "/third-party-modules/$name" 2>/dev/null | cut -d' ' -f1 || true)"
+              local_sum="$(md5sum "$f" | cut -d' ' -f1)"
+              if [ "$before" != "$local_sum" ]; then
+                docker cp "$f" "$IGNITION_CONTAINER:/third-party-modules/$name"
+                echo "  shipped module $name"
+                restart=1
+              fi
+            done < <(find payload/third-party-modules -type f -name '*.modl')
+          fi
+
+          # --- library JARs -> lib/core/gateway (additive) ---
+          if [ -d payload/jar-files/jar ]; then
+            while IFS= read -r f; do
+              name="$(basename "$f")"
+              before="$(docker exec "$IGNITION_CONTAINER" md5sum "$GATEWAY_JAR_PATH/$name" 2>/dev/null | cut -d' ' -f1 || true)"
+              local_sum="$(md5sum "$f" | cut -d' ' -f1)"
+              if [ "$before" != "$local_sum" ]; then
+                docker cp "$f" "$IGNITION_CONTAINER:$GATEWAY_JAR_PATH/$name"
+                echo "  shipped JAR $name"
+                restart=1
+              fi
+            done < <(find payload/jar-files/jar -type f -name '*.jar')
+          fi
+
+          if [ "$restart" -eq 0 ]; then
+            echo "Boot-time payload unchanged, no restart needed."
+            exit 0
+          fi
+          echo "Boot-time payload changed, restarting $IGNITION_CONTAINER..."
+          docker restart "$IGNITION_CONTAINER"
+          # StatusPing says RUNNING even while details say COMMISSIONING: a
+          # boot-time module trust check runs a commissioning pass first.
+          # Require RUNNING without COMMISSIONING, or the scan below fires into
+          # the commissioning webapp and gets a 400.
+          for _ in $(seq 1 60); do
+            state="$(curl -fsS --max-time 3 "$IGNITION_URL/StatusPing" 2>/dev/null || true)"
+            if echo "$state" | grep -q '"state":"RUNNING"' && ! echo "$state" | grep -q COMMISSIONING; then
+              echo "gateway RUNNING again."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "gateway did not come back after the restart (last StatusPing: $state)" >&2
+          exit 1
+
+      - name: Trigger gateway scan
+        # Hot reload of projects and config. Self-heal on 401/403: the gateway
+        # only reads its api-token and the deployed security-properties at
+        # boot, so restart once, wait, retry. A 401 that survives the restart
+        # means no matching token is installed: run scripts/mint-api-key.sh on
+        # the production host.
+        run: |
+          set -euo pipefail
+          run_scans() {
+            local what code tries
+            for what in config projects; do
+              tries=0
+              while :; do
+                code="$(curl -sS -o /dev/null -w '%{http_code}' -X POST \
+                  --connect-timeout 5 --max-time 30 \
+                  -H "X-Ignition-API-Token: $IGNITION_API_KEY" \
+                  "$IGNITION_URL/data/api/v1/scan/$what" || echo 000)"
+                echo "scan $what -> HTTP $code"
+                if [ "$code" = "401" ] || [ "$code" = "403" ]; then
+                  return 42
+                fi
+                if [ "$code" -ge 200 ] && [ "$code" -lt 300 ]; then
+                  break
+                fi
+                # 400 included: the commissioning webapp answers 400 while a
+                # boot-time trust pass is still finishing.
+                if { [ "$code" -ge 500 ] || [ "$code" = "400" ] || [ "$code" = "000" ]; } && [ "$tries" -lt 12 ]; then
+                  tries=$((tries + 1))
+                  echo "  gateway not ready yet, retry $tries/12 in 10s"
+                  sleep 10
+                  continue
+                fi
+                echo "scan $what failed (HTTP $code)" >&2
+                return 1
+              done
+            done
+          }
+          rc=0
+          run_scans || rc=$?
+          if [ "$rc" = "42" ]; then
+            echo "Scan not authorized: the gateway has not loaded the API token /"
+            echo "security-properties yet. Restarting it to load them, then retrying."
+            docker restart "$IGNITION_CONTAINER"
+            for _ in $(seq 1 60); do
+              state="$(curl -fsS --max-time 3 "$IGNITION_URL/StatusPing" 2>/dev/null || true)"
+              if echo "$state" | grep -q '"state":"RUNNING"' && ! echo "$state" | grep -q COMMISSIONING; then
+                break
+              fi
+              sleep 5
+            done
+            run_scans
+          elif [ "$rc" != "0" ]; then
+            exit "$rc"
+          fi
+
+      - name: Smoke check, the gateway answers on the public URL
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 30); do
+            if curl -fsS --max-time 5 "$PUBLIC_URL/StatusPing" | grep -q RUNNING; then
+              echo "Gateway RUNNING behind $PUBLIC_URL"
+              exit 0
+            fi
+            echo "waiting ($i/30)"; sleep 10
+          done
+          echo "Gateway did not come up within 5 minutes" >&2
+          exit 1
+
+      - name: Verify the demo data and page routes
+        # A failure fails the run. Nothing is restored automatically: roll
+        # back by reverting the release PR.
+        run: tools/demo/check-runtime.sh progress
+
   demo-readiness:
-    name: Customer demo readiness
+    name: Demo readiness
     if: github.event_name == 'schedule' || inputs.readiness_only == true
-    runs-on:
-    - self-hosted
-    - demo-oatmakers
+    runs-on: [self-hosted, demo-oatmakers]
     timeout-minutes: 5
     steps:
-    - uses: actions/checkout@v4
-    - name: Check timer progress, history and native page routes
-      run: tools/demo/check-runtime.sh progress
+      - uses: actions/checkout@v4
+      - name: Check timer progress, history and page routes
+        run: tools/demo/check-runtime.sh progress
