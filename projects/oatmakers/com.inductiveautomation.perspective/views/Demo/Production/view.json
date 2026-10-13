@@ -1,0 +1,345 @@
+{
+  "custom": {
+    "live": {
+      "ready": false,
+      "metrics": [],
+      "lines": [],
+      "trend": [],
+      "updatedEpochMs": 0,
+      "updatedAt": "",
+      "shiftStart": ""
+    },
+    "events": []
+  },
+  "params": {},
+  "propConfig": {
+    "custom.live": {
+      "binding": {
+        "type": "expr-struct",
+        "config": {
+          "waitOnAll": true,
+          "struct": {
+            "tick": "now(1000)"
+          }
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.live()"
+          }
+        ]
+      }
+    },
+    "custom.events": {
+      "binding": {
+        "type": "expr-struct",
+        "config": {
+          "waitOnAll": true,
+          "struct": {
+            "start": "{/root/Timeline.props.output.visibleStartMs}",
+            "end": "{/root/Timeline.props.output.visibleEndMs}",
+            "refresh": "now(5000)"
+          }
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.timeline(value[\"start\"], value[\"end\"])"
+          }
+        ]
+      }
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 1000
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Demo/Page"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Header"
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "classes": "Demo/PageHeader"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Identity"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Eyebrow"
+                },
+                "props": {
+                  "text": "OATMAKERS / LIVE OPERATIONS",
+                  "style": {
+                    "classes": "Demo/Eyebrow"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Title"
+                },
+                "props": {
+                  "text": "Production planning",
+                  "style": {
+                    "classes": "Demo/PageTitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Subtitle"
+                },
+                "props": {
+                  "text": "Browse shifts, pan through the schedule and open a batch for details.",
+                  "style": {
+                    "classes": "Demo/Subtitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0,
+              "grow": 1
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Mode"
+            },
+            "props": {
+              "text": "SIMULATED FACTORY",
+              "style": {
+                "classes": "Demo/DemoBadge"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "LiveStatus"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Demo/LiveStatus"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({view.custom.live.ready}, \"Live \u00b7 recorded at \" + {view.custom.live.updatedAt} + \" \u00b7 updates every second\", \"Live telemetry is unavailable\")"
+              }
+            }
+          },
+          "props.style.color": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({view.custom.live.ready}, \"#6d757c\", \"#b57a17\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "mustrysolutions.perspective.display.resourcetimeline",
+        "meta": {
+          "name": "Timeline"
+        },
+        "props": {
+          "config": {
+            "resources": [
+              {
+                "id": "1",
+                "label": "Rolling line 01",
+                "group": "Oat processing",
+                "color": "#39444f"
+              },
+              {
+                "id": "2",
+                "label": "Cutting line 02",
+                "group": "Oat processing",
+                "color": "#77889a"
+              },
+              {
+                "id": "3",
+                "label": "Milling line 03",
+                "group": "Oat processing",
+                "color": "#aeb8c0"
+              }
+            ],
+            "rowHeight": 76,
+            "timezone": "Europe/Brussels",
+            "locale": "en-GB",
+            "showToolbar": true,
+            "showMiniNav": true,
+            "showLegend": true,
+            "refreshSeconds": 5,
+            "editable": false,
+            "selectable": false,
+            "builtInEditor": false,
+            "showExport": true,
+            "categories": [
+              {
+                "id": "planned",
+                "label": "Scheduled",
+                "color": "#9aa3ab"
+              },
+              {
+                "id": "running",
+                "label": "In production",
+                "color": "#4d5862"
+              },
+              {
+                "id": "quality",
+                "label": "Quality review",
+                "color": "#b57a17"
+              },
+              {
+                "id": "complete",
+                "label": "Completed",
+                "color": "#c3cad0"
+              },
+              {
+                "id": "stop",
+                "label": "Unplanned stop",
+                "color": "#b23b34"
+              },
+              {
+                "id": "changeover",
+                "label": "Changeover / CIP",
+                "color": "#7d8891"
+              }
+            ],
+            "shifts": [
+              {
+                "label": "Early",
+                "start": "06:00"
+              },
+              {
+                "label": "Late",
+                "start": "14:00"
+              },
+              {
+                "label": "Night",
+                "start": "22:00"
+              }
+            ]
+          },
+          "data": {
+            "events": []
+          },
+          "state": {
+            "zoom": "shift",
+            "followNow": true
+          },
+          "style": {
+            "classes": "Demo/PlanningTimeline"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "480px"
+        },
+        "propConfig": {
+          "props.data.events": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.events"
+              }
+            }
+          }
+        },
+        "events": {
+          "component": {
+            "onEventClick": {
+              "type": "script",
+              "scope": "G",
+              "config": {
+                "script": "\tapplication.demo.showBatch(event.id)"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "PlanningHelp"
+        },
+        "props": {
+          "text": "Use Hour, Day, Shift or Week to change the scale. Click a batch to inspect its production and quality record.",
+          "style": {
+            "classes": "Demo/Muted"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

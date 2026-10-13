@@ -1,0 +1,32 @@
+name: demo-oatmakers-runner
+services:
+  runner:
+    image: myoung34/github-runner:latest
+    container_name: demo-oatmakers-runner
+    restart: unless-stopped
+    environment:
+      REPO_URL: https://github.com/Mustry-Solutions/demo-oatmakers
+      RUNNER_TOKEN: "${RUNNER_TOKEN:-}"
+      RUNNER_NAME: demo-oatmakers-runner
+      RUNNER_SCOPE: repo
+      LABELS: self-hosted,demo-oatmakers
+      CONFIGURED_ACTIONS_RUNNER_FILES_DIR: /runner-state
+      DISABLE_AUTOMATIC_DEREGISTRATION: 'true'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner-state:/runner-state
+      - /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose:ro
+    networks:
+      - capstone
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+volumes:
+  runner-state:
+    name: demo-oatmakers-runner-state
+networks:
+  capstone:
+    external: true
+    name: cicd-capstone_default

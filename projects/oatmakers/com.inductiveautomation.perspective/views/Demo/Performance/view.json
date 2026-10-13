@@ -1,0 +1,277 @@
+{
+  "custom": {
+    "summary": {
+      "metrics": [],
+      "losses": []
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.summary": {
+      "binding": {
+        "type": "expr-struct",
+        "config": {
+          "waitOnAll": true,
+          "struct": {
+            "start": "try({/root/History.props.params.range.start}, 0)",
+            "end": "try({/root/History.props.params.range.end}, 0)",
+            "line": "{/root/History.props.params.lineNumber}",
+            "refresh": "now(10000)"
+          }
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.rangeSnapshot(value[\"start\"], value[\"end\"], value[\"line\"])"
+          }
+        ]
+      }
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 1000
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Demo/Page"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Header"
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "classes": "Demo/PageHeader"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Identity"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Eyebrow"
+                },
+                "props": {
+                  "text": "OATMAKERS / LIVE OPERATIONS",
+                  "style": {
+                    "classes": "Demo/Eyebrow"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Title"
+                },
+                "props": {
+                  "text": "Performance & history",
+                  "style": {
+                    "classes": "Demo/PageTitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Subtitle"
+                },
+                "props": {
+                  "text": "Pick exact dates or a live preset. Every chart uses that recorded range.",
+                  "style": {
+                    "classes": "Demo/Subtitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0,
+              "grow": 1
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Mode"
+            },
+            "props": {
+              "text": "SIMULATED FACTORY",
+              "style": {
+                "classes": "Demo/DemoBadge"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "History"
+        },
+        "props": {
+          "path": "Demo/HistoryChart",
+          "params": {
+            "lineNumber": 0,
+            "metric": "rate",
+            "showSelectors": true,
+            "range": {
+              "start": 0,
+              "end": 0,
+              "valid": false,
+              "realtime": false
+            }
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "460px"
+        }
+      },
+      {
+        "type": "ia.display.flex-repeater",
+        "meta": {
+          "name": "Metrics"
+        },
+        "props": {
+          "path": "Demo/Components/Metric",
+          "direction": "row",
+          "wrap": "wrap",
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": true,
+          "elementPosition": {
+            "basis": "230px",
+            "grow": 1,
+            "shrink": 0
+          },
+          "instances": [],
+          "style": {
+            "classes": "Demo/Repeater"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.summary.metrics"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "mustrysolutions.perspective.input.datagrid",
+        "meta": {
+          "name": "Losses"
+        },
+        "props": {
+          "config": {
+            "columns": [
+              {
+                "field": "reason",
+                "header": "Loss reason",
+                "width": 250
+              },
+              {
+                "field": "minutes",
+                "header": "Line minutes",
+                "width": 140,
+                "type": "number",
+                "align": "right",
+                "decimals": 0
+              },
+              {
+                "field": "lost_kg",
+                "header": "Lost output kg",
+                "width": 160,
+                "type": "number",
+                "align": "right",
+                "decimals": 1
+              }
+            ],
+            "idField": "reason",
+            "rowHeight": 44,
+            "locale": "en-GB",
+            "rowSelect": "none",
+            "showToolbar": true,
+            "showExport": true,
+            "editable": false,
+            "emptyMessage": "No records for the selected range."
+          },
+          "data": {
+            "rows": []
+          },
+          "state": {
+            "selection": []
+          },
+          "style": {
+            "classes": "Demo/DataGrid"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "250px"
+        },
+        "propConfig": {
+          "props.data.rows": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.summary.losses"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

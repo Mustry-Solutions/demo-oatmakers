@@ -1,0 +1,362 @@
+{
+  "custom": {
+    "value": 0,
+    "lastUpdate": 0,
+    "fresh": false,
+    "setpoint": 0
+  },
+  "params": {
+    "lineNumber": 1,
+    "metric": "temperature",
+    "tag": "Temperature",
+    "label": "Temperature",
+    "unit": "\u00b0C"
+  },
+  "propConfig": {
+    "custom.value": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "[default]OatmakersDemo/Line{line}/{tag}",
+          "references": {
+            "line": "{view.params.lineNumber}",
+            "tag": "{view.params.tag}"
+          }
+        }
+      }
+    },
+    "custom.lastUpdate": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "[default]OatmakersDemo/Line{line}/LastUpdate",
+          "references": {
+            "line": "{view.params.lineNumber}"
+          }
+        }
+      }
+    },
+    "custom.fresh": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "dateDiff({view.custom.lastUpdate}, now(1000), \"second\") < 15"
+        }
+      }
+    },
+    "custom.setpoint": {
+      "binding": {
+        "type": "expr-struct",
+        "config": {
+          "waitOnAll": true,
+          "struct": {
+            "line": "{view.params.lineNumber}",
+            "metric": "{view.params.metric}"
+          }
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.scadaSetpoint(value[\"line\"], value[\"metric\"])"
+          }
+        ]
+      }
+    },
+    "params.lineNumber": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.metric": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.label": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.unit": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 100
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Demo/TagFace"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Name"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Demo/TagName"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.label"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Reading"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "classes": "Demo/MetricReading"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "PV"
+            },
+            "props": {
+              "text": "PV",
+              "style": {
+                "classes": "Demo/PvLabel"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Value"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/TagValue"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if({view.custom.fresh}, numberFormat({view.custom.value}, \"#,##0.0\"), \"n/a\")"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Unit"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/TagUnit"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.params.unit"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Target"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "classes": "Demo/MetricReading"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "SP"
+            },
+            "props": {
+              "text": "SP",
+              "style": {
+                "classes": "Demo/SpLabel"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Setpoint"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/SpValue"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "numberFormat({view.custom.setpoint}, \"#,##0.0\")"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Unit"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/TagUnit"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.params.unit"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.metric} != \"power\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Condition"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Demo/TagCondition"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(!{view.custom.fresh}, \"! STALE DATA\", if({view.params.metric} = \"moisture\" && {view.custom.value} > 13, \"! HIGH MOISTURE\", if({view.params.metric} = \"temperature\" && {view.custom.value} > 86, \"! HIGH TEMPERATURE\", \"\")))"
+              }
+            }
+          },
+          "position.display": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "!{view.custom.fresh} || ({view.params.metric} = \"moisture\" && {view.custom.value} > 13) || ({view.params.metric} = \"temperature\" && {view.custom.value} > 86)"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    },
+    "events": {
+      "dom": {
+        "onClick": {
+          "type": "script",
+          "scope": "G",
+          "config": {
+            "script": "\tself.session.custom.demo.scadaMetric = self.view.params.metric"
+          }
+        }
+      }
+    }
+  }
+}

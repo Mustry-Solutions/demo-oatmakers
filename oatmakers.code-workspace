@@ -1,0 +1,22 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "ignitionFlint.sslVerify": false,
+        "ignitionFlint.ignitionGateways": [
+            {
+                "label": "oatmakers",
+                "address": "http://localhost:8088",
+                "projectPaths": [
+                    "projects/oatmakers"
+                ],
+                "updateDesignerOnSave": true,
+                "forceUpdateDesigner": false,
+                "supportsProjectScanEndpoint": true
+            }
+        ]
+    }
+}

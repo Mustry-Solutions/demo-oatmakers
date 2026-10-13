@@ -1,0 +1,196 @@
+name: Deploy Oatmakers
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - projects/oatmakers/**
+    - db-migration/**
+    - services/ignition/config/resources/core/ignition/database-connection/OatmakersDemo/**
+    - services/ignition/config/resources/core/ignition/secret-provider/DemoRuntime/**
+    - services/ignition/third-party-modules/**
+    - tools/demo/**
+    - ops/assemble-deploy.sh
+    - .github/workflows/deploy.yml
+  workflow_dispatch:
+    inputs:
+      readiness_only:
+        description: Verify the running cloud demo without deploying
+        type: boolean
+        default: false
+  schedule:
+  - cron: 17 */6 * * *
+permissions:
+  contents: read
+concurrency:
+  group: deploy-oatmakers-cloud
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  validate:
+    if: github.event_name != 'schedule' && inputs.readiness_only != true
+    uses: ./.github/workflows/demo-tests.yml
+  deploy:
+    if: github.event_name != 'schedule' && inputs.readiness_only != true
+    name: Deploy this repository to cloud.mustrysolutions.com
+    runs-on:
+    - self-hosted
+    - demo-oatmakers
+    timeout-minutes: 30
+    env:
+      IGNITION_CONTAINER: ${{ vars.IGNITION_CONTAINER || 'cicd-capstone-gateway' }}
+      IGNITION_URL: ${{ vars.IGNITION_URL || 'http://cicd-capstone-gateway:8088' }}
+      IGNITION_API_KEY: ${{ secrets.IGNITION_API_KEY }}
+      PUBLIC_URL: https://cloud.mustrysolutions.com
+      GATEWAY_DATA_PATH: /usr/local/bin/ignition/data
+      GATEWAY_JAR_PATH: /usr/local/bin/ignition/lib/core/gateway
+      SITE: oatmakers-site-7
+      DEMO_SCOPED_DEPLOY: 'true'
+    steps:
+    - uses: actions/checkout@v4
+    - name: Assemble the committed Oatmakers payload
+      run: ops/assemble-deploy.sh payload
+    - name: Verify deploy prerequisites
+      run: |
+        set -euo pipefail
+        command -v docker > /dev/null || { echo "docker CLI not installed on runner" >&2; exit 1; }
+        test -n "$IGNITION_API_KEY" || { echo "IGNITION_API_KEY secret is missing" >&2; exit 1; }
+        if ! docker inspect "$IGNITION_CONTAINER" > /dev/null 2>&1; then
+          echo "Container '$IGNITION_CONTAINER' not found on this runner's Docker daemon" >&2
+          exit 1
+        fi
+        state="$(docker inspect -f '{{.State.Status}}' "$IGNITION_CONTAINER")"
+        if [ "$state" != "running" ]; then
+          echo "Container '$IGNITION_CONTAINER' is in state '$state', expected 'running'" >&2
+          exit 1
+        fi
+        echo "Prerequisites OK (container=$IGNITION_CONTAINER state=$state)."
+    - name: Verify demo hot-reload authorization
+      run: |
+        for resource in config projects; do
+          curl -fsS --connect-timeout 5 --max-time 30 -X POST \
+            -H "X-Ignition-API-Token: $IGNITION_API_KEY" \
+            "$IGNITION_URL/data/api/v1/scan/$resource" > /dev/null
+        done
+    - name: Resolve and verify managed demo database credentials
+      env:
+        POSTGRES_CONTAINER: ${{ vars.POSTGRES_CONTAINER || 'cicd-capstone-postgres' }}
+        POSTGRES_DB: ${{ vars.POSTGRES_DB || 'ignition' }}
+      run: tools/demo/database-credentials.sh
+    - name: Materialize durable demo database credentials
+      run: |
+        set -euo pipefail
+        export POSTGRES_USERNAME="${DEMO_POSTGRES_USERNAME:-$POSTGRES_USERNAME}"
+        export POSTGRES_PASSWORD="${DEMO_POSTGRES_PASSWORD:-$POSTGRES_PASSWORD}"
+        config=payload/services/ignition/config/resources/core/ignition/database-connection/OatmakersDemo/config.json
+        if [ -f "$config" ]; then
+          test -n "$POSTGRES_USERNAME" || { echo "POSTGRES_USERNAME is missing" >&2; exit 1; }
+          python3 - "$config" <<'PYCODE'
+        import json, os, pathlib, sys
+        path = pathlib.Path(sys.argv[1])
+        value = json.loads(path.read_text())
+        value["username"] = os.environ["POSTGRES_USERNAME"]
+        path.write_text(json.dumps(value, indent=2) + "\n")
+        PYCODE
+          test -n "$POSTGRES_PASSWORD" || { echo "POSTGRES_PASSWORD is missing" >&2; exit 1; }
+          docker exec -u root "$IGNITION_CONTAINER" install -d -o 2003 -g 0 -m 750 "$GATEWAY_DATA_PATH/demo-secrets"
+          printf '%s' "$POSTGRES_PASSWORD" | docker exec -i -u root "$IGNITION_CONTAINER" sh -c               'umask 077; cat > /usr/local/bin/ignition/data/demo-secrets/POSTGRES_PASSWORD; chown 2003:0 /usr/local/bin/ignition/data/demo-secrets/POSTGRES_PASSWORD; chmod 400 /usr/local/bin/ignition/data/demo-secrets/POSTGRES_PASSWORD'
+        fi
+    - name: Migrate database
+      env:
+        POSTGRES_CONTAINER: ${{ vars.POSTGRES_CONTAINER || 'cicd-capstone-postgres' }}
+        POSTGRES_DB: ${{ vars.POSTGRES_DB || 'ignition' }}
+        MIGRATE_IMAGE: migrate/migrate:v4.17.1
+      run: |
+        set -euo pipefail
+        if [ "${DEMO_SCOPED_DEPLOY:-false}" = true ]; then
+          POSTGRES_USERNAME="${DEMO_POSTGRES_USERNAME:?verified demo username required}"
+          POSTGRES_PASSWORD="${DEMO_POSTGRES_PASSWORD:?verified demo password required}"
+        fi
+        dir="payload/db-migration/migrate"
+        if [ -z "$(find "$dir" -name '*.sql' -print -quit 2>/dev/null)" ]; then
+          echo "No migrations in the payload - skipping."
+          exit 0
+        fi
+        if ! docker inspect "$POSTGRES_CONTAINER" > /dev/null 2>&1; then
+          echo "::error::Payload carries migrations but container '$POSTGRES_CONTAINER' does not exist" >&2
+          exit 1
+        fi
+        test -n "$POSTGRES_USERNAME" || { echo "POSTGRES_USERNAME secret is missing" >&2; exit 1; }
+        test -n "$POSTGRES_PASSWORD" || { echo "POSTGRES_PASSWORD secret is missing" >&2; exit 1; }
+
+        network="$(docker inspect "$POSTGRES_CONTAINER" \
+          --format '{{range $k, $_ := .NetworkSettings.Networks}}{{$k}}{{end}}')"
+
+        # Credentials go INTO a URL, so they must be percent-encoded: a
+        # password with ':' '@' '/' or '%' would otherwise break the URL
+        # parse - and the parser's error message echoes password fragments
+        # into a public log (GitHub only masks exact full-string matches).
+        urlenc() {
+          local s="$1" out='' c i
+          for ((i = 0; i < ${#s}; i++)); do
+            c="${s:i:1}"
+            case "$c" in
+              [a-zA-Z0-9.~_-]) out+="$c" ;;
+              *) printf -v c '%%%02X' "'$c"; out+="$c" ;;
+            esac
+          done
+          printf '%s' "$out"
+        }
+        db_url="postgres://$(urlenc "$POSTGRES_USERNAME"):$(urlenc "$POSTGRES_PASSWORD")@${POSTGRES_CONTAINER}:5432/${POSTGRES_DB}?sslmode=disable"
+
+        if [ "${DEMO_SCOPED_DEPLOY:-false}" = true ]; then
+          db_url="${db_url}&x-migrations-table=oat_demo_schema_migrations"
+        fi
+
+        cid="$(docker create --network "$network" "$MIGRATE_IMAGE" \
+          -path=/migrations -database "$db_url" up)"
+        trap 'docker rm -f "$cid" > /dev/null 2>&1 || true' EXIT
+        docker cp "$dir/." "$cid:/migrations/" > /dev/null
+        echo "migrate up → $POSTGRES_DB (network: $network)"
+        docker start -a "$cid"
+    - name: Stage pinned Mustry UI without replacing other module registrations
+      run: python3 tools/demo/install-module.py payload
+    - name: Load Mustry UI when its binary or registration changed
+      run: bash tools/demo/restart-module.sh
+    - name: Back up and ship isolated customer demo
+      run: tools/demo/deploy-scoped.sh payload
+    - name: Reload the Oatmakers resources
+      run: |-
+        set -euo pipefail
+        for resource in config projects; do
+          curl -fsS --connect-timeout 5 --max-time 30 -X POST \
+            -H "X-Ignition-API-Token: $IGNITION_API_KEY" \
+            "$IGNITION_URL/data/api/v1/scan/$resource" > /dev/null
+        done
+    - name: Verify the public gateway
+      run: |
+        set -euo pipefail
+        for i in $(seq 1 30); do
+          if curl -fsS --max-time 5 "$PUBLIC_URL/StatusPing" | grep -q RUNNING; then
+            echo "Gateway RUNNING behind $PUBLIC_URL"
+            exit 0
+          fi
+          echo "waiting ($i/30)…"; sleep 10
+        done
+        echo "Gateway did not come up within 5 minutes" >&2
+        exit 1
+    - name: Verify customer demo data and page routes
+      run: tools/demo/check-runtime.sh progress
+    - name: Restore previous demo resources if verification fails
+      run: tools/demo/rollback-scoped.sh
+      if: failure() && env.DEMO_BACKUP != ''
+    needs: validate
+  demo-readiness:
+    name: Customer demo readiness
+    if: github.event_name == 'schedule' || inputs.readiness_only == true
+    runs-on:
+    - self-hosted
+    - demo-oatmakers
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v4
+    - name: Check timer progress, history and native page routes
+      run: tools/demo/check-runtime.sh progress

@@ -1,0 +1,336 @@
+{
+  "custom": {
+    "live": {
+      "ready": false,
+      "metrics": [],
+      "lines": [],
+      "trend": [],
+      "updatedEpochMs": 0,
+      "updatedAt": "",
+      "shiftStart": ""
+    },
+    "health": {
+      "liveAgeSeconds": "n/a",
+      "coverageDays": "n/a",
+      "lineCount": "n/a"
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.live": {
+      "binding": {
+        "type": "expr-struct",
+        "config": {
+          "waitOnAll": true,
+          "struct": {
+            "tick": "now(1000)"
+          }
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.live()"
+          }
+        ]
+      }
+    },
+    "custom.health": {
+      "binding": {
+        "type": "expr-struct",
+        "config": {
+          "waitOnAll": true,
+          "struct": {
+            "refresh": "now(5000)"
+          }
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.health()"
+          }
+        ]
+      }
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 1000
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Demo/Page"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Header"
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "classes": "Demo/PageHeader"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Identity"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Eyebrow"
+                },
+                "props": {
+                  "text": "OATMAKERS / LIVE OPERATIONS",
+                  "style": {
+                    "classes": "Demo/Eyebrow"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Title"
+                },
+                "props": {
+                  "text": "Demo health",
+                  "style": {
+                    "classes": "Demo/PageTitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Subtitle"
+                },
+                "props": {
+                  "text": "Data freshness and automatic retention.",
+                  "style": {
+                    "classes": "Demo/Subtitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0,
+              "grow": 1
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Mode"
+            },
+            "props": {
+              "text": "SIMULATED FACTORY",
+              "style": {
+                "classes": "Demo/DemoBadge"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "LiveStatus"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Demo/LiveStatus"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({view.custom.live.ready}, \"Live \u00b7 recorded at \" + {view.custom.live.updatedAt} + \" \u00b7 updates every second\", \"Live telemetry is unavailable\")"
+              }
+            }
+          },
+          "props.style.color": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({view.custom.live.ready}, \"#6d757c\", \"#b57a17\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Metrics"
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "classes": "Demo/Wrap"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "Age"
+            },
+            "props": {
+              "path": "Demo/Components/Metric",
+              "params": {
+                "title": "LIVE DATA AGE",
+                "unit": "sec",
+                "hint": "One-second recorded telemetry"
+              },
+              "useDefaultViewWidth": false,
+              "useDefaultViewHeight": false
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "240px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.custom.health.liveAgeSeconds"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "History"
+            },
+            "props": {
+              "path": "Demo/Components/Metric",
+              "params": {
+                "title": "HISTORY",
+                "unit": "days",
+                "hint": "Minute history, capped at three months"
+              },
+              "useDefaultViewWidth": false,
+              "useDefaultViewHeight": false
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "240px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.custom.health.coverageDays"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "Lines"
+            },
+            "props": {
+              "path": "Demo/Components/Metric",
+              "params": {
+                "title": "LINES",
+                "unit": "",
+                "hint": "Three simulated production lines"
+              },
+              "useDefaultViewWidth": false,
+              "useDefaultViewHeight": false
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "240px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.custom.health.lineCount"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Policy"
+        },
+        "props": {
+          "text": "One-second telemetry is retained for 6 hours. Minute history, recorded batch output and inspections are retained for at most 90 days or three calendar months.",
+          "style": {
+            "classes": "Demo/Body"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

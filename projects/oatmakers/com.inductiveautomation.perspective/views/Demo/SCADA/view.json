@@ -1,0 +1,173 @@
+{
+  "custom": {},
+  "params": {},
+  "propConfig": {},
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 939
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Demo/Page Separator/Page"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Header"
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "classes": "Demo/PageHeader"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Identity"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Eyebrow"
+                },
+                "props": {
+                  "text": "OATMAKERS / LIVE OPERATIONS",
+                  "style": {
+                    "classes": "Demo/Eyebrow"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Title"
+                },
+                "props": {
+                  "text": "SCADA",
+                  "style": {
+                    "classes": "Demo/PageTitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Subtitle"
+                },
+                "props": {
+                  "text": "Separator A. Drag to pan, scroll to zoom.",
+                  "style": {
+                    "classes": "Demo/Subtitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0,
+              "grow": 1
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Mode"
+            },
+            "props": {
+              "text": "SIMULATED FACTORY",
+              "style": {
+                "classes": "Demo/DemoBadge"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "mustrysolutions.perspective.display.panzoomview",
+        "meta": {
+          "name": "ProcessViewport"
+        },
+        "props": {
+          "config": {
+            "viewPath": "Demo/Separator/Process",
+            "viewParams": [],
+            "contentWidth": 1740,
+            "contentHeight": 910,
+            "minZoom": 0.2,
+            "maxZoom": 4,
+            "zoomStep": 1.25,
+            "wheelZoom": true,
+            "doubleClickZoom": true,
+            "showControls": true,
+            "showMinimap": true,
+            "showPoiList": false,
+            "flyToMs": 250,
+            "home": {
+              "x": -1,
+              "y": -1,
+              "zoom": 0
+            }
+          },
+          "state": {
+            "zoom": 0,
+            "center": {
+              "x": 0,
+              "y": 0
+            },
+            "target": ""
+          },
+          "data": {
+            "pois": []
+          },
+          "style": {
+            "classes": "Separator/PanZoom",
+            "minHeight": "0px"
+          }
+        },
+        "position": {
+          "shrink": 1,
+          "basis": "0px",
+          "grow": 1
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

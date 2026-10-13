@@ -1,0 +1,62 @@
+name: oatmakers-ui-local
+services:
+  database:
+    image: postgres:17.5
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ignition
+      POSTGRES_USER: ignition
+      POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
+      TZ: Europe/Brussels
+    volumes:
+      - demo-db:/var/lib/postgresql/data
+      - ./services/ignition/secrets/POSTGRES_PASSWORD:/run/secrets/POSTGRES_PASSWORD:ro
+    networks:
+      default:
+        aliases: [postgres]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U ignition -d ignition']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  module-init:
+    image: inductiveautomation/ignition:8.3.8
+    user: '0:0'
+    volumes:
+      - demo-gateway:/data
+      - ./services/ignition/third-party-modules:/module-source:ro
+      - ./tools/demo/mustry-ui-registry.json:/registry.json:ro
+      - ./services/ignition/secrets:/local-secrets:ro
+    entrypoint: [/bin/sh, -c]
+    command: ['mkdir -p /data/custom-modules /data/projects /data/demo-secrets; cp /local-secrets/POSTGRES_PASSWORD /data/demo-secrets/POSTGRES_PASSWORD; chmod 400 /data/demo-secrets/POSTGRES_PASSWORD; cp /module-source/Mustry_UI-0.5.2.modl /data/custom-modules/Mustry_UI.modl; if [ ! -f /data/modules.json ]; then cp /registry.json /data/modules.json; fi; chown -R 2003:0 /data']
+  gateway:
+    image: inductiveautomation/ignition:8.3.8
+    restart: unless-stopped
+    ports: ['127.0.0.1:${DEMO_HTTP_PORT:-8088}:8088']
+    volumes:
+      - demo-gateway:/usr/local/bin/ignition/data
+      - ./services/ignition/third-party-modules:/module-source:ro
+      - ./projects:/usr/local/bin/ignition/data/projects
+      - ./services/ignition/config:/usr/local/bin/ignition/data/config
+      - ./services/ignition/secrets:/run/secrets:ro
+    environment:
+      ACCEPT_IGNITION_EULA: 'Y'
+      IGNITION_EDITION: standard
+      DISABLE_QUICKSTART: 'true'
+      GATEWAY_ADMIN_USERNAME: admin
+      GATEWAY_ADMIN_PASSWORD: password
+      TZ: Europe/Brussels
+    command: ['-n', oatmakers-ui-local, '-m', '1024', '--', 'wrapper.java.initmemory=256']
+    depends_on:
+      module-init:
+        condition: service_completed_successfully
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, curl, -fsS, 'http://localhost:8088/StatusPing']
+      interval: 15s
+      timeout: 5s
+      retries: 20
+volumes:
+  demo-db:
+  demo-gateway:

@@ -1,0 +1,404 @@
+{
+  "custom": {},
+  "params": {
+    "lineNumber": 1,
+    "name": "",
+    "state": "",
+    "product": "",
+    "rate": 0,
+    "temperature": 0,
+    "moisture": 0,
+    "pressure": 0,
+    "colour": "#2d8962"
+  },
+  "propConfig": {
+    "params.lineNumber": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.name": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.state": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.product": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.rate": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.temperature": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.moisture": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.pressure": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.colour": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 270
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Demo/Panel"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Heading"
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "classes": "Demo/Spread"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Name"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/SectionTitle"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.params.name"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "State"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/Badge"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.params.state"
+                  }
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.params.colour"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Product"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Demo/Muted"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.product"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "SpeedCaption"
+        },
+        "props": {
+          "text": "LIVE THROUGHPUT",
+          "style": {
+            "classes": "Demo/Eyebrow"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Rate"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Demo/LineValue"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.rate"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn \"{0:,.0f} kg/h\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Readings"
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "classes": "Demo/Wrap"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "Temperature"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/ReadingButton"
+              }
+            },
+            "position": {
+              "basis": "90px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "type": "script",
+                  "scope": "G",
+                  "config": {
+                    "script": "\tapplication.demo.showHistory(self.view.params.lineNumber, \"temperature\")"
+                  }
+                }
+              }
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.params.temperature"
+                  },
+                  "transforms": [
+                    {
+                      "type": "script",
+                      "code": "\treturn u\"{0:.1f} {1}\".format(value or 0, u\"\\u00b0C\")"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "Moisture"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/ReadingButton"
+              }
+            },
+            "position": {
+              "basis": "90px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "type": "script",
+                  "scope": "G",
+                  "config": {
+                    "script": "\tapplication.demo.showHistory(self.view.params.lineNumber, \"moisture\")"
+                  }
+                }
+              }
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.params.moisture"
+                  },
+                  "transforms": [
+                    {
+                      "type": "script",
+                      "code": "\treturn u\"{0:.1f} {1}\".format(value or 0, u\"%\")"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "Pressure"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/ReadingButton"
+              }
+            },
+            "position": {
+              "basis": "90px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "type": "script",
+                  "scope": "G",
+                  "config": {
+                    "script": "\tapplication.demo.showHistory(self.view.params.lineNumber, \"pressure\")"
+                  }
+                }
+              }
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.params.pressure"
+                  },
+                  "transforms": [
+                    {
+                      "type": "script",
+                      "code": "\treturn u\"{0:.1f} {1}\".format(value or 0, u\"bar\")"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "ia.input.button",
+        "meta": {
+          "name": "Scada"
+        },
+        "props": {
+          "text": "Open SCADA",
+          "style": {
+            "classes": "Demo/QuietButton"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "40px"
+        },
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "type": "script",
+              "scope": "G",
+              "config": {
+                "script": "\tself.session.custom.demo.scadaLine = self.view.params.lineNumber\n\tsystem.perspective.navigate(\"/scada\")"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

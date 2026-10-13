@@ -1,0 +1,82 @@
+{
+  "custom": {},
+  "params": {
+    "text": "From Header A",
+    "source": ""
+  },
+  "propConfig": {
+    "params.text": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.source": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 28
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "cursor": "pointer"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Graphic"
+        },
+        "props": {
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMzIiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxMzIgMjgiPjwvc3ZnPg==",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.source"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    },
+    "events": {
+      "dom": {
+        "onClick": {
+          "type": "script",
+          "scope": "G",
+          "config": {
+            "script": "\tapplication.demo.showSeparatorDetail(self.view.params.text, \"pressure\")"
+          }
+        }
+      }
+    }
+  }
+}

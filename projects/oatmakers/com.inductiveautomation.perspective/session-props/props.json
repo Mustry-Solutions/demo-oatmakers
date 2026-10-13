@@ -1,0 +1,12 @@
+{
+  "custom": {
+    "demo": {
+      "scadaLine": 1,
+      "scadaArea": "peeling",
+      "scadaMetric": "temperature"
+    }
+  },
+  "props": {
+    "theme": "light"
+  }
+}
