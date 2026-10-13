@@ -6,7 +6,7 @@ import subprocess
 import time
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-CONTAINER = os.environ.get('DEMO_TEST_CONTAINER', 'oatmakers-ui-local-database-1')
+CONTAINER = os.environ.get('DEMO_TEST_CONTAINER', 'oatmakers-postgres')
 DB = 'oatmakers_demo_test'
 PREFIX = ['docker','exec','-i',CONTAINER,'psql','-U','ignition'] if CONTAINER else ['psql','-U',os.environ.get('PGUSER','ignition')]
 

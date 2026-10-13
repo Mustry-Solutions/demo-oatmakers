@@ -1,0 +1,9 @@
+[
+  {
+    "dataType": "String",
+    "defaultValue": "4",
+    "name": "SchemaVersion",
+    "tagType": "AtomicTag",
+    "valueSource": "memory"
+  }
+]

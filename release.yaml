@@ -1,0 +1,9 @@
+# What runs on production (cloud.mustrysolutions.com), right now.
+#
+# Each pin is a git tag <project>@vX.Y.Z that must exist before this file may
+# point at it. A merged change to this file is the only thing that deploys
+# (.github/workflows/deploy.yml); rollback is a revert of that change. The
+# oatmakers pin also carries the gateway config, modules, JARs and migrations.
+gateway: oatmakers-site-7
+projects:
+  oatmakers: v5.0.0

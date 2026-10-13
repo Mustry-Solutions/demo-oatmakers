@@ -1,0 +1,503 @@
+# PR validation: runs on every pull request into main (GitHub Flow).
+#
+# Several contributors share this repo, so most checks are PATH-FILTERED: the
+# `changes` job works out what a PR touches, and only the matching jobs run.
+#
+#   projects/<name>/**        -> validate-projects (a matrix job per project)
+#   release.yaml              -> validate-release ("a pin may only point at a
+#                                tag that exists" is enforced HERE, at PR time)
+#   services/, jar-files/,    -> validate-gateway-payload (manifest, JARs,
+#   third-party-modules/,        migration pairs, identity resources)
+#   db-migration/
+#   the demo (projects/oatmakers, db-migration/, tools/, tests/,
+#   deploy.yml)               -> demo (generated views, database lifecycle,
+#                                release payload)
+#
+# Branch protection on main requires exactly ONE status check: "CI OK". It
+# aggregates whatever ran; skipped jobs do not block a merge. Job ids double as
+# status-check names: keep them stable.
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+# Cancel any in-flight CI run for this PR when a new commit lands.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Least-privilege default.
+permissions:
+  contents: read
+
+jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      projects: ${{ steps.diff.outputs.projects }}
+      release: ${{ steps.diff.outputs.release }}
+      gateway_payload: ${{ steps.diff.outputs.gateway_payload }}
+      demo: ${{ steps.diff.outputs.demo }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Diff against the merge base
+        id: diff
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+          base="$(git merge-base "origin/$BASE_REF" HEAD)"
+          git diff --name-only "$base" HEAD > changed.txt
+          echo "changed files:"
+          sed 's/^/  /' changed.txt
+
+          # JSON array of project names touched by this PR, e.g. ["wout"].
+          projects="$( (grep -E '^projects/[^/]+/' changed.txt || true) \
+            | cut -d/ -f2 | sort -u | jq -R . | jq -sc .)"
+
+          flag() { if grep -qE "$1" changed.txt; then echo true; else echo false; fi; }
+          {
+            echo "projects=$projects"
+            echo "release=$(flag '^release\.yaml$')"
+            echo "gateway_payload=$(flag '^(services/|jar-files/|third-party-modules/|db-migration/)')"
+            echo "demo=$(flag '^(projects/oatmakers/|db-migration/|tools/|tests/|\.github/workflows/deploy\.yml$)')"
+          } >> "$GITHUB_OUTPUT"
+
+  validate-projects:
+    name: Validate project ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: changes
+    if: needs.changes.outputs.projects != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJSON(needs.changes.outputs.projects) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JSON validity sweep
+        # Every *.json under this project must parse. Failures surface as PR
+        # annotations via the ::error syntax. Only THIS project is swept —
+        # someone else's broken view never fails your PR.
+        env:
+          PROJECT: ${{ matrix.project }}
+        run: |
+          set -euo pipefail
+          dir="projects/$PROJECT"
+          if [ ! -d "$dir" ]; then
+            echo "$dir was deleted in this PR — nothing to validate."
+            exit 0
+          fi
+          if [ ! -f "$dir/project.json" ]; then
+            echo "::error file=$dir::Missing project.json — is this a real Ignition project?"
+            exit 1
+          fi
+          fail=0
+          while IFS= read -r f; do
+            if ! python3 -m json.tool "$f" > /dev/null 2>&1; then
+              echo "::error file=$f::Invalid JSON"
+              fail=1
+            fi
+          done < <(find "$dir" -type f -name '*.json')
+          [ "$fail" -eq 0 ] && echo "All JSON in $dir parses cleanly."
+          exit "$fail"
+
+      - name: ignition-lint (Perspective views)
+        # Runs only once the repo carries a rule_config.json (same tooling as
+        # labs 04–06). Until then this is a documented no-op.
+        env:
+          PROJECT: ${{ matrix.project }}
+        run: |
+          set -euo pipefail
+          if [ ! -f rule_config.json ] || [ ! -d "projects/$PROJECT" ]; then
+            echo "No rule_config.json (or project deleted) — skipping ign-lint."
+            exit 0
+          fi
+          pip install ign-lint==0.6.1
+          python3 tools/demo/lint_config.py "$PROJECT"
+          ign-lint --config build/lint/rules.json --files "projects/$PROJECT/**/view.json"
+
+  validate-release:
+    name: Validate release.yaml
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: changes
+    if: needs.changes.outputs.release == 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The whole point of this job is "a pin may only point at a tag
+          # that exists" — so fetch the tags to check against.
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Schema + every pin points at an existing tag
+        run: |
+          set -euo pipefail
+          pip install pyyaml==6.0.2
+          python3 - <<'EOF'
+          import re, subprocess, sys, yaml
+
+          ERRORS = []
+          def err(msg): ERRORS.append(msg)
+
+          try:
+              with open("release.yaml") as f:
+                  data = yaml.safe_load(f)
+          except FileNotFoundError:
+              print("::error::release.yaml is gone — this file is the production state, it must exist at the repo root")
+              sys.exit(1)
+          except yaml.YAMLError as e:
+              print(f"::error file=release.yaml::Not valid YAML: {e}")
+              sys.exit(1)
+
+          if not isinstance(data, dict):
+              print("::error file=release.yaml::Expected a mapping with 'gateway' and 'projects'")
+              sys.exit(1)
+
+          if data.get("gateway") != "oatmakers-site-7":
+              err(f"gateway must be 'oatmakers-site-7', got {data.get('gateway')!r}")
+
+          unknown = set(data) - {"gateway", "projects"}
+          if unknown:
+              err(f"unknown top-level keys: {sorted(unknown)}")
+
+          projects = data.get("projects")
+          if not isinstance(projects, dict) or not projects:
+              err("'projects' must be a non-empty mapping of <project>: vX.Y.Z")
+              projects = {}
+
+          tags = set(subprocess.run(
+              ["git", "tag", "--list"],
+              capture_output=True, text=True, check=True).stdout.split())
+
+          for name, version in projects.items():
+              if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*", str(name)):
+                  err(f"project name {name!r} is not a valid name")
+                  continue
+              if not re.fullmatch(r"v\d+\.\d+\.\d+", str(version)):
+                  err(f"{name}: version {version!r} must look like v1.2.3")
+                  continue
+              tag = f"{name}@{version}"
+              if tag not in tags:
+                  # Tag races are part of the lab: tell the student what IS
+                  # released for this project and which number is free next.
+                  taken = sorted(
+                      tuple(map(int, m.groups()))
+                      for t in tags
+                      if (m := re.fullmatch(rf"{re.escape(str(name))}@v(\d+)\.(\d+)\.(\d+)", t)))
+                  if taken:
+                      latest = taken[-1]
+                      hint = (f"existing releases: {', '.join('v%d.%d.%d' % v for v in taken)} — "
+                              f"next free is v{latest[0]}.{latest[1]}.{latest[2] + 1}")
+                  else:
+                      hint = "no releases exist for this project yet — start at v1.0.0"
+                  err(f"{name}: pinned at {version} but tag '{tag}' does not exist — "
+                      f"push the tag first, the release must exist before release.yaml may point at it ({hint})")
+                  continue
+              tree = subprocess.run(
+                  ["git", "ls-tree", "-d", f"refs/tags/{tag}", "--", f"projects/{name}"],
+                  capture_output=True, text=True, check=True).stdout.strip()
+              if not tree:
+                  err(f"{name}: tag '{tag}' exists but contains no projects/{name}/ — "
+                      "tag a commit that actually has the project on main")
+
+          if "oatmakers" not in projects:
+              err("the 'oatmakers' pin is required — the shared project's tag also carries "
+                  "the gateway config, modules, JARs and migrations")
+
+          for e in ERRORS:
+              print(f"::error file=release.yaml::{e}")
+          if ERRORS:
+              sys.exit(1)
+          print(f"release.yaml OK — {len(projects)} pin(s), every tag exists.")
+          EOF
+
+  validate-gateway-payload:
+    name: Validate gateway payload
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: changes
+    if: needs.changes.outputs.gateway_payload == 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JSON validity sweep (services/)
+        run: |
+          set -euo pipefail
+          [ -d services ] || { echo "No services/ — skipping."; exit 0; }
+          fail=0
+          while IFS= read -r f; do
+            if ! python3 -m json.tool "$f" > /dev/null 2>&1; then
+              echo "::error file=$f::Invalid JSON"
+              fail=1
+            fi
+          done < <(find services -type f -name '*.json')
+          [ "$fail" -eq 0 ] && echo "All JSON under services/ parses cleanly."
+          exit "$fail"
+
+      - name: Module manifest ↔ third-party-modules/ agree
+        # Every manifest entry under /third-party-modules/ must ship its .modl
+        # in this repo and record the trust pair (certFingerprint +
+        # licenseAgreementHash) — the lab 06 move. And every .modl in the
+        # folder must be registered, or the gateway would never load it.
+        run: |
+          set -euo pipefail
+          [ -f services/modules.json ] || { echo "No services/modules.json — skipping."; exit 0; }
+          python3 - <<'EOF'
+          import json, os, sys
+
+          with open("services/modules.json") as f:
+              manifest = json.load(f)
+
+          errors = []
+          referenced = set()
+          for module_id, entry in manifest.items():
+              filename = entry.get("filename", "")
+              if not filename.startswith("/third-party-modules/"):
+                  continue  # gateway-bundled module, nothing to ship
+              basename = os.path.basename(filename)
+              referenced.add(basename)
+              if not os.path.isfile(f"third-party-modules/{basename}"):
+                  errors.append(f"{module_id}: manifest points at {filename} but "
+                                f"third-party-modules/{basename} is not in the repo")
+              if entry.get("onStartup") == "enabled":
+                  for key in ("certFingerprint", "licenseAgreementHash"):
+                      if key not in entry:
+                          errors.append(f"{module_id}: enabled third-party module is missing "
+                                        f"'{key}' — the gateway will refuse to trust it")
+
+          if os.path.isdir("third-party-modules"):
+              for f in os.listdir("third-party-modules"):
+                  if f.endswith(".modl") and f not in referenced:
+                      errors.append(f"third-party-modules/{f} is not registered in "
+                                    "services/modules.json — it would never be installed")
+
+          for e in errors:
+              print(f"::error file=services/modules.json::{e}")
+          sys.exit(1 if errors else 0)
+          EOF
+          echo "Module manifest and third-party-modules/ agree."
+
+      - name: Gateway identity resources stay clean
+        # Same model as the earlier labs: the repo carries the LOCAL
+        # gateway's identity (systemName oatmakers-local), and the deploy
+        # never ships system-properties: production keeps its own name.
+        # security-properties DOES deploy (permission policy, including
+        # the APIKEY security level the deploy's scan API needs), so
+        # first-boot commissioning churn (temp auth profile) must never
+        # merge. Run scripts/setup.sh after a fresh clone's
+        # first `docker compose up` and this stays green by itself.
+        run: |
+          set -euo pipefail
+          sp="services/config/resources/core/ignition/security-properties/config.json"
+          syp="services/config/resources/core/ignition/system-properties/config.json"
+          if [ ! -f "$sp" ] || [ ! -f "$syp" ]; then
+            echo "identity resources absent — skipping"
+            exit 0
+          fi
+          fail=0
+          if ! grep -q '"APIKEY"' "$sp"; then
+            echo "::error file=$sp::The APIKEY security level is gone — this is first-boot commissioning churn, run scripts/setup.sh (or git checkout the file)"
+            fail=1
+          fi
+          if ! grep -q '"systemAuthProfile": "default"' "$sp"; then
+            echo "::error file=$sp::systemAuthProfile is not default — first-boot commissioning churn, run scripts/setup.sh (or git checkout the file)"
+            fail=1
+          fi
+          if ! grep -q '"systemName": "oatmakers-local"' "$syp"; then
+            echo "::error file=$syp::systemName is not oatmakers-local. The repo carries the LOCAL gateway's identity; don't commit another gateway's rewrite"
+            fail=1
+          fi
+          [ "$fail" -eq 0 ] && echo "Gateway identity resources are clean."
+          exit "$fail"
+
+      - name: Migration pairs (.up.sql ↔ .down.sql)
+        # Always pairs: every up has a down, every down has an up.
+        run: |
+          set -euo pipefail
+          dir="db-migration/migrate"
+          [ -d "$dir" ] || { echo "No $dir — skipping."; exit 0; }
+          fail=0
+          shopt -s nullglob
+          for up in "$dir"/*.up.sql; do
+            down="${up%.up.sql}.down.sql"
+            if [ ! -f "$down" ]; then
+              echo "::error file=$up::Missing its .down.sql pair"
+              fail=1
+            fi
+          done
+          for down in "$dir"/*.down.sql; do
+            up="${down%.down.sql}.up.sql"
+            if [ ! -f "$up" ]; then
+              echo "::error file=$down::Missing its .up.sql pair"
+              fail=1
+            fi
+          done
+          [ "$fail" -eq 0 ] && echo "All migrations come in pairs."
+          exit "$fail"
+
+      - name: jar-files/jar/ hygiene
+        # Library JARs only (→ lib/core/gateway at deploy time), plus a README
+        # recording where each JAR came from.
+        run: |
+          set -euo pipefail
+          [ -d jar-files/jar ] || { echo "No jar-files/jar/ — skipping."; exit 0; }
+          fail=0
+          while IFS= read -r f; do
+            case "$f" in
+              *.jar|*/README.md|*/.gitkeep) ;;
+              *) echo "::error file=$f::Only *.jar (and a README) belong in jar-files/jar/"; fail=1 ;;
+            esac
+          done < <(find jar-files/jar -type f)
+          [ "$fail" -eq 0 ] && echo "jar-files/jar/ holds only JARs."
+          exit "$fail"
+
+  lint-workflows:
+    name: Lint workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: actionlint
+        uses: raven-actions/actionlint@v2
+
+  # Students author their own test-<name>.yml workflows (Part 0). The
+  # production runner is root-equivalent on the production server, so exactly
+  # one workflow in this repo may ever target it — and no pull_request
+  # workflow may use ANY self-hosted runner (PR code is unreviewed by
+  # definition). This catches honest mistakes; review catches the rest.
+  workflow-hygiene:
+    name: Workflow hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: No student workflow on the production runner
+        run: |
+          set -euo pipefail
+          pip install pyyaml==6.0.2
+          python3 - <<'EOF'
+          import glob, sys, yaml
+
+          PROD_LABEL = "demo-oatmakers"
+          PROD_ALLOWED = {"deploy.yml"}
+          ERRORS = []
+
+          def runs_on_labels(job):
+              ro = job.get("runs-on", [])
+              if isinstance(ro, str):
+                  return [ro]
+              if isinstance(ro, dict):  # runs-on: {group: ..., labels: [...]}
+                  labels = ro.get("labels", [])
+                  return [labels] if isinstance(labels, str) else list(labels)
+              return list(ro)
+
+          for path in sorted(glob.glob(".github/workflows/*.yml") + glob.glob(".github/workflows/*.yaml")):
+              name = path.rsplit("/", 1)[-1]
+              with open(path) as f:
+                  wf = yaml.safe_load(f) or {}
+              # PyYAML parses the 'on:' key as boolean True.
+              triggers = wf.get("on", wf.get(True, {}))
+              if isinstance(triggers, str):
+                  triggers = {triggers: None}
+              if isinstance(triggers, list):
+                  triggers = {t: None for t in triggers}
+              pr_triggered = any(t.startswith("pull_request") for t in triggers)
+              for job_id, job in (wf.get("jobs") or {}).items():
+                  labels = runs_on_labels(job or {})
+                  if PROD_LABEL in labels and name not in PROD_ALLOWED:
+                      ERRORS.append(f"{path}: job '{job_id}' targets the production "
+                                    f"runner label '{PROD_LABEL}' — only "
+                                    f"{sorted(PROD_ALLOWED)} may run there")
+                  if pr_triggered and "self-hosted" in labels:
+                      ERRORS.append(f"{path}: job '{job_id}' runs on a self-hosted "
+                                    "runner from a pull_request trigger — PR code is "
+                                    "unreviewed, this is never allowed")
+
+          for e in ERRORS:
+              print(f"::error::{e}")
+          sys.exit(1 if ERRORS else 0)
+          EOF
+          echo "All workflows respect the runner rules."
+
+  # The demo itself: its generated views, its database lifecycle (migrations,
+  # time travel, retention) and the release payload assembly of deploy.yml.
+  demo:
+    name: Demo tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: changes
+    if: needs.changes.outputs.demo == 'true'
+    services:
+      postgres:
+        image: timescale/timescaledb:2.30.2-pg17
+        env:
+          POSTGRES_USER: ignition
+          POSTGRES_PASSWORD: demo-test-only
+          POSTGRES_DB: ignition
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ignition -d ignition"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generated views match tools/demo/build_views.py
+        # Semantic comparison: a Designer save that only reformats a view or
+        # restamps its resource.json passes. See tools/demo/check_generated.py
+        # for how to regenerate.
+        run: python3 tools/demo/check_generated.py
+      - name: Resources, routes and embedded scripts
+        run: |
+          python3 tools/demo/validate.py
+          python3 tests/demo/test_view_startup.py
+      - name: Database lifecycle against a disposable database
+        env:
+          DEMO_TEST_CONTAINER: ""
+          PGHOST: localhost
+          PGPORT: "5432"
+          PGUSER: ignition
+          PGPASSWORD: demo-test-only
+        run: python3 tests/demo/test_database.py
+      - name: Release payload assembly (deploy.yml)
+        run: |
+          pip install pyyaml==6.0.2
+          python3 tests/test_deploy_payload.py
+
+  # The ONE required status check for branch protection. Aggregates whatever
+  # ran: a skipped job (path didn't match) is fine, a failed one blocks.
+  ci-ok:
+    name: CI OK
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    needs:
+      - changes
+      - validate-projects
+      - validate-release
+      - validate-gateway-payload
+      - demo
+      - lint-workflows
+      - workflow-hygiene
+    if: always()
+    steps:
+      - name: Aggregate results
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          set -euo pipefail
+          echo "job results: $RESULTS"
+          for r in $RESULTS; do
+            case "$r" in
+              failure|cancelled) echo "::error::A required job ended as '$r'"; exit 1 ;;
+            esac
+          done
+          echo "All checks that apply to this PR are green."

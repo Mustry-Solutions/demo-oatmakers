@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-# Authored project and configuration edits must remain visible to Git.
-# Gateway-owned state is excluded by .gitignore rather than hidden in the index.
-set -euo pipefail
-cd "$(git rev-parse --show-toplevel)"
-git ls-files -z -- projects services/ignition/config |
-  git update-index --no-skip-worktree -z --stdin

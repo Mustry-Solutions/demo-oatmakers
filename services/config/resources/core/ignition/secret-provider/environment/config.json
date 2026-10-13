@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "type": "file"
+  },
+  "settings": {
+    "files": {
+      "POSTGRES_USERNAME": {
+        "description": "Database username (local-development/secrets locally; not used on production)",
+        "filePath": "/run/secrets/POSTGRES_USERNAME",
+        "fileType": "CLEARTEXT"
+      },
+      "POSTGRES_PASSWORD": {
+        "description": "Database password (local-development/secrets locally; mounted by the server stack on production)",
+        "filePath": "/run/secrets/POSTGRES_PASSWORD",
+        "fileType": "CLEARTEXT"
+      }
+    }
+  }
+}

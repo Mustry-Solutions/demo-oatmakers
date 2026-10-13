@@ -1,0 +1,220 @@
+name: oatmakers
+
+# Local development stack for the Oatmakers demo.
+#
+#   gateway        http://localhost:8088   your development gateway, bind-mounted
+#                                          from ./projects and ./services/config
+#   postgres       localhost:5432          the demo database (TimescaleDB on
+#                                          PostgreSQL 17, like production)
+#
+# Lab 07 Part 0 adds a second pair behind the `test` profile (see below):
+#
+#   test-gateway   http://localhost:8090   your personal test gateway, fed only
+#                                          by your own deploy workflow
+#   test-runner                            your GitHub Actions runner
+#
+# scripts/setup.sh brings this up. It starts the test pair only when .env sets
+# LAB_USER. Host ports can be moved with GATEWAY_PORT, TEST_GATEWAY_PORT and
+# POSTGRES_PORT in .env when something else already listens on them.
+
+# Run the gateway under umask 0002. The image's default umask (022) makes
+# everything the gateway writes into the bind mounts 644/755, group read-only,
+# so despite group_add + setgid you could not edit or delete those files.
+# With 0002 they land 664/775, group-owned by you via the setgid dirs.
+x-ignition-entrypoint: &ignition-entrypoint
+  ["/bin/sh", "-c", 'umask 0002 && exec docker-entrypoint.sh "$@"', "--"]
+
+x-ignition-environment: &ignition-environment
+  ACCEPT_IGNITION_EULA: "Y"
+  IGNITION_EDITION: standard
+  DISABLE_QUICKSTART: "true"
+  GATEWAY_ADMIN_USERNAME: admin
+  GATEWAY_ADMIN_PASSWORD: password
+  TZ: "Europe/Brussels"
+  # Headless trust for the third-party modules in services/modules.json on a
+  # gateway's FIRST install; afterwards the certFingerprint and
+  # licenseAgreementHash in the manifest carry it. ONE line, comma-separated,
+  # NO spaces: the gateway splits on "," without trimming.
+  ACCEPT_MODULE_LICENSES: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components"
+  ACCEPT_MODULE_CERTS: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components"
+
+x-logging: &logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  gateway:
+    image: inductiveautomation/ignition:8.3.8
+    container_name: oatmakers-gateway
+    hostname: oatmakers-gateway
+    # Keep the image's own identity (uid 2003, gid 0) and ADD your group, so
+    # everything the gateway writes into the bind mounts stays editable by you
+    # without sudo. LAB_GID is exported (and written to .env) by
+    # scripts/preflight.sh.
+    user: "2003:0"
+    group_add:
+      - "${LAB_GID:-0}"
+    entrypoint: *ignition-entrypoint
+    restart: unless-stopped
+    ports:
+      - "${GATEWAY_PORT:-8088}:8088"
+    volumes:
+      - gateway-data:/usr/local/bin/ignition/data
+      - ./projects:/usr/local/bin/ignition/data/projects
+      - ./services/config:/usr/local/bin/ignition/data/config
+      # The module manifest and the .modl files themselves: the gateway
+      # installs the repo's third-party modules on boot, and writes derived
+      # trust values back into services/modules.json for you to commit.
+      - ./services/modules.json:/usr/local/bin/ignition/data/modules.json
+      - ./third-party-modules:/third-party-modules
+      # Local stand-ins for the referenced database secrets. The same
+      # `environment` secret provider that reads /run/secrets/ on production
+      # reads these here.
+      - ./local-development/secrets:/run/secrets:ro
+    environment: *ignition-environment
+    command: >
+      -n oatmakers-local
+      -m 1024
+      --
+      wrapper.java.initmemory=256
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8088/StatusPing"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    logging: *logging
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    # Same PostgreSQL major and TimescaleDB extension as production. The
+    # TimescaleDB Historian module needs the extension.
+    image: timescale/timescaledb:2.30.2-pg17
+    container_name: oatmakers-postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    networks:
+      default:
+        # Production's database service is also reachable as `postgres`, so
+        # jdbc:postgresql://postgres:5432/ignition resolves in both places.
+        aliases:
+          - postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./local-development/secrets:/run/secrets:ro
+    environment:
+      POSTGRES_DB: ignition
+      POSTGRES_USER_FILE: /run/secrets/POSTGRES_USERNAME
+      POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
+      TZ: "Europe/Brussels"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ignition -d ignition"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    logging: *logging
+
+  # ---- Lab 07 Part 0: your personal test gateway ---------------------------
+  # Deliberately NOT bind-mounted: like production, it only receives files from
+  # a deploy (docker cp + an authenticated scan), so `git status` stays clean
+  # and a green test deploy says something about production.
+  # Starts only with the profile: scripts/setup.sh does that when LAB_USER is
+  # set in .env.
+  test-gateway:
+    image: inductiveautomation/ignition:8.3.8
+    container_name: oatmakers-test-gateway
+    hostname: oatmakers-test-gateway
+    profiles: [test]
+    user: "2003:0"
+    group_add:
+      - "${LAB_GID:-0}"
+    entrypoint: *ignition-entrypoint
+    restart: unless-stopped
+    ports:
+      - "${TEST_GATEWAY_PORT:-8090}:8088"
+    volumes:
+      # scripts/setup.sh seeds your API token into this volume BEFORE the first
+      # boot: the scan API only accepts tokens the gateway has already loaded.
+      - test-gateway-data:/usr/local/bin/ignition/data
+      - ./local-development/secrets:/run/secrets:ro
+    environment: *ignition-environment
+    command: >
+      -n oatmakers-test
+      -m 1024
+      --
+      wrapper.java.initmemory=256
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8088/StatusPing"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    logging: *logging
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ---- Lab 07 Part 0: your personal GitHub Actions runner -------------------
+  # Registers on the shared repo with YOUR label, so only your
+  # test-<yourname>.yml runs here. Everything derives from LAB_USER in .env.
+  test-runner:
+    image: myoung34/github-runner:latest
+    container_name: oatmakers-test-runner-${LAB_USER:-example}
+    hostname: oatmakers-test-runner
+    profiles: [test]
+    restart: unless-stopped
+    environment:
+      REPO_URL: "${REPO_URL:-https://github.com/Mustry-Solutions/demo-oatmakers}"
+      # Registering a runner needs repo-admin rights, which contributors do
+      # not have, so the credential comes from the instructors:
+      #   RUNNER_TOKEN       the registration token posted in the chat. Valid
+      #                      one hour, enroll-only, needed once (the
+      #                      registration persists in test-runner-state).
+      #   RUNNER_GITHUB_PAT  instructor-only fallback for unattended machines.
+      #                      The image prefers it when both are set.
+      ACCESS_TOKEN: "${RUNNER_GITHUB_PAT:-}"
+      RUNNER_TOKEN: "${RUNNER_TOKEN:-}"
+      # Your clone's scan-API key (setup.sh generates it into .env). Your
+      # workflow reads it from this runner's environment; the repository's
+      # IGNITION_API_KEY secret belongs to production. Recreate this container
+      # after the key changes.
+      IGNITION_API_KEY: "${IGNITION_API_KEY:-}"
+      RUNNER_NAME: "${RUNNER_NAME:-oatmakers-test-${LAB_USER:-example}}"
+      RUNNER_SCOPE: repo
+      # THE routing decision: your workflow's runs-on must match this label.
+      LABELS: "self-hosted,${RUNNER_LABEL:-${LAB_USER:-example}-local}"
+      # No EPHEMERAL on purpose: the image treats ANY non-empty value (even
+      # "false") as "enable --ephemeral".
+      DISABLE_AUTO_UPDATE: "true"
+      # Persist the registration across `docker compose down` / `up`, so the
+      # one-hour RUNNER_TOKEN only has to work once.
+      CONFIGURED_ACTIONS_RUNNER_FILES_DIR: /runner-state
+      # Required with state reuse: without it the entrypoint deregisters on
+      # TERM and poisons the persisted state for the next start.
+      DISABLE_AUTOMATIC_DEREGISTRATION: "true"
+    volumes:
+      # docker cp / docker exec into your test gateway need the host's Docker
+      # daemon. This makes the runner root-equivalent on your machine: fine
+      # for your own laptop, and why it never goes near production.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - test-runner-state:/runner-state
+    logging: *logging
+
+volumes:
+  gateway-data:
+  postgres-data:
+  test-gateway-data:
+  test-runner-state:
