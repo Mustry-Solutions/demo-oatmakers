@@ -43,6 +43,10 @@
     "/scada": {
       "title": "SCADA",
       "viewPath": "Demo/SCADA"
+    },
+    "/course/audit07": {
+      "title": "Course audit07",
+      "viewPath": "Course/audit07/Sim"
     }
   },
   "sharedDocks": {
