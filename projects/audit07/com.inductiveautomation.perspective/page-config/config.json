@@ -1,0 +1,8 @@
+{
+  "pages": {
+    "/": {
+      "title": "audit07",
+      "viewPath": "Welcome"
+    }
+  }
+}
