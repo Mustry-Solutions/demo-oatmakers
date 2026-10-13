@@ -1,0 +1,20 @@
+{
+  "scope": "A",
+  "description": "Lab 07 challenge 4 (audit07)",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "config.json",
+    "instructions.csv"
+  ],
+  "attributes": {
+    "lastModification": {
+      "actor": "api-token:CICD-APIKEY:192.168.223.1",
+      "timestamp": "2026-10-13T19:31:30Z"
+    },
+    "uuid": "5a6cbf5c-0174-4ab4-b939-de76e15b86be",
+    "lastModificationSignature": "1bc19f658b7ae1f0bac963510e9e4d4ff882aca23072f6f418b1dfdae6eb0d5b",
+    "enabled": true
+  }
+}
