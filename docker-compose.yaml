@@ -34,7 +34,9 @@ x-ignition-environment: &ignition-environment
   # Headless trust for the third-party modules in services/modules.json on a
   # gateway's FIRST install; afterwards the certFingerprint and
   # licenseAgreementHash in the manifest carry it. ONE line, comma-separated,
-  # NO spaces: the gateway splits on "," without trimming.
+  # NO spaces: the gateway splits on "," without trimming. The same list as
+  # production's: the test gateway proves a module installs from the
+  # manifest alone.
   ACCEPT_MODULE_LICENSES: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components"
   ACCEPT_MODULE_CERTS: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components"
 
@@ -73,7 +75,14 @@ services:
       # `environment` secret provider that reads /run/secrets/ on production
       # reads these here.
       - ./local-development/secrets:/run/secrets:ro
-    environment: *ignition-environment
+    environment:
+      <<: *ignition-environment
+      # The local gateway also accepts the modules a Lab 07 challenge adds
+      # (Embr Charts), so a minimal manifest entry installs headless and the
+      # gateway writes the trust values back into services/modules.json.
+      # Production and the test gateway only trust what that manifest says.
+      ACCEPT_MODULE_LICENSES: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components,com.mussonindustrial.embr.charts"
+      ACCEPT_MODULE_CERTS: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components,com.mussonindustrial.embr.charts"
     command: >
       -n oatmakers-local
       -m 1024
@@ -192,6 +201,8 @@ services:
       # IGNITION_API_KEY secret belongs to production. Recreate this container
       # after the key changes.
       IGNITION_API_KEY: "${IGNITION_API_KEY:-}"
+      # So your workflow can print the right URL when you moved the port.
+      TEST_GATEWAY_PORT: "${TEST_GATEWAY_PORT:-8090}"
       RUNNER_NAME: "${RUNNER_NAME:-oatmakers-test-${LAB_USER:-example}}"
       RUNNER_SCOPE: repo
       # THE routing decision: your workflow's runs-on must match this label.

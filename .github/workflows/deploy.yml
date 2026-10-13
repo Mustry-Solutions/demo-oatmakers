@@ -12,7 +12,8 @@
 #
 #   1. every pinned project is taken FROM ITS OWN TAG (nothing is built; the
 #      deploy ships the files as they were at that tag). CI's validate-release
-#      job refuses a pin whose tag does not exist.
+#      job refuses a pin whose tag does not exist or points at a commit that
+#      is not on main, and this workflow checks both again.
 #   2. the gateway-level payload (services/config, services/modules.json,
 #      third-party-modules/, jar-files/jar/, db-migration/) ships from the
 #      `oatmakers` pin: the shared project owns the gateway.
@@ -22,14 +23,16 @@
 #      itself owns (identity, users, API token, keys, tag values), and loaded
 #      hot through the scan API.
 #   5. boot-time payload (modules + JARs) restarts the gateway only when it
-#      actually changed.
+#      actually changed. A JAR this workflow shipped earlier and that is gone
+#      from jar-files/jar/ is removed again.
 #   6. the demo's readiness check must pass, or the run fails.
 #
 # Rollback is `git revert` of the release PR: the file goes back and this same
 # workflow makes the old pins true again. There is no automatic rollback.
-# workflow_dispatch re-runs the deploy for the state of the chosen ref, and
-# with readiness_only it only checks the running demo, like the six-hourly
-# schedule does.
+# workflow_dispatch re-runs the deploy for main (a dispatch from any other
+# branch is refused: an unreviewed release.yaml must never ship), and with
+# readiness_only it only checks the running demo, like the six-hourly schedule
+# does.
 #
 # The job runs on the self-hosted runner next to the production gateway
 # (ops/compose.runner.yml). It shares the gateway's Docker daemon, so files
@@ -85,8 +88,25 @@ env:
   SITE: oatmakers-site-7
 
 jobs:
+  # A dispatch from a branch would ship that branch's release.yaml, which no
+  # one reviewed. Fail loudly instead of skipping silently.
+  refuse-other-branch:
+    name: Refuse a deploy from another branch
+    if: github.event_name == 'workflow_dispatch' && inputs.readiness_only != true && github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Only main deploys to production
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          echo "::error::Deploy only ships main, and this run was started from $REF." >&2
+          echo "Merge release.yaml through a reviewed PR, or dispatch with --ref main" >&2
+          echo "(readiness_only=true may run from any branch)." >&2
+          exit 1
+
   deploy:
-    if: github.event_name != 'schedule' && inputs.readiness_only != true
+    if: github.event_name != 'schedule' && inputs.readiness_only != true && github.ref == 'refs/heads/main'
     name: Deploy release.yaml to production
     runs-on: [self-hosted, demo-oatmakers]
     timeout-minutes: 30
@@ -95,7 +115,7 @@ jobs:
 
     steps:
       - name: Check out the repository with its tags
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           clean: true
           fetch-depth: 0
@@ -149,6 +169,12 @@ jobs:
             tag="$name@$version"
             if ! git rev-parse -q --verify "refs/tags/$tag" > /dev/null; then
               echo "::error file=release.yaml::pin $name: $version but tag '$tag' does not exist. Push the tag first." >&2
+              exit 1
+            fi
+            # A tag on a commit that never merged would ship unreviewed code
+            # through a one-line release PR.
+            if ! git merge-base --is-ancestor "refs/tags/$tag^{commit}" refs/remotes/origin/main; then
+              echo "::error file=release.yaml::tag '$tag' points at a commit that is not on main. Tag a commit on main and pin that tag." >&2
               exit 1
             fi
             if [ -z "$(git ls-tree -d "refs/tags/$tag" -- "projects/$name")" ]; then
@@ -329,19 +355,41 @@ jobs:
             done < <(find payload/third-party-modules -type f -name '*.modl')
           fi
 
-          # --- library JARs -> lib/core/gateway (additive) ---
+          # --- library JARs -> lib/core/gateway ---
+          # This workflow owns the JARs it copied in: their names are kept in
+          # jars.shipped on the data volume. One it shipped earlier that is
+          # gone from jar-files/jar/ is removed again, so deleting a JAR in the
+          # repo deletes it on the gateway. JARs it never copied (the image's
+          # own) are never touched.
+          owned_list="$GATEWAY_DATA_PATH/jars.shipped"
+          { docker exec "$IGNITION_CONTAINER" cat "$owned_list" 2>/dev/null || true; } \
+            | sed '/^$/d' | sort -u > "$RUNNER_TEMP/jars.owned"
+          : > "$RUNNER_TEMP/jars.payload"
+          : > "$RUNNER_TEMP/jars.copied"
           if [ -d payload/jar-files/jar ]; then
             while IFS= read -r f; do
               name="$(basename "$f")"
+              echo "$name" >> "$RUNNER_TEMP/jars.payload"
               before="$(docker exec "$IGNITION_CONTAINER" md5sum "$GATEWAY_JAR_PATH/$name" 2>/dev/null | cut -d' ' -f1 || true)"
               local_sum="$(md5sum "$f" | cut -d' ' -f1)"
               if [ "$before" != "$local_sum" ]; then
                 docker cp "$f" "$IGNITION_CONTAINER:$GATEWAY_JAR_PATH/$name"
+                echo "$name" >> "$RUNNER_TEMP/jars.copied"
                 echo "  shipped JAR $name"
                 restart=1
               fi
             done < <(find payload/jar-files/jar -type f -name '*.jar')
           fi
+          sort -u -o "$RUNNER_TEMP/jars.payload" "$RUNNER_TEMP/jars.payload"
+          while IFS= read -r name; do
+            docker exec -u root "$IGNITION_CONTAINER" rm -f "$GATEWAY_JAR_PATH/$name"
+            echo "  removed JAR $name (no longer in jar-files/jar/)"
+            restart=1
+          done < <(comm -23 "$RUNNER_TEMP/jars.owned" "$RUNNER_TEMP/jars.payload")
+          # Passed as an argument, not on stdin: `docker exec -i` can hang when
+          # its input is empty.
+          owned_now="$( { comm -12 "$RUNNER_TEMP/jars.owned" "$RUNNER_TEMP/jars.payload"; cat "$RUNNER_TEMP/jars.copied"; } | sort -u)"
+          docker exec "$IGNITION_CONTAINER" sh -c 'printf "%s\n" "$1" | sed "/^$/d" > "$2"' sh "$owned_now" "$owned_list"
 
           if [ "$restart" -eq 0 ]; then
             echo "Boot-time payload unchanged, no restart needed."
@@ -443,6 +491,6 @@ jobs:
     runs-on: [self-hosted, demo-oatmakers]
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Check timer progress, history and page routes
         run: tools/demo/check-runtime.sh progress

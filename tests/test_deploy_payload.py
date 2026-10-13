@@ -66,6 +66,16 @@ with tempfile.TemporaryDirectory() as temporary:
     write('projects/stephan/project.json', 'not pinned')
     git('add', '.')
     git('commit', '-qm', 'later work')
+    # The checkout's view of main: every pinned tag must sit on it.
+    git('update-ref', 'refs/remotes/origin/main', 'HEAD')
+
+    # A tag on a branch that never merged.
+    git('switch', '-qc', 'unmerged')
+    write('projects/wout/project.json', 'wout unreviewed')
+    git('add', 'projects/wout/project.json')
+    git('commit', '-qm', 'unreviewed work')
+    git('tag', 'wout@v1.1.0')
+    git('switch', '-q', '-')
     write('projects/wout/project.json', 'dirty local edit')
 
     write('release.yaml', 'gateway: oatmakers-site-7\nprojects:\n  oatmakers: v5.0.0   # shared\n  wout: v1.0.0\n')
@@ -94,6 +104,7 @@ with tempfile.TemporaryDirectory() as temporary:
     # Refusals.
     for release, reason in [
         ('gateway: oatmakers-site-7\nprojects:\n  oatmakers: v5.0.0\n  wout: v9.9.9\n', 'tag does not exist'),
+        ('gateway: oatmakers-site-7\nprojects:\n  oatmakers: v5.0.0\n  wout: v1.1.0\n', 'a tag that is not on main'),
         ('gateway: oatmakers-site-7\nprojects:\n  wout: v1.0.0\n', 'oatmakers pin missing'),
         ('gateway: somewhere-else\nprojects:\n  oatmakers: v5.0.0\n', 'wrong gateway'),
         ('gateway: oatmakers-site-7\nprojects:\n  oatmakers: 5.0\n', 'unparsable version'),
@@ -101,4 +112,6 @@ with tempfile.TemporaryDirectory() as temporary:
         write('release.yaml', release)
         result = run(PARSE + '\n' + ASSEMBLE, check=False)
         assert result.returncode != 0, 'accepted a release with ' + reason
-    print('PASS missing tags, a missing oatmakers pin, another gateway and bad versions are refused')
+        if reason == 'a tag that is not on main':
+            assert 'not on main' in result.stderr, result.stderr
+    print('PASS missing tags, tags off main, a missing oatmakers pin, another gateway and bad versions are refused')

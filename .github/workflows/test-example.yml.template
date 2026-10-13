@@ -21,6 +21,13 @@
 # mechanism. Production says `runs-on: [self-hosted, demo-oatmakers]` for the
 # same reason.
 #
+# Once it is on main, you can also deploy a branch to your test gateway
+# before you open (or merge) its PR:
+#
+#     gh workflow run test-<yourname>.yml --ref <your-branch>
+#
+# The next push to main puts main back.
+#
 # What this workflow does is what the production deploy does, minus the
 # release.yaml indirection: check out main, run the migrations against your
 # local database, `docker cp` projects + config into your test gateway's
@@ -40,8 +47,8 @@
 "on":
   push:
     branches: [main]
-  # Run it by hand from the Actions tab (or `gh workflow run`) to check that
-  # your runner picks it up.
+  # Run it by hand from the Actions tab, or `gh workflow run` with --ref to
+  # deploy a branch (see above).
   workflow_dispatch:
 
 # Never cancel a deploy mid-ship; queue the next one. github.workflow is this
@@ -74,8 +81,8 @@ jobs:
       MIGRATE_IMAGE: migrate/migrate:v4.17.1
 
     steps:
-      - name: Check out main
-        uses: actions/checkout@v4
+      - name: Check out main (or the branch you dispatched)
+        uses: actions/checkout@v7
         with:
           clean: true
 
@@ -198,18 +205,37 @@ jobs:
             done < <(find third-party-modules -type f -name '*.modl')
           fi
 
+          # Same ownership rule as production: a JAR this workflow shipped
+          # earlier that is gone from jar-files/jar/ is removed again.
+          owned_list="$GATEWAY_DATA_PATH/jars.shipped"
+          { docker exec "$IGNITION_CONTAINER" cat "$owned_list" 2>/dev/null || true; } \
+            | sed '/^$/d' | sort -u > "$RUNNER_TEMP/jars.owned"
+          : > "$RUNNER_TEMP/jars.payload"
+          : > "$RUNNER_TEMP/jars.copied"
           if [ -d jar-files/jar ]; then
             while IFS= read -r f; do
               name="$(basename "$f")"
+              echo "$name" >> "$RUNNER_TEMP/jars.payload"
               before="$(docker exec "$IGNITION_CONTAINER" md5sum "$GATEWAY_JAR_PATH/$name" 2>/dev/null | cut -d' ' -f1 || true)"
               local_sum="$(md5sum "$f" | cut -d' ' -f1)"
               if [ "$before" != "$local_sum" ]; then
                 docker cp "$f" "$IGNITION_CONTAINER:$GATEWAY_JAR_PATH/$name"
+                echo "$name" >> "$RUNNER_TEMP/jars.copied"
                 echo "  shipped JAR $name"
                 restart=1
               fi
             done < <(find jar-files/jar -type f -name '*.jar')
           fi
+          sort -u -o "$RUNNER_TEMP/jars.payload" "$RUNNER_TEMP/jars.payload"
+          while IFS= read -r name; do
+            docker exec -u root "$IGNITION_CONTAINER" rm -f "$GATEWAY_JAR_PATH/$name"
+            echo "  removed JAR $name (no longer in jar-files/jar/)"
+            restart=1
+          done < <(comm -23 "$RUNNER_TEMP/jars.owned" "$RUNNER_TEMP/jars.payload")
+          # Passed as an argument, not on stdin: `docker exec -i` can hang when
+          # its input is empty.
+          owned_now="$( { comm -12 "$RUNNER_TEMP/jars.owned" "$RUNNER_TEMP/jars.payload"; cat "$RUNNER_TEMP/jars.copied"; } | sort -u)"
+          docker exec "$IGNITION_CONTAINER" sh -c 'printf "%s\n" "$1" | sed "/^$/d" > "$2"' sh "$owned_now" "$owned_list"
 
           if [ "$restart" -eq 0 ]; then
             echo "Boot-time payload unchanged, no restart needed."
@@ -232,8 +258,10 @@ jobs:
         # Hot reload of projects and config, with the same 401/403 self-heal
         # as production: the first deploy to a fresh test gateway restarts it
         # once to load the deployed security-properties; every later deploy
-        # scans hot. A 401 that survives the restart means the seeded token
-        # does not match your key: re-run scripts/setup.sh.
+        # scans hot. A 401 that survives the restart means the token seeded
+        # into the test gateway's volume does not match the key in your .env
+        # (setup.sh only seeds a NEW volume): recreate the test gateway, see
+        # the end of this step.
         run: |
           set -euo pipefail
           run_scans() {
@@ -276,10 +304,21 @@ jobs:
               fi
               sleep 5
             done
-            run_scans
+            rc=0
+            run_scans || rc=$?
+            if [ "$rc" = "42" ]; then
+              echo "Still not authorized: your test gateway holds an older API token" >&2
+              echo "than the key in your .env. Recreate it with a fresh volume:" >&2
+              echo "  docker compose --profile test rm -sf test-gateway test-runner" >&2
+              echo "  docker volume rm oatmakers_test-gateway-data" >&2
+              echo "  ./scripts/setup.sh" >&2
+              exit 1
+            fi
+            exit "$rc"
           elif [ "$rc" != "0" ]; then
             exit "$rc"
           fi
 
       - name: Where to look
-        run: echo "Deployed $(git rev-parse --short HEAD). Open http://localhost:8090 on your machine (admin / password)."
+        # TEST_GATEWAY_PORT comes from your .env through the runner container.
+        run: echo "Deployed $(git rev-parse --short HEAD) ($GITHUB_REF_NAME). Open http://localhost:${TEST_GATEWAY_PORT:-8090} on your machine (admin / password)."

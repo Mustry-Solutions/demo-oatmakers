@@ -58,7 +58,7 @@ two-hour trial mode; `scripts/reset-trial.sh` resets it. Stop everything with
 2. Tag the merged commit: `git tag <project>@vX.Y.Z && git push origin <project>@vX.Y.Z`
    (the next free version: `git fetch --tags && git tag -l '<project>@*'`).
 3. Pin the tag in `release.yaml` in a second PR. CI refuses a pin whose tag
-   does not exist.
+   does not exist or points at a commit that is not on `main`.
 4. Merging that PR runs `.github/workflows/deploy.yml` on the production
    runner: every pinned project from its own tag, plus the gateway config,
    module manifest, third-party modules, JARs and migrations from the
@@ -66,7 +66,8 @@ two-hour trial mode; `scripts/reset-trial.sh` resets it. Stop everything with
    restarts the gateway once. The demo's readiness check must pass.
 
 Roll back by reverting the release PR. The Deploy workflow also has a manual
-`readiness_only` run and checks the running demo every six hours.
+`readiness_only` run and checks the running demo every six hours. A manual
+deploy only runs from `main`.
 
 The gateway's own identity never ships and is never wiped: its name
 (system-properties), internal users and identity provider, the scan-API
@@ -81,7 +82,9 @@ it with `docker logs oatmakers-test-runner-<yourname>` ("Listening for Jobs").
 Copy `.github/workflows/test-example.yml.template` to
 `.github/workflows/test-<yourname>.yml`, set
 `runs-on: [self-hosted, <yourname>-local]`, and every push to `main` deploys
-`main` to your test gateway.
+`main` to your test gateway. Once that file is on `main`,
+`gh workflow run test-<yourname>.yml --ref <branch>` deploys a branch to your
+test gateway before you merge it.
 
 ## Tests
 
