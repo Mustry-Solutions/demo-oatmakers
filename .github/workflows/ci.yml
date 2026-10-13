@@ -5,7 +5,8 @@
 #
 #   projects/<name>/**        -> validate-projects (a matrix job per project)
 #   release.yaml              -> validate-release ("a pin may only point at a
-#                                tag that exists" is enforced HERE, at PR time)
+#                                tag that exists, on a commit on main" is
+#                                enforced HERE, at PR time)
 #   services/, jar-files/,    -> validate-gateway-payload (manifest, JARs,
 #   third-party-modules/,        migration pairs, identity resources)
 #   db-migration/
@@ -43,7 +44,7 @@ jobs:
       gateway_payload: ${{ steps.diff.outputs.gateway_payload }}
       demo: ${{ steps.diff.outputs.demo }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -81,7 +82,7 @@ jobs:
       matrix:
         project: ${{ fromJSON(needs.changes.outputs.projects) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: JSON validity sweep
         # Every *.json under this project must parse. Failures surface as PR
@@ -132,14 +133,14 @@ jobs:
     needs: changes
     if: needs.changes.outputs.release == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # The whole point of this job is "a pin may only point at a tag
           # that exists" — so fetch the tags to check against.
           fetch-depth: 0
           fetch-tags: true
 
-      - name: Schema + every pin points at an existing tag
+      - name: Schema + every pin points at an existing tag on main
         run: |
           set -euo pipefail
           pip install pyyaml==6.0.2
@@ -203,6 +204,16 @@ jobs:
                   err(f"{name}: pinned at {version} but tag '{tag}' does not exist — "
                       f"push the tag first, the release must exist before release.yaml may point at it ({hint})")
                   continue
+              # A tag on a commit that never merged would ship unreviewed
+              # code through a one-line release PR.
+              on_main = subprocess.run(
+                  ["git", "merge-base", "--is-ancestor", f"refs/tags/{tag}^{{commit}}",
+                   "refs/remotes/origin/main"]).returncode == 0
+              if not on_main:
+                  err(f"{name}: tag '{tag}' points at a commit that is not on main. "
+                      "A release must be a reviewed, merged commit: merge your change first, "
+                      "then tag main and pin that tag")
+                  continue
               tree = subprocess.run(
                   ["git", "ls-tree", "-d", f"refs/tags/{tag}", "--", f"projects/{name}"],
                   capture_output=True, text=True, check=True).stdout.strip()
@@ -218,7 +229,7 @@ jobs:
               print(f"::error file=release.yaml::{e}")
           if ERRORS:
               sys.exit(1)
-          print(f"release.yaml OK — {len(projects)} pin(s), every tag exists.")
+          print(f"release.yaml OK: {len(projects)} pin(s), every tag exists and is on main.")
           EOF
 
   validate-gateway-payload:
@@ -228,7 +239,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.gateway_payload == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: JSON validity sweep (services/)
         run: |
@@ -366,7 +377,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: actionlint
         uses: raven-actions/actionlint@v2
 
@@ -380,7 +391,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: No student workflow on the production runner
         run: |
           set -euo pipefail
@@ -450,7 +461,7 @@ jobs:
           --health-cmd "pg_isready -U ignition -d ignition"
           --health-interval 5s --health-timeout 3s --health-retries 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Generated views match tools/demo/build_views.py
         # Semantic comparison: a Designer save that only reformats a view or
         # restamps its resource.json passes. See tools/demo/check_generated.py
