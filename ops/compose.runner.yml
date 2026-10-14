@@ -17,7 +17,7 @@ services:
       - runner-state:/runner-state
       - /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose:ro
     networks:
-      - capstone
+      - oatmakers-production
     logging:
       driver: json-file
       options:
@@ -27,6 +27,6 @@ volumes:
   runner-state:
     name: demo-oatmakers-runner-state
 networks:
-  capstone:
+  oatmakers-production:
     external: true
-    name: cicd-capstone_default
+    name: oatmakers-production_default

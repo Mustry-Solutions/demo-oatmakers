@@ -44,10 +44,10 @@
 #                                 lives only on the gateway (never in git; the
 #                                 wipe below spares it). scripts/mint-api-key.sh
 #                                 installs it and sets this secret in one go.
-#   Variable: IGNITION_CONTAINER  Optional, default cicd-capstone-gateway.
+#   Variable: IGNITION_CONTAINER  Optional, default oatmakers-production-gateway.
 #   Variable: IGNITION_URL        Optional, default
-#                                 http://cicd-capstone-gateway:8088.
-#   Variable: POSTGRES_CONTAINER  Optional, default cicd-capstone-postgres.
+#                                 http://oatmakers-production-gateway:8088.
+#   Variable: POSTGRES_CONTAINER  Optional, default oatmakers-production-postgres.
 #   Variable: POSTGRES_DB         Optional, default ignition.
 # The database password is not a GitHub secret: the server stack mounts it
 # into the gateway, and tools/demo/database-credentials.sh reads it inside the
@@ -78,14 +78,15 @@ permissions:
   contents: read
 
 env:
-  IGNITION_CONTAINER: ${{ vars.IGNITION_CONTAINER || 'cicd-capstone-gateway' }}
-  IGNITION_URL: ${{ vars.IGNITION_URL || 'http://cicd-capstone-gateway:8088' }}
-  POSTGRES_CONTAINER: ${{ vars.POSTGRES_CONTAINER || 'cicd-capstone-postgres' }}
+  IGNITION_CONTAINER: ${{ vars.IGNITION_CONTAINER || 'oatmakers-production-gateway' }}
+  IGNITION_URL: ${{ vars.IGNITION_URL || 'http://oatmakers-production-gateway:8088' }}
+  POSTGRES_CONTAINER: ${{ vars.POSTGRES_CONTAINER || 'oatmakers-production-postgres' }}
   POSTGRES_DB: ${{ vars.POSTGRES_DB || 'ignition' }}
   PUBLIC_URL: https://cloud.mustrysolutions.com
   GATEWAY_DATA_PATH: /usr/local/bin/ignition/data
   # The gateway's JAR directory: a volume on its classpath, next to the
-  # image's lib/core/gateway (mustry-cloud-edge capstone/docker-compose.yaml).
+  # image's lib/core/gateway (mustry-cloud-edge
+  # oatmakers-production/docker-compose.yaml).
   GATEWAY_JAR_PATH: /usr/local/bin/ignition/user-lib/jars
   SITE: oatmakers-site-7
 
@@ -358,7 +359,7 @@ jobs:
           fi
 
           # --- library JARs -> the gateway's JAR directory ---
-          # A volume on the gateway's classpath (mustry-cloud-edge capstone
+          # A volume on the gateway's classpath (mustry-cloud-edge production
           # stack), so shipped JARs survive a container recreate. This workflow
           # owns the JARs in it: their names are kept in jars.shipped on the
           # data volume. One it shipped earlier that is gone from jar-files/jar/
@@ -368,7 +369,7 @@ jobs:
           if find payload/jar-files/jar -type f -name '*.jar' 2>/dev/null | grep -q . \
              && ! docker exec "$IGNITION_CONTAINER" test -d "$GATEWAY_JAR_PATH"; then
             echo "The gateway has no JAR directory at $GATEWAY_JAR_PATH." >&2
-            echo "  It is a volume on the gateway's classpath, defined in the capstone stack" >&2
+            echo "  It is a volume on the gateway's classpath, defined in the production stack" >&2
             echo "  (Mustry-Solutions/mustry-cloud-edge). Roll that stack out first." >&2
             exit 1
           fi

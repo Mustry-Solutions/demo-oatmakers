@@ -10,7 +10,7 @@
 # run; rollback is a revert of the release PR) and by its six-hourly readiness
 # check. No optional Web Dev module licence is required.
 set -euo pipefail
-container="${POSTGRES_CONTAINER:-cicd-capstone-postgres}"
+container="${POSTGRES_CONTAINER:-oatmakers-production-postgres}"
 url="${PUBLIC_URL:-https://cloud.mustrysolutions.com}"
 mode="${1:-check}"
 tmp="$(mktemp)"

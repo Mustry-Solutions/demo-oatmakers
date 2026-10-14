@@ -24,14 +24,14 @@
 # own key for the local + personal test gateways.)
 #
 # Usage:
-#   scripts/mint-api-key.sh                        # container cicd-capstone-gateway
+#   scripts/mint-api-key.sh                        # container oatmakers-production-gateway
 #   scripts/mint-api-key.sh <container-name>       # another gateway container
 set -euo pipefail
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 REPO="${REPO:-Mustry-Solutions/demo-oatmakers}"
 TOKEN_NAME="CICD-APIKEY"
-CONTAINER="${1:-cicd-capstone-gateway}"
+CONTAINER="${1:-oatmakers-production-gateway}"
 TOKEN_DIR=/usr/local/bin/ignition/data/config/resources/core/ignition/api-token
 
 command -v gh > /dev/null || { echo "gh CLI required." >&2; exit 1; }
