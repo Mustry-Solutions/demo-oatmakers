@@ -47,7 +47,10 @@ database state live in Docker volumes. Ports already in use? Set
 The local gateway bind-mounts the repo: a save in the Designer lands in your
 working tree, so `git status` is your export step. After editing files by
 hand, `scripts/scan.sh` reloads projects and config without a restart.
-`scripts/migrate.sh up` applies new migration pairs. The gateway runs in
+`scripts/migrate.sh up` applies new migration pairs. Editing in VS Code with
+Flint? `flint.config.json` points it at the local gateway, and the Project
+Scan Endpoint module (in `third-party-modules/`) lets it refresh open
+Designers after a save; `setup.sh` writes the token file Flint reads. The gateway runs in
 two-hour trial mode; `scripts/reset-trial.sh` resets it. Stop everything with
 `scripts/teardown.sh` (add `--volumes` for a factory reset).
 
