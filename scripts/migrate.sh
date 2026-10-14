@@ -9,16 +9,27 @@
 #   scripts/migrate.sh down N        # roll back N steps
 #   scripts/migrate.sh version       # current position + dirty flag
 #   scripts/migrate.sh force V       # reset a dirty ledger to version V
+#   scripts/migrate.sh --test ...    # the same, on your test gateway's own
+#                                    # database (oatmakers-test-postgres)
 #
-# The applied position is tracked in the database's schema_migrations table,
+# The applied position is tracked in each database's schema_migrations table,
 # the same table the test workflow and the production deploy use:
 #   docker exec oatmakers-postgres psql -U ignition -d ignition \
 #     -c 'SELECT * FROM schema_migrations;'
 set -euo pipefail
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# shellcheck source=lib.sh
+. scripts/lib.sh
+
+TARGET="local"
+if [ "${1:-}" = "--test" ]; then
+  TARGET="test"
+  shift
+fi
+
 MIGRATE_IMAGE="migrate/migrate:v4.17.1"
-DB_CONTAINER="${DB_CONTAINER:-oatmakers-postgres}"
+DB_CONTAINER="${DB_CONTAINER:-$(db_container "$TARGET")}"
 MIGRATIONS_DIR="db-migration/migrate"
 # The same local stand-ins the gateway's secret provider and the database
 # container read (local-development/secrets).
@@ -26,7 +37,7 @@ PG_USER="${POSTGRES_USER:-$(cat local-development/secrets/POSTGRES_USERNAME)}"
 PG_PASS="${POSTGRES_PASSWORD:-$(cat local-development/secrets/POSTGRES_PASSWORD)}"
 DATABASE="${POSTGRES_DB:-ignition}"
 
-[ $# -gt 0 ] || { sed -n '2,15p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit 1; }
+[ $# -gt 0 ] || { sed -n '2,18p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit 1; }
 
 if ! find "$MIGRATIONS_DIR" -name '*.sql' -print -quit 2>/dev/null | grep -q .; then
   echo "No migrations in $MIGRATIONS_DIR, nothing to do."
@@ -57,7 +68,7 @@ urlenc() {
 # create + docker cp + start instead of a bind mount: works identically on
 # the host and inside a containerized runner.
 DB_URL="postgres://$(urlenc "$PG_USER"):$(urlenc "$PG_PASS")@${DB_CONTAINER}:5432/${DATABASE}?sslmode=disable"
-echo "migrate $* -> ${DATABASE} (network: ${NETWORK})"
+echo "migrate $* -> ${DATABASE} on ${DB_CONTAINER} (network: ${NETWORK})"
 
 cid="$(docker create --network "$NETWORK" "$MIGRATE_IMAGE" \
   -path=/migrations -database "$DB_URL" "$@")"

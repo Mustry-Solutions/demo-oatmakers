@@ -14,12 +14,12 @@ projects/<name>/             one project per Lab 07 contributor
 services/config/             gateway configuration export
 services/modules.json        module manifest (trust values per module)
 third-party-modules/         .modl files the pipeline installs (Mustry UI, TimescaleDB Historian)
-jar-files/jar/               library JARs, shipped to lib/core/gateway
+jar-files/jar/               library JARs, loaded from the gateway's JAR directory
 db-migration/migrate/        golang-migrate up/down pairs, run before anything ships
 local-development/secrets/   local stand-ins for the referenced database secrets
 scripts/                     setup, teardown, validate, migrate, scan, reset-trial, API keys
 tools/demo/  tests/          demo view generator, readiness checks and tests
-docker-compose.yaml          local gateway + database (+ the Part 0 test pair)
+docker-compose.yaml          local gateway + database (+ the Part 0 test stack)
 ops/compose.runner.yml       the production runner definition
 .github/workflows/           ci.yml (PR checks) · deploy.yml (release.yaml -> production)
                              · test-example.yml.template (Part 0, copy per person)
@@ -46,7 +46,8 @@ database state live in Docker volumes. Ports already in use? Set
 
 The local gateway bind-mounts the repo: a save in the Designer lands in your
 working tree, so `git status` is your export step. After editing files by
-hand, `scripts/scan.sh` reloads projects and config without a restart.
+hand, `scripts/scan.sh` reloads projects and config without a restart. A JAR
+you put in `jar-files/jar/` loads after `docker compose restart gateway`.
 `scripts/migrate.sh up` applies new migration pairs. Editing in VS Code with
 Flint? `flint.config.json` points it at the local gateway, and the Project
 Scan Endpoint module (in `third-party-modules/`) lets it refresh open
@@ -66,7 +67,9 @@ two-hour trial mode; `scripts/reset-trial.sh` resets it. Stop everything with
    runner: every pinned project from its own tag, plus the gateway config,
    module manifest, third-party modules, JARs and migrations from the
    `oatmakers` tag. Projects and config reload hot; a changed module or JAR
-   restarts the gateway once. The demo's readiness check must pass.
+   restarts the gateway once. Modules and JARs live in volumes on the
+   gateway, so they survive a container recreate. The demo's readiness check
+   must pass.
 
 Roll back by reverting the release PR. The Deploy workflow also has a manual
 `readiness_only` run and checks the running demo every six hours. A manual
@@ -80,14 +83,23 @@ token, its secrets keys and tag values.
 
 Put `LAB_USER=<yourname>` and the `RUNNER_TOKEN` from the chat in `.env`, run
 `./scripts/setup.sh`, and it also starts a test gateway on
-http://localhost:8090 and your own runner labelled `<yourname>-local`. Check
-it with `docker logs oatmakers-test-runner-<yourname>` ("Listening for Jobs").
+http://localhost:8090 with its own database (`oatmakers-test-postgres`, no
+host port) and your own runner labelled `<yourname>-local`. Check the runner
+with `docker logs oatmakers-test-runner-<yourname>` ("Listening for Jobs").
+Only your test workflow migrates that database: what you try locally with
+`scripts/migrate.sh` stays in your local one (`scripts/migrate.sh --test ...`
+reaches the test one when you need to repair it).
 Copy `.github/workflows/test-example.yml.template` to
 `.github/workflows/test-<yourname>.yml`, set
 `runs-on: [self-hosted, <yourname>-local]`, and every push to `main` deploys
 `main` to your test gateway. Once that file is on `main`,
 `gh workflow run test-<yourname>.yml --ref <branch>` deploys a branch to your
 test gateway before you merge it.
+
+To rotate your scan-API key, empty `IGNITION_API_KEY` in `.env` and run
+`./scripts/setup.sh` again: it generates a new key, puts it on both gateways
+and your runner, restarts each gateway that still has the old one, and checks
+that the new key works.
 
 ## Tests
 
