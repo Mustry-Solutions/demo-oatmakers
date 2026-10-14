@@ -1,8 +1,7 @@
-"""Keep the bundled lint policy and declare real Ignition project namespaces."""
+"""Keep the course lint policy and declare real Ignition project namespaces."""
 import json
 from pathlib import Path
 import sys
-import ignition_lint
 root=Path(__file__).resolve().parents[2]
 project=sys.argv[1] if len(sys.argv)>1 else 'oatmakers'
 modules=set()
@@ -14,7 +13,9 @@ while project:
     scripts=directory/'ignition/script-python'
     if scripts.exists():modules.update(p.name for p in scripts.iterdir() if p.is_dir())
     project=json.loads((directory/'project.json').read_text()).get('parent','')
-base=Path(ignition_lint.__file__).parent/'.config/.ignition-pylintrc'
+rules=json.loads((root/'rule_config.json').read_text())
+# The course pylint config (rule_config.json names it, repo-root-relative).
+base=root/rules['PylintScriptRule']['kwargs']['pylintrc']
 lines=base.read_text().splitlines()
 for index,line in enumerate(lines):
     if line.startswith('additional-builtins='):
@@ -25,7 +26,6 @@ for index,line in enumerate(lines):
         lines[index]='argument-rgx=^(?:[a-z_][a-z0-9_]*|previousValue|currentValue|missedEvents)$'
 out=root/'build/lint';out.mkdir(parents=True,exist_ok=True)
 (out/'ignition-pylintrc').write_text('\n'.join(lines)+'\n')
-rules=json.loads((root/'rule_config.json').read_text())
 # These are fixed names in the Mustry component schema, not project identifiers.
 rules['NamePatternRule']['kwargs']['skip_names'] = ['root', 'id', 'idField']
 rules['PylintScriptRule']['kwargs']['pylintrc']=str(out/'ignition-pylintrc')
