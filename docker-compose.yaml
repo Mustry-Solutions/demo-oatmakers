@@ -7,15 +7,21 @@ name: oatmakers
 #   postgres       localhost:5432          the demo database (TimescaleDB on
 #                                          PostgreSQL 17, like production)
 #
-# Lab 07 Part 0 adds a second pair behind the `test` profile (see below):
+# Lab 07 Part 0 adds your test stack behind the `test` profile (see below):
 #
 #   test-gateway   http://localhost:8090   your personal test gateway, fed only
 #                                          by your own deploy workflow
+#   test-postgres                          its own database, migrated only by
+#                                          that workflow (no host port)
 #   test-runner                            your GitHub Actions runner
 #
-# scripts/setup.sh brings this up. It starts the test pair only when .env sets
+# scripts/setup.sh brings this up. It starts the test stack only when .env sets
 # LAB_USER. Host ports can be moved with GATEWAY_PORT, TEST_GATEWAY_PORT and
 # POSTGRES_PORT in .env when something else already listens on them.
+#
+# Container names start with the compose project name, `oatmakers` unless .env
+# sets COMPOSE_PROJECT_NAME (only needed to run a second copy of this stack on
+# the same machine).
 
 # Run the gateway under umask 0002. The image's default umask (022) makes
 # everything the gateway writes into the bind mounts 644/755, group read-only,
@@ -40,6 +46,15 @@ x-ignition-environment: &ignition-environment
   ACCEPT_MODULE_LICENSES: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components"
   ACCEPT_MODULE_CERTS: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components"
 
+# Library JARs from jar-files/jar/ load from their own directory, added to the
+# gateway's classpath next to the image's lib/core/gateway. The local gateway
+# bind-mounts jar-files/jar/ there; the test gateway and production keep the
+# JARs the deploy ships in a volume, so they survive a container recreate. The
+# image's own JARs stay in the image, so an image upgrade is never held back
+# by an old copy in a volume. The classpath is read at boot: a new JAR needs a
+# restart.
+x-jar-dir: &jar-dir /usr/local/bin/ignition/user-lib/jars
+
 x-logging: &logging
   driver: "json-file"
   options:
@@ -49,8 +64,8 @@ x-logging: &logging
 services:
   gateway:
     image: inductiveautomation/ignition:8.3.8
-    container_name: oatmakers-gateway
-    hostname: oatmakers-gateway
+    container_name: ${COMPOSE_PROJECT_NAME:-oatmakers}-gateway
+    hostname: ${COMPOSE_PROJECT_NAME:-oatmakers}-gateway
     # Keep the image's own identity (uid 2003, gid 0) and ADD your group, so
     # everything the gateway writes into the bind mounts stays editable by you
     # without sudo. LAB_GID is exported (and written to .env) by
@@ -75,6 +90,12 @@ services:
       # `environment` secret provider that reads /run/secrets/ on production
       # reads these here.
       - ./local-development/secrets:/run/secrets:ro
+      # The repo's library JARs, straight from your working tree: drop a JAR
+      # in jar-files/jar/ and restart the gateway to load it.
+      - type: bind
+        source: ./jar-files/jar
+        target: *jar-dir
+        read_only: true
     environment:
       <<: *ignition-environment
       # The local gateway also accepts the modules a Lab 07 challenge adds
@@ -88,6 +109,7 @@ services:
       -m 1024
       --
       wrapper.java.initmemory=256
+      wrapper.java.classpath.4=/usr/local/bin/ignition/user-lib/jars/*
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost:8088/StatusPing"]
       interval: 30s
@@ -107,7 +129,7 @@ services:
     # Same PostgreSQL major and TimescaleDB extension as production. The
     # TimescaleDB Historian module needs the extension.
     image: timescale/timescaledb:2.30.2-pg17
-    container_name: oatmakers-postgres
+    container_name: ${COMPOSE_PROJECT_NAME:-oatmakers}-postgres
     restart: unless-stopped
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
@@ -138,10 +160,12 @@ services:
   # and a green test deploy says something about production.
   # Starts only with the profile: scripts/setup.sh does that when LAB_USER is
   # set in .env.
+  # It lives on its own `test` network with its own database, so `postgres`
+  # in the shipped connection settings means test-postgres here.
   test-gateway:
     image: inductiveautomation/ignition:8.3.8
-    container_name: oatmakers-test-gateway
-    hostname: oatmakers-test-gateway
+    container_name: ${COMPOSE_PROJECT_NAME:-oatmakers}-test-gateway
+    hostname: ${COMPOSE_PROJECT_NAME:-oatmakers}-test-gateway
     profiles: [test]
     user: "2003:0"
     group_add:
@@ -155,12 +179,20 @@ services:
       # boot: the scan API only accepts tokens the gateway has already loaded.
       - test-gateway-data:/usr/local/bin/ignition/data
       - ./local-development/secrets:/run/secrets:ro
+      # The third-party modules and JARs your test workflow ships, kept
+      # across a recreate (like production's volumes). Only the workflow
+      # writes here.
+      - test-gateway-modules:/third-party-modules
+      - type: volume
+        source: test-gateway-jars
+        target: *jar-dir
     environment: *ignition-environment
     command: >
       -n oatmakers-test
       -m 1024
       --
       wrapper.java.initmemory=256
+      wrapper.java.classpath.4=/usr/local/bin/ignition/user-lib/jars/*
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost:8088/StatusPing"]
       interval: 30s
@@ -172,19 +204,57 @@ services:
         limits:
           memory: 2G
     logging: *logging
+    networks:
+      - test
     depends_on:
-      postgres:
+      test-postgres:
         condition: service_healthy
+
+  # ---- Lab 07 Part 0: your test gateway's own database ----------------------
+  # Same image and credentials as the local database, but a separate server:
+  # only your test workflow migrates it, and only your test gateway writes to
+  # it. A migration you try on a branch with scripts/migrate.sh, or data your
+  # local gateway writes, never reaches your test runs, and what main brings
+  # (everyone's merged migrations) never collides with your branch work.
+  # Reachable as `postgres` on the test network, the hostname the shipped
+  # connection settings use; no host port.
+  test-postgres:
+    image: timescale/timescaledb:2.30.2-pg17
+    container_name: ${COMPOSE_PROJECT_NAME:-oatmakers}-test-postgres
+    profiles: [test]
+    restart: unless-stopped
+    networks:
+      test:
+        aliases:
+          - postgres
+    volumes:
+      - test-postgres-data:/var/lib/postgresql/data
+      - ./local-development/secrets:/run/secrets:ro
+    environment:
+      POSTGRES_DB: ignition
+      POSTGRES_USER_FILE: /run/secrets/POSTGRES_USERNAME
+      POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
+      TZ: "Europe/Brussels"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ignition -d ignition"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    logging: *logging
 
   # ---- Lab 07 Part 0: your personal GitHub Actions runner -------------------
   # Registers on the shared repo with YOUR label, so only your
   # test-<yourname>.yml runs here. Everything derives from LAB_USER in .env.
   test-runner:
     image: myoung34/github-runner:latest
-    container_name: oatmakers-test-runner-${LAB_USER:-example}
-    hostname: oatmakers-test-runner
+    container_name: ${COMPOSE_PROJECT_NAME:-oatmakers}-test-runner-${LAB_USER:-example}
+    hostname: ${COMPOSE_PROJECT_NAME:-oatmakers}-test-runner
     profiles: [test]
     restart: unless-stopped
+    # On the test network: your workflow reaches the test gateway's API by
+    # container name, and its migrate container joins the test database there.
+    networks:
+      - test
     environment:
       REPO_URL: "${REPO_URL:-https://github.com/Mustry-Solutions/demo-oatmakers}"
       # Registering a runner needs repo-admin rights, which contributors do
@@ -201,6 +271,11 @@ services:
       # IGNITION_API_KEY secret belongs to production. Recreate this container
       # after the key changes.
       IGNITION_API_KEY: "${IGNITION_API_KEY:-}"
+      # Your test stack, as your workflow addresses it: the gateway it ships
+      # to and the database it migrates. Never the local pair.
+      IGNITION_CONTAINER: "${COMPOSE_PROJECT_NAME:-oatmakers}-test-gateway"
+      IGNITION_URL: "http://${COMPOSE_PROJECT_NAME:-oatmakers}-test-gateway:8088"
+      POSTGRES_CONTAINER: "${COMPOSE_PROJECT_NAME:-oatmakers}-test-postgres"
       # So your workflow can print the right URL when you moved the port.
       TEST_GATEWAY_PORT: "${TEST_GATEWAY_PORT:-8090}"
       RUNNER_NAME: "${RUNNER_NAME:-oatmakers-test-${LAB_USER:-example}}"
@@ -224,8 +299,16 @@ services:
       - test-runner-state:/runner-state
     logging: *logging
 
+networks:
+  # Your test gateway, its database and your runner. Kept apart from the local
+  # pair on `default`, where `postgres` means your local database.
+  test:
+
 volumes:
   gateway-data:
   postgres-data:
   test-gateway-data:
+  test-gateway-modules:
+  test-gateway-jars:
+  test-postgres-data:
   test-runner-state:
