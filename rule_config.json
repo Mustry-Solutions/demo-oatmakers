@@ -1,5 +1,5 @@
 {
-  "_comment": "ign-lint rules for the lab Perspective views. Component min_length is 1: this lab ships dense KPI/status tiles whose leaf label/value/unit components use single-character names (L, V, U, S) by design. All other rules match the course standard. Docs: https://bw-design-group.github.io/ignition-lint",
+  "_comment": "ign-lint rules for the Perspective views: the course's lint config, the same as in labs 03-06. Component min_length is 1: the dense KPI/status tiles use single-character leaf names (L, V, U, S) by design. Scripts are linted with .config/.ignition-pylintrc: ign-lint's bundled pylint config plus import-outside-toplevel disabled, because a Perspective transform or event script is a function body and can only import inside itself. ign-lint resolves that path against its working directory, so it (and debug_dir) is repo-root-relative and every ign-lint run starts in the repo root. CI and local runs lint through tools/demo/lint_config.py, which layers this repo's project script namespaces and component event names on top of both files. Docs: https://bw-design-group.github.io/ignition-lint",
   "NamePatternRule": {
     "enabled": true,
     "kwargs": {
@@ -36,7 +36,7 @@
   "PylintScriptRule": {
     "enabled": true,
     "kwargs": {
-      "pylintrc": null,
+      "pylintrc": ".config/.ignition-pylintrc",
       "debug": false,
       "debug_dir": ".ignition-lint/debug/",
       "batch_mode": false,

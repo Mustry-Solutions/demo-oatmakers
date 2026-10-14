@@ -112,8 +112,10 @@ jobs:
           exit "$fail"
 
       - name: ignition-lint (Perspective views)
-        # Runs only once the repo carries a rule_config.json (same tooling as
-        # labs 04–06). Until then this is a documented no-op.
+        # The course lint config (rule_config.json + .config/.ignition-pylintrc,
+        # the same as in labs 03-06), run from the repo root. lint_config.py
+        # adds this repo's project script namespaces on top. Skipped when the
+        # PR deleted the project.
         env:
           PROJECT: ${{ matrix.project }}
         run: |
