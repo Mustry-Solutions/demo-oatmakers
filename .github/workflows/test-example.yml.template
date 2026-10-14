@@ -30,19 +30,20 @@
 #
 # What this workflow does is what the production deploy does, minus the
 # release.yaml indirection: check out main, run the migrations against your
-# local database, `docker cp` projects + config into your test gateway's
-# container, ship modules + JARs (restart only when they changed), ask the
-# gateway to scan. Same transport, same API, same self-heal.
+# test gateway's own database, `docker cp` projects + config into your test
+# gateway's container, ship modules + JARs (restart only when they changed),
+# ask the gateway to scan. Same transport, same API, same self-heal.
 #
 # Prerequisites (Part 0):
-#   - your test pair is up: ./scripts/setup.sh with LAB_USER and RUNNER_TOKEN
+#   - your test stack is up: ./scripts/setup.sh with LAB_USER and RUNNER_TOKEN
 #     in .env
 #   - your runner listens:  docker logs oatmakers-test-runner-<yourname>
 #                           shows "Listening for Jobs"
 #
-# No API-key secret to configure: setup.sh generated YOUR key into .env,
-# docker-compose passes it into YOUR runner container, and this workflow reads
-# it from the runner's environment.
+# No API-key secret and no container names to configure: setup.sh generated
+# YOUR key into .env, and docker-compose passes it, plus the names of YOUR
+# test gateway and test database, into YOUR runner container. This workflow
+# reads them from the runner's environment.
 
 "on":
   push:
@@ -69,14 +70,13 @@ jobs:
     runs-on: [self-hosted, CHANGEME-local]
     timeout-minutes: 15
     env:
-      IGNITION_CONTAINER: oatmakers-test-gateway
-      IGNITION_URL: http://oatmakers-test-gateway:8088
-      # IGNITION_API_KEY is deliberately NOT set here: the job inherits it
-      # from your runner container's environment. The repository's
-      # IGNITION_API_KEY secret is PRODUCTION's key.
+      # Deliberately NOT set here: IGNITION_API_KEY, IGNITION_CONTAINER,
+      # IGNITION_URL and POSTGRES_CONTAINER. The job inherits them from your
+      # runner container's environment, so they always name YOUR test stack.
+      # The repository's IGNITION_API_KEY secret is PRODUCTION's key.
       GATEWAY_DATA_PATH: /usr/local/bin/ignition/data
-      GATEWAY_JAR_PATH: /usr/local/bin/ignition/lib/core/gateway
-      POSTGRES_CONTAINER: oatmakers-postgres
+      # The gateway's JAR directory (on its classpath, kept in a volume).
+      GATEWAY_JAR_PATH: /usr/local/bin/ignition/user-lib/jars
       POSTGRES_DB: ignition
       MIGRATE_IMAGE: migrate/migrate:v4.17.1
 
@@ -91,13 +91,15 @@ jobs:
         run: |
           set -euo pipefail
           command -v docker >/dev/null || { echo "docker CLI not available in the runner" >&2; exit 1; }
-          test -n "${IGNITION_API_KEY:-}" || {
-            echo "IGNITION_API_KEY is not in the runner's environment." >&2
-            echo "  scripts/setup.sh generates it into .env and compose passes it to the" >&2
-            echo "  runner container. Re-run setup.sh, then:" >&2
-            echo "  docker compose --profile test up -d --force-recreate test-runner" >&2
-            exit 1
-          }
+          for var in IGNITION_API_KEY IGNITION_CONTAINER IGNITION_URL POSTGRES_CONTAINER; do
+            test -n "${!var:-}" || {
+              echo "$var is not in the runner's environment." >&2
+              echo "  docker-compose.yaml passes it to your runner container; an older" >&2
+              echo "  runner container misses it. Re-run ./scripts/setup.sh, then:" >&2
+              echo "  docker compose --profile test up -d --force-recreate test-runner" >&2
+              exit 1
+            }
+          done
           for container in "$IGNITION_CONTAINER" "$POSTGRES_CONTAINER"; do
             state="$(docker inspect -f '{{.State.Status}}' "$container" 2>/dev/null || echo missing)"
             if [ "$state" != "running" ]; then
@@ -109,8 +111,10 @@ jobs:
           echo "Prerequisites OK ($IGNITION_CONTAINER, $POSTGRES_CONTAINER running)."
 
       - name: Migrate database
-        # Same step as production, pointed at your local oatmakers-postgres
-        # with the local stand-in credentials from local-development/secrets.
+        # Same step as production, pointed at your test gateway's own
+        # database (oatmakers-test-postgres), with the local stand-in
+        # credentials from local-development/secrets. Nothing else migrates
+        # it: your local database and scripts/migrate.sh never touch it.
         # BEFORE the ship steps: a failed migration stops the run.
         run: |
           set -euo pipefail
@@ -208,10 +212,20 @@ jobs:
           # Same ownership rule as production: a JAR this workflow shipped
           # earlier that is gone from jar-files/jar/ is removed again.
           owned_list="$GATEWAY_DATA_PATH/jars.shipped"
-          { docker exec "$IGNITION_CONTAINER" cat "$owned_list" 2>/dev/null || true; } \
-            | sed '/^$/d' | sort -u > "$RUNNER_TEMP/jars.owned"
+          if find jar-files/jar -type f -name '*.jar' 2>/dev/null | grep -q . \
+             && ! docker exec "$IGNITION_CONTAINER" test -d "$GATEWAY_JAR_PATH"; then
+            echo "The gateway has no JAR directory at $GATEWAY_JAR_PATH." >&2
+            echo "  Your test gateway predates the JAR volume. Pull main and re-run" >&2
+            echo "  ./scripts/setup.sh: it recreates the test gateway with it." >&2
+            exit 1
+          fi
+          # Everything in the JAR directory came from this step (the image's own
+          # JARs live elsewhere), so what is there counts as shipped too: a JAR
+          # survives in the volume even when jars.shipped does not.
+          { docker exec "$IGNITION_CONTAINER" cat "$owned_list" 2>/dev/null || true
+            docker exec "$IGNITION_CONTAINER" sh -c 'cd "$1" 2>/dev/null && ls -1 -- *.jar 2>/dev/null' sh "$GATEWAY_JAR_PATH" || true
+          } | sed '/^$/d' | sort -u > "$RUNNER_TEMP/jars.owned"
           : > "$RUNNER_TEMP/jars.payload"
-          : > "$RUNNER_TEMP/jars.copied"
           if [ -d jar-files/jar ]; then
             while IFS= read -r f; do
               name="$(basename "$f")"
@@ -220,7 +234,6 @@ jobs:
               local_sum="$(md5sum "$f" | cut -d' ' -f1)"
               if [ "$before" != "$local_sum" ]; then
                 docker cp "$f" "$IGNITION_CONTAINER:$GATEWAY_JAR_PATH/$name"
-                echo "$name" >> "$RUNNER_TEMP/jars.copied"
                 echo "  shipped JAR $name"
                 restart=1
               fi
@@ -234,7 +247,8 @@ jobs:
           done < <(comm -23 "$RUNNER_TEMP/jars.owned" "$RUNNER_TEMP/jars.payload")
           # Passed as an argument, not on stdin: `docker exec -i` can hang when
           # its input is empty.
-          owned_now="$( { comm -12 "$RUNNER_TEMP/jars.owned" "$RUNNER_TEMP/jars.payload"; cat "$RUNNER_TEMP/jars.copied"; } | sort -u)"
+          # After this step the JAR directory holds exactly the payload.
+          owned_now="$(cat "$RUNNER_TEMP/jars.payload")"
           docker exec "$IGNITION_CONTAINER" sh -c 'printf "%s\n" "$1" | sed "/^$/d" > "$2"' sh "$owned_now" "$owned_list"
 
           if [ "$restart" -eq 0 ]; then
@@ -258,10 +272,9 @@ jobs:
         # Hot reload of projects and config, with the same 401/403 self-heal
         # as production: the first deploy to a fresh test gateway restarts it
         # once to load the deployed security-properties; every later deploy
-        # scans hot. A 401 that survives the restart means the token seeded
-        # into the test gateway's volume does not match the key in your .env
-        # (setup.sh only seeds a NEW volume): recreate the test gateway, see
-        # the end of this step.
+        # scans hot. A 401 that survives the restart means the token in the
+        # test gateway's volume does not match the key in your runner (a key
+        # rotated without re-running setup.sh): see the end of this step.
         run: |
           set -euo pipefail
           run_scans() {
@@ -307,11 +320,10 @@ jobs:
             rc=0
             run_scans || rc=$?
             if [ "$rc" = "42" ]; then
-              echo "Still not authorized: your test gateway holds an older API token" >&2
-              echo "than the key in your .env. Recreate it with a fresh volume:" >&2
-              echo "  docker compose --profile test rm -sf test-gateway test-runner" >&2
-              echo "  docker volume rm oatmakers_test-gateway-data" >&2
-              echo "  ./scripts/setup.sh" >&2
+              echo "Still not authorized: your test gateway and your runner hold" >&2
+              echo "different API keys. Run ./scripts/setup.sh on your machine: it" >&2
+              echo "puts the key from your .env into both and restarts the gateway." >&2
+              echo "Then re-run this run." >&2
               exit 1
             fi
             exit "$rc"

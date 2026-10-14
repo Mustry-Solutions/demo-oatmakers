@@ -69,10 +69,26 @@ gateway_url() {
   printf 'http://localhost:%s' "$port"
 }
 
+# Container names start with the compose project name: `oatmakers` unless .env
+# sets COMPOSE_PROJECT_NAME (a second copy of the stack on one machine).
+stack_name() {
+  setting COMPOSE_PROJECT_NAME oatmakers
+}
+
 gateway_container() {
   case "${1:-local}" in
-    local) printf 'oatmakers-gateway' ;;
-    test)  printf 'oatmakers-test-gateway' ;;
+    local) printf '%s-gateway' "$(stack_name)" ;;
+    test)  printf '%s-test-gateway' "$(stack_name)" ;;
+    *)     return 1 ;;
+  esac
+}
+
+# Each gateway has its own database server: the local one and, for Part 0,
+# the test gateway's test-postgres.
+db_container() {
+  case "${1:-local}" in
+    local) printf '%s-postgres' "$(stack_name)" ;;
+    test)  printf '%s-test-postgres' "$(stack_name)" ;;
     *)     return 1 ;;
   esac
 }
@@ -110,4 +126,15 @@ wait_gateway_running() {
   done
   LAST_GATEWAY_STATE="$state"
   return 1
+}
+
+# HTTP status of an authenticated call with IGNITION_API_KEY. A config scan is
+# what every deploy sends and is harmless to repeat. 401 means the gateway does
+# not know the key (it loads token resources at boot only); 403 means it knows
+# the key but its security-properties do not grant it yet (a test gateway
+# before its first deploy). 000 means no answer.
+api_key_status() {
+  curl -sS -o /dev/null -w '%{http_code}' -X POST -m 30 \
+    -H "X-Ignition-API-Token: ${IGNITION_API_KEY:-}" \
+    "$1/data/api/v1/scan/config" 2>/dev/null || true
 }

@@ -5,14 +5,18 @@
 #   - starts the database and applies the migrations (the demo simulation
 #     needs its schema before the gateway's continuity timer runs)
 #   - brings up the local gateway and, when .env sets LAB_USER, the Lab 07
-#     Part 0 test pair (test gateway + your runner)
+#     Part 0 test stack (test gateway, its own database, your runner)
 #   - fixes the one-time first-boot identity churn: commissioning invents a
 #     "temp" idp/user source (password-reset semantics, because the repo
 #     already carries security-properties). This promotes it to the
 #     gitignored "default" (admin / password), restores the committed
 #     security-properties, and restarts the gateway.
+#   - checks that every gateway accepts the API key in .env, and restarts a
+#     gateway once when it does not know the key yet (a new or rotated key:
+#     gateways load token resources at boot only)
 #
-# Re-run safely: every step is idempotent.
+# Re-run safely: every step is idempotent. To rotate your API key, empty
+# IGNITION_API_KEY in .env and run this script again.
 
 set -euo pipefail
 
@@ -112,6 +116,9 @@ compose() { docker compose ${PROFILE_ARGS[@]+"${PROFILE_ARGS[@]}"} "$@"; }
 # The collection manifest must come along: on first boot the gateway creates
 # the `core` collection and refuses a non-empty dir without a manifest.
 #
+# On later runs the token is replaced when the key in .env changed (a
+# rotation); the key check further down restarts the gateway to load it.
+#
 # Deliberately NOT seeded: security-properties. A gateway that boots with a
 # pre-existing security-properties treats commissioning as a password reset
 # and stamps a "temp" identity instead of "default", and the deploy keeps only
@@ -129,8 +136,19 @@ seed_test_gateway() {
   compose create test-gateway >/dev/null 2>&1 || true
   docker volume inspect "$vol" >/dev/null 2>&1 || return 0
 
+  local token_rel=resources/core/ignition/api-token
   if docker run --rm -v "$vol:/d" alpine:3 \
-       test -d /d/config/resources/core/ignition/api-token 2>/dev/null; then
+       test -d "/d/config/$token_rel" 2>/dev/null; then
+    # Already seeded: replace the token only when the key in .env changed.
+    local want have
+    want="$(token_hash < "services/config/$token_rel/$API_TOKEN_NAME/config.json")"
+    have="$(docker run --rm -v "$vol:/d" alpine:3 \
+      cat "/d/config/$token_rel/$API_TOKEN_NAME/config.json" 2>/dev/null | token_hash)"
+    [ -n "$want" ] && [ "$want" = "$have" ] && return 0
+    echo "Your API key changed: replacing the test gateway's token in $vol..."
+    docker run --rm -v "$vol:/d" -v "$PWD/services/config/$token_rel:/seed:ro" alpine:3 \
+      sh -c "rm -rf '/d/config/$token_rel' && mkdir -p '/d/config/$token_rel' \
+             && cp -R /seed/. '/d/config/$token_rel/' && chown -R 2003:0 '/d/config/$token_rel'"
     return 0
   fi
 
@@ -139,29 +157,49 @@ seed_test_gateway() {
   tmp="$(mktemp -d)"
   mkdir -p "$tmp/resources/core/ignition"
   cp services/config/resources/core/config-mode.json "$tmp/resources/core/"
-  cp -R services/config/resources/core/ignition/api-token "$tmp/resources/core/ignition/"
+  cp -R "services/config/$token_rel" "$tmp/resources/core/ignition/"
   docker run --rm -v "$vol:/d" -v "$tmp:/seed:ro" alpine:3 \
     sh -c 'mkdir -p /d/config && cp -R /seed/. /d/config/ && chown -R 2003:0 /d'
   rm -rf "$tmp"
   echo "  seeded api-token into $vol"
 }
 
+# The tokenHash of an api-token config.json on stdin (empty when unreadable).
+token_hash() {
+  python3 -c 'import json,sys
+try: print(json.load(sys.stdin)["settings"]["tokenHash"])
+except Exception: pass'
+}
+
+load_api_key_from_env
+API_TOKEN_NAME="${IGNITION_API_KEY%%:*}"
+
 if [ ${#PROFILE_ARGS[@]} -gt 0 ]; then
   seed_test_gateway
 fi
 
 # ---- database first, then the migrations ----------------------------------
+# The local database only. Your test gateway's database (test-postgres) is
+# migrated by your test workflow, like production's by Deploy.
 docker compose up -d postgres
 echo -n "Waiting for the database "
 for _ in $(seq 1 60); do
-  if [ "$(docker inspect -f '{{.State.Health.Status}}' oatmakers-postgres 2>/dev/null)" = healthy ]; then
+  if [ "$(docker inspect -f '{{.State.Health.Status}}' "$(db_container local)" 2>/dev/null)" = healthy ]; then
     echo " up."
     break
   fi
   echo -n "."
   sleep 2
 done
-scripts/migrate.sh up
+# A failure here does not stop the setup: the usual cause is a migration you
+# applied on another branch, and the gateways (and a key rotation) must still
+# come up. The fix is on that branch.
+if ! scripts/migrate.sh up; then
+  echo -e "${YELLOW}The local database did not migrate (see above). Carrying on with the gateways.${NC}"
+  echo "  'no migration found for version N': your local database ran migration N on"
+  echo "  another branch. Switch to that branch, run scripts/migrate.sh down 1, switch"
+  echo "  back and run scripts/migrate.sh up."
+fi
 
 # ---- the gateways (and your runner) ----------------------------------------
 compose up -d
@@ -227,11 +265,58 @@ else
   git checkout -- "$IG/security-properties" 2>/dev/null || true
 fi
 
+# ---- do the gateways accept this clone's API key? ---------------------------
+# A gateway loads api-token resources at boot only. After a key rotation (or a
+# token written while it ran) it answers 401 until it restarts, so restart it
+# once and check again. The test gateway may answer 403 until your first test
+# deploy ships the committed security-properties: the key is known, the
+# permission arrives with that deploy.
+
+# The key's status code, retried while the gateway's API is still starting.
+key_status_when_ready() {
+  local url="$1" code=''
+  for _ in $(seq 1 24); do
+    code="$(api_key_status "$url")"
+    case "$code" in
+      000|400|5??) sleep 5 ;;
+      *) break ;;
+    esac
+  done
+  printf '%s' "$code"
+}
+
+ensure_api_key() {
+  local which="$1" url container code
+  url="$(gateway_url "$which")"
+  container="$(gateway_container "$which")"
+  code="$(key_status_when_ready "$url")"
+  if [ "$code" = "401" ]; then
+    echo "The $which gateway does not know the API key in .env yet; restarting it once to load it..."
+    docker restart "$container" >/dev/null
+    wait_running "$which"
+    code="$(key_status_when_ready "$url")"
+  fi
+  case "$which:$code" in
+    *:2??)
+      echo "  API key accepted by the $which gateway (HTTP $code)." ;;
+    test:403)
+      echo "  API key known to the test gateway (HTTP 403 until your first test deploy grants it scans)." ;;
+    *)
+      echo -e "${RED}The $which gateway answered HTTP $code to the API key in .env.${NC}" >&2
+      echo "Check: docker logs $container" >&2
+      exit 1 ;;
+  esac
+}
+ensure_api_key local
+if [ ${#PROFILE_ARGS[@]} -gt 0 ]; then
+  ensure_api_key test
+fi
+
 # ---- Part 0: is your runner listening? -------------------------------------
 # Contributors cannot open Settings -> Actions -> Runners, so the runner's own
 # log is the place to look.
 if [ ${#PROFILE_ARGS[@]} -gt 0 ]; then
-  runner="oatmakers-test-runner-$LAB_USER_VALUE"
+  runner="$(stack_name)-test-runner-$LAB_USER_VALUE"
   echo -n "Waiting for your runner ($runner) to listen for jobs "
   listening=false
   for _ in $(seq 1 30); do
@@ -262,7 +347,7 @@ echo "  demo       $(gateway_url local)/data/perspective/client/oatmakers/"
 echo "  postgres   localhost:$(setting POSTGRES_PORT 5432)          ignition / $(cat local-development/secrets/POSTGRES_PASSWORD)"
 if [ ${#PROFILE_ARGS[@]} -gt 0 ]; then
   echo "  test gw    $(gateway_url test)   admin / password   (your deploy target)"
-  echo "  runner     docker logs oatmakers-test-runner-$LAB_USER_VALUE   (look for 'Listening for Jobs')"
+  echo "  runner     docker logs $(stack_name)-test-runner-$LAB_USER_VALUE   (look for 'Listening for Jobs')"
 fi
 echo ""
 echo "git status should be clean now. If the identity files ever show up dirty"

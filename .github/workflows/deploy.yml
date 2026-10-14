@@ -84,7 +84,9 @@ env:
   POSTGRES_DB: ${{ vars.POSTGRES_DB || 'ignition' }}
   PUBLIC_URL: https://cloud.mustrysolutions.com
   GATEWAY_DATA_PATH: /usr/local/bin/ignition/data
-  GATEWAY_JAR_PATH: /usr/local/bin/ignition/lib/core/gateway
+  # The gateway's JAR directory: a volume on its classpath, next to the
+  # image's lib/core/gateway (mustry-cloud-edge capstone/docker-compose.yaml).
+  GATEWAY_JAR_PATH: /usr/local/bin/ignition/user-lib/jars
   SITE: oatmakers-site-7
 
 jobs:
@@ -355,17 +357,28 @@ jobs:
             done < <(find payload/third-party-modules -type f -name '*.modl')
           fi
 
-          # --- library JARs -> lib/core/gateway ---
-          # This workflow owns the JARs it copied in: their names are kept in
-          # jars.shipped on the data volume. One it shipped earlier that is
-          # gone from jar-files/jar/ is removed again, so deleting a JAR in the
-          # repo deletes it on the gateway. JARs it never copied (the image's
-          # own) are never touched.
+          # --- library JARs -> the gateway's JAR directory ---
+          # A volume on the gateway's classpath (mustry-cloud-edge capstone
+          # stack), so shipped JARs survive a container recreate. This workflow
+          # owns the JARs in it: their names are kept in jars.shipped on the
+          # data volume. One it shipped earlier that is gone from jar-files/jar/
+          # is removed again, so deleting a JAR in the repo deletes it on the
+          # gateway. The image's own JARs (lib/core/) are never touched.
           owned_list="$GATEWAY_DATA_PATH/jars.shipped"
-          { docker exec "$IGNITION_CONTAINER" cat "$owned_list" 2>/dev/null || true; } \
-            | sed '/^$/d' | sort -u > "$RUNNER_TEMP/jars.owned"
+          if find payload/jar-files/jar -type f -name '*.jar' 2>/dev/null | grep -q . \
+             && ! docker exec "$IGNITION_CONTAINER" test -d "$GATEWAY_JAR_PATH"; then
+            echo "The gateway has no JAR directory at $GATEWAY_JAR_PATH." >&2
+            echo "  It is a volume on the gateway's classpath, defined in the capstone stack" >&2
+            echo "  (Mustry-Solutions/mustry-cloud-edge). Roll that stack out first." >&2
+            exit 1
+          fi
+          # Everything in the JAR directory came from this step (the image's own
+          # JARs live elsewhere), so what is there counts as shipped too: a JAR
+          # survives in the volume even when jars.shipped does not.
+          { docker exec "$IGNITION_CONTAINER" cat "$owned_list" 2>/dev/null || true
+            docker exec "$IGNITION_CONTAINER" sh -c 'cd "$1" 2>/dev/null && ls -1 -- *.jar 2>/dev/null' sh "$GATEWAY_JAR_PATH" || true
+          } | sed '/^$/d' | sort -u > "$RUNNER_TEMP/jars.owned"
           : > "$RUNNER_TEMP/jars.payload"
-          : > "$RUNNER_TEMP/jars.copied"
           if [ -d payload/jar-files/jar ]; then
             while IFS= read -r f; do
               name="$(basename "$f")"
@@ -374,7 +387,6 @@ jobs:
               local_sum="$(md5sum "$f" | cut -d' ' -f1)"
               if [ "$before" != "$local_sum" ]; then
                 docker cp "$f" "$IGNITION_CONTAINER:$GATEWAY_JAR_PATH/$name"
-                echo "$name" >> "$RUNNER_TEMP/jars.copied"
                 echo "  shipped JAR $name"
                 restart=1
               fi
@@ -388,7 +400,8 @@ jobs:
           done < <(comm -23 "$RUNNER_TEMP/jars.owned" "$RUNNER_TEMP/jars.payload")
           # Passed as an argument, not on stdin: `docker exec -i` can hang when
           # its input is empty.
-          owned_now="$( { comm -12 "$RUNNER_TEMP/jars.owned" "$RUNNER_TEMP/jars.payload"; cat "$RUNNER_TEMP/jars.copied"; } | sort -u)"
+          # After this step the JAR directory holds exactly the payload.
+          owned_now="$(cat "$RUNNER_TEMP/jars.payload")"
           docker exec "$IGNITION_CONTAINER" sh -c 'printf "%s\n" "$1" | sed "/^$/d" > "$2"' sh "$owned_now" "$owned_list"
 
           if [ "$restart" -eq 0 ]; then

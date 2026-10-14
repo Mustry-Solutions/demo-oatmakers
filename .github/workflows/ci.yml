@@ -359,7 +359,7 @@ jobs:
           exit "$fail"
 
       - name: jar-files/jar/ hygiene
-        # Library JARs only (→ lib/core/gateway at deploy time), plus a README
+        # Library JARs only (→ the gateway's JAR directory at deploy time), plus a README
         # recording where each JAR came from.
         run: |
           set -euo pipefail
