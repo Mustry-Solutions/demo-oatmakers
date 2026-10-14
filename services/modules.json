@@ -170,5 +170,11 @@
     "onStartup": "enabled",
     "certFingerprint": "9cf87a32d018c8153b68e507e9666b9fa7932983",
     "licenseAgreementHash": 2865025977
+  },
+  "project-scan-endpoint": {
+    "filename": "/third-party-modules/Project-Scan-Endpoint-1.0.0.modl",
+    "onStartup": "enabled",
+    "certFingerprint": "7eeb95841827f50c0b617e2a33f4cb26df7e8a12",
+    "licenseAgreementHash": 2181639367
   }
 }

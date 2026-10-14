@@ -16,6 +16,9 @@
 #      from the bind mount; setup.sh seeds the same resource into your test
 #      gateway's volume before its first boot.
 #
+#   3. writes the same key into .flint/tokens/local-api.json (gitignored), the
+#      token file flint.config.json points Flint's project-scan-endpoint at.
+#
 # Your test-deploy workflow reads the key from the RUNNER's environment —
 # docker-compose.yaml passes IGNITION_API_KEY from .env into your
 # test-runner container — so no GitHub secret is involved for your own
@@ -106,4 +109,19 @@ if current != thash:
         }, f, indent=2)
         f.write("\n")
     print(f"  wrote api-token resource -> services/config/.../api-token/{name}/")
+
+# Flint (flint.config.json) reads the same key from a gitignored token file,
+# in dotenv format despite the .json name. Kept in step with .env, so a
+# rotated key reaches Flint too.
+flint_path = os.path.join(root, ".flint/tokens/local-api.json")
+flint_text = f"ignition_token={value}\n"
+current_flint = None
+if os.path.isfile(flint_path):
+    with open(flint_path) as f:
+        current_flint = f.read()
+if current_flint != flint_text:
+    os.makedirs(os.path.dirname(flint_path), exist_ok=True)
+    with open(flint_path, "w") as f:
+        f.write(flint_text)
+    print("  wrote the key for Flint -> .flint/tokens/local-api.json")
 PYEOF
