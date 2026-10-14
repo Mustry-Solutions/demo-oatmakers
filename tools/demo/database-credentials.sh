@@ -14,7 +14,7 @@
 # For the migrations that follow, it exports POSTGRES_USERNAME=ignition and the
 # (masked) password to $GITHUB_ENV.
 set -euo pipefail
-container="${POSTGRES_CONTAINER:-cicd-capstone-postgres}"
+container="${POSTGRES_CONTAINER:-oatmakers-production-postgres}"
 database="${POSTGRES_DB:-ignition}"
 
 docker exec -i -e DB="$database" "$container" sh -c '
