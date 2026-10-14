@@ -6,4 +6,4 @@
 # oatmakers pin also carries the gateway config, modules, JARs and migrations.
 gateway: oatmakers-site-7
 projects:
-  oatmakers: v5.0.0
+  oatmakers: v5.1.0
