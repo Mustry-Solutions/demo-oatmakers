@@ -4,6 +4,9 @@
 # `changes` job works out what a PR touches, and only the matching jobs run.
 #
 #   projects/<name>/**        -> validate-projects (a matrix job per project)
+#   rule_config.json,         -> validate-projects for EVERY project (a rule
+#   .config/.ignition-pylintrc,  change can break views nobody touched)
+#   tools/demo/lint_config.py
 #   release.yaml              -> validate-release ("a pin may only point at a
 #                                tag that exists, on a commit on main" is
 #                                enforced HERE, at PR time)
@@ -62,6 +65,11 @@ jobs:
           # JSON array of project names touched by this PR, e.g. ["wout"].
           projects="$( (grep -E '^projects/[^/]+/' changed.txt || true) \
             | cut -d/ -f2 | sort -u | jq -R . | jq -sc .)"
+          # A change to the shared lint config re-lints every project.
+          if grep -qE '^(rule_config\.json|\.config/\.ignition-pylintrc|tools/demo/lint_config\.py)$' changed.txt; then
+            projects="$(find projects -mindepth 1 -maxdepth 1 -type d -exec basename {} \; \
+              | sort | jq -R . | jq -sc .)"
+          fi
 
           flag() { if grep -qE "$1" changed.txt; then echo true; else echo false; fi; }
           {
