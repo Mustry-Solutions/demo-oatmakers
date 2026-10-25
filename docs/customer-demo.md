@@ -52,9 +52,8 @@ After changing resources:
 ```sh
 scripts/scan.sh
 scripts/validate.sh
-# With ign-lint 0.6.1 in Python 3.10-3.13:
-python3 tools/demo/lint_config.py oatmakers
-ign-lint --config build/lint/rules.json --files "projects/oatmakers/**/view.json"
+# pip install iglint==0.1.0 --find-links https://github.com/Mustry-Solutions/iglint/releases/expanded_assets/v0.1.0
+iglint check
 python3 tests/demo/test_database.py
 python3 tests/test_deploy_payload.py
 ```

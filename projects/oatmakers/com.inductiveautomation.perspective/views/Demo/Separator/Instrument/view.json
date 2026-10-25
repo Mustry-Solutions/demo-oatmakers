@@ -54,6 +54,7 @@
         },
         "props": {
           "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMzAiIGhlaWdodD0iNTEiIHZpZXdCb3g9IjAgMCAxMzAgNTEiPjwvc3ZnPg==",
+          "altText": "Instrument",
           "fit": {
             "mode": "fill"
           },

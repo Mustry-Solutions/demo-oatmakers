@@ -1430,7 +1430,7 @@
                   "component": {
                     "onActionPerformed": {
                       "config": {
-                        "script": "# pylint: disable=undefined-variable\n\tself.view.custom.scene \u003d ObservatoryLogic.next_scene(self.view.custom.scene)\n\tself.view.custom.interactions \u003d int(self.view.custom.interactions) + 1"
+                        "script": "\tself.view.custom.scene \u003d ObservatoryLogic.next_scene(self.view.custom.scene)\n\tself.view.custom.interactions \u003d int(self.view.custom.interactions) + 1"
                       },
                       "scope": "G",
                       "type": "script"
@@ -1468,7 +1468,7 @@
                       },
                       "transforms": [
                         {
-                          "code": "# pylint: disable=undefined-variable\n\treturn ObservatoryLogic.scene_label(value)",
+                          "code": "\treturn ObservatoryLogic.scene_label(value)",
                           "type": "script"
                         }
                       ],

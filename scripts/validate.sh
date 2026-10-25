@@ -12,6 +12,7 @@
 #   6. The demo: generated views match tools/demo/build_views.py, resources,
 #      routes and embedded scripts are valid.
 #   7. actionlint on .github/workflows/ (only if actionlint is installed).
+#   8. iglint on projects/ and services/ (only if iglint is installed).
 #
 # Exits non-zero if any check fails. No Ignition or Docker needed. (CI also
 # runs the demo's database tests against a disposable database.)
@@ -211,6 +212,18 @@ if command -v actionlint > /dev/null 2>&1; then
   fi
 else
   echo -e "  ${YELLOW}skipped${NC} — actionlint not installed (CI runs it; install from https://github.com/rhysd/actionlint)"
+fi
+
+# 8. iglint (optional) ----------------------------------------------------------
+echo "→ iglint (projects/, services/)"
+if command -v iglint > /dev/null 2>&1; then
+  if iglint check projects services; then
+    echo -e "  ${GREEN}ok${NC}"
+  else
+    rc=1
+  fi
+else
+  echo -e "  ${YELLOW}skipped${NC} — iglint not installed (CI runs it; pip install iglint==0.1.0 --find-links https://github.com/Mustry-Solutions/iglint/releases/expanded_assets/v0.1.0)"
 fi
 
 echo ""

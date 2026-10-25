@@ -7,8 +7,8 @@ BG='#e6e6e6'
 INK='#565957'
 FLOW_AXIS=48
 
-def image_svg(name,svg):
-    return node('ia.display.image',name,{'source':'data:image/svg+xml;base64,'+base64.b64encode(svg.encode()).decode(),'fit':{'mode':'contain'},'style':{'pointerEvents':'none'}})
+def image_svg(name,svg,alt):
+    return node('ia.display.image',name,{'source':'data:image/svg+xml;base64,'+base64.b64encode(svg.encode()).decode(),'altText':alt,'fit':{'mode':'contain'},'style':{'pointerEvents':'none'}})
 
 def svg(body,w,h):
     return '<svg xmlns="http://www.w3.org/2000/svg" width="%s" height="%s" viewBox="0 0 %s %s">%s</svg>'%(w,h,w,h,body)
@@ -57,25 +57,25 @@ def stream_svg(text,w):
 
 def build_separator():
     # Instrument circle center is (10,32), with pipe ports at y=22 and y=42.
-    graphic=image_svg('Graphic',svg('',130,51));graphic['props']['fit']['mode']='fill'
+    graphic=image_svg('Graphic',svg('',130,51),'Instrument');graphic['props']['fit']['mode']='fill'
     graphic['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tag':'{view.params.tag}','kind':'{view.params.kind}','value':'{view.params.value}','colour':'{view.params.colour}'}},'transforms':[{'type':'script','code':'\treturn application.demo.separatorInstrumentSvg(value["tag"], value["kind"], value["value"], value["colour"])'}]}}}
     graphic['position']={'x':0,'y':0,'width':1,'height':1}
     instrument=node('ia.container.coord','root',{'mode':'percent','style':{'cursor':'pointer'}},[graphic])
     instrument['events']={'dom':{'onClick':{'type':'script','scope':'G','config':{'script':'\tapplication.demo.showSeparatorDetail(self.view.params.tag, self.view.params.signal)'}}}}
     view('Demo/Separator/Instrument',instrument,params={'tag':'PI152A','kind':'PI','value':'n/a','colour':'#f7f7f7','signal':'pressure'},height=51)
-    device_graphic=image_svg('Graphic',svg('',78,88));device_graphic['props']['fit']['mode']='fill'
+    device_graphic=image_svg('Graphic',svg('',78,88),'Valve or pump');device_graphic['props']['fit']['mode']='fill'
     device_graphic['propConfig']={'props.source':bind('view.params.source')}
     device_graphic['position']={'x':0,'y':0,'width':1,'height':1}
     device_root=node('ia.container.coord','root',{'mode':'percent','style':{'cursor':'pointer'}},[device_graphic])
     device_root['events']={'dom':{'onClick':{'type':'script','scope':'G','config':{'script':'\tapplication.demo.showSeparatorDetail(self.view.params.tag, self.view.params.signal)'}}}}
     view('Demo/Separator/Device',device_root,params={'tag':'PCV151A2','source':'','signal':'pressure'},height=88)
-    trend=image_svg('Plot',svg('',280,70));trend['props']['style']={'pointerEvents':'none'}
+    trend=image_svg('Plot',svg('',280,70),'Trend');trend['props']['style']={'pointerEvents':'none'}
     trend['props']['fit']['mode']='fill'
     trend['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(1000)','signal':'{view.params.signal}','colour':'{view.params.colour}','sp':'{view.params.sp}'}},'transforms':[{'type':'script','code':'\treturn application.demo.separatorTrendSvg(value["signal"], value["colour"], value["sp"])'}]}}}
     trend['position']={'x':0,'y':0,'width':1,'height':1}
     view('Demo/Separator/Trend',node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'signal':'level','colour':'#81888d','sp':47.3},height=70)
 
-    stream_graphic=image_svg('Graphic',svg('',132,28));stream_graphic['props']['fit']['mode']='fill'
+    stream_graphic=image_svg('Graphic',svg('',132,28),'Stream');stream_graphic['props']['fit']['mode']='fill'
     stream_graphic['propConfig']={'props.source':bind('view.params.source')}
     stream_graphic['position']={'x':0,'y':0,'width':1,'height':1}
     stream=node('ia.container.coord','root',{'mode':'percent','style':{'cursor':'pointer'}},[stream_graphic])
@@ -115,8 +115,8 @@ def build_separator():
     path('M1091 50.5 H1145 M1170 50.5 H1255.5 M1271 61 V85',INK,1.4)
     pipes.append('<g fill="#e6e6e6" stroke="#777"><rect x="1060" y="40" width="31" height="21"/><rect x="1255.5" y="40" width="31" height="21"/><path d="M1145 45 L1170 56 V45 L1145 56 Z"/><rect x="1150" y="27" width="16" height="14"/></g><g font-family="Arial" fill="#555" text-anchor="middle" font-size="12"><text x="1075.5" y="55">AS</text><text x="1271" y="55">I/P</text><text x="1158" y="38">S</text><text x="1158" y="71">SOV151A2</text></g>')
     # Main vessel is a separate live view, over the pipe network.
-    canvas=[xy(image_svg('Piping',svg(''.join(pipes),W,H)),0,0,W,H)]
-    vessel=image_svg('Vessel',svg('',610,260))
+    canvas=[xy(image_svg('Piping',svg(''.join(pipes),W,H),'Separator A piping'),0,0,W,H)]
+    vessel=image_svg('Vessel',svg('',610,260),'Separator A vessel')
     vessel['propConfig']={'props.source':script_expr('now(1000)','\treturn application.demo.separatorVesselSvg()')}
     canvas.append(xy(vessel,410,240,610,260))
     for name,signal,colour,sp,x,y,w,h in [('PressureTrend','pressure','#d2ab53',3.88,424,284,570,62),('LevelTrend','level','#7c8185',47.33,720,340,271,62),('InterfaceTrend','interface','#789cad',21.51,444,429,268,65)]:
