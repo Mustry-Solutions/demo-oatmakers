@@ -223,7 +223,7 @@ if command -v iglint > /dev/null 2>&1; then
     rc=1
   fi
 else
-  echo -e "  ${YELLOW}skipped${NC} — iglint not installed (CI runs it; pip install iglint==0.1.0 --find-links https://github.com/Mustry-Solutions/iglint/releases/expanded_assets/v0.1.0)"
+  echo -e "  ${YELLOW}skipped${NC} — iglint not installed (CI runs it; pip install iglint==0.1.0)"
 fi
 
 echo ""

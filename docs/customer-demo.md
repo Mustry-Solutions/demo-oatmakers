@@ -52,7 +52,7 @@ After changing resources:
 ```sh
 scripts/scan.sh
 scripts/validate.sh
-# pip install iglint==0.1.0 --find-links https://github.com/Mustry-Solutions/iglint/releases/expanded_assets/v0.1.0
+# pip install iglint==0.1.0
 iglint check
 python3 tests/demo/test_database.py
 python3 tests/test_deploy_payload.py

@@ -132,7 +132,7 @@ jobs:
             echo "projects/$PROJECT was deleted in this PR, skipping iglint."
             exit 0
           fi
-          pip install iglint==0.1.0 --find-links https://github.com/Mustry-Solutions/iglint/releases/expanded_assets/v0.1.0
+          pip install iglint==0.1.0
           iglint check --output-format github "projects/$PROJECT"
 
   validate-release:
@@ -270,7 +270,7 @@ jobs:
         run: |
           set -euo pipefail
           [ -d services ] || { echo "No services/, skipping."; exit 0; }
-          pip install iglint==0.1.0 --find-links https://github.com/Mustry-Solutions/iglint/releases/expanded_assets/v0.1.0
+          pip install iglint==0.1.0
           iglint check --output-format github services
 
       - name: Module manifest ↔ third-party-modules/ agree
