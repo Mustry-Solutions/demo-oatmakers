@@ -1,0 +1,28 @@
+# iglint configuration for every project in this repo: the course's lint
+# config, the same as in labs 03-06. iglint finds this file from the path it
+# lints, so it works from any directory.
+# Rules: https://iglint.mustrysolutions.com/
+
+# Opt-in rules on top of the defaults: naming conventions and brittle
+# `../` / getParent() navigation of the component tree.
+extend-select = ["NAME001", "VIEW018"]
+
+# Component min_length is 1: the dense KPI/status tiles use single-character
+# leaf names (L, V, U, S) by design. root, id and idField are fixed names in
+# the Mustry component schema, not project identifiers.
+[rules.NAME001]
+skip-names = ["root", "id", "idField"]
+per-type = { component = { convention = "PascalCase", min_length = 1, severity = "error" }, property = { convention = "camelCase", min_length = 1, severity = "warning" }, message_handler = { convention = "kebab-case", min_length = 2, severity = "warning" }, custom_method = { convention = "snake_case", min_length = 2, severity = "error" } }
+
+# The demo's clock ticks once a second; anything faster is a runaway poll.
+[rules.BIND004]
+severity = "error"
+minimum-interval = 1000
+
+[rules.VIEW018]
+severity = "error"
+
+# Demo/Components/Event is an orphan view no screen embeds; its card class
+# was never defined in the stylesheet.
+[rules.STYLE001]
+exclude = ["projects/oatmakers/com.inductiveautomation.perspective/views/Demo/Components/Event/view.json"]

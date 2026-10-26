@@ -39,6 +39,7 @@
         },
         "props": {
           "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMzIiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxMzIgMjgiPjwvc3ZnPg==",
+          "altText": "Stream",
           "fit": {
             "mode": "fill"
           },

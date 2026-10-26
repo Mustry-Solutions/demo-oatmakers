@@ -4,9 +4,9 @@
 # `changes` job works out what a PR touches, and only the matching jobs run.
 #
 #   projects/<name>/**        -> validate-projects (a matrix job per project)
-#   rule_config.json,         -> validate-projects for EVERY project (a rule
-#   .config/.ignition-pylintrc,  change can break views nobody touched)
-#   tools/demo/lint_config.py
+#   iglint.toml               -> validate-projects for EVERY project and
+#                                validate-gateway-payload (a rule change can
+#                                break resources nobody touched)
 #   release.yaml              -> validate-release ("a pin may only point at a
 #                                tag that exists, on a commit on main" is
 #                                enforced HERE, at PR time)
@@ -66,7 +66,7 @@ jobs:
           projects="$( (grep -E '^projects/[^/]+/' changed.txt || true) \
             | cut -d/ -f2 | sort -u | jq -R . | jq -sc .)"
           # A change to the shared lint config re-lints every project.
-          if grep -qE '^(rule_config\.json|\.config/\.ignition-pylintrc|tools/demo/lint_config\.py)$' changed.txt; then
+          if grep -qE '^iglint\.toml$' changed.txt; then
             projects="$(find projects -mindepth 1 -maxdepth 1 -type d -exec basename {} \; \
               | sort | jq -R . | jq -sc .)"
           fi
@@ -75,7 +75,7 @@ jobs:
           {
             echo "projects=$projects"
             echo "release=$(flag '^release\.yaml$')"
-            echo "gateway_payload=$(flag '^(services/|jar-files/|third-party-modules/|db-migration/)')"
+            echo "gateway_payload=$(flag '^(services/|jar-files/|third-party-modules/|db-migration/|iglint\.toml$)')"
             echo "demo=$(flag '^(projects/oatmakers/|db-migration/|tools/|tests/|\.github/workflows/deploy\.yml$)')"
           } >> "$GITHUB_OUTPUT"
 
@@ -119,22 +119,21 @@ jobs:
           [ "$fail" -eq 0 ] && echo "All JSON in $dir parses cleanly."
           exit "$fail"
 
-      - name: ignition-lint (Perspective views)
-        # The course lint config (rule_config.json + .config/.ignition-pylintrc,
-        # the same as in labs 03-06), run from the repo root. lint_config.py
-        # adds this repo's project script namespaces on top. Skipped when the
-        # PR deleted the project.
+      - name: iglint
+        # The whole project: views, scripts, expressions, named queries and
+        # cross-references, with the course lint config in iglint.toml (the
+        # same as in labs 03-06). Findings are annotated on the PR. Skipped
+        # when the PR deleted the project.
         env:
           PROJECT: ${{ matrix.project }}
         run: |
           set -euo pipefail
-          if [ ! -f rule_config.json ] || [ ! -d "projects/$PROJECT" ]; then
-            echo "No rule_config.json (or project deleted) — skipping ign-lint."
+          if [ ! -d "projects/$PROJECT" ]; then
+            echo "projects/$PROJECT was deleted in this PR, skipping iglint."
             exit 0
           fi
-          pip install ign-lint==0.6.1
-          python3 tools/demo/lint_config.py "$PROJECT"
-          ign-lint --config build/lint/rules.json --files "projects/$PROJECT/**/view.json"
+          pip install iglint==0.1.0
+          iglint check --output-format github "projects/$PROJECT"
 
   validate-release:
     name: Validate release.yaml
@@ -264,6 +263,15 @@ jobs:
           done < <(find services -type f -name '*.json')
           [ "$fail" -eq 0 ] && echo "All JSON under services/ parses cleanly."
           exit "$fail"
+
+      - name: iglint (gateway resources)
+        # Tags, UDTs, tag groups and the other gateway resources, checked
+        # against the projects that use them.
+        run: |
+          set -euo pipefail
+          [ -d services ] || { echo "No services/, skipping."; exit 0; }
+          pip install iglint==0.1.0
+          iglint check --output-format github services
 
       - name: Module manifest ↔ third-party-modules/ agree
         # Every manifest entry under /third-party-modules/ must ship its .modl

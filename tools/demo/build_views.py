@@ -182,7 +182,7 @@ page('Demo/Health','Demo health','Data freshness and automatic retention.',[flex
 
 routes=[('/','Factory overview','Demo/Overview'),('/scada','SCADA','Demo/SCADA'),('/production','Production planning','Demo/Production'),('/performance','Performance','Demo/Performance'),('/quality','Quality & traceability','Demo/Quality'),('/operator','Batch output','Demo/Operator')]
 logo=base64.b64encode((ROOT/'tools/demo/scada-assets/oatmakers-logo.svg').read_bytes()).decode()
-nav=[node('ia.display.image','Brand',{'source':'data:image/svg+xml;base64,'+logo,'fit':{'mode':'contain'},'style':{'classes':'Demo/BrandLogo'}},basis='74px'),label('BrandDetail','CONNECTED OPERATIONS','Demo/NavEyebrow'),label('DemoLabel','LIVE SIMULATION','Demo/NavBadge')]
+nav=[node('ia.display.image','Brand',{'source':'data:image/svg+xml;base64,'+logo,'altText':'Oatmakers','fit':{'mode':'contain'},'style':{'classes':'Demo/BrandLogo'}},basis='74px'),label('BrandDetail','CONNECTED OPERATIONS','Demo/NavEyebrow'),label('DemoLabel','LIVE SIMULATION','Demo/NavBadge')]
 for i,(path,title,_) in enumerate(routes):
     b=button('Nav'+str(i),title,page=path,classes='Demo/NavButton');b['position']['basis']='45px';b['propConfig']={'props.style.backgroundColor':expr('if({page.props.path} = '+json.dumps(path)+', "#3d474f", "transparent")')};nav.append(b)
 nav += [flex('Spacer',[],grow=1),button('Health','Demo health',page='/demo/health',classes='Demo/NavButton'),label('Footer','Mustry Solutions','Demo/NavFooter')]
