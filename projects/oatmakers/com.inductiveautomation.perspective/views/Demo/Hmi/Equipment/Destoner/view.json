@@ -87,7 +87,7 @@
               "transforms": [
                 {
                   "type": "script",
-                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\tbody = '<path d=\"M0 %s L%s 0 V%s L0 %s Z\"/><path d=\"M20 %s V%s M%s %s V%s\" fill=\"none\"/>' % (h*0.2, w, h*0.45, h*0.65, h*0.62, h, w-20, h*0.42, h)\n\treturn application.demo.scadaEquipmentSvg(body, w, h, [0, 0, 0, 0])"
+                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\tbody = '<path d=\"M0 %s L%s 0 V%s L0 %s Z\"/><path d=\"M20 %s V%s M%s %s V%s M12 %s h16 M%s %s h16\" fill=\"none\"/>' % (h*0.2, w, h*0.45, h*0.65, h*0.62, h, w-20, h*0.42, h, h, w-28, h)\n\treturn application.demo.scadaEquipmentSvg(body, w, h, [0, 0, 0, 0])"
                 }
               ]
             }
