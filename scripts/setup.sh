@@ -65,6 +65,8 @@ echo "================================"
 #   The pre-commit hook then reverts junk-only rewrites so they cannot be
 #   committed. Hiding alone is not enough: an empty diff does not mean the
 #   file on disk is unchanged.
+#   The same hook runs iglint (the CI version and iglint.toml) on every
+#   project the commit touches.
 REPO_ROOT="$(pwd)"
 
 configure_git_drivers() {
