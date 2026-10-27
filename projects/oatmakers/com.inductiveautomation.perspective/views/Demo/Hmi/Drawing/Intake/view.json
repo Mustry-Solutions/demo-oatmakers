@@ -89,7 +89,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-CV101"
+          "name": "MCV101"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -116,7 +116,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-EL101"
+          "name": "MEL101"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -143,7 +143,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-PC101"
+          "name": "MPC101"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -192,7 +192,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-CV102"
+          "name": "MCV102"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -635,7 +635,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-CV103"
+          "name": "MCV103"
         },
         "props": {
           "path": "Demo/Hmi/Device",

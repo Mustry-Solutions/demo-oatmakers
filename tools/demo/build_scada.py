@@ -221,7 +221,7 @@ class Scene:
     def device(self,tag,kind,cx,cy,signal='',unit='',dec=1,running=True):
         compact=kind in ('motor','fan','rotary')
         w,h=(110,60) if compact else (78,88)
-        n=embed(tag,HMI+'Device',{'area':self.area,'tag':tag,'signal':signal,'unit':unit,'decimals':dec,'running':running is not False,'on':b64(symbol(kind,True,tag,w,h)),'off':b64(symbol(kind,False,tag,w,h))})
+        n=embed(tag.replace('-',''),HMI+'Device',{'area':self.area,'tag':tag,'signal':signal,'unit':unit,'decimals':dec,'running':running is not False,'on':b64(symbol(kind,True,tag,w,h)),'off':b64(symbol(kind,False,tag,w,h))})
         if running=='line':n['propConfig']={'props.params.running':bind('view.custom.data.running')}
         self.parts.append(at(n,cx-20 if compact else cx-39,cy-30 if compact else cy-48,w,h))
     def silo(self,tag,signal,product,x,y,w=110,h=330):

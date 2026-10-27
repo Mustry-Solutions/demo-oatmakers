@@ -116,7 +116,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-SP201"
+          "name": "MSP201"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -170,7 +170,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-DS201"
+          "name": "MDS201"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -197,7 +197,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-TR201"
+          "name": "MTR201"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -246,7 +246,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-CV205"
+          "name": "MCV205"
         },
         "props": {
           "path": "Demo/Hmi/Device",

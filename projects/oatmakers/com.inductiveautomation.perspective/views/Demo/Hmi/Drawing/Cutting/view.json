@@ -230,7 +230,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-GC601"
+          "name": "MGC601"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -267,7 +267,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-GC602"
+          "name": "MGC602"
         },
         "props": {
           "path": "Demo/Hmi/Device",

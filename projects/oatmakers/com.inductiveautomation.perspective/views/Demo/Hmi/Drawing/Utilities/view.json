@@ -581,7 +581,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-AC901"
+          "name": "MAC901"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -608,7 +608,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-AC902"
+          "name": "MAC902"
         },
         "props": {
           "path": "Demo/Hmi/Device",

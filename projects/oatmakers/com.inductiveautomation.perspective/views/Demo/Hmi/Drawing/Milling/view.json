@@ -274,7 +274,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-HM701"
+          "name": "MHM701"
         },
         "props": {
           "path": "Demo/Hmi/Device",

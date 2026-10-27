@@ -493,7 +493,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-CV804"
+          "name": "MCV804"
         },
         "props": {
           "path": "Demo/Hmi/Device",

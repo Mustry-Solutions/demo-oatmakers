@@ -116,7 +116,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-HU301"
+          "name": "MHU301"
         },
         "props": {
           "path": "Demo/Hmi/Device",
@@ -219,7 +219,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-GS301"
+          "name": "MGS301"
         },
         "props": {
           "path": "Demo/Hmi/Device",

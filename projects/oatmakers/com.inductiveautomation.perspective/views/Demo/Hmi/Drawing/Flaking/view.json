@@ -230,7 +230,7 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "M-FM501"
+          "name": "MFM501"
         },
         "props": {
           "path": "Demo/Hmi/Device",
