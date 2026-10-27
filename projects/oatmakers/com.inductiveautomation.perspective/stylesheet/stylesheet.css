@@ -62,11 +62,64 @@
 .psc-Demo\/Brand { font-size:24px; font-weight:800; letter-spacing:1.2px; color:#f2f4f5; padding:0 9px; }
 .psc-Demo\/NavEyebrow { font-size:9px; letter-spacing:1.3px; color:#a6aeb4; padding:0 9px; }
 .psc-Demo\/NavBadge { font-size:9px; color:#c8ced3; background:#3a434a; padding:9px; border-radius:3px; margin:15px 0; }
-.psc-Demo\/NavButton { background:transparent; color:#d5dade; border:0; border-radius:4px; padding:10px 12px; font-size:12px; }
+.psc-Demo\/NavButton { background:transparent; color:#d5dade; border:0; border-radius:4px; padding:10px 12px; font-size:12px; text-align:left; }
+/* The button centres its icon and text inline; menu items read better left-aligned. */
+.psc-Demo\/NavButton > div { width:100%; justify-content:flex-start !important; gap:10px; }
+.psc-Demo\/NavButton .text { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .psc-Demo\/NavButton:hover { background:#3d474f; }
 .psc-Demo\/NavFooter { font-size:10px; color:#98a1a8; padding:4px 9px; }
 @container demo (max-width:900px) { .psc-Demo\/Workspace { flex-wrap:wrap !important; } .psc-Demo\/Workspace > * { flex-basis:100% !important; } .psc-Demo\/PageHeader { flex-wrap:wrap !important; } }
 @media(max-width:650px) { .psc-Demo\/Page { padding:14px; } .psc-Demo\/PageTitle { font-size:24px; } .psc-Demo\/Filters { flex-wrap:wrap !important; } }
+
+/* Hello Kitty theme: the root of every page, popup and the navigation carries
+   Theme/HelloKitty when the session chooses it on the settings page. */
+.psc-Theme\/HelloKitty {
+  --demo-ink:#3b3038; --demo-muted:#75606d; --demo-bg:#fff5f8;
+  --demo-line:#edc9d6; --demo-surface:#fff; --demo-accent:#ac2454;
+  --demo-alarm:#b23b34; --demo-warn:#956000; --demo-info:#246b80;
+  font-family:"Trebuchet MS","Verdana",sans-serif; letter-spacing:0;
+}
+.psc-Theme\/HelloKitty.psc-Demo\/Page {
+  background-color:var(--demo-bg);
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 31px,#f9e6ed 31px,#f9e6ed 32px);
+  padding:24px 28px; gap:18px; font-family:"Trebuchet MS","Verdana",sans-serif;
+}
+.psc-Theme\/HelloKitty .psc-Demo\/PageHeader { border-bottom:2px solid #edb3c8; padding-bottom:16px; gap:16px; }
+.psc-Theme\/HelloKitty .psc-Demo\/PageTitle { font-size:27px; color:#8d2149; line-height:1.3; }
+.psc-Theme\/HelloKitty .psc-Demo\/Eyebrow,.psc-Theme\/HelloKitty .psc-Demo\/NavEyebrow,.psc-Theme\/HelloKitty .psc-Demo\/NavBadge,
+.psc-Theme\/HelloKitty .psc-Demo\/DemoBadge,.psc-Theme\/HelloKitty .psc-Demo\/Brand { letter-spacing:0; }
+.psc-Theme\/HelloKitty .psc-Demo\/Eyebrow { color:#8d3655; font-size:11px; }
+.psc-Theme\/HelloKitty .psc-Demo\/SectionTitle { color:#713048; font-size:17px; }
+.psc-Theme\/HelloKitty .psc-Demo\/Metric { border-radius:8px; border-top:3px solid #dc779b; padding:18px; background:#fff; box-shadow:0 2px 0 #f4dce6; }
+.psc-Theme\/HelloKitty .psc-Demo\/MetricValue { font-size:32px; color:#70203f; }
+.psc-Theme\/HelloKitty .psc-Demo\/MetricUnit { color:#75606d; }
+.psc-Theme\/HelloKitty .psc-Demo\/Panel { border:0; border-top:1px solid var(--demo-line); border-radius:0; padding:18px 0; background:transparent; box-shadow:none; }
+.psc-Theme\/HelloKitty .psc-Demo\/Repeater .psc-Demo\/Panel { background:#fff; border:1px solid var(--demo-line); border-radius:8px; border-top:3px solid #d990ac; padding:18px; }
+.psc-Theme\/HelloKitty .psc-Demo\/LineValue { color:#70203f; font-size:28px; }
+.psc-Theme\/HelloKitty .psc-Demo\/DemoBadge,.psc-Theme\/HelloKitty .psc-Demo\/Badge { background:#fbe2ec; color:#772343; border-radius:4px; white-space:normal; }
+.psc-Theme\/HelloKitty .psc-Demo\/Button { background:#ac2454; border-color:#ac2454; border-radius:6px; }
+.psc-Theme\/HelloKitty .psc-Demo\/Button:hover:enabled { background:#8d2149; }
+.psc-Theme\/HelloKitty .psc-Demo\/QuietButton,.psc-Theme\/HelloKitty .psc-Demo\/ReadingButton { border-color:#e4b7c8; color:#713048; background:#fff; border-radius:6px; }
+.psc-Theme\/HelloKitty .psc-Demo\/QuietButton:hover,.psc-Theme\/HelloKitty .psc-Demo\/ReadingButton:hover { background:#fce5ee; }
+.psc-Theme\/HelloKitty .psc-Demo\/Button:focus-visible,.psc-Theme\/HelloKitty .psc-Demo\/NavButton:focus-visible,
+.psc-Theme\/HelloKitty .psc-Demo\/QuietButton:focus-visible,.psc-Theme\/HelloKitty .psc-Demo\/ReadingButton:focus-visible { outline:3px solid #246b80; outline-offset:2px; }
+.psc-Theme\/HelloKitty .psc-Demo\/Select { border-color:#ddb0c2; border-radius:6px; }
+.psc-Theme\/HelloKitty .psc-Demo\/DataGrid { --dg-header-bg:#fbe8ef; border-radius:6px; }
+.psc-Theme\/HelloKitty .psc-Demo\/PlanningTimeline { --tml-group-bg:#fbe8ef; border-radius:6px; }
+.psc-Theme\/HelloKitty.psc-Demo\/Navigation { background:#fff; color:#713048; border-right:1px solid #edc9d6; padding:20px 14px; gap:8px; font-family:"Trebuchet MS","Verdana",sans-serif; }
+.psc-Theme\/HelloKitty .psc-Demo\/BrandLogo { background:transparent; padding:0; margin:0; }
+.psc-Theme\/HelloKitty .psc-Demo\/NavEyebrow { color:#75606d; font-size:11px; padding:0 10px; }
+.psc-Theme\/HelloKitty .psc-Demo\/NavBadge { color:#8d2149; background:#fce5ee; margin:8px 0; padding:9px 10px; }
+.psc-Theme\/HelloKitty .psc-Demo\/NavButton { color:#713048; border-radius:6px; font-size:13px; padding:10px; }
+.psc-Theme\/HelloKitty .psc-Demo\/NavButton:hover { background:#fce5ee !important; }
+.psc-Theme\/HelloKitty .psc-Demo\/NavFooter { color:#75606d; white-space:normal; }
+.psc-Theme\/HelloKitty.psc-Demo\/PopupRoot { background:#fff5f8; }
+.psc-Theme\/HelloKitty .psc-Separator\/PanZoom.mustry-panzoom { --pz-bg:#fff5f8; --pz-accent:#ac2454; }
+.psc-Theme\/HelloKitty .psc-Demo\/PageHeader > * { min-width:0; }
+.psc-Theme\/HelloKitty .psc-Demo\/Filters { flex-wrap:wrap !important; }
+.psc-Theme\/HelloKitty .psc-Demo\/Filters > *,.psc-Theme\/HelloKitty .psc-Demo\/Workspace > * { max-width:100%; min-width:0; }
+.psc-Theme\/HelloKitty .psc-Demo\/Workspace { flex-wrap:wrap; }
+@media(max-width:650px) { .psc-Theme\/HelloKitty.psc-Demo\/Page { padding:14px; } .psc-Theme\/HelloKitty .psc-Demo\/PageTitle { font-size:23px; } .psc-Theme\/HelloKitty .psc-Demo\/DemoBadge { font-size:10px; } }
 
 .psc-Separator\/Page { background:#e6e6e6; color:#565957; overflow:hidden; width:100%; height:100%; font-family:Arial,sans-serif; }
 .psc-Separator\/PanZoom.mustry-panzoom { border:0; border-radius:0; --pz-canvas:#e6e6e6; --pz-bg:#e6e6e6; --pz-accent:#565957; }

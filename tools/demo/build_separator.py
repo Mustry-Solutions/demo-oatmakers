@@ -168,13 +168,14 @@ def build_separator():
         'state':{'zoom':0,'center':{'x':0,'y':0},'target':''},
         'data':{'pois':[]},'style':{'classes':'Separator/PanZoom','minHeight':'0px'}},basis='0px',grow=1)
     pan['position']['shrink']=1
-    header=flex('Header',[flex('Identity',[label('Eyebrow','OATMAKERS / LIVE OPERATIONS','Demo/Eyebrow'),label('Title','SCADA','Demo/PageTitle'),label('Subtitle','Separator A. Drag to pan, scroll to zoom.','Demo/Subtitle')],grow=1),label('Mode','SIMULATED FACTORY','Demo/DemoBadge')],'row','Demo/PageHeader')
-    root=flex('root',[header,pan],classes='Demo/Page Separator/Page')
+    header=flex('Header',[flex('Identity',[label('Eyebrow','OATMAKERS / LIVE OPERATIONS','Demo/Eyebrow'),label('Title','SCADA','Demo/PageTitle'),label('Subtitle','Separator A. Drag to pan, scroll to zoom.','Demo/Subtitle')],grow=1),theme_badge(label('Mode','SIMULATED FACTORY','Demo/DemoBadge'))],'row','Demo/PageHeader')
+    root=theme_root(flex('root',[header,pan],classes='Demo/Page Separator/Page'))
     view('Demo/SCADA',root,height=939)
     # A reusable read-only detail view for instruments and connected streams.
     detail_value=label('Value','','Separator/DetailValue')
     detail_value['propConfig']={'props.text':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(1000)','signal':'{view.params.signal}'}},'transforms':[{'type':'script','code':'\treturn application.demo.separatorDetailValue(value["signal"])'}]}}}
     detail=flex('root',[bound_label('Title','view.params.tag','Demo/SectionTitle'),label('Mode','Read-only process simulation','Demo/Muted'),detail_value,embed('Trend','Demo/Separator/Trend',{'colour':'#626b75','sp':0},basis='160px'),label('Caption','Last hour of simulated process history','Demo/Muted')],classes='Demo/PopupRoot')
+    theme_root(detail)
     detail['children'][3]['propConfig']={'props.params.signal':bind('view.params.signal')}
     view('Demo/Separator/Detail',detail,params={'tag':'PI152A','signal':'pressure'},height=300)
 

@@ -324,6 +324,16 @@
     ],
     "position": {
       "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"Demo/PopupRoot Theme/HelloKitty\", \"Demo/PopupRoot\")"
+          }
+        }
+      }
     }
   }
 }

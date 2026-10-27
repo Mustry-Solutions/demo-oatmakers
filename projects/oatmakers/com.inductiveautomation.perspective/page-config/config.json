@@ -43,6 +43,10 @@
     "/scada": {
       "title": "SCADA",
       "viewPath": "Demo/SCADA"
+    },
+    "/settings": {
+      "title": "Settings",
+      "viewPath": "Demo/Settings"
     }
   },
   "sharedDocks": {
