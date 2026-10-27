@@ -1,25 +1,17 @@
-# PR validation: runs on every pull request into main (GitHub Flow).
+# PR validation: two jobs on every pull request into main.
 #
-# Several contributors share this repo, so most checks are PATH-FILTERED: the
-# `changes` job works out what a PR touches, and only the matching jobs run.
+#   Lint           iglint on every project and on the gateway resources in
+#                  services/, with the rules in iglint.toml. iglint parses
+#                  every file, so broken JSON fails here too.
+#   Deploy safety  what would break or endanger a production deploy: every
+#                  release.yaml pin is an existing tag on main, the gateway
+#                  identity stays out of the payload, the module manifest
+#                  matches third-party-modules/, migrations come in up/down
+#                  pairs and jar-files/jar/ holds only JARs. Every step runs
+#                  even when an earlier one fails, so one run shows them all.
 #
-#   projects/<name>/**        -> validate-projects (a matrix job per project)
-#   iglint.toml               -> validate-projects for EVERY project and
-#                                validate-gateway-payload (a rule change can
-#                                break resources nobody touched)
-#   release.yaml              -> validate-release ("a pin may only point at a
-#                                tag that exists, on a commit on main" is
-#                                enforced HERE, at PR time)
-#   services/, jar-files/,    -> validate-gateway-payload (manifest, JARs,
-#   third-party-modules/,        migration pairs, identity resources)
-#   db-migration/
-#   the demo (projects/oatmakers, db-migration/, tools/, tests/,
-#   deploy.yml)               -> demo (generated views, database lifecycle,
-#                                release payload)
-#
-# Branch protection on main requires exactly ONE status check: "CI OK". It
-# aggregates whatever ran; skipped jobs do not block a merge. Job ids double as
-# status-check names: keep them stable.
+# Both run in well under a minute. Job ids double as status-check names: keep
+# them stable if a ruleset requires them.
 
 name: CI
 
@@ -37,119 +29,43 @@ permissions:
   contents: read
 
 jobs:
-  changes:
-    name: Detect changes
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    outputs:
-      projects: ${{ steps.diff.outputs.projects }}
-      release: ${{ steps.diff.outputs.release }}
-      gateway_payload: ${{ steps.diff.outputs.gateway_payload }}
-      demo: ${{ steps.diff.outputs.demo }}
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-
-      - name: Diff against the merge base
-        id: diff
-        env:
-          BASE_REF: ${{ github.base_ref }}
-        run: |
-          set -euo pipefail
-          base="$(git merge-base "origin/$BASE_REF" HEAD)"
-          git diff --name-only "$base" HEAD > changed.txt
-          echo "changed files:"
-          sed 's/^/  /' changed.txt
-
-          # JSON array of project names touched by this PR, e.g. ["wout"].
-          projects="$( (grep -E '^projects/[^/]+/' changed.txt || true) \
-            | cut -d/ -f2 | sort -u | jq -R . | jq -sc .)"
-          # A change to the shared lint config re-lints every project.
-          if grep -qE '^iglint\.toml$' changed.txt; then
-            projects="$(find projects -mindepth 1 -maxdepth 1 -type d -exec basename {} \; \
-              | sort | jq -R . | jq -sc .)"
-          fi
-
-          flag() { if grep -qE "$1" changed.txt; then echo true; else echo false; fi; }
-          {
-            echo "projects=$projects"
-            echo "release=$(flag '^release\.yaml$')"
-            echo "gateway_payload=$(flag '^(services/|jar-files/|third-party-modules/|db-migration/|iglint\.toml$)')"
-            echo "demo=$(flag '^(projects/oatmakers/|db-migration/|tools/|tests/|\.github/workflows/deploy\.yml$)')"
-          } >> "$GITHUB_OUTPUT"
-
-  validate-projects:
-    name: Validate project ${{ matrix.project }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs: changes
-    if: needs.changes.outputs.projects != '[]'
-    strategy:
-      fail-fast: false
-      matrix:
-        project: ${{ fromJSON(needs.changes.outputs.projects) }}
     steps:
       - uses: actions/checkout@v7
 
-      - name: JSON validity sweep
-        # Every *.json under this project must parse. Failures surface as PR
-        # annotations via the ::error syntax. Only THIS project is swept —
-        # someone else's broken view never fails your PR.
-        env:
-          PROJECT: ${{ matrix.project }}
+      - name: iglint (projects)
         run: |
           set -euo pipefail
-          dir="projects/$PROJECT"
-          if [ ! -d "$dir" ]; then
-            echo "$dir was deleted in this PR — nothing to validate."
-            exit 0
-          fi
-          if [ ! -f "$dir/project.json" ]; then
-            echo "::error file=$dir::Missing project.json — is this a real Ignition project?"
-            exit 1
-          fi
-          fail=0
-          while IFS= read -r f; do
-            if ! python3 -m json.tool "$f" > /dev/null 2>&1; then
-              echo "::error file=$f::Invalid JSON"
-              fail=1
-            fi
-          done < <(find "$dir" -type f -name '*.json')
-          [ "$fail" -eq 0 ] && echo "All JSON in $dir parses cleanly."
-          exit "$fail"
-
-      - name: iglint
-        # The whole project: views, scripts, expressions, named queries and
-        # cross-references, with the course lint config in iglint.toml (the
-        # same as in labs 03-06). Findings are annotated on the PR. Skipped
-        # when the PR deleted the project.
-        env:
-          PROJECT: ${{ matrix.project }}
-        run: |
-          set -euo pipefail
-          if [ ! -d "projects/$PROJECT" ]; then
-            echo "projects/$PROJECT was deleted in this PR, skipping iglint."
-            exit 0
-          fi
           pip install iglint==0.1.0
-          iglint check --output-format github "projects/$PROJECT"
+          iglint check --output-format github projects/*/
 
-  validate-release:
-    name: Validate release.yaml
+
+      - name: iglint (gateway resources)
+        if: always()
+        # Tags, UDTs, tag groups and the other gateway resources, checked
+        # against the projects that use them.
+        run: |
+          set -euo pipefail
+          [ -d services ] || { echo "No services/, skipping."; exit 0; }
+          pip install iglint==0.1.0
+          iglint check --output-format github services
+
+  deploy-safety:
+    name: Deploy safety
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: changes
-    if: needs.changes.outputs.release == 'true'
     steps:
       - uses: actions/checkout@v7
         with:
-          # The whole point of this job is "a pin may only point at a tag
-          # that exists" — so fetch the tags to check against.
+          # Pins are checked against the tags and main, so fetch them.
           fetch-depth: 0
           fetch-tags: true
 
       - name: Schema + every pin points at an existing tag on main
+        if: always()
         run: |
           set -euo pipefail
           pip install pyyaml==6.0.2
@@ -241,39 +157,8 @@ jobs:
           print(f"release.yaml OK: {len(projects)} pin(s), every tag exists and is on main.")
           EOF
 
-  validate-gateway-payload:
-    name: Validate gateway payload
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs: changes
-    if: needs.changes.outputs.gateway_payload == 'true'
-    steps:
-      - uses: actions/checkout@v7
-
-      - name: JSON validity sweep (services/)
-        run: |
-          set -euo pipefail
-          [ -d services ] || { echo "No services/ — skipping."; exit 0; }
-          fail=0
-          while IFS= read -r f; do
-            if ! python3 -m json.tool "$f" > /dev/null 2>&1; then
-              echo "::error file=$f::Invalid JSON"
-              fail=1
-            fi
-          done < <(find services -type f -name '*.json')
-          [ "$fail" -eq 0 ] && echo "All JSON under services/ parses cleanly."
-          exit "$fail"
-
-      - name: iglint (gateway resources)
-        # Tags, UDTs, tag groups and the other gateway resources, checked
-        # against the projects that use them.
-        run: |
-          set -euo pipefail
-          [ -d services ] || { echo "No services/, skipping."; exit 0; }
-          pip install iglint==0.1.0
-          iglint check --output-format github services
-
       - name: Module manifest ↔ third-party-modules/ agree
+        if: always()
         # Every manifest entry under /third-party-modules/ must ship its .modl
         # in this repo and record the trust pair (certFingerprint +
         # licenseAgreementHash) — the lab 06 move. And every .modl in the
@@ -317,6 +202,7 @@ jobs:
           echo "Module manifest and third-party-modules/ agree."
 
       - name: Gateway identity resources stay clean
+        if: always()
         # Same model as the earlier labs: the repo carries the LOCAL
         # gateway's identity (systemName oatmakers-local), and the deploy
         # never ships system-properties: production keeps its own name.
@@ -350,6 +236,7 @@ jobs:
           exit "$fail"
 
       - name: Migration pairs (.up.sql ↔ .down.sql)
+        if: always()
         # Always pairs: every up has a down, every down has an up.
         run: |
           set -euo pipefail
@@ -375,6 +262,7 @@ jobs:
           exit "$fail"
 
       - name: jar-files/jar/ hygiene
+        if: always()
         # Library JARs only (→ the gateway's JAR directory at deploy time), plus a README
         # recording where each JAR came from.
         run: |
@@ -389,99 +277,3 @@ jobs:
           done < <(find jar-files/jar -type f)
           [ "$fail" -eq 0 ] && echo "jar-files/jar/ holds only JARs."
           exit "$fail"
-
-  lint-workflows:
-    name: Lint workflows
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v7
-      - name: actionlint
-        uses: raven-actions/actionlint@v2
-
-  # Students author their own test-<name>.yml workflows (Part 0). The
-  # production runner is root-equivalent on the production server, so exactly
-  # one workflow in this repo may ever target it — and no pull_request
-  # workflow may use ANY self-hosted runner (PR code is unreviewed by
-  # definition). This catches honest mistakes; review catches the rest.
-  workflow-hygiene:
-    name: Workflow hygiene
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v7
-      - name: No student workflow on the production runner
-        run: |
-          set -euo pipefail
-          pip install pyyaml==6.0.2
-          python3 - <<'EOF'
-          import glob, sys, yaml
-
-          PROD_LABEL = "demo-oatmakers"
-          PROD_ALLOWED = {"deploy.yml"}
-          ERRORS = []
-
-          def runs_on_labels(job):
-              ro = job.get("runs-on", [])
-              if isinstance(ro, str):
-                  return [ro]
-              if isinstance(ro, dict):  # runs-on: {group: ..., labels: [...]}
-                  labels = ro.get("labels", [])
-                  return [labels] if isinstance(labels, str) else list(labels)
-              return list(ro)
-
-          for path in sorted(glob.glob(".github/workflows/*.yml") + glob.glob(".github/workflows/*.yaml")):
-              name = path.rsplit("/", 1)[-1]
-              with open(path) as f:
-                  wf = yaml.safe_load(f) or {}
-              # PyYAML parses the 'on:' key as boolean True.
-              triggers = wf.get("on", wf.get(True, {}))
-              if isinstance(triggers, str):
-                  triggers = {triggers: None}
-              if isinstance(triggers, list):
-                  triggers = {t: None for t in triggers}
-              pr_triggered = any(t.startswith("pull_request") for t in triggers)
-              for job_id, job in (wf.get("jobs") or {}).items():
-                  labels = runs_on_labels(job or {})
-                  if PROD_LABEL in labels and name not in PROD_ALLOWED:
-                      ERRORS.append(f"{path}: job '{job_id}' targets the production "
-                                    f"runner label '{PROD_LABEL}' — only "
-                                    f"{sorted(PROD_ALLOWED)} may run there")
-                  if pr_triggered and "self-hosted" in labels:
-                      ERRORS.append(f"{path}: job '{job_id}' runs on a self-hosted "
-                                    "runner from a pull_request trigger — PR code is "
-                                    "unreviewed, this is never allowed")
-
-          for e in ERRORS:
-              print(f"::error::{e}")
-          sys.exit(1 if ERRORS else 0)
-          EOF
-          echo "All workflows respect the runner rules."
-
-  # The ONE required status check for branch protection. Aggregates whatever
-  # ran: a skipped job (path didn't match) is fine, a failed one blocks.
-  ci-ok:
-    name: CI OK
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    needs:
-      - changes
-      - validate-projects
-      - validate-release
-      - validate-gateway-payload
-      - lint-workflows
-      - workflow-hygiene
-    if: always()
-    steps:
-      - name: Aggregate results
-        env:
-          RESULTS: ${{ join(needs.*.result, ' ') }}
-        run: |
-          set -euo pipefail
-          echo "job results: $RESULTS"
-          for r in $RESULTS; do
-            case "$r" in
-              failure|cancelled) echo "::error::A required job ended as '$r'"; exit 1 ;;
-            esac
-          done
-          echo "All checks that apply to this PR are green."

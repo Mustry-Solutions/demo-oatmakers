@@ -21,8 +21,7 @@ scripts/                     setup, teardown, validate, migrate, scan, reset-tri
 tools/demo/  tests/          demo view generator, readiness checks and tests
 docker-compose.yaml          local gateway + database (+ the Part 0 test stack)
 ops/compose.runner.yml       the production runner definition
-.github/workflows/           ci.yml (PR checks) · deploy.yml (release.yaml -> production)
-                             · test-example.yml.template (Part 0, copy per person)
+.github/workflows/           ci.yml (PR checks: Lint, Deploy safety) · deploy.yml (release.yaml -> production)
 ```
 
 ## Quick start
@@ -57,8 +56,8 @@ two-hour trial mode; `scripts/reset-trial.sh` resets it. Stop everything with
 
 ## How a change reaches production
 
-1. Change it locally, open a PR. `CI OK` must be green and a reviewer
-   approves; merging deploys nothing.
+1. Change it locally, open a PR. The `Lint` (iglint) and `Deploy safety`
+   checks must be green; merging deploys nothing.
 2. Tag the merged commit: `git tag <project>@vX.Y.Z && git push origin <project>@vX.Y.Z`
    (the next free version: `git fetch --tags && git tag -l '<project>@*'`).
 3. Pin the tag in `release.yaml` in a second PR. CI refuses a pin whose tag
@@ -78,28 +77,6 @@ deploy only runs from `main`.
 The gateway's own identity never ships and is never wiped: its name
 (system-properties), internal users and identity provider, the scan-API
 token, its secrets keys and tag values.
-
-## Lab 07 Part 0: your personal test gateway
-
-Put `LAB_USER=<yourname>` and the `RUNNER_TOKEN` from the chat in `.env`, run
-`./scripts/setup.sh`, and it also starts a test gateway on
-http://localhost:8090 with its own database (`oatmakers-test-postgres`, no
-host port) and your own runner labelled `<yourname>-local`. Check the runner
-with `docker logs oatmakers-test-runner-<yourname>` ("Listening for Jobs").
-Only your test workflow migrates that database: what you try locally with
-`scripts/migrate.sh` stays in your local one (`scripts/migrate.sh --test ...`
-reaches the test one when you need to repair it).
-Copy `.github/workflows/test-example.yml.template` to
-`.github/workflows/test-<yourname>.yml`, set
-`runs-on: [self-hosted, <yourname>-local]`, and every push to `main` deploys
-`main` to your test gateway. Once that file is on `main`,
-`gh workflow run test-<yourname>.yml --ref <branch>` deploys a branch to your
-test gateway before you merge it.
-
-To rotate your scan-API key, empty `IGNITION_API_KEY` in `.env` and run
-`./scripts/setup.sh` again: it generates a new key, puts it on both gateways
-and your runner, restarts each gateway that still has the old one, and checks
-that the new key works.
 
 ## Tests
 
