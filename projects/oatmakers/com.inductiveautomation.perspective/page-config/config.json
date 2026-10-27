@@ -4,34 +4,6 @@
       "title": "Factory overview",
       "viewPath": "Demo/Overview"
     },
-    "/observatory": {
-      "title": "Gateway Observatory",
-      "viewPath": "Showcase/Gateway Observatory"
-    },
-    "/oee": {
-      "title": "Performance",
-      "viewPath": "Demo/Performance"
-    },
-    "/production": {
-      "title": "Production planning",
-      "viewPath": "Demo/Production"
-    },
-    "/process": {
-      "title": "SCADA",
-      "viewPath": "Demo/SCADA"
-    },
-    "/performance": {
-      "title": "Performance",
-      "viewPath": "Demo/Performance"
-    },
-    "/quality": {
-      "title": "Quality & traceability",
-      "viewPath": "Demo/Quality"
-    },
-    "/operator": {
-      "title": "Batch output",
-      "viewPath": "Demo/Operator"
-    },
     "/demo/health": {
       "title": "Demo health",
       "viewPath": "Demo/Health"
@@ -40,9 +12,45 @@
       "title": "Batch output",
       "viewPath": "Demo/Operator"
     },
+    "/makeramaigreatagain": {
+      "title": "",
+      "viewPath": "Demo/MakeRamaiGreatAgain"
+    },
+    "/observatory": {
+      "title": "Gateway Observatory",
+      "viewPath": "Showcase/Gateway Observatory"
+    },
+    "/oee": {
+      "title": "Performance",
+      "viewPath": "Demo/Performance"
+    },
+    "/operator": {
+      "title": "Batch output",
+      "viewPath": "Demo/Operator"
+    },
+    "/performance": {
+      "title": "Performance",
+      "viewPath": "Demo/Performance"
+    },
+    "/process": {
+      "title": "SCADA",
+      "viewPath": "Demo/SCADA"
+    },
+    "/production": {
+      "title": "Production planning",
+      "viewPath": "Demo/Production"
+    },
+    "/quality": {
+      "title": "Quality & traceability",
+      "viewPath": "Demo/Quality"
+    },
     "/scada": {
       "title": "SCADA",
       "viewPath": "Demo/SCADA"
+    },
+    "/settings": {
+      "title": "Settings",
+      "viewPath": "Demo/Settings"
     },
     "/scada/intake": {
       "title": "Intake & raw oat silos",

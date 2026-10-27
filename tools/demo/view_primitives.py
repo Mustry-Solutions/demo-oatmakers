@@ -19,6 +19,24 @@ def prop(path, both=False):
 def expr(value):
     return {'binding': {'type':'expr','config':{'expression':value}}}
 
+# The session theme is chosen on the settings page. A themed root carries the
+# theme's class, so the stylesheet can restyle everything below it.
+THEMES=[('standard','Standard'),('hello-kitty','Hello Kitty')]
+THEME_CLASSES={'hello-kitty':'Theme/HelloKitty'}
+def themed(values):
+    """Bind a property to the value for the session theme, standard by default."""
+    expression=json.dumps(values['standard'])
+    for theme,value in values.items():
+        if theme!='standard':expression='if(try({session.custom.theme}, "") = '+json.dumps(theme)+', '+json.dumps(value)+', '+expression+')'
+    return expr(expression)
+
+def theme_root(n):
+    classes=n['props']['style']['classes']
+    n.setdefault('propConfig',{})['props.style.classes']=themed({'standard':classes}|{t:classes+' '+c for t,c in THEME_CLASSES.items()});return n
+
+def theme_badge(n):
+    n['propConfig']={'props.text':themed({'standard':n['props']['text'],'hello-kitty':'HELLO KITTY EDITION'})};return n
+
 def node(kind,name,props=None,children=None,basis=None,grow=None,classes=None):
     n={'type':kind,'meta':{'name':name},'props':props or {}}
     if children is not None:n['children']=children

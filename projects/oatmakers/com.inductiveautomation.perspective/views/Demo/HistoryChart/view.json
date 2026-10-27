@@ -1393,6 +1393,54 @@
               }
             }
           },
+          "props.series[0].line.appearance.stroke.color": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#ac2454\", \"#39444f\")"
+              }
+            }
+          },
+          "props.series[0].line.appearance.fill.color": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#ac2454\", \"#39444f\")"
+              }
+            }
+          },
+          "props.series[1].line.appearance.stroke.color": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#246b80\", \"#77889a\")"
+              }
+            }
+          },
+          "props.series[1].line.appearance.fill.color": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#246b80\", \"#77889a\")"
+              }
+            }
+          },
+          "props.series[2].line.appearance.stroke.color": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#857038\", \"#aeb8c0\")"
+              }
+            }
+          },
+          "props.series[2].line.appearance.fill.color": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#857038\", \"#aeb8c0\")"
+              }
+            }
+          },
           "props.yAxes[0].label.enabled": {
             "persistent": true
           },

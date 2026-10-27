@@ -264,6 +264,16 @@
             "position": {
               "shrink": 0,
               "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"HELLO KITTY EDITION\", \"SIMULATED FACTORY\")"
+                  }
+                }
+              }
             }
           }
         ],
@@ -322,6 +332,16 @@
     ],
     "position": {
       "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"Demo/Page Hmi/Page Theme/HelloKitty\", \"Demo/Page Hmi/Page\")"
+          }
+        }
+      }
     }
   }
 }
