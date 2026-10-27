@@ -1,10 +1,37 @@
 {
-  "custom": {},
+  "custom": {
+    "tile": {
+      "title": "",
+      "state": "",
+      "pillFill": "#dfe3e6",
+      "pillText": "#4d555c",
+      "rows": []
+    }
+  },
   "params": {
     "area": "intake",
     "route": "/scada/intake"
   },
   "propConfig": {
+    "custom.tile": {
+      "binding": {
+        "type": "expr-struct",
+        "config": {
+          "waitOnAll": true,
+          "struct": {
+            "tick": "now(2000)",
+            "area": "{view.params.area}"
+          }
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.scadaTile(value[\"area\"])"
+          }
+        ]
+      },
+      "persistent": true
+    },
     "params.area": {
       "paramDirection": "input",
       "persistent": true
@@ -26,52 +53,364 @@
       "name": "root"
     },
     "props": {
-      "mode": "percent",
+      "mode": "fixed",
       "style": {
         "cursor": "pointer"
       }
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
-          "name": "Graphic"
+          "name": "Shape"
         },
         "props": {
-          "source": "",
-          "altText": "Process area",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 230 170",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "rect",
+              "name": "rect0",
+              "x": "1",
+              "y": "1",
+              "width": "228",
+              "height": "168",
+              "rx": "4",
+              "fill": {
+                "paint": "#f4f4f3"
+              },
+              "stroke": {
+                "paint": "#9a9e9c",
+                "width": "1.5"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect1",
+              "x": "14",
+              "y": "38",
+              "width": "80",
+              "height": "18",
+              "rx": "3",
+              "fill": {
+                "paint": "#dfe3e6"
+              }
+            }
+          ],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
           "x": 0,
           "y": 0,
-          "width": 1,
-          "height": 1
+          "width": 230,
+          "height": 170
         },
         "propConfig": {
-          "props.source": {
+          "props.elements[1].width": {
             "binding": {
-              "type": "expr-struct",
+              "type": "expr",
               "config": {
-                "waitOnAll": true,
-                "struct": {
-                  "tick": "now(2000)",
-                  "area": "{view.params.area}"
-                }
-              },
-              "transforms": [
-                {
-                  "type": "script",
-                  "code": "\treturn application.demo.scadaTileSvg(value[\"area\"])"
-                }
-              ]
+                "expression": "len({view.custom.tile.state}) * 6.6 + 12"
+              }
+            }
+          },
+          "props.elements[1].fill.paint": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.tile.pillFill"
+              }
             }
           }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Title"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "14px",
+            "fontWeight": 700,
+            "color": "#3f4447",
+            "alignItems": "flex-start"
+          }
+        },
+        "position": {
+          "x": 14,
+          "y": 14,
+          "width": 210,
+          "height": 18
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.tile.title"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "State"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#4d555c",
+            "alignItems": "flex-start"
+          }
+        },
+        "position": {
+          "x": 20,
+          "y": 38,
+          "width": 190,
+          "height": 18
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.tile.state"
+              }
+            }
+          },
+          "props.style.color": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.tile.pillText"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Caption1"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "11.5px",
+            "fontWeight": 400,
+            "color": "#6d7270",
+            "alignItems": "flex-start"
+          }
+        },
+        "position": {
+          "x": 14,
+          "y": 70,
+          "width": 120,
+          "height": 16
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.tile.rows[0].caption}, \"\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Value1"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "13px",
+            "fontWeight": 700,
+            "color": "#333399",
+            "alignItems": "flex-end"
+          }
+        },
+        "position": {
+          "x": 96,
+          "y": 70,
+          "width": 120,
+          "height": 16
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.tile.rows[0].value}, \"\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Caption2"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "11.5px",
+            "fontWeight": 400,
+            "color": "#6d7270",
+            "alignItems": "flex-start"
+          }
+        },
+        "position": {
+          "x": 14,
+          "y": 94,
+          "width": 120,
+          "height": 16
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.tile.rows[1].caption}, \"\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Value2"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "13px",
+            "fontWeight": 700,
+            "color": "#333399",
+            "alignItems": "flex-end"
+          }
+        },
+        "position": {
+          "x": 96,
+          "y": 94,
+          "width": 120,
+          "height": 16
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.tile.rows[1].value}, \"\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Caption3"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "11.5px",
+            "fontWeight": 400,
+            "color": "#6d7270",
+            "alignItems": "flex-start"
+          }
+        },
+        "position": {
+          "x": 14,
+          "y": 118,
+          "width": 120,
+          "height": 16
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.tile.rows[2].caption}, \"\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Value3"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "13px",
+            "fontWeight": 700,
+            "color": "#333399",
+            "alignItems": "flex-end"
+          }
+        },
+        "position": {
+          "x": 96,
+          "y": 118,
+          "width": 120,
+          "height": 16
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.tile.rows[2].value}, \"\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Open"
+        },
+        "props": {
+          "text": "OPEN SCREEN \u203a",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "10.5px",
+            "fontWeight": 700,
+            "color": "#3f5a73",
+            "alignItems": "flex-end"
+          }
+        },
+        "position": {
+          "x": 96,
+          "y": 147,
+          "width": 120,
+          "height": 14
         }
       }
     ],

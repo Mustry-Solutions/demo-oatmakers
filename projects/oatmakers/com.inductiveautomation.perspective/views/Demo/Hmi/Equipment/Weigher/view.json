@@ -53,18 +53,17 @@
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
           "name": "Shape"
         },
         "props": {
-          "source": "",
-          "altText": "Weigher",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 100 100",
+          "preserveAspectRatio": "none",
+          "elements": [],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
@@ -74,7 +73,7 @@
           "height": 100
         },
         "propConfig": {
-          "props.source": {
+          "props.elements": {
             "binding": {
               "type": "expr-struct",
               "config": {
@@ -87,16 +86,16 @@
               "transforms": [
                 {
                   "type": "script",
-                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\tbody = '<path d=\"M%s 0 L%s 30 H0 Z\"/><path d=\"M0 34 h%s l-10 30 h-%s Z\"/>' % (w/2, w, w, w-20)\n\treturn application.demo.scadaEquipmentSvg(body, w, h, [0, 0, 0, 0])"
+                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\tbody = '<path d=\"M%s 0 L%s 30 H0 Z\"/><path d=\"M0 34 h%s l-10 30 h-%s Z\"/>' % (w/2, w, w, w-20)\n\treturn application.demo.scadaEquipmentElements(body, w, h, [0, 0, 0, 0])"
                 }
               ]
             }
           },
-          "props.altText": {
+          "props.viewBox": {
             "binding": {
               "type": "expr",
               "config": {
-                "expression": "if(len({view.params.tag}) > 0, {view.params.tag}, \"Weigher\")"
+                "expression": "\"0 0 \" + ({view.params.width} + 4) + \" \" + ({view.params.height} + 4)"
               }
             }
           },

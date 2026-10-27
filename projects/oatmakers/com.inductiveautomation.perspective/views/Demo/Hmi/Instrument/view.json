@@ -56,51 +56,146 @@
       "name": "root"
     },
     "props": {
-      "mode": "percent",
+      "mode": "fixed",
       "style": {
         "cursor": "pointer"
       }
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
-          "name": "Graphic"
+          "name": "Shape"
         },
         "props": {
-          "source": "",
-          "altText": "Instrument",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 130 51",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "circle",
+              "name": "circle0",
+              "cx": "10",
+              "cy": "32",
+              "r": "10",
+              "fill": {
+                "paint": "#e6e6e6"
+              },
+              "stroke": {
+                "paint": "#7d817f",
+                "width": "1"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect1",
+              "x": "26",
+              "y": "22",
+              "width": "64",
+              "height": "20",
+              "rx": "10",
+              "fill": {
+                "paint": "#f7f7f7"
+              }
+            }
+          ],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
           "x": 0,
           "y": 0,
-          "width": 1,
-          "height": 1
+          "width": 130,
+          "height": 51
         },
         "propConfig": {
-          "props.source": {
+          "props.elements[1].width": {
             "binding": {
-              "type": "expr-struct",
+              "type": "expr",
               "config": {
-                "waitOnAll": true,
-                "struct": {
-                  "kind": "{view.params.kind}",
-                  "value": "{view.params.value}",
-                  "colour": "{view.params.colour}"
-                }
-              },
-              "transforms": [
-                {
-                  "type": "script",
-                  "code": "\treturn application.demo.scadaInstrumentSvg(value[\"kind\"], value[\"value\"], value[\"colour\"])"
-                }
-              ]
+                "expression": "max(64, min(102, len(toStr({view.params.value})) * 6 + 14))"
+              }
+            }
+          },
+          "props.elements[1].fill.paint": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.colour"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Kind"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "8px",
+            "fontWeight": 400,
+            "color": "#565957",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 22,
+          "width": 20,
+          "height": 20
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.kind"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Value"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "11.5px",
+            "fontWeight": 400,
+            "color": "#565957",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 26,
+          "y": 22,
+          "width": 64,
+          "height": 20
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.value"
+              }
+            }
+          },
+          "position.width": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "max(64, min(102, len(toStr({view.params.value})) * 6 + 14))"
+              }
             }
           }
         }
@@ -119,8 +214,8 @@
         "position": {
           "x": 0,
           "y": 0,
-          "width": 1,
-          "height": 0.3
+          "width": 130,
+          "height": 15
         },
         "propConfig": {
           "props.text": {

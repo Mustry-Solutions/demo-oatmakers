@@ -6,10 +6,7 @@
     "signal": "",
     "unit": "",
     "decimals": 1,
-    "running": true,
-    "on": "",
-    "off": "",
-    "compact": true
+    "running": true
   },
   "propConfig": {
     "params.area": {
@@ -35,18 +32,6 @@
     "params.running": {
       "paramDirection": "input",
       "persistent": true
-    },
-    "params.on": {
-      "paramDirection": "input",
-      "persistent": true
-    },
-    "params.off": {
-      "paramDirection": "input",
-      "persistent": true
-    },
-    "params.compact": {
-      "paramDirection": "input",
-      "persistent": true
     }
   },
   "props": {
@@ -61,39 +46,71 @@
       "name": "root"
     },
     "props": {
-      "mode": "percent",
+      "mode": "fixed",
       "style": {
         "cursor": "pointer"
       }
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
-          "name": "Graphic"
+          "name": "Shape"
         },
         "props": {
-          "source": "",
-          "altText": "Equipment",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 110 60",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "group",
+              "name": "g0",
+              "fill": {
+                "paint": "#555"
+              },
+              "elements": [
+                {
+                  "type": "circle",
+                  "name": "circle0",
+                  "cx": "20",
+                  "cy": "30",
+                  "r": "14",
+                  "fill": {
+                    "paint": "#a7dfa5"
+                  },
+                  "stroke": {
+                    "paint": "#555",
+                    "width": "1.6"
+                  }
+                },
+                {
+                  "type": "path",
+                  "name": "path1",
+                  "d": "M6 30 h28 M20 16 v28 M10 20 l20 20 M30 20 l-20 20",
+                  "stroke": {
+                    "paint": "#555",
+                    "width": "1"
+                  }
+                }
+              ]
+            }
+          ],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
           "x": 0,
           "y": 0,
-          "width": 1,
-          "height": 1
+          "width": 110,
+          "height": 60
         },
         "propConfig": {
-          "props.source": {
+          "props.elements[0].elements[0].fill.paint": {
             "binding": {
               "type": "expr",
               "config": {
-                "expression": "if({view.params.running}, {view.params.on}, {view.params.off})"
+                "expression": "if({view.params.running}, \"#a7dfa5\", \"#b3b3b3\")"
               }
             }
           }
@@ -107,14 +124,15 @@
         "props": {
           "text": "",
           "style": {
-            "classes": "Hmi/Tag"
+            "classes": "Hmi/Tag",
+            "alignItems": "flex-start"
           }
         },
         "position": {
-          "x": 0,
-          "y": 0,
-          "width": 1,
-          "height": 1
+          "x": 42,
+          "y": 22,
+          "width": 68,
+          "height": 15
         },
         "propConfig": {
           "props.text": {
@@ -130,46 +148,6 @@
               "type": "expr",
               "config": {
                 "expression": "{session.custom.showLabels}"
-              }
-            }
-          },
-          "position.x": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({view.params.compact}, 0.38, 0)"
-              }
-            }
-          },
-          "position.y": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({view.params.compact}, 0.37, 0.81)"
-              }
-            }
-          },
-          "position.width": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({view.params.compact}, 0.62, 1)"
-              }
-            }
-          },
-          "position.height": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({view.params.compact}, 0.25, 0.17)"
-              }
-            }
-          },
-          "props.style.alignItems": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({view.params.compact}, \"flex-start\", \"center\")"
               }
             }
           }

@@ -22,18 +22,282 @@
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTk4IDYxMCBIMjgwIFY2MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjgwIDczMCBWNzQ2IiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTUwMCA3NTYgSDUyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik01NjAgMTMwIEg2NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNzI1IDE3MCBWMzAwIEg3NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNODEwIDEzNSBIODUwIFYyMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNOTM1IDI1MCBWMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTkzNSA2ODYgVjgwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDk1IDI1MCBWMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEwOTUgNjg2IFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTI1NSAyNTAgVjM2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMjU1IDY4NiBWODAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MTUgMjUwIFYzNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTQxNSA2ODYgVjgwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNTIwIDgxMCBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yNTUgMTQwIFYxMDciIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48cGF0aCBkPSJNMjgwIDYyMCBWNTYwIEgxNzAgVjI1MCBIMjAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+PHBhdGggZD0iTTUxMCAxMTcgSDQ2MCBWMjMwIEgzMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48cGF0aCBkPSJNMzkwIDcyMiBWNzQ2IiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9IjU5NiIgeT0iNDQ2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48L3N2Zz4=",
-          "altText": "Intake & raw oat silos piping",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 1740 910",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "path",
+              "name": "path0",
+              "d": "M198 610 H280 V620",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path1",
+              "d": "M280 730 V746",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path2",
+              "d": "M500 756 H520",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path3",
+              "d": "M560 130 H640",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path4",
+              "d": "M725 170 V300 H760",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path5",
+              "d": "M810 135 H850 V230",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path6",
+              "d": "M935 250 V360",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path7",
+              "d": "M935 686 V800",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path8",
+              "d": "M1095 250 V360",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path9",
+              "d": "M1095 686 V800",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path10",
+              "d": "M1255 250 V360",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path11",
+              "d": "M1255 686 V800",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path12",
+              "d": "M1415 250 V360",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path13",
+              "d": "M1415 686 V800",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path14",
+              "d": "M1520 810 H1540",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path15",
+              "d": "M255 140 V107",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#8f9599",
+                "width": "1",
+                "linejoin": "round",
+                "dasharray": "4 3"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path16",
+              "d": "M280 620 V560 H170 V250 H200",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#8f9599",
+                "width": "1",
+                "linejoin": "round",
+                "dasharray": "4 3"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path17",
+              "d": "M510 117 H460 V230 H310",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#8f9599",
+                "width": "1",
+                "linejoin": "round",
+                "dasharray": "4 3"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path18",
+              "d": "M390 722 V746",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect19",
+              "x": "596",
+              "y": "446",
+              "width": "248",
+              "height": "78",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            }
+          ],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
@@ -247,8 +511,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "Raw oats by truck",
             "target": "",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNjAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE0NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjNTk1YzVhIi8+PGNpcmNsZSBjeD0iMTQ2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTQzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI2Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5SYXcgb2F0cyBieSB0cnVjazwvdGV4dD48L3N2Zz4="
+            "width": 160
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -266,17 +531,14 @@
           "name": "MCV101"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/Motor",
           "params": {
             "area": "intake",
             "tag": "M-CV101",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -304,17 +566,14 @@
           "name": "MEL101"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/Motor",
           "params": {
             "area": "intake",
             "tag": "M-EL101",
             "signal": "elevAmps",
             "unit": "A",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -342,17 +601,14 @@
           "name": "MPC101"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/Motor",
           "params": {
             "area": "intake",
             "tag": "M-PC101",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -382,8 +638,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "To screenings bin",
             "target": "",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDEzNiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjNTk1YzVhIi8+PGNpcmNsZSBjeD0iMTM2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTMzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI2Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5UbyBzY3JlZW5pbmdzIGJpbjwvdGV4dD48L3N2Zz4="
+            "width": 150
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -401,17 +658,14 @@
           "name": "MCV102"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/Motor",
           "params": {
             "area": "intake",
             "tag": "M-CV102",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -532,17 +786,14 @@
           "name": "RV101"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/RotaryValve",
           "params": {
             "area": "intake",
             "tag": "RV101",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -663,17 +914,14 @@
           "name": "RV102"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/RotaryValve",
           "params": {
             "area": "intake",
             "tag": "RV102",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -794,17 +1042,14 @@
           "name": "RV103"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/RotaryValve",
           "params": {
             "area": "intake",
             "tag": "RV103",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -925,17 +1170,14 @@
           "name": "RV104"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/RotaryValve",
           "params": {
             "area": "intake",
             "tag": "RV104",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -963,17 +1205,14 @@
           "name": "MCV103"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/Motor",
           "params": {
             "area": "intake",
             "tag": "M-CV103",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -1003,8 +1242,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "To cleaning",
             "target": "/scada/cleaning",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNjAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE0NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTQ2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTQzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI2Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5UbyBjbGVhbmluZzwvdGV4dD48L3N2Zz4="
+            "width": 160
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -1022,17 +1262,14 @@
           "name": "FN101"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/Fan",
           "params": {
             "area": "intake",
             "tag": "FN101",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false

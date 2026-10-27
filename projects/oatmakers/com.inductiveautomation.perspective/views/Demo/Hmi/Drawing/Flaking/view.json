@@ -22,18 +22,204 @@
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMjA4IDExMCBIMjYwIFYxNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjYwIDI5MCBWMzgwIEgzODAgVjExMCBINDc1IFYxNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjM4IDY1NCBIMzUwIFY0MDAgSDQyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhNTRlIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik00NzUgNDUwIFY0NjYgSDUwNSBWNDgyIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTU2MCA2NTAgVjcxNSBINjQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTk0MCA3MTUgSDk5MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMTQwIDcxNSBIMTIwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMzcwIDcyMCBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMzQwIDc3MCBWODIwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgNjUyIFY3MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iODE2IiB5PSIxODYiIHdpZHRoPSIzMDgiIGhlaWdodD0iODMiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjxyZWN0IHg9IjExNzYiIHk9IjE4NiIgd2lkdGg9IjMwOCIgaGVpZ2h0PSI4MyIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHJlY3QgeD0iODE2IiB5PSIzNzYiIHdpZHRoPSIzMDgiIGhlaWdodD0iODMiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjxyZWN0IHg9IjExNzYiIHk9IjM3NiIgd2lkdGg9IjMwOCIgaGVpZ2h0PSI4MyIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PC9zdmc+",
-          "altText": "Line 01 \u00b7 Steaming & flaking piping",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 1740 910",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "path",
+              "name": "path0",
+              "d": "M208 110 H260 V140",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path1",
+              "d": "M260 290 V380 H380 V110 H475 V150",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path2",
+              "d": "M238 654 H350 V400 H420",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#c9a54e",
+                "width": "1.7",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path3",
+              "d": "M475 450 V466 H505 V482",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path4",
+              "d": "M560 650 V715 H640",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path5",
+              "d": "M940 715 H990",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path6",
+              "d": "M1140 715 H1200",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path7",
+              "d": "M1370 720 H1540",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path8",
+              "d": "M1340 770 V820 H1540",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path9",
+              "d": "M1400 652 V720",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect10",
+              "x": "816",
+              "y": "186",
+              "width": "308",
+              "height": "83",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect11",
+              "x": "1176",
+              "y": "186",
+              "width": "308",
+              "height": "83",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect12",
+              "x": "816",
+              "y": "376",
+              "width": "308",
+              "height": "83",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect13",
+              "x": "1176",
+              "y": "376",
+              "width": "308",
+              "height": "83",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            }
+          ],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
@@ -264,8 +450,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "Groats from kiln",
             "target": "/scada/kiln",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNzAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE1NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTU2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTUzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Hcm9hdHMgZnJvbSBraWxuPC90ZXh0Pjwvc3ZnPg=="
+            "width": 170
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -283,17 +470,14 @@
           "name": "RV501"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/RotaryValve",
           "params": {
             "area": "flaking",
             "tag": "RV501",
             "signal": "rate",
             "unit": "kg/h",
             "decimals": 0,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -323,8 +507,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "Steam from boiler house",
             "target": "/scada/utilities",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyMDAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE4NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTg2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTgzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI4Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5TdGVhbSBmcm9tIGJvaWxlciBob3VzZTwvdGV4dD48L3N2Zz4="
+            "width": 200
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -342,17 +527,14 @@
           "name": "PCV501"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/ControlValve",
           "params": {
             "area": "flaking",
             "tag": "PCV501",
             "signal": "pressure",
             "unit": "bar",
             "decimals": 2,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48L2c+PC9zdmc+",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48L2c+PC9zdmc+",
-            "compact": false
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -380,17 +562,14 @@
           "name": "MFM501"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/Motor",
           "params": {
             "area": "flaking",
             "tag": "M-FM501",
             "signal": "power",
             "unit": "kW",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -420,8 +599,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "Rolled oats to packing",
             "target": "/scada/packing",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxOTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE3NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTc2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTczIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI4Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Sb2xsZWQgb2F0cyB0byBwYWNraW5nPC90ZXh0Pjwvc3ZnPg=="
+            "width": 190
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -441,8 +621,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "Fines to Line 03",
             "target": "/scada/milling",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxOTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE3NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTc2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTczIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI4Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5GaW5lcyB0byBMaW5lIDAzPC90ZXh0Pjwvc3ZnPg=="
+            "width": 190
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false

@@ -22,18 +22,218 @@
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMjA4IDExMCBIMjYwIFYxNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjYwIDI5MCBWMzgyIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTQ3MCAzOTIgSDUyMCBWMTAwIEg2MDAgVjEzNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yMzggNjU0IEg0MjAgVjQwMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhNTRlIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MjAgNjU0IEg1NDAgVjQwMCBINTYyIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTY3MCAxMzkgVjgwIEg3NjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48cGF0aCBkPSJNNjMwIDQ2MCBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTcwMCA2NDAgSDc0MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGY5NTk5IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjQgMyIvPjxwYXRoIGQ9Ik02MzAgNzUwIFY3OTAgSDkyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDkwIDc4NSBIMTIwMCBWMjAwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEyMDAgMzMwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEyMDAgNDYwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iODk2IiB5PSIxNzYiIHdpZHRoPSIyNjgiIGhlaWdodD0iNzgiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjxyZWN0IHg9Ijg5NiIgeT0iMzI2IiB3aWR0aD0iMjY4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48cmVjdCB4PSI4OTYiIHk9IjQ3NiIgd2lkdGg9IjI2OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PC9zdmc+",
-          "altText": "Kilning & stabilisation piping",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 1740 910",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "path",
+              "name": "path0",
+              "d": "M208 110 H260 V140",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path1",
+              "d": "M260 290 V382",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path2",
+              "d": "M470 392 H520 V100 H600 V136",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path3",
+              "d": "M238 654 H420 V402",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#c9a54e",
+                "width": "1.7",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path4",
+              "d": "M420 654 H540 V400 H562",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#c9a54e",
+                "width": "1.7",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path5",
+              "d": "M670 139 V80 H763",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#8f9599",
+                "width": "1",
+                "linejoin": "round",
+                "dasharray": "4 3"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path6",
+              "d": "M630 460 V560",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path7",
+              "d": "M700 640 H743",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#8f9599",
+                "width": "1",
+                "linejoin": "round",
+                "dasharray": "4 3"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path8",
+              "d": "M630 750 V790 H920",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path9",
+              "d": "M1090 785 H1200 V200 H1540",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path10",
+              "d": "M1200 330 H1540",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path11",
+              "d": "M1200 460 H1540",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect12",
+              "x": "896",
+              "y": "176",
+              "width": "268",
+              "height": "78",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect13",
+              "x": "896",
+              "y": "326",
+              "width": "268",
+              "height": "78",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect14",
+              "x": "896",
+              "y": "476",
+              "width": "268",
+              "height": "78",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            }
+          ],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
@@ -191,8 +391,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "From dehulling",
             "target": "/scada/dehulling",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNzAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE1NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTU2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTUzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Gcm9tIGRlaHVsbGluZzwvdGV4dD48L3N2Zz4="
+            "width": 170
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -210,17 +411,14 @@
           "name": "RV401"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/RotaryValve",
           "params": {
             "area": "kiln",
             "tag": "RV401",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -250,8 +448,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "Steam from boiler house",
             "target": "/scada/utilities",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyMDAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE4NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTg2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTgzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI4Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5TdGVhbSBmcm9tIGJvaWxlciBob3VzZTwvdGV4dD48L3N2Zz4="
+            "width": 200
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -269,17 +468,14 @@
           "name": "FCV401"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/ControlValve",
           "params": {
             "area": "kiln",
             "tag": "FCV401",
             "signal": "steamFlow",
             "unit": "kg/h",
             "decimals": 0,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48L2c+PC9zdmc+",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48L2c+PC9zdmc+",
-            "compact": false
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -307,17 +503,14 @@
           "name": "FN402"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/Fan",
           "params": {
             "area": "kiln",
             "tag": "FN402",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -345,17 +538,14 @@
           "name": "RV402"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/RotaryValve",
           "params": {
             "area": "kiln",
             "tag": "RV402",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -383,17 +573,14 @@
           "name": "FN401"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/Fan",
           "params": {
             "area": "kiln",
             "tag": "FN401",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
-            "compact": true
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -421,17 +608,14 @@
           "name": "SDV411"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/ShutoffValve",
           "params": {
             "area": "kiln",
             "tag": "SDV411",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjwvZz48L3N2Zz4=",
-            "compact": false
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -461,8 +645,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "Groats to Line 01",
             "target": "/scada/flaking",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Hcm9hdHMgdG8gTGluZSAwMTwvdGV4dD48L3N2Zz4="
+            "width": 180
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -480,17 +665,14 @@
           "name": "SDV412"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/ShutoffValve",
           "params": {
             "area": "kiln",
             "tag": "SDV412",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjwvZz48L3N2Zz4=",
-            "compact": false
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -520,8 +702,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "Groats to Line 02",
             "target": "/scada/cutting",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Hcm9hdHMgdG8gTGluZSAwMjwvdGV4dD48L3N2Zz4="
+            "width": 180
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -539,17 +722,14 @@
           "name": "SDV413"
         },
         "props": {
-          "path": "Demo/Hmi/Device",
+          "path": "Demo/Hmi/Device/ShutoffValve",
           "params": {
             "area": "kiln",
             "tag": "SDV413",
             "signal": "",
             "unit": "",
             "decimals": 1,
-            "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjwvZz48L3N2Zz4=",
-            "compact": false
+            "running": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -579,8 +759,9 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
+            "text": "Groats to Line 03",
             "target": "/scada/milling",
-            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Hcm9hdHMgdG8gTGluZSAwMzwvdGV4dD48L3N2Zz4="
+            "width": 180
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false

@@ -1,6 +1,5 @@
 """Build the oat mill SCADA: a plant overview and drill-down process area screens."""
-import base64,json
-from html import escape
+import json,re
 from view_primitives import *
 from build_tags import build_tags
 
@@ -36,10 +35,33 @@ ROUTE={k:r for k,r,*_ in AREAS}
 SILO_TONNES={'Raw oats':450,'Rolled oats':60,'Steel-cut oats':40,'Oat flour':50}
 TITLE={k:t for k,_,t,*_ in AREAS}
 
-def b64(markup):return 'data:image/svg+xml;base64,'+base64.b64encode(markup.encode()).decode()
-def svg(body,w,h):return '<svg xmlns="http://www.w3.org/2000/svg" width="%s" height="%s" viewBox="0 0 %s %s">%s</svg>'%(w,h,w,h,body)
-def image(name,source,alt):
-    return node('ia.display.image',name,{'source':source,'altText':alt,'fit':{'mode':'fill'},'style':{'pointerEvents':'none'}})
+def svg(body,w,h):return '<svg viewBox="0 0 %s %s">%s</svg>'%(w,h,body)
+# Graphics are Perspective drawings (ia.shapes.svg). Static outlines are written as
+# SVG markup and converted to drawing elements; application.demo.scadaElements does
+# the same at runtime for the size-dependent equipment templates.
+SVG_TAG=re.compile(r'<(/?)(\w+)([^>]*?)(/?)>')
+SVG_ATTR=re.compile(r'([\w:-]+)="([^"]*)"')
+SVG_STYLE={'fill':('fill','paint'),'fill-opacity':('fill','opacity'),'stroke':('stroke','paint'),'stroke-width':('stroke','width'),
+           'stroke-dasharray':('stroke','dasharray'),'stroke-linejoin':('stroke','linejoin'),'stroke-linecap':('stroke','linecap')}
+def svg_elements(markup):
+    root=[];stack=[root]
+    for closing,name,attrs,self_closing in SVG_TAG.findall(markup):
+        if name=='svg':continue
+        if closing:stack.pop();continue
+        assert name!='text','drawings carry no text; use a Label'
+        el={'type':'group' if name=='g' else name,'name':'%s%d'%(name,len(stack[-1]))}
+        for key,value in SVG_ATTR.findall(attrs):
+            if key in SVG_STYLE:section,prop=SVG_STYLE[key];el.setdefault(section,{})[prop]=value
+            elif not key.startswith('font') and key not in ('text-anchor','paint-order','xmlns','viewBox'):el[key]=value
+        stack[-1].append(el)
+        if name=='g' and not self_closing:el['elements']=[];stack.append(el['elements'])
+    return root
+def drawing(name,elements,width,height,preserve='none'):
+    return node('ia.shapes.svg',name,{'viewBox':'0 0 %s %s'%(width,height),'preserveAspectRatio':preserve,'elements':elements,'style':{'pointerEvents':'none','overflow':'visible'}})
+def text_label(name,text,x,y,w,h,size=12,weight=400,colour='#555',align='center',classes='Hmi/Shape'):
+    """A label laid over a drawing: text never lives inside the drawing itself."""
+    return at(node('ia.display.label',name,{'text':text,'style':{'classes':classes,'fontSize':'%spx'%size,'fontWeight':weight,'color':colour,'alignItems':ALIGN_X[align]}}),x,y,w,h)
+ALIGN_X={'start':'flex-start','center':'center','end':'flex-end'}
 def at(n,x,y,w,h):
     n['position']={'x':x,'y':y,'width':w,'height':h};return n
 def bind(path):return {'binding':{'type':'property','config':{'path':path}}}
@@ -60,8 +82,8 @@ def text_node(name,x,y,text,size=12,weight=400,anchor='middle',fill='#555',toggl
     if toggle:n['propConfig']={'meta.visible':expr(SHOW_LABELS)}
     return at(n,left,round(y-size),width,line)
 def click(script):return {'dom':{'onClick':{'type':'script','scope':'G','config':{'script':script}}}}
-def clickable(children,script,cursor='pointer'):
-    root=node('ia.container.coord','root',{'mode':'percent','style':{'cursor':cursor}},children);root['events']=click(script);return root
+def clickable(children,script,cursor='pointer',mode='percent'):
+    root=node('ia.container.coord','root',{'mode':mode,'style':{'cursor':cursor}},children);root['events']=click(script);return root
 def full(n):
     n['position']={'x':0,'y':0,'width':1,'height':1};return n
 
@@ -77,67 +99,112 @@ def symbol(kind,active,w=78,h=88):
             body+='<circle cx="%s" cy="%s" r="21" fill="#c0dfb8" stroke="#555" stroke-width="2"/>'%(cx,cy) if active else '<circle cx="%s" cy="%s" r="21" fill="%s" stroke="#555" stroke-width="2"/>'%(cx,cy,OFF)
             for r in (0,90,180,270):
                 body+='<path d="M%s %s q-22 -20 -9 -19 q15 -3 13 14 Z" transform="rotate(%d %s %s)" fill="%s"/>'%(cx,cy,r,cx,cy,'#548455' if active else '#7c7f7d')
-            body+='<circle cx="%s" cy="%s" r="5" fill="#555"/><text x="%s" y="17" font-size="12">M</text>'%(cx,cy,w-15)
+            body+='<circle cx="%s" cy="%s" r="5" fill="#555"/>'%(cx,cy)
         else:
             body+='<path d="M%s %s L%s %s V%s L%s %s Z" fill="%s" stroke="#555" stroke-width="1.6"/>'%(cx-15,cy-8,cx+15,cy+8,cy-8,cx-15,cy+8,fill)
             body+='<path d="M%s %s V%s" stroke="#555" stroke-width="1.4"/>'%(cx,cy-22,cy)
             if kind=='control':
-                body+='<path d="M%s %s a14 12 0 0 1 28 0 Z" fill="%s" stroke="#555" stroke-width="1.4"/><text x="%s" y="%s" font-size="12">A</text>'%(cx-14,cy-22,fill,cx+20,cy-23)
+                body+='<path d="M%s %s a14 12 0 0 1 28 0 Z" fill="%s" stroke="#555" stroke-width="1.4"/>'%(cx-14,cy-22,fill)
             else:
                 body+='<rect x="%s" y="%s" width="20" height="12" fill="%s" stroke="#555" stroke-width="1.4"/><path d="M%s %s h20 M%s %s v12" stroke="#555"/>'%(cx-10,cy-34,fill,cx-10,cy-28,cx,cy-34)
     else:
         cx,cy=20,30
         if kind=='motor':
-            body+='<circle cx="%s" cy="%s" r="15" fill="%s" stroke="#555" stroke-width="1.6"/><text x="%s" y="%s" text-anchor="middle" font-size="13" font-weight="700">M</text>'%(cx,cy,fill,cx,cy+5)
+            body+='<circle cx="%s" cy="%s" r="15" fill="%s" stroke="#555" stroke-width="1.6"/>'%(cx,cy,fill)
         elif kind=='fan':
             body+='<circle cx="%s" cy="%s" r="17" fill="%s" stroke="#555" stroke-width="1.6"/>'%(cx,cy,fill)
             for r in (0,120,240):
                 body+='<path d="M%s %s q-3 -12 7 -13 q4 6 -7 13 Z" transform="rotate(%d %s %s)" fill="#555"/>'%(cx,cy,r,cx,cy)
         else:
             body+='<circle cx="%s" cy="%s" r="14" fill="%s" stroke="#555" stroke-width="1.6"/><path d="M%s %s h28 M%s %s v28 M%s %s l20 20 M%s %s l-20 20" stroke="#555" stroke-width="1"/>'%(cx,cy,fill,cx-14,cy,cx,cy-14,cx-10,cy-10,cx+10,cy-10)
-    return svg('<g font-family="Arial" fill="#555">'+body+'</g>',w,h)
+    return '<g fill="#555">'+body+'</g>'
 
-def stream_svg(text,w,target):
-    fill='#3f5a73' if target else '#595c5a'
-    body='<path d="M0 0 H%s a14 14 0 0 1 0 28 H0 Z" fill="%s"/>'%(w-14,fill)
-    body+='<circle cx="%s" cy="14" r="9" fill="#cdd0cd"/><path d="M%s 8 l7 6 -7 6 Z" fill="#60645f"/>'%(w-14,w-17)
-    body+='<text x="%s" y="18" text-anchor="middle" font-family="Arial" font-size="10.5" fill="white">%s</text>'%((w-25)/2,escape(text))
-    return svg(body,w,28)
+# Device templates: kind -> (view, width, height, letter label (text, x, y, size) or None).
+DEVICES={'motor':('Motor',110,60,('M',5,22,13)),'fan':('Fan',110,60,None),'rotary':('RotaryValve',110,60,None),
+         'pump':('Pump',78,88,('M',63,5,12)),'control':('ControlValve',78,88,('A',58,13,12)),'block':('ShutoffValve',78,88,None)}
+
+def state_bindings(on,off,path='props.elements'):
+    """Bind every paint that differs between the running and stopped symbol to view.params.running."""
+    config={}
+    for i,(a,b) in enumerate(zip(on,off)):
+        assert a['type']==b['type'],(a,b)
+        here='%s[%d]'%(path,i)
+        for section in ('fill','stroke'):
+            if a.get(section,{}).get('paint')!=b.get(section,{}).get('paint'):
+                config[here+'.'+section+'.paint']=expr('if({view.params.running}, "%s", "%s")'%(a[section]['paint'],b[section]['paint']))
+        config.update(state_bindings(a.get('elements',[]),b.get('elements',[]),here+'.elements'))
+    return config
 
 def components():
-    graphic=full(image('Graphic','','Instrument'))
-    graphic['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'kind':'{view.params.kind}','value':'{view.params.value}','colour':'{view.params.colour}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaInstrumentSvg(value["kind"], value["value"], value["colour"])'}]}}}
+    # Devices used to be one image view; their templates now live under Demo/Hmi/Device/.
+    for old in ('view.json','resource.json'):(V/HMI/'Device'/old).unlink(missing_ok=True)
     detail='\tp = self.view.params\n\tif p.signal:\n\t\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, p.unit, p.decimals)'
-    tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/InstrumentTag'}}),0,0,1,0.3)
+    # Instrument: kind bubble and value pill, the pill stretching with the value.
+    pill='max(64, min(102, len(toStr({view.params.value})) * 6 + 14))'
+    shape=at(drawing('Shape',svg_elements('<circle cx="10" cy="32" r="10" fill="#e6e6e6" stroke="#7d817f" stroke-width="1"/><rect x="26" y="22" width="64" height="20" rx="10" fill="#f7f7f7"/>'),130,51),0,0,130,51)
+    shape['propConfig']={'props.elements[1].width':expr(pill),'props.elements[1].fill.paint':bind('view.params.colour')}
+    kind=text_label('Kind','',0,22,20,20,8,colour='#565957');kind['propConfig']={'props.text':bind('view.params.kind')}
+    value=text_label('Value','',26,22,64,20,11.5,colour='#565957');value['propConfig']={'props.text':bind('view.params.value'),'position.width':expr(pill)}
+    tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/InstrumentTag'}}),0,0,130,15)
     tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS)}
-    view(HMI+'Instrument',clickable([graphic,tag],detail),params={'area':'intake','tag':'TI101','kind':'TI','signal':'','unit':'','decimals':1,'value':'--','colour':'#f7f7f7'},height=51,width=130)
-    device=full(image('Graphic','','Equipment'))
-    device['propConfig']={'props.source':{'binding':{'type':'expr','config':{'expression':'if({view.params.running}, {view.params.on}, {view.params.off})'}}}}
-    tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Tag'}}),0,0,1,1)
-    compact=lambda a,b:expr('if({view.params.compact}, %s, %s)'%(a,b))
-    tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS),
-        'position.x':compact(0.38,0),'position.y':compact(0.37,0.81),'position.width':compact(0.62,1),'position.height':compact(0.25,0.17),
-        'props.style.alignItems':compact('"flex-start"','"center"')}
-    root=clickable([device,tag],'\tp = self.view.params\n\tif p.signal:\n\t\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, p.unit, p.decimals)')
-    view(HMI+'Device',root,params={'area':'intake','tag':'M101','signal':'','unit':'','decimals':1,'running':True,'on':'','off':'','compact':True},height=60,width=110)
-    # Connected streams navigate to the area that supplies or receives them.
-    link=full(image('Graphic','','Stream'));link['propConfig']={'props.source':bind('view.params.source')}
-    root=clickable([link],'\tif self.view.params.target:\n\t\tsystem.perspective.navigate(self.view.params.target)')
-    root['propConfig']={'props.style.cursor':{'binding':{'type':'expr','config':{'expression':'if(len({view.params.target}) > 0, "pointer", "default")'}}}}
-    view(HMI+'Stream',root,params={'source':'','target':''},height=28,width=170)
-    trend=full(image('Plot','','Trend'))
-    trend['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}','signal':'{view.params.signal}','colour':'{view.params.colour}','sp':'{view.params.sp}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTrendSvg(value["area"], value["signal"], value["colour"], value["sp"])'}]}}}
+    view(HMI+'Instrument',clickable([shape,kind,value,tag],detail,mode='fixed'),params={'area':'intake','tag':'TI101','kind':'TI','signal':'','unit':'','decimals':1,'value':'--','colour':'#f7f7f7'},height=51,width=130)
+    # Devices: one drawing template per kind; paints follow view.params.running.
+    for kind,(name,w,h,letter) in DEVICES.items():
+        on,off=svg_elements(symbol(kind,True,w,h)),svg_elements(symbol(kind,False,w,h))
+        shape=at(drawing('Shape',on,w,h),0,0,w,h);shape['propConfig']=state_bindings(on,off)
+        children=[shape]
+        if letter:
+            text,x,y,size=letter
+            children.append(text_label('Letter',text,x,y,30 if w==110 else 15,size+4,size,700 if w==110 else 400,'#555','center' if w==110 else 'start'))
+        compact=w==110
+        tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Tag','alignItems':'flex-start' if compact else 'center'}}),42 if compact else 0,22 if compact else h-17,w-42 if compact else w,15)
+        tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS)}
+        children.append(tag)
+        view(HMI+'Device/'+name,clickable(children,detail,mode='fixed'),params={'area':'intake','tag':'M101','signal':'','unit':'','decimals':1,'running':True},height=h,width=w)
+    # Streams: an arrow box whose width follows view.params.width; connected streams navigate.
+    width='{view.params.width}'
+    shape=at(drawing('Shape',svg_elements('<path d="M0 0 H156 a14 14 0 0 1 0 28 H0 Z" fill="#3f5a73"/><circle cx="156" cy="14" r="9" fill="#cdd0cd"/><path d="M153 8 l7 6 -7 6 Z" fill="#60645f"/>'),170,28),0,0,170,28)
+    shape['propConfig']={'position.width':expr(width),'props.viewBox':expr('"0 0 " + %s + " 28"'%width),
+        'props.elements[0].d':expr('"M0 0 H" + (%s - 14) + " a14 14 0 0 1 0 28 H0 Z"'%width),
+        'props.elements[0].fill.paint':expr('if(len({view.params.target}) > 0, "#3f5a73", "#595c5a")'),
+        'props.elements[1].cx':expr('%s - 14'%width),'props.elements[2].d':expr('"M" + (%s - 17) + " 8 l7 6 -7 6 Z"'%width)}
+    text=text_label('Text','',0,0,145,28,10.5,colour='#ffffff');text['propConfig']={'props.text':bind('view.params.text'),'position.width':expr('%s - 25'%width)}
+    root=clickable([shape,text],'\tif self.view.params.target:\n\t\tsystem.perspective.navigate(self.view.params.target)',mode='fixed')
+    root['propConfig']={'props.style.cursor':expr('if(len({view.params.target}) > 0, "pointer", "default")')}
+    view(HMI+'Stream',root,params={'text':'','target':'','width':170},height=28,width=170)
+    # Trend: a drawing whose elements the gateway computes from history or the model.
+    trend=full(drawing('Plot',[],280,70))
+    trend['propConfig']={'props.elements':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}','signal':'{view.params.signal}','colour':'{view.params.colour}','sp':'{view.params.sp}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTrendElements(value["area"], value["signal"], value["colour"], value["sp"])'}]}}}
     view(HMI+'Trend',node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'area':'intake','signal':'','colour':'#626b75','sp':0},height=70,width=280)
-    silo=full(image('Graphic','','Silo'))
-    silo['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'level':'{view.params.level}','product':'{view.params.product}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaSiloSvg(value["level"], value["product"])'}]}}}
+    # Silo: outline, product level and a level pill, drawn in 110 x 330 units and scaled to the instance.
+    outline='M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z'
+    silo=full(drawing('Shape',svg_elements('<path d="%s" fill="#e9e9e7"/><path d="M3 320 H107" fill="#d8cda8"/><path d="%s" fill="none" stroke="#666a68" stroke-width="2"/><rect x="22" y="104" width="66" height="22" rx="11" fill="#f7f7f7" stroke="#a9adab"/>'%(outline,outline)),110,330))
+    silo['propConfig']={'props.elements[1].d':{'binding':{'type':'property','config':{'path':'view.params.level'},'transforms':[{'type':'script','code':'\treturn application.demo.scadaSiloLevel(value)'}]}}}
+    level=at(node('ia.display.label','Level',{'text':'','style':{'classes':'Hmi/Shape','fontSize':'13px','fontWeight':700,'color':'#333399','alignItems':'center'}}),0.2,0.315,0.6,0.067)
+    level['propConfig']={'props.text':expr('numberFormat({view.params.level}, "0") + " %"')}
+    product=at(node('ia.display.label','Product',{'text':'','style':{'classes':'Hmi/Shape','fontSize':'10.5px','color':'#565957','alignItems':'center'}}),0,0.41,1,0.045)
+    product['propConfig']={'props.text':bind('view.params.product')}
     tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Text Hmi/Tag','alignItems':'flex-start'}}),0.555,-0.06,1,0.05)
     tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS),
         'position.y':expr('-21 / {view.params.height}'),'position.height':expr('16 / {view.params.height}')}
-    root=clickable([silo,tag],'\tp = self.view.params\n\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, "%", 0)');root['props']['style']['overflow']='visible'
+    root=clickable([silo,level,product,tag],'\tp = self.view.params\n\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, "%", 0)');root['props']['style']['overflow']='visible'
     view(HMI+'Silo',root,params={'area':'intake','tag':'SI101','signal':'','level':0,'product':'','height':330},height=330,width=110)
-    tile=full(image('Graphic','','Process area'))
-    tile['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTileSvg(value["area"])'}]}}}
-    view(HMI+'Tile',clickable([tile],'\tsystem.perspective.navigate(self.view.params.route)'),params={'area':'intake','route':'/scada/intake'},height=170,width=230)
+    # Tile: frame and state pill drawing, live texts as labels.
+    shape=at(drawing('Shape',svg_elements('<rect x="1" y="1" width="228" height="168" rx="4" fill="#f4f4f3" stroke="#9a9e9c" stroke-width="1.5"/><rect x="14" y="38" width="80" height="18" rx="3" fill="#dfe3e6"/>'),230,170),0,0,230,170)
+    shape['propConfig']={'props.elements[1].width':expr('len({view.custom.tile.state}) * 6.6 + 12'),'props.elements[1].fill.paint':bind('view.custom.tile.pillFill')}
+    children=[shape,text_label('Title','',14,14,210,18,14,700,'#3f4447','start'),text_label('State','',20,38,190,18,10,700,'#4d555c','start')]
+    children[1]['propConfig']={'props.text':bind('view.custom.tile.title')}
+    children[2]['propConfig']={'props.text':bind('view.custom.tile.state'),'props.style.color':bind('view.custom.tile.pillText')}
+    for i in range(3):
+        caption=text_label('Caption%d'%(i+1),'',14,70+i*24,120,16,11.5,colour='#6d7270',align='start')
+        caption['propConfig']={'props.text':expr('try({view.custom.tile.rows[%d].caption}, "")'%i)}
+        value=text_label('Value%d'%(i+1),'',96,70+i*24,120,16,13,700,'#333399','end')
+        value['propConfig']={'props.text':expr('try({view.custom.tile.rows[%d].value}, "")'%i)}
+        children+=[caption,value]
+    children.append(text_label('Open','OPEN SCREEN ›',96,147,120,14,10.5,700,'#3f5a73','end'))
+    view(HMI+'Tile',clickable(children,'\tsystem.perspective.navigate(self.view.params.route)',mode='fixed'),params={'area':'intake','route':'/scada/intake'},
+         custom={'tile':{'title':'','state':'','pillFill':'#dfe3e6','pillText':'#4d555c','rows':[]}},
+         config={'custom.tile':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTile(value["area"])'}]},'persistent':True}},height=170,width=230)
     value=label('Value','','Hmi/DetailValue')
     value['propConfig']={'props.text':{'binding':{'type':'expr','config':{'expression':'if(len({view.params.tagPath}) > 0, tag({view.params.tagPath}), 0)'},
         'transforms':[{'type':'script','code':'\tp = self.view.params\n\treturn application.demo._scadaFormat(value, p.unit, p.decimals)'}]}}}
@@ -174,7 +241,7 @@ EQUIPMENT={
  'boiler':('Boiler',(40,60,0,0),'body = \'<rect width="%s" height="%s" rx="%s"/><rect x="-40" y="%s" width="40" height="%s"/><rect x="%s" y="-60" width="22" height="60"/>\' % (w, h, h/2, h*0.25, h*0.5, w-70)'),
  'vessel':('Vessel',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="%s"/>\' % (w, h, min(w, h)/2)'),
  'box':('Box',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/>\' % (w, h)'),
- 'magnet':('Magnet',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/><text x="%s" y="%s" font-family="Arial" font-size="10" text-anchor="middle" stroke="none" fill="#555">MAG</text>\' % (w, h, w/2, h/2+4)'),
+ 'magnet':('Magnet',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/>\' % (w, h)'),
  'sorter':('OpticalSorter',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/><path d="M15 40 l20 12 l-20 12 Z M%s 40 l-20 12 l20 12 Z" fill="#999"/>\' % (w, h, w-15)'),
  'detector':('MetalDetector',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/><path d="M12 %s V12 H%s V%s" fill="none" stroke-width="3"/>\' % (w, h, h, w-12, h)'),
  'palletiser':('Palletiser',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/><rect x="20" y="%s" width="%s" height="10" fill="#b9a27a"/><rect x="25" y="40" width="%s" height="%s" fill="#ecebe5"/>\' % (w, h, h-30, w-40, w-50, h-72)'),
@@ -187,10 +254,10 @@ SAMPLE={}
 def equipment_templates():
     for kind,(name,pad,code) in EQUIPMENT.items():
         left,top,right,bottom=[v+2 for v in pad]
-        shape=at(image('Shape','',name),0,0,100,100)
-        script='\tw, h = float(value["width"]), float(value["height"])\n'+''.join('\t'+line+'\n' for line in code.split('\n'))+'\treturn application.demo.scadaEquipmentSvg(body, w, h, %s)'%json.dumps(list(pad))
-        shape['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'width':'{view.params.width}','height':'{view.params.height}'}},'transforms':[{'type':'script','code':script}]}},
-                             'props.altText':expr('if(len({view.params.tag}) > 0, {view.params.tag}, "%s")'%name),
+        shape=at(drawing('Shape',[],100,100),0,0,100,100)
+        script='\tw, h = float(value["width"]), float(value["height"])\n'+''.join('\t'+line+'\n' for line in code.split('\n'))+'\treturn application.demo.scadaEquipmentElements(body, w, h, %s)'%json.dumps(list(pad))
+        shape['propConfig']={'props.elements':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'width':'{view.params.width}','height':'{view.params.height}'}},'transforms':[{'type':'script','code':script}]}},
+                             'props.viewBox':expr('"0 0 " + ({view.params.width} + %d) + " " + ({view.params.height} + %d)'%(left+right,top+bottom)),
                              'position.width':expr('{view.params.width} + %d'%(left+right)),'position.height':expr('{view.params.height} + %d'%(top+bottom))}
         # labelX/labelY is the centre of the tag's baseline in body coordinates.
         tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Text Hmi/Tag'}}),0,0,300,16)
@@ -199,7 +266,9 @@ def equipment_templates():
         title=at(node('ia.display.label','Title',{'text':'','style':{'classes':'Hmi/Text Hmi/Title'}}),0,0,300,14)
         title['propConfig']={'props.text':bind('view.params.title'),'meta.visible':expr(SHOW_LABELS+' && len({view.params.title}) > 0'),
                              'position.x':expr('{view.params.labelX} + %d'%(left-150)),'position.y':expr('{view.params.labelY} + %d'%(top+4))}
-        root=node('ia.container.coord','root',{'mode':'fixed','style':{'overflow':'visible'}},[shape,tag,title]);root.pop('position',None)
+        children=[shape,tag,title]
+        if kind=='magnet':children.insert(1,text_label('Letter','MAG',left,top,40,26,10))
+        root=node('ia.container.coord','root',{'mode':'fixed','style':{'overflow':'visible'}},children);root.pop('position',None)
         w,h,lx,ly,tag,title=SAMPLE[kind]
         view(HMI+'Equipment/'+name,root,params={'tag':tag,'title':title,'width':w,'height':h,'labelX':lx,'labelY':ly},
              height=h+top+bottom,width=w+left+right)
@@ -274,8 +343,8 @@ class Scene:
         self.parts.append(at(n,x,y,130,51))
     def device(self,tag,kind,cx,cy,signal='',unit='',dec=1,standby=False):
         compact=kind in ('motor','fan','rotary')
-        w,h=(110,60) if compact else (78,88)
-        n=embed(tag.replace('-',''),HMI+'Device',{'area':self.area,'tag':tag,'signal':signal,'unit':unit,'decimals':dec,'running':True,'on':b64(symbol(kind,True,w,h)),'off':b64(symbol(kind,False,w,h)),'compact':compact})
+        name,w,h,_=DEVICES[kind]
+        n=embed(tag.replace('-',''),HMI+'Device/'+name,{'area':self.area,'tag':tag,'signal':signal,'unit':unit,'decimals':dec,'running':True})
         if kind in DRIVES:
             # Rated current is a fixed nameplate value per drive, derived from its tag name.
             rated=float(round(4+sum(map(ord,tag))%7*(4.5 if kind=='rotary' else 9.0 if kind=='fan' else 6.0),1))
@@ -292,7 +361,7 @@ class Scene:
         n['propConfig']={'props.params.level':tag_binding(self.path(tag)+'/Level')}
         self.parts.append(at(n,x,y,w,h))
     def stream(self,text,x,y,w=170,target=None):
-        n=embed(''.join(c for c in text.title() if c.isalnum())+'Link',HMI+'Stream',{'target':ROUTE.get(target,''),'source':b64(stream_svg(text,w,target))})
+        n=embed(''.join(c for c in text.title() if c.isalnum())+'Link',HMI+'Stream',{'text':text,'target':ROUTE.get(target,''),'width':w})
         self.parts.append(at(n,x,y,w,28))
     def trend(self,signal,x,y,w,h,caption,colour='#626b75',sp=0):
         self.frame(x,y,w,h,caption)
@@ -301,7 +370,7 @@ class Scene:
     def build(self,title):
         self.text(40,890,title,22,600,'start','#5a5e5c',toggle=False)
         self.text(1700,890,'SIMULATION',10,400,'end','#777',toggle=False)
-        canvas=[at(image('Piping',b64(svg(''.join(self.under),W,H)),title+' piping'),0,0,W,H)]+self.equipment+self.parts+self.texts
+        canvas=[at(drawing('Piping',svg_elements(''.join(self.under)),W,H),0,0,W,H)]+self.equipment+self.parts+self.texts
         scene=node('ia.container.coord','root',{'mode':'fixed','style':{'backgroundColor':'transparent','overflow':'visible'}},canvas);scene.pop('position',None)
         if self.area!='overview':
             self.register('Area','ProcessArea',Title=TITLE[self.area])
@@ -634,6 +703,7 @@ SCADA_CSS='''
 .psc-Hmi\\/Tag { font-size:12px; font-weight:600; color:#555; align-items:center; line-height:16px; white-space:nowrap; pointer-events:none; }
 .psc-Hmi\\/Title { font-size:10.5px; color:#777; align-items:center; line-height:14px; }
 .psc-Hmi\\/InstrumentTag { font-family:Arial,sans-serif; font-size:12px; color:#565957; align-items:flex-start; justify-content:flex-end; white-space:nowrap; pointer-events:none; }
+.psc-Hmi\\/Shape { font-family:Arial,sans-serif; white-space:nowrap; justify-content:center; pointer-events:none; line-height:1; }
 .psc-Hmi\\/LabelToggle { gap:4px; align-items:center; margin-right:8px; }
 .psc-Hmi\\/DetailValue { font-size:28px; color:#444; }
 .psc-Demo\\/Menu { background:transparent; color:#d5dade; font-size:12px; }

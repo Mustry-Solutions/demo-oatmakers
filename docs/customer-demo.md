@@ -89,8 +89,8 @@ conveyor, elevator, sieve, kiln, mills, weigher, boiler and so on) is an
 embedded instance of a template under `Demo/Hmi/Equipment/` that draws its
 outline from its `width` and `height` params and carries its own tag and title
 labels, positioned by its `labelX` and `labelY` params and allowed to overflow
-the template. Only the piping is one static SVG per drawing; every other text is
-a Label component. The session property `showLabels` (default on) shows or hides
+the template. All graphics are Perspective drawings (`ia.shapes.svg`), never images: the
+piping is one drawing per area, and every text is a Label component. The session property `showLabels` (default on) shows or hides
 all labels, and the Labels switch in the SCADA header toggles it for the session. Blue stream links navigate to the area that
 supplies or receives the product; grey links leave the plant. The page header has
 previous and next buttons in process order.

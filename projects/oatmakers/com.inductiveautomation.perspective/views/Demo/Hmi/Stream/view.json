@@ -1,15 +1,20 @@
 {
   "custom": {},
   "params": {
-    "source": "",
-    "target": ""
+    "text": "",
+    "target": "",
+    "width": 170
   },
   "propConfig": {
-    "params.source": {
+    "params.text": {
       "paramDirection": "input",
       "persistent": true
     },
     "params.target": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.width": {
       "paramDirection": "input",
       "persistent": true
     }
@@ -26,39 +31,145 @@
       "name": "root"
     },
     "props": {
-      "mode": "percent",
+      "mode": "fixed",
       "style": {
         "cursor": "pointer"
       }
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
-          "name": "Graphic"
+          "name": "Shape"
         },
         "props": {
-          "source": "",
-          "altText": "Stream",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 170 28",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "path",
+              "name": "path0",
+              "d": "M0 0 H156 a14 14 0 0 1 0 28 H0 Z",
+              "fill": {
+                "paint": "#3f5a73"
+              }
+            },
+            {
+              "type": "circle",
+              "name": "circle1",
+              "cx": "156",
+              "cy": "14",
+              "r": "9",
+              "fill": {
+                "paint": "#cdd0cd"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path2",
+              "d": "M153 8 l7 6 -7 6 Z",
+              "fill": {
+                "paint": "#60645f"
+              }
+            }
+          ],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
           "x": 0,
           "y": 0,
-          "width": 1,
-          "height": 1
+          "width": 170,
+          "height": 28
         },
         "propConfig": {
-          "props.source": {
+          "position.width": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.width}"
+              }
+            }
+          },
+          "props.viewBox": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "\"0 0 \" + {view.params.width} + \" 28\""
+              }
+            }
+          },
+          "props.elements[0].d": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "\"M0 0 H\" + ({view.params.width} - 14) + \" a14 14 0 0 1 0 28 H0 Z\""
+              }
+            }
+          },
+          "props.elements[0].fill.paint": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(len({view.params.target}) > 0, \"#3f5a73\", \"#595c5a\")"
+              }
+            }
+          },
+          "props.elements[1].cx": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.width} - 14"
+              }
+            }
+          },
+          "props.elements[2].d": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "\"M\" + ({view.params.width} - 17) + \" 8 l7 6 -7 6 Z\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "10.5px",
+            "fontWeight": 400,
+            "color": "#ffffff",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 145,
+          "height": 28
+        },
+        "propConfig": {
+          "props.text": {
             "binding": {
               "type": "property",
               "config": {
-                "path": "view.params.source"
+                "path": "view.params.text"
+              }
+            }
+          },
+          "position.width": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.width} - 25"
               }
             }
           }

@@ -40,18 +40,17 @@
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
           "name": "Plot"
         },
         "props": {
-          "source": "",
-          "altText": "Trend",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 280 70",
+          "preserveAspectRatio": "none",
+          "elements": [],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
@@ -61,7 +60,7 @@
           "height": 1
         },
         "propConfig": {
-          "props.source": {
+          "props.elements": {
             "binding": {
               "type": "expr-struct",
               "config": {
@@ -77,7 +76,7 @@
               "transforms": [
                 {
                   "type": "script",
-                  "code": "\treturn application.demo.scadaTrendSvg(value[\"area\"], value[\"signal\"], value[\"colour\"], value[\"sp\"])"
+                  "code": "\treturn application.demo.scadaTrendElements(value[\"area\"], value[\"signal\"], value[\"colour\"], value[\"sp\"])"
                 }
               ]
             }

@@ -53,18 +53,17 @@
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
           "name": "Shape"
         },
         "props": {
-          "source": "",
-          "altText": "Aspirator",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 100 100",
+          "preserveAspectRatio": "none",
+          "elements": [],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
@@ -74,7 +73,7 @@
           "height": 100
         },
         "propConfig": {
-          "props.source": {
+          "props.elements": {
             "binding": {
               "type": "expr-struct",
               "config": {
@@ -87,16 +86,16 @@
               "transforms": [
                 {
                   "type": "script",
-                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\ts = w * 0.4\n\tbody = '<rect width=\"%s\" height=\"%s\" rx=\"4\"/><path d=\"M%s %s l%s 20 l-%s 20 l%s 20 l-%s 20\" fill=\"none\" stroke-width=\"1\"/>' % (w, h, w*0.3, h*0.3, s, s, s, s)\n\tbody += '<path d=\"M%s %s v-36 m-6 8 l6 -8 l6 8\" fill=\"none\" stroke-width=\"1.2\"/>' % (w*0.75, h*0.55)\n\treturn application.demo.scadaEquipmentSvg(body, w, h, [0, 0, 0, 0])"
+                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\ts = w * 0.4\n\tbody = '<rect width=\"%s\" height=\"%s\" rx=\"4\"/><path d=\"M%s %s l%s 20 l-%s 20 l%s 20 l-%s 20\" fill=\"none\" stroke-width=\"1\"/>' % (w, h, w*0.3, h*0.3, s, s, s, s)\n\tbody += '<path d=\"M%s %s v-36 m-6 8 l6 -8 l6 8\" fill=\"none\" stroke-width=\"1.2\"/>' % (w*0.75, h*0.55)\n\treturn application.demo.scadaEquipmentElements(body, w, h, [0, 0, 0, 0])"
                 }
               ]
             }
           },
-          "props.altText": {
+          "props.viewBox": {
             "binding": {
               "type": "expr",
               "config": {
-                "expression": "if(len({view.params.tag}) > 0, {view.params.tag}, \"Aspirator\")"
+                "expression": "\"0 0 \" + ({view.params.width} + 4) + \" \" + ({view.params.height} + 4)"
               }
             }
           },

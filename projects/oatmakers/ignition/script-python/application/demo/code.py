@@ -1,4 +1,5 @@
 """Customer demonstration services. All writes are confined to oat_demo."""
+import re
 import time
 from java.util import UUID
 from java.lang import Exception as JavaException
@@ -400,14 +401,36 @@ def _scadaSimulate(area):
 	return data
 
 
-def _scadaSvg(content, width, height):
-	import base64
-	markup = u'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {0} {1}" preserveAspectRatio="none" width="{0}" height="{1}">{2}</svg>'.format(width, height, content)
-	return 'data:image/svg+xml;base64,' + base64.b64encode(markup.encode('utf-8'))
+# The SCADA graphics are Perspective drawings (ia.shapes.svg). Size-dependent
+# outlines are written as SVG markup and converted to drawing elements here.
+_SVG_TAG = re.compile(r'<(/?)(\w+)([^>]*?)(/?)>')
+_SVG_ATTR = re.compile(r'([\w:-]+)="([^"]*)"')
+_SVG_STYLE = {'fill': ('fill', 'paint'), 'fill-opacity': ('fill', 'opacity'), 'stroke': ('stroke', 'paint'),
+	'stroke-width': ('stroke', 'width'), 'stroke-dasharray': ('stroke', 'dasharray'),
+	'stroke-linejoin': ('stroke', 'linejoin'), 'stroke-linecap': ('stroke', 'linecap')}
 
 
-def _escape(text):
-	return unicode(text).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
+def scadaElements(markup):
+	root = []
+	stack = [root]
+	for closing, name, attrs, selfClosing in _SVG_TAG.findall(markup):
+		if name == 'svg':
+			continue
+		if closing:
+			stack.pop()
+			continue
+		element = {'type': 'group' if name == 'g' else name, 'name': '{0}{1}'.format(name, len(stack[-1]))}
+		for key, value in _SVG_ATTR.findall(attrs):
+			if key in _SVG_STYLE:
+				section, prop = _SVG_STYLE[key]
+				element.setdefault(section, {})[prop] = value
+			elif not key.startswith('font') and key not in ('text-anchor', 'paint-order', 'xmlns'):
+				element[key] = value
+		stack[-1].append(element)
+		if name == 'g' and not selfClosing:
+			element['elements'] = []
+			stack.append(element['elements'])
+	return root
 
 
 def _scadaFormat(value, unit, decimals):
@@ -415,19 +438,17 @@ def _scadaFormat(value, unit, decimals):
 	return text + (u' ' + unit if unit else u'')
 
 
-def scadaSiloSvg(level, product):
+def scadaSiloLevel(level):
+	# Path of the product inside the silo outline (110 x 330 design units).
 	level = max(0.0, min(100.0, float(level or 0)))
 	top = 6 + 314 * (1 - level / 100.0)
-	body = '<defs><clipPath id="silo"><path d="M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z"/></clipPath></defs>'
-	body += '<path d="M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z" fill="#e9e9e7"/>'
-	body += '<rect clip-path="url(#silo)" y="{0:.1f}" width="110" height="330" fill="#d8cda8"/>'.format(top)
-	body += '<path d="M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z" fill="none" stroke="#666a68" stroke-width="2"/>'
-	body += u'<rect x="22" y="104" width="66" height="22" rx="11" fill="#f7f7f7" stroke="#a9adab"/><text x="55" y="120" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#333399">{0:.0f} %</text>'.format(level)
-	body += u'<text x="55" y="148" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#565957">{0}</text>'.format(_escape(product))
-	return _scadaSvg(body, 110, 330)
+	if top <= 240:
+		return 'M3 {0:.1f} H107 V240 L64 326 H46 L3 240 Z'.format(top)
+	t = (top - 240) / 86.0
+	return 'M{0:.1f} {1:.1f} H{2:.1f} L64 326 H46 Z'.format(3 + 43 * t, top, 107 - 43 * t)
 
 
-def scadaTrendSvg(area, signal, colour, setpoint):
+def scadaTrendElements(area, signal, colour, setpoint):
 	spec = _scadaArea(area)
 	end = system.date.toMillis(system.date.now())
 	values = []
@@ -437,7 +458,7 @@ def scadaTrendSvg(area, signal, colour, setpoint):
 	if len(values) < 2 and signal in spec['signals']:
 		values = [_scadaWave(signal, spec['signals'][signal], end / 1000.0 - 600 + i * 5) for i in range(121)]
 	if len(values) < 2:
-		return _scadaSvg('', 280, 70)
+		return []
 	low, high = min(values), max(values)
 	if setpoint:
 		low, high = min(low, float(setpoint)), max(high, float(setpoint))
@@ -445,13 +466,15 @@ def scadaTrendSvg(area, signal, colour, setpoint):
 	low, high = low - spread * 0.25, high + spread * 0.25
 	step = 274.0 / (len(values) - 1)
 	points = [(3 + i * step, 65 - (value - low) / (high - low) * 60) for i, value in enumerate(values)]
-	body = ''
+	elements = []
 	if setpoint:
 		y = 65 - (float(setpoint) - low) / (high - low) * 60
-		body += '<path d="M3 {0:.2f} H277" stroke="#73c9d9" stroke-width="1" stroke-dasharray="4 4" fill="none"/>'.format(y)
-	body += '<polyline points="{0}" stroke="{1}" stroke-width="1" fill="none"/>'.format(' '.join('{0:.2f},{1:.2f}'.format(x, y) for x, y in points), _escape(colour))
-	body += '<circle cx="277" cy="{0:.2f}" r="2.2" fill="#df8074"/>'.format(points[-1][1])
-	return _scadaSvg(body, 280, 70)
+		elements.append({'type': 'path', 'name': 'Setpoint', 'd': 'M3 {0:.2f} H277'.format(y),
+			'fill': {'paint': 'none'}, 'stroke': {'paint': '#73c9d9', 'width': 1, 'dasharray': '4 4'}})
+	elements.append({'type': 'polyline', 'name': 'Value', 'points': ' '.join('{0:.2f},{1:.2f}'.format(x, y) for x, y in points),
+		'fill': {'paint': 'none'}, 'stroke': {'paint': colour, 'width': 1}})
+	elements.append({'type': 'circle', 'name': 'Now', 'cx': 277, 'cy': round(points[-1][1], 2), 'r': 2.2, 'fill': {'paint': '#df8074'}})
+	return elements
 
 
 def showScadaDetail(area, tag, signal, unit, decimals):
@@ -549,38 +572,26 @@ def scadaValues(area):
 	return dict(zip(keys, [qv.value if qv.quality.isGood() else None for qv in system.tag.readBlocking(paths)]))
 
 
-def scadaEquipmentSvg(body, width, height, padding):
+def scadaEquipmentElements(body, width, height, padding):
 	# Equipment templates draw their body from (0, 0); padding (left, top, right,
 	# bottom) holds hoppers, heads and stacks, plus 2 px for the outline stroke.
-	left, top, right, bottom = [value + 2 for value in padding]
-	content = u'<g transform="translate({0} {1})" fill="#d7d9d8" stroke="#666a68" stroke-width="1.4">{2}</g>'.format(left, top, body)
-	return _scadaSvg(content, width + left + right, height + top + bottom)
+	left, top = padding[0] + 2, padding[1] + 2
+	return scadaElements(u'<g transform="translate({0} {1})" fill="#d7d9d8" stroke="#666a68" stroke-width="1.4">{2}</g>'.format(left, top, body))
 
 
-def scadaInstrumentSvg(kind, value, colour):
-	# The tag itself is a Label in Demo/Hmi/Instrument, so it follows the label toggle.
-	body = u'<g font-family="Arial" fill="#565957">'
-	body += u'<circle cx="10" cy="32" r="10" fill="#e6e6e6" stroke="#7d817f" stroke-width="1"/><text x="10" y="35" text-anchor="middle" font-size="8">{0}</text>'.format(_escape(kind))
-	pill_width = min(102, max(64, len(unicode(value)) * 6 + 14))
-	body += u'<rect x="26" y="22" width="{2}" height="20" rx="10" fill="{0}"/><text x="{3}" y="36" text-anchor="middle" font-size="11.5">{1}</text></g>'.format(_escape(colour), _escape(value), pill_width, 26 + pill_width / 2.0)
-	return _scadaSvg(body, 130, 51)
+SCADA_PILLS = {'Stopped': ('#b23b34', '#ffffff'), 'Quality hold': ('#f6dca6', '#6b4a0c'), 'Recovering': ('#c9d9ea', '#24425f')}
 
 
-def scadaTileSvg(area):
+def scadaTile(area):
 	spec = _scadaArea(area)
 	data = scadaValues(area)
 	state = data.get('state') or 'Starting'
-	pill = {'Stopped': ('#b23b34', '#ffffff'), 'Quality hold': ('#f6dca6', '#6b4a0c'), 'Recovering': ('#c9d9ea', '#24425f')}.get(state, ('#dfe3e6', '#4d555c'))
-	body = '<rect x="1" y="1" width="228" height="168" rx="4" fill="#f4f4f3" stroke="#9a9e9c" stroke-width="1.5"/>'
-	body += u'<text x="14" y="28" font-size="14" font-weight="700" fill="#3f4447">{0}</text>'.format(_escape(spec['title']))
-	body += u'<rect x="14" y="38" width="{0}" height="18" rx="3" fill="{1}"/><text x="20" y="51" font-size="10" font-weight="700" fill="{2}">{3}</text>'.format(len(state) * 6.6 + 12, pill[0], pill[1], _escape(state.upper()))
-	for i, (caption, signal, unit, decimals) in enumerate(spec['tile']):
-		y = 82 + i * 24
+	fill, text = SCADA_PILLS.get(state, ('#dfe3e6', '#4d555c'))
+	rows = []
+	for caption, signal, unit, decimals in spec['tile']:
 		value = data.get(signal)
-		text = _scadaFormat(value, unit, decimals) if value is not None else '--'
-		body += u'<text x="14" y="{0}" font-size="11.5" fill="#6d7270">{1}</text><text x="216" y="{0}" font-size="13" font-weight="700" text-anchor="end" fill="#333399">{2}</text>'.format(y, _escape(caption), _escape(text))
-	body += '<text x="216" y="158" font-size="10.5" text-anchor="end" fill="#3f5a73" font-weight="700">OPEN SCREEN &#8250;</text>'
-	return _scadaSvg('<g font-family="Arial">' + body + '</g>', 230, 170)
+		rows.append({'caption': caption, 'value': _scadaFormat(value, unit, decimals) if value is not None else '--'})
+	return {'title': spec['title'], 'state': state.upper(), 'pillFill': fill, 'pillText': text, 'rows': rows}
 
 
 def completedOutputBatches():

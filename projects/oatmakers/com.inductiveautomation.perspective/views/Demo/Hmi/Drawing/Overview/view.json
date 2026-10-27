@@ -22,18 +22,254 @@
     },
     "children": [
       {
-        "type": "ia.display.image",
+        "type": "ia.shapes.svg",
         "meta": {
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMzIwIDQ0NSBIMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTM2MCA0NDUgbC0xMCAtNiB2MTIgWiIgZmlsbD0iIzU2NTk1NyIvPjxwYXRoIGQ9Ik01OTAgNDQ1IEg2MzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNjMwIDQ0NSBsLTEwIC02IHYxMiBaIiBmaWxsPSIjNTY1OTU3Ii8+PHBhdGggZD0iTTg2MCA0NDUgSDkwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05MDAgNDQ1IGwtMTAgLTYgdjEyIFoiIGZpbGw9IiM1NjU5NTciLz48cGF0aCBkPSJNMTEzMCA0NDUgSDExNTAgVjIxNSBIMTE3MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMTcwIDIxNSBsLTEwIC02IHYxMiBaIiBmaWxsPSIjNTY1OTU3Ii8+PHBhdGggZD0iTTExMzAgNDQ1IEgxMTUwIFY0NDUgSDExNzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTE3MCA0NDUgbC0xMCAtNiB2MTIgWiIgZmlsbD0iIzU2NTk1NyIvPjxwYXRoIGQ9Ik0xMTMwIDQ0NSBIMTE1MCBWNjc1IEgxMTcwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTExNzAgNjc1IGwtMTAgLTYgdjEyIFoiIGZpbGw9IiM1NjU5NTciLz48cGF0aCBkPSJNMTQwMCAyMTUgSDE0MjAgVjQ0NSBIMTQ0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNDQwIDQ0NSBsLTEwIC02IHYxMiBaIiBmaWxsPSIjNTY1OTU3Ii8+PHBhdGggZD0iTTE0MDAgNDQ1IEgxNDIwIFY0NDUgSDE0NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTQ0MCA0NDUgbC0xMCAtNiB2MTIgWiIgZmlsbD0iIzU2NTk1NyIvPjxwYXRoIGQ9Ik0xNDAwIDY3NSBIMTQyMCBWNDQ1IEgxNDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0NDAgNDQ1IGwtMTAgLTYgdjEyIFoiIGZpbGw9IiM1NjU5NTciLz48cGF0aCBkPSJNODYwIDcyNSBIMTAxNSBWNTMwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEwMTUgNTMwIGwtNiAxMCBoMTIgWiIgZmlsbD0iI2M5YTU0ZSIvPjxwYXRoIGQ9Ik05MCAxNzAgaDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTkwIDIwMCBoNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YTU0ZSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=",
-          "altText": "Oatmakers plant overview piping",
-          "fit": {
-            "mode": "fill"
-          },
+          "viewBox": "0 0 1740 910",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "path",
+              "name": "path0",
+              "d": "M320 445 H360",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path1",
+              "d": "M360 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path2",
+              "d": "M590 445 H630",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path3",
+              "d": "M630 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path4",
+              "d": "M860 445 H900",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path5",
+              "d": "M900 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path6",
+              "d": "M1130 445 H1150 V215 H1170",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path7",
+              "d": "M1170 215 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path8",
+              "d": "M1130 445 H1150 V445 H1170",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path9",
+              "d": "M1170 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path10",
+              "d": "M1130 445 H1150 V675 H1170",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path11",
+              "d": "M1170 675 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path12",
+              "d": "M1400 215 H1420 V445 H1440",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path13",
+              "d": "M1440 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path14",
+              "d": "M1400 445 H1420 V445 H1440",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path15",
+              "d": "M1440 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path16",
+              "d": "M1400 675 H1420 V445 H1440",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path17",
+              "d": "M1440 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path18",
+              "d": "M860 725 H1015 V530",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#c9a54e",
+                "width": "1.7",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path19",
+              "d": "M1015 530 l-6 10 h12 Z",
+              "fill": {
+                "paint": "#c9a54e"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path20",
+              "d": "M90 170 h40",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path21",
+              "d": "M90 200 h40",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#c9a54e",
+                "width": "1.7",
+                "linejoin": "round"
+              }
+            }
+          ],
           "style": {
-            "pointerEvents": "none"
+            "pointerEvents": "none",
+            "overflow": "visible"
           }
         },
         "position": {
