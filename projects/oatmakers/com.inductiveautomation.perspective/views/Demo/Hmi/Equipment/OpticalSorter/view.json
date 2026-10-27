@@ -1,0 +1,92 @@
+{
+  "custom": {},
+  "params": {
+    "tag": "",
+    "width": 100,
+    "height": 100
+  },
+  "propConfig": {
+    "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.width": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.height": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 100
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Shape"
+        },
+        "props": {
+          "source": "",
+          "altText": "OpticalSorter",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "type": "expr-struct",
+              "config": {
+                "waitOnAll": true,
+                "struct": {
+                  "width": "{view.params.width}",
+                  "height": "{view.params.height}"
+                }
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\tbody = '<rect width=\"%s\" height=\"%s\" rx=\"4\"/><path d=\"M15 40 l20 12 l-20 12 Z M%s 40 l-20 12 l20 12 Z\" fill=\"#999\"/>' % (w, h, w-15)\n\treturn application.demo.scadaEquipmentSvg(body, w, h, [0, 0, 0, 0])"
+                }
+              ]
+            }
+          },
+          "props.altText": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(len({view.params.tag}) > 0, {view.params.tag}, \"OpticalSorter\")"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

@@ -549,6 +549,14 @@ def scadaValues(area):
 	return dict(zip(keys, [qv.value if qv.quality.isGood() else None for qv in system.tag.readBlocking(paths)]))
 
 
+def scadaEquipmentSvg(body, width, height, padding):
+	# Equipment templates draw their body from (0, 0); padding (left, top, right,
+	# bottom) holds hoppers, heads and stacks, plus 2 px for the outline stroke.
+	left, top, right, bottom = [value + 2 for value in padding]
+	content = u'<g transform="translate({0} {1})" fill="#d7d9d8" stroke="#666a68" stroke-width="1.4">{2}</g>'.format(left, top, body)
+	return _scadaSvg(content, width + left + right, height + top + bottom)
+
+
 def scadaInstrumentSvg(tag, kind, value, colour):
 	body = u'<g font-family="Arial" fill="#565957"><text x="0" y="12" font-size="12">{0}</text>'.format(_escape(tag))
 	body += u'<circle cx="10" cy="32" r="10" fill="#e6e6e6" stroke="#7d817f" stroke-width="1"/><text x="10" y="35" text-anchor="middle" font-size="8">{0}</text>'.format(_escape(kind))

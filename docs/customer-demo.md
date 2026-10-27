@@ -84,7 +84,11 @@ the current page is highlighted.
 Each area is a fixed 1740 by 910 drawing under `Demo/Hmi/Drawing/`, embedded in
 Mustry Pan & Zoom by a screen under `Demo/Hmi/Screen/` (the overview is
 `Demo/SCADA`). Instrument, device, silo, stream, trend, tile and detail elements
-are reusable views under `Demo/Hmi/`. Blue stream links navigate to the area that
+are reusable views under `Demo/Hmi/`. Every piece of process equipment (bin,
+conveyor, elevator, sieve, kiln, mills, weigher, boiler and so on) is an
+embedded instance of a template under `Demo/Hmi/Equipment/` that draws its
+outline from its `width` and `height` params. Only the piping and the labels
+are one static SVG per drawing. Blue stream links navigate to the area that
 supplies or receives the product; grey links leave the plant. The page header has
 previous and next buttons in process order.
 

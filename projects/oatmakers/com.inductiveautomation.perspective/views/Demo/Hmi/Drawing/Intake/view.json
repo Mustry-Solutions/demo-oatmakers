@@ -27,7 +27,7 @@
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTk4IDYxMCBIMjgwIFY2MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cGF0aCBkPSJNMjEwIDYyMCBIMzUwIFY2OTcuMCBMMjkwLjAgNzMwIEgyNzAuMCBMMjEwIDY5Ny4wIFoiLz48L2c+PHBhdGggZD0iTTI4MCA3MzAgVjc0NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjI1MCIgeT0iNzQ2IiB3aWR0aD0iMjUwIiBoZWlnaHQ9IjIwIiByeD0iMTAiLz48Y2lyY2xlIGN4PSIyNjEiIGN5PSI3NTYiIHI9IjciLz48Y2lyY2xlIGN4PSI0ODkiIGN5PSI3NTYiIHI9IjciLz48L2c+PHBhdGggZD0iTTUwMCA3NTYgSDUyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjUyMCIgeT0iMTM0IiB3aWR0aD0iMzAiIGhlaWdodD0iNjQwIi8+PHBhdGggZD0iTTUxMCAxMDAgaDUwIHYzNCBoLTUwIFoiLz48cGF0aCBkPSJNNTEyIDc3NCBoNDYgdjI2IGgtNDYgWiIvPjwvZz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cGF0aCBkPSJNNTI5IDE0MCBWNzcwIE01NDEgMTQwIFY3NzAiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9nPjxwYXRoIGQ9Ik01NzAgMTM1IEg2NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cmVjdCB4PSI2NDAiIHk9IjEwMCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSI3MCIgcng9IjM1LjAiLz48cGF0aCBkPSJNNjc1LjAgMTM1LjAgSDc3NS4wIiBmaWxsPSJub25lIiBzdHJva2UtZGFzaGFycmF5PSIzIDQiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48cGF0aCBkPSJNNzI1IDE3MCBWMzAwIEg3NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNODEwIDEzNSBIODUwIFYyMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cmVjdCB4PSI4NDAiIHk9IjIzMCIgd2lkdGg9IjY5MCIgaGVpZ2h0PSIyMCIgcng9IjEwIi8+PGNpcmNsZSBjeD0iODUxIiBjeT0iMjQwIiByPSI3Ii8+PGNpcmNsZSBjeD0iMTUxOSIgY3k9IjI0MCIgcj0iNyIvPjwvZz48cGF0aCBkPSJNOTM1IDI1MCBWMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTkzNSA2OTAgVjgwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDk1IDI1MCBWMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEwOTUgNjkwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTI1NSAyNTAgVjM2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMjU1IDY5MCBWODAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MTUgMjUwIFYzNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTQxNSA2OTAgVjgwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjkwMCIgeT0iODAwIiB3aWR0aD0iNjIwIiBoZWlnaHQ9IjIwIiByeD0iMTAiLz48Y2lyY2xlIGN4PSI5MTEiIGN5PSI4MTAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTA5IiBjeT0iODEwIiByPSI3Ii8+PC9nPjxwYXRoIGQ9Ik0xNTIwIDgxMCBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxwYXRoIGQ9Ik0yMDAgMTQwIEgzMTAgVjI2OS42IEwyNjUuMCAzMjAgSDI0NS4wIEwyMDAgMjY5LjYgWiIvPjxwYXRoIGQ9Ik0yMjIuMCAxNTAgVjI1Ny42IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMjQ0LjAgMTUwIFYyNTcuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTI2Ni4wIDE1MCBWMjU3LjYiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0yODguMCAxNTAgVjI1Ny42IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48L2c+PHBhdGggZD0iTTI1NSAxNDAgVjExMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGY5NTk5IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjQgMyIvPjxwYXRoIGQ9Ik0yODAgNjIwIFY1NjAgSDI0MCBWMzIwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+PHBhdGggZD0iTTUxMCAxMTcgSDQ2MCBWMjMwIEgzMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48cGF0aCBkPSJNMzkwIDcyMiBWNzQ2IiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9IjU5NiIgeT0iNDQ2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48dGV4dCB4PSI2MDAiIHk9IjQ0MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPkludGFrZSByYXRlICh0L2gpPC90ZXh0Pjwvc3ZnPg==",
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTk4IDYxMCBIMjgwIFY2MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjgwIDczMCBWNzQ2IiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTUwMCA3NTYgSDUyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik01NzAgMTM1IEg2NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNzI1IDE3MCBWMzAwIEg3NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNODEwIDEzNSBIODUwIFYyMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNOTM1IDI1MCBWMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTkzNSA2OTAgVjgwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDk1IDI1MCBWMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEwOTUgNjkwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTI1NSAyNTAgVjM2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMjU1IDY5MCBWODAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MTUgMjUwIFYzNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTQxNSA2OTAgVjgwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNTIwIDgxMCBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yNTUgMTQwIFYxMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48cGF0aCBkPSJNMjgwIDYyMCBWNTYwIEgyNDAgVjMyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGY5NTk5IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjQgMyIvPjxwYXRoIGQ9Ik01MTAgMTE3IEg0NjAgVjIzMCBIMzEwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+PHBhdGggZD0iTTM5MCA3MjIgVjc0NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSI1OTYiIHk9IjQ0NiIgd2lkdGg9IjI0OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHRleHQgeD0iNjAwIiB5PSI0NDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5JbnRha2UgcmF0ZSAodC9oKTwvdGV4dD48L3N2Zz4=",
           "altText": "Intake & raw oat silos piping",
           "fit": {
             "mode": "fill"
@@ -41,6 +41,160 @@
           "y": 0,
           "width": 1740,
           "height": 910
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "IP101Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Bin",
+          "params": {
+            "tag": "IP101",
+            "width": 140,
+            "height": 110
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 208,
+          "y": 618,
+          "width": 144,
+          "height": 114
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "CV101Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/ChainConveyor",
+          "params": {
+            "tag": "CV101",
+            "width": 250,
+            "height": 20
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 248,
+          "y": 744,
+          "width": 254,
+          "height": 24
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "EL101Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/BucketElevator",
+          "params": {
+            "tag": "EL101",
+            "width": 50,
+            "height": 700
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 508,
+          "y": 98,
+          "width": 54,
+          "height": 704
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PC101Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Drum",
+          "params": {
+            "tag": "PC101",
+            "width": 170,
+            "height": 70
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 638,
+          "y": 98,
+          "width": 174,
+          "height": 74
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "ChainConveyorShape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/ChainConveyor",
+          "params": {
+            "tag": "",
+            "width": 690,
+            "height": 20
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 838,
+          "y": 228,
+          "width": 694,
+          "height": 24
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "ChainConveyor2Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/ChainConveyor",
+          "params": {
+            "tag": "",
+            "width": 620,
+            "height": 20
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 898,
+          "y": 798,
+          "width": 624,
+          "height": 24
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "F101Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/BagFilter",
+          "params": {
+            "tag": "F101",
+            "width": 110,
+            "height": 180
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 198,
+          "y": 138,
+          "width": 114,
+          "height": 184
         }
       },
       {

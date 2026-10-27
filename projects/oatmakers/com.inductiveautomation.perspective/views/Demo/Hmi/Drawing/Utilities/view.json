@@ -27,7 +27,7 @@
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTg4IDExMCBIMjMwIiBmaWxsPSJub25lIiBzdHJva2U9IiM5M2JjZDEiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGcgZmlsbD0iI2Q3ZDlkOCIgc3Ryb2tlPSIjNjY2YTY4IiBzdHJva2Utd2lkdGg9IjEuNCI+PHJlY3QgeD0iMjMwIiB5PSI4MCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjEyMCIgcng9IjM1LjAiLz48L2c+PHBhdGggZD0iTTMwMCAxNDAgSDM2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTNiY2QxIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjM2MCIgeT0iMTAwIiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjkwIiByeD0iNDUuMCIvPjwvZz48cGF0aCBkPSJNNTgwIDE0NSBINjAwIFYyOTAgSDcwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTNiY2QxIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9Ijc0MCIgeT0iMTgwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgcng9Ijc1LjAiLz48cmVjdCB4PSI3MDAiIHk9IjIxNy41IiB3aWR0aD0iNDAiIGhlaWdodD0iNzUuMCIvPjxyZWN0IHg9Ijk3MCIgeT0iMTIwIiB3aWR0aD0iMjIiIGhlaWdodD0iNjAiLz48L2c+PHBhdGggZD0iTTE4OCAzNDQgSDcwMCBWMjk1IiBmaWxsPSJub25lIiBzdHJva2U9IiNiM2E0YzkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTk3MCAxODAgVjEzMCBIMTQwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhNTRlIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNDAwIDEzMCBWMzQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMTMwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMjAwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMjcwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMzQwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjQ4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPkNPTVBSRVNTRUQgQUlSPC90ZXh0PjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjIwMCIgeT0iNTIwIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjkwIiByeD0iNCIvPjwvZz48cGF0aCBkPSJNMzQwIDU2NSBINDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGcgZmlsbD0iI2Q3ZDlkOCIgc3Ryb2tlPSIjNjY2YTY4IiBzdHJva2Utd2lkdGg9IjEuNCI+PHJlY3QgeD0iMjAwIiB5PSI3MjAiIHdpZHRoPSIxNDAiIGhlaWdodD0iOTAiIHJ4PSI0Ii8+PC9nPjxwYXRoIGQ9Ik0zNDAgNzY1IEg0MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNDIwIDU2NSBWNzY1IiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTQyMCA2NDAgSDUyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGY5NTk5IiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjUyMCIgeT0iNTIwIiB3aWR0aD0iODAiIGhlaWdodD0iMjIwIiByeD0iNDAuMCIvPjwvZz48cGF0aCBkPSJNNjAwIDY0MCBINzAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGcgZmlsbD0iI2Q3ZDlkOCIgc3Ryb2tlPSIjNjY2YTY4IiBzdHJva2Utd2lkdGg9IjEuNCI+PHJlY3QgeD0iNzAwIiB5PSI1ODAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNCIvPjwvZz48cGF0aCBkPSJNODIwIDY0MCBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGY5NTk5IiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDEwIDU4MiBWNjQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9Ijk3NiIgeT0iMzk2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48dGV4dCB4PSI5ODAiIHk9IjM5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPlN0ZWFtIGhlYWRlciAoYmFyKTwvdGV4dD48cmVjdCB4PSIxMjY2IiB5PSIzOTYiIHdpZHRoPSIyNDgiIGhlaWdodD0iNzgiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjx0ZXh0IHg9IjEyNzAiIHk9IjM5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPkNvbXByZXNzZWQgYWlyIChiYXIpPC90ZXh0Pjwvc3ZnPg==",
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTg4IDExMCBIMjMwIiBmaWxsPSJub25lIiBzdHJva2U9IiM5M2JjZDEiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTMwMCAxNDAgSDM2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTNiY2QxIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik01ODAgMTQ1IEg2MDAgVjI5MCBINzAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM5M2JjZDEiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE4OCAzNDQgSDcwMCBWMjk1IiBmaWxsPSJub25lIiBzdHJva2U9IiNiM2E0YzkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTk3MCAxODAgVjEzMCBIMTQwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhNTRlIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNDAwIDEzMCBWMzQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMTMwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMjAwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMjcwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMzQwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjQ4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPkNPTVBSRVNTRUQgQUlSPC90ZXh0PjxwYXRoIGQ9Ik0zNDAgNTY1IEg0MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMzQwIDc2NSBINDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTQyMCA1NjUgVjc2NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGY5NTk5IiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MjAgNjQwIEg1MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNjAwIDY0MCBINzAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTgyMCA2NDAgSDE1NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTAxMCA1ODIgVjY0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSI5NzYiIHk9IjM5NiIgd2lkdGg9IjI0OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHRleHQgeD0iOTgwIiB5PSIzOTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5TdGVhbSBoZWFkZXIgKGJhcik8L3RleHQ+PHJlY3QgeD0iMTI2NiIgeT0iMzk2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48dGV4dCB4PSIxMjcwIiB5PSIzOTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5Db21wcmVzc2VkIGFpciAoYmFyKTwvdGV4dD48L3N2Zz4=",
           "altText": "Steam & compressed air piping",
           "fit": {
             "mode": "fill"
@@ -41,6 +41,160 @@
           "y": 0,
           "width": 1740,
           "height": 910
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "WT901Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Vessel",
+          "params": {
+            "tag": "WT901",
+            "width": 70,
+            "height": 120
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 228,
+          "y": 78,
+          "width": 74,
+          "height": 124
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FW901Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Vessel",
+          "params": {
+            "tag": "FW901",
+            "width": 220,
+            "height": 90
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 358,
+          "y": 98,
+          "width": 224,
+          "height": 94
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "B901Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Boiler",
+          "params": {
+            "tag": "B901",
+            "width": 300,
+            "height": 150
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 698,
+          "y": 118,
+          "width": 344,
+          "height": 214
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "AC901Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Box",
+          "params": {
+            "tag": "AC901",
+            "width": 140,
+            "height": 90
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 198,
+          "y": 518,
+          "width": 144,
+          "height": 94
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "AC902Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Box",
+          "params": {
+            "tag": "AC902",
+            "width": 140,
+            "height": 90
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 198,
+          "y": 718,
+          "width": 144,
+          "height": 94
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "AR901Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Vessel",
+          "params": {
+            "tag": "AR901",
+            "width": 80,
+            "height": 220
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 518,
+          "y": 518,
+          "width": 84,
+          "height": 224
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "AD901Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Box",
+          "params": {
+            "tag": "AD901",
+            "width": 120,
+            "height": 120
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 698,
+          "y": 578,
+          "width": 124,
+          "height": 124
         }
       },
       {

@@ -10,8 +10,6 @@ STEAM='#c9a54e'
 AIR='#8f9599'
 WATER='#93bcd1'
 GAS='#b3a4c9'
-METAL='#d7d9d8'
-EDGE='#666a68'
 ON='#a7dfa5'
 OFF='#b3b3b3'
 HMI='Demo/Hmi/'
@@ -129,11 +127,54 @@ def components():
     caption=label('Caption','','Demo/Muted');caption['propConfig']={'props.text':script_expr('{view.params.area}','\treturn application.demo.scadaAreaTitle(value) + " | recent trend"')}
     view(HMI+'Detail',flex('root',[bound_label('Title','view.params.tag','Demo/SectionTitle'),bound_label('Path','view.params.tagPath','Demo/Muted'),label('Mode','Read-only process simulation','Demo/Muted'),value,plot,caption],classes='Demo/PopupRoot'),params={'area':'intake','tag':'','signal':'','unit':'','decimals':1,'tagPath':''},height=320)
 
+# Equipment templates, ISA-101 greyscale. Each is an embedded view under
+# Demo/Hmi/Equipment/ that draws its outline from its width and height params;
+# padding (left, top, right, bottom) makes room for hoppers, stacks and heads
+# outside the body. The Jython code sets `body` in body coordinates.
+EQUIPMENT={
+ 'bin':('Bin',(0,0,0,0),'b = h * 0.7\nbody = \'<path d="M0 0 H%s V%s L%s %s H%s L0 %s Z"/>\' % (w, b, w/2+10, h, w/2-10, b)'),
+ 'chain':('ChainConveyor',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="%s"/><circle cx="11" cy="%s" r="7"/><circle cx="%s" cy="%s" r="7"/>\' % (w, h, h/2, h/2, w-11, h/2)'),
+ 'screw':('ScrewConveyor',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="%s"/>\' % (w, h, h/2) + \'\'.join(\'<path d="M%s 4 l6 12 l6 -12" fill="none" stroke-width="1"/>\' % (14+i*12) for i in range(int((w-28)/12)))'),
+ 'elevator':('BucketElevator',(0,0,0,0),'body = \'<rect x="10" y="34" width="30" height="%s"/><path d="M0 0 h50 v34 h-50 Z"/><path d="M2 %s h46 v26 h-46 Z"/>\' % (h-60, h-26)\nbody += \'<path d="M19 40 V%s M31 40 V%s" stroke-dasharray="6 5" fill="none" stroke-width="1"/>\' % (h-30, h-30)'),
+ 'sieve':('Sieve',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/>\' % (w, h) + \'\'.join(\'<path d="M10 %s L%s %s" fill="none" stroke-dasharray="5 3" stroke-width="1"/>\' % (h*f, w-10, h*f+16) for f in (0.25, 0.5, 0.75))'),
+ 'aspirator':('Aspirator',(0,0,0,0),'s = w * 0.4\nbody = \'<rect width="%s" height="%s" rx="4"/><path d="M%s %s l%s 20 l-%s 20 l%s 20 l-%s 20" fill="none" stroke-width="1"/>\' % (w, h, w*0.3, h*0.3, s, s, s, s)\nbody += \'<path d="M%s %s v-36 m-6 8 l6 -8 l6 8" fill="none" stroke-width="1.2"/>\' % (w*0.75, h*0.55)'),
+ 'deck':('Destoner',(0,0,0,0),'body = \'<path d="M0 %s L%s 0 V%s L0 %s Z"/><path d="M20 %s V%s M%s %s V%s" fill="none"/>\' % (h*0.2, w, h*0.45, h*0.65, h*0.62, h, w-20, h*0.42, h)'),
+ 'drum':('Drum',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="%s"/><path d="M%s %s H%s" fill="none" stroke-dasharray="3 4" stroke-width="1"/>\' % (w, h, h/2, h/2, h/2, w-h/2)'),
+ 'huller':('ImpactHuller',(0,18,0,0),'r = w / 2\nbody = \'<path d="M%s -18 h40 l-8 18 h-24 Z"/><circle cx="%s" cy="%s" r="%s"/><circle cx="%s" cy="%s" r="%s" fill="#c9cbca"/>\' % (r-20, r, r, r, r, r, r*0.55)\nbody += \'\'.join(\'<path d="M%s %s l%s 0" transform="rotate(%d %s %s)" fill="none" stroke-width="3"/>\' % (r, r, r*0.55, a, r, r) for a in range(0, 360, 45))'),
+ 'cyclone':('Cyclone',(0,0,0,0),'b = h * 0.4\nbody = \'<path d="M0 0 H%s V%s L%s %s H%s L0 %s Z"/>\' % (w, b, w/2+9, h, w/2-9, b)'),
+ 'filter':('BagFilter',(0,0,0,0),'b = h * 0.72\nbody = \'<path d="M0 0 H%s V%s L%s %s H%s L0 %s Z"/>\' % (w, b, w/2+10, h, w/2-10, b) + \'\'.join(\'<path d="M%s 10 V%s" fill="none" stroke-width="1"/>\' % (w*f, b-12) for f in (0.2, 0.4, 0.6, 0.8))'),
+ 'column':('Kiln',(0,14,0,0),'body = \'<path d="M0 20 Q%s -14 %s 20 V%s L%s %s H%s L0 %s Z"/>\' % (w/2, w, h-40, w/2+12, h, w/2-12, h-40)\nbody += \'\'.join(\'<path d="M3 %s h%s" fill="none" stroke="#c9a54e" stroke-width="2.5"/>\' % (h*f, w-6) for f in (0.3, 0.5, 0.7))'),
+ 'cooler':('Cooler',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/>\' % (w, h) + \'\'.join(\'<path d="M%s %s l14 -10" fill="none" stroke-width="1"/>\' % (12+i*22, h*f) for f in (0.3, 0.55, 0.8) for i in range(int((w-30)/22)))'),
+ 'steamer':('Steamer',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="%s"/>\' % (w, h, w/2)'),
+ 'rollmill':('FlakingMill',(0,18,0,0),'body = \'<path d="M%s -18 h40 l-12 18 h-16 Z"/><rect width="%s" height="%s" rx="4"/>\' % (w/2-20, w, h)\nbody += \'\'.join(\'<circle cx="%s" cy="%s" r="%s" fill="#c9cbca"/>\' % (w/2+d*h*0.24, h*0.45, h*0.23) for d in (-1, 1))'),
+ 'hammermill':('HammerMill',(0,0,0,0),'cx, cy = w/2, h/2\nbody = \'<rect width="%s" height="%s" rx="6"/><circle cx="%s" cy="%s" r="%s" fill="#c9cbca"/>\' % (w, h, cx, cy, h*0.32)\nbody += \'\'.join(\'<rect x="%s" y="%s" width="8" height="%s" transform="rotate(%d %s %s)" fill="#999"/>\' % (cx-4, cy-h*0.3, h*0.14, a, cx, cy) for a in range(0, 360, 60))'),
+ 'plansifter':('Plansifter',(0,0,0,0),'body = \'\'.join(\'<rect y="%s" width="%s" height="%s"/>\' % (i*h/6, w, h/6) for i in range(6))'),
+ 'beltdryer':('BeltDryer',(0,12,0,0),'body = \'<rect width="%s" height="%s" rx="4"/>\' % (w, h) + \'\'.join(\'<path d="M12 %s H%s" fill="none" stroke-width="2"/>\' % (h*f, w-12) for f in (0.3, 0.55, 0.8))\nbody += \'\'.join(\'<path d="M%s 0 v-12 h24 v12" fill="none"/>\' % (w*f) for f in (0.2, 0.5, 0.8))'),
+ 'weigher':('Weigher',(0,0,0,0),'body = \'<path d="M%s 0 L%s 30 H0 Z"/><path d="M0 34 h%s l-10 30 h-%s Z"/>\' % (w/2, w, w, w-20)'),
+ 'bagger':('Bagger',(0,0,0,0),'body = \'<rect width="%s" height="70" rx="4"/><circle cx="19" cy="22" r="14" fill="#c9cbca"/><path d="M%s 76 h30 l6 34 h-42 Z" fill="#ecebe5"/>\' % (w, w/2-15)'),
+ 'boiler':('Boiler',(40,60,0,0),'body = \'<rect width="%s" height="%s" rx="%s"/><rect x="-40" y="%s" width="40" height="%s"/><rect x="%s" y="-60" width="22" height="60"/>\' % (w, h, h/2, h*0.25, h*0.5, w-70)'),
+ 'vessel':('Vessel',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="%s"/>\' % (w, h, min(w, h)/2)'),
+ 'box':('Box',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/>\' % (w, h)'),
+ 'magnet':('Magnet',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/><text x="%s" y="%s" font-family="Arial" font-size="10" text-anchor="middle" stroke="none" fill="#555">MAG</text>\' % (w, h, w/2, h/2+4)'),
+ 'sorter':('OpticalSorter',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/><path d="M15 40 l20 12 l-20 12 Z M%s 40 l-20 12 l20 12 Z" fill="#999"/>\' % (w, h, w-15)'),
+ 'detector':('MetalDetector',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/><path d="M12 %s V12 H%s V%s" fill="none" stroke-width="3"/>\' % (w, h, h, w-12, h)'),
+ 'palletiser':('Palletiser',(0,0,0,0),'body = \'<rect width="%s" height="%s" rx="4"/><rect x="20" y="%s" width="%s" height="10" fill="#b9a27a"/><rect x="25" y="40" width="%s" height="%s" fill="#ecebe5"/>\' % (w, h, h-30, w-40, w-50, h-72)'),
+}
+
+
+def equipment_templates():
+    for kind,(name,pad,code) in EQUIPMENT.items():
+        shape=full(image('Shape','',name))
+        script='\tw, h = float(value["width"]), float(value["height"])\n'+''.join('\t'+line+'\n' for line in code.split('\n'))+'\treturn application.demo.scadaEquipmentSvg(body, w, h, %s)'%json.dumps(list(pad))
+        shape['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'width':'{view.params.width}','height':'{view.params.height}'}},'transforms':[{'type':'script','code':script}]}},
+                           'props.altText':expr('if(len({view.params.tag}) > 0, {view.params.tag}, "%s")'%name)}
+        view(HMI+'Equipment/'+name,node('ia.container.coord','root',{'mode':'percent'},[shape]),params={'tag':'','width':100,'height':100},height=100)
+
 
 class Scene:
     """One process drawing in fixed design coordinates: static vector layers with live views between them."""
     def __init__(self,area):
-        self.area=area;self.under=[];self.parts=[];self.over=[];self.tags={}
+        self.area=area;self.under=[];self.parts=[];self.over=[];self.tags={};self.equipment=[];self.counts={}
     def path(self,tag):return '%s/%s/%s'%(TAG_ROOT,self.area.title(),tag)
     def register(self,tag,udt,**params):
         types={str:'String',int:'Int4',float:'Float8'}
@@ -150,79 +191,35 @@ class Scene:
     def name(self,x,y,tag,title):
         if tag:self.text(x,y,tag,12,600,layer=self.over)
         if title:self.text(x,y+14,title,10.5,400,fill='#777',layer=self.over)
-    def shape(self,body):self.under.append('<g fill="%s" stroke="%s" stroke-width="1.4">%s</g>'%(METAL,EDGE,body))
-    # Static equipment outlines, ISA-101 greyscale.
-    def bin(self,x,y,w,h,tag,title):
-        b=y+h*0.7
-        self.shape('<path d="M%s %s H%s V%s L%s %s H%s L%s %s Z"/>'%(x,y,x+w,b,x+w/2+10,y+h,x+w/2-10,x,b))
-        self.name(x+w/2,y+h*0.42,tag,title)
-    def conveyor(self,x,y,w,tag,title,kind='chain'):
-        inner=''.join('<path d="M%s %s l6 12 l6 -12" fill="none" stroke-width="1"/>'%(x+14+i*12,y+4) for i in range(int((w-28)/12))) if kind=='screw' else '<circle cx="%s" cy="%s" r="7"/><circle cx="%s" cy="%s" r="7"/>'%(x+11,y+10,x+w-11,y+10)
-        self.shape('<rect x="%s" y="%s" width="%s" height="20" rx="10"/>%s'%(x,y,w,inner))
-        self.name(x+w/2,y+36,tag,title)
-    def elevator(self,x,top,bottom,tag,title):
-        self.shape('<rect x="%s" y="%s" width="30" height="%s"/><path d="M%s %s h50 v34 h-50 Z"/><path d="M%s %s h46 v26 h-46 Z"/>'%(x,top+34,bottom-top-60,x-10,top,x-8,bottom-26))
-        self.shape('<path d="M%s %s V%s M%s %s V%s" stroke-dasharray="6 5" fill="none" stroke-width="1"/>'%(x+9,top+40,bottom-30,x+21,top+40,bottom-30))
-        self.name(x-46,(top+bottom)/2,tag,title)
-    def sieve(self,x,y,w,h,tag,title):
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="4"/>'%(x,y,w,h)+''.join('<path d="M%s %s L%s %s" fill="none" stroke-dasharray="5 3" stroke-width="1"/>'%(x+10,y+h*f,x+w-10,y+h*f+16) for f in (0.25,0.5,0.75)))
-        self.name(x+w/2,y+h+18,tag,title)
-    def aspirator(self,x,y,w,h,tag,title):
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="4"/><path d="M%s %s l%s 20 l-%s 20 l%s 20 l-%s 20" fill="none" stroke-width="1"/><path d="M%s %s v-36 m-6 8 l6 -8 l6 8" fill="none" stroke-width="1.2"/>'%(x,y,w,h,x+w*0.3,y+h*0.3,w*0.4,w*0.4,w*0.4,w*0.4,x+w*0.75,y+h*0.55))
-        self.name(x+w/2,y+h+18,tag,title)
-    def deck(self,x,y,w,h,tag,title):
-        self.shape('<path d="M%s %s L%s %s V%s L%s %s Z"/><path d="M%s %s V%s M%s %s V%s" fill="none"/>'%(x,y+h*0.2,x+w,y,y+h*0.45,x,y+h*0.65,x+20,y+h*0.62,y+h,x+w-20,y+h*0.42,y+h))
-        self.name(x+w/2,y+h+18,tag,title)
-    def drum(self,x,y,w,h,tag,title):
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="%s"/><path d="M%s %s H%s" fill="none" stroke-dasharray="3 4" stroke-width="1"/>'%(x,y,w,h,h/2,x+h/2,y+h/2,x+w-h/2))
-        self.name(x+w/2,y+h+18,tag,title)
-    def huller(self,cx,cy,r,tag,title):
-        self.shape('<circle cx="%s" cy="%s" r="%s"/><circle cx="%s" cy="%s" r="%s" fill="#c9cbca"/>'%(cx,cy,r,cx,cy,r*0.55)+''.join('<path d="M%s %s l%s 0" transform="rotate(%d %s %s)" fill="none" stroke-width="3"/>'%(cx,cy,r*0.55,a,cx,cy) for a in range(0,360,45)))
-        self.name(cx,cy+r+18,tag,title)
-    def cyclone(self,x,y,w,h,tag,title):
-        b=y+h*0.4
-        self.shape('<path d="M%s %s H%s V%s L%s %s H%s L%s %s Z"/>'%(x,y,x+w,b,x+w/2+9,y+h,x+w/2-9,x,b))
-        self.name(x+w+40,y+h*0.35,tag,title)
-    def filter(self,x,y,w,h,tag,title):
-        b=y+h*0.72
-        self.shape('<path d="M%s %s H%s V%s L%s %s H%s L%s %s Z"/>'%(x,y,x+w,b,x+w/2+10,y+h,x+w/2-10,x,b)+''.join('<path d="M%s %s V%s" fill="none" stroke-width="1"/>'%(x+w*f,y+10,b-12) for f in (0.2,0.4,0.6,0.8)))
-        self.name(x+w/2,y+h+18,tag,title)
-    def column(self,x,y,w,h,tag,title):
-        self.shape('<path d="M%s %s Q%s %s %s %s V%s L%s %s H%s L%s %s Z"/>'%(x,y+20,x+w/2,y-14,x+w,y+20,y+h-40,x+w/2+12,y+h,x+w/2-12,x,y+h-40)+''.join('<path d="M%s %s h%s" fill="none" stroke="%s" stroke-width="2.5"/>'%(x+3,y+h*f,w-6,STEAM) for f in (0.3,0.5,0.7)))
-    def cooler(self,x,y,w,h,tag,title):
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="4"/>'%(x,y,w,h)+''.join('<path d="M%s %s l14 -10" fill="none" stroke-width="1"/>'%(x+12+i*22,y+h*f) for f in (0.3,0.55,0.8) for i in range(int((w-30)/22))))
-        self.name(x+w/2,y+h+18,tag,title)
-    def steamer(self,x,y,w,h,tag,title):
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="%s"/>'%(x,y,w,h,w/2))
-        self.name(x+w/2,y+h/2,tag,title)
-    def rollmill(self,x,y,w,h,tag,title):
-        self.shape('<path d="M%s %s h40 l-12 18 h-16 Z"/><rect x="%s" y="%s" width="%s" height="%s" rx="4"/><circle cx="%s" cy="%s" r="%s" fill="#c9cbca"/><circle cx="%s" cy="%s" r="%s" fill="#c9cbca"/>'%(x+w/2-20,y-18,x,y,w,h,x+w/2-h*0.24,y+h*0.45,h*0.23,x+w/2+h*0.24,y+h*0.45,h*0.23))
-        self.name(x+w/2,y+h+18,tag,title)
-    def hammermill(self,x,y,w,h,tag,title):
-        cx,cy=x+w/2,y+h/2
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="6"/><circle cx="%s" cy="%s" r="%s" fill="#c9cbca"/>'%(x,y,w,h,cx,cy,h*0.32)+''.join('<rect x="%s" y="%s" width="8" height="%s" transform="rotate(%d %s %s)" fill="#999"/>'%(cx-4,cy-h*0.3,h*0.14,a,cx,cy) for a in range(0,360,60)))
-        self.name(cx,y+h+18,tag,title)
-    def plansifter(self,x,y,w,h,tag,title):
-        self.shape(''.join('<rect x="%s" y="%s" width="%s" height="%s"/>'%(x,y+i*h/6,w,h/6) for i in range(6)))
-        self.name(x+w/2,y+h+18,tag,title)
-    def beltdryer(self,x,y,w,h,tag,title):
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="4"/>'%(x,y,w,h)+''.join('<path d="M%s %s H%s" fill="none" stroke-width="2"/>'%(x+12,y+h*f,x+w-12) for f in (0.3,0.55,0.8))+''.join('<path d="M%s %s v-12 h24 v12" fill="none"/>'%(x+w*f,y) for f in (0.2,0.5,0.8)))
-        self.name(x+w/2,y+h+18,tag,title)
-    def weigher(self,cx,y,tag,title):
-        self.shape('<path d="M%s %s L%s %s H%s Z"/><path d="M%s %s h80 l-10 30 h-60 Z"/>'%(cx,y,cx+40,y+30,cx-40,cx-40,y+34))
-        self.name(cx+80,y+30,tag,title)
-    def bagger(self,cx,y,tag,title):
-        self.shape('<rect x="%s" y="%s" width="90" height="70" rx="4"/><circle cx="%s" cy="%s" r="14" fill="#c9cbca"/><path d="M%s %s h30 l6 34 h-42 Z" fill="#ecebe5"/>'%(cx-45,y,cx-26,y+22,cx-15,y+76))
-        self.name(cx+90,y+30,tag,title)
-    def boiler(self,x,y,w,h,tag,title):
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="%s"/><rect x="%s" y="%s" width="40" height="%s"/><rect x="%s" y="%s" width="22" height="60"/>'%(x,y,w,h,h/2,x-40,y+h*0.25,h*0.5,x+w-70,y-60))
-        self.name(x+w/2,y+h/2+4,tag,title)
-    def vessel(self,x,y,w,h,tag,title):
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="%s"/>'%(x,y,w,h,min(w,h)/2))
-        self.name(x+w/2,y+h+18,tag,title)
-    def box(self,x,y,w,h,tag,title,inner=''):
-        self.shape('<rect x="%s" y="%s" width="%s" height="%s" rx="4"/>%s'%(x,y,w,h,inner))
-        self.name(x+w/2,y+h+18,tag,title)
+    def equip(self,kind,x,y,w,h,tag=''):
+        name,(left,top,right,bottom),_=EQUIPMENT[kind]
+        key=(tag or name).replace('-','')
+        self.counts[key]=self.counts.get(key,0)+1
+        n=embed(key+('' if self.counts[key]==1 else str(self.counts[key]))+'Shape',HMI+'Equipment/'+name,{'tag':tag,'width':w,'height':h})
+        self.equipment.append(at(n,x-left-2,y-top-2,w+left+right+4,h+top+bottom+4))
+    # Equipment: a template instance plus its tag and title in the label layer.
+    def bin(self,x,y,w,h,tag,title):self.equip('bin',x,y,w,h,tag);self.name(x+w/2,y+h*0.42,tag,title)
+    def conveyor(self,x,y,w,tag,title,kind='chain'):self.equip(kind,x,y,w,20,tag);self.name(x+w/2,y+36,tag,title)
+    def elevator(self,x,top,bottom,tag,title):self.equip('elevator',x-10,top,50,bottom-top,tag);self.name(x-46,(top+bottom)/2,tag,title)
+    def sieve(self,x,y,w,h,tag,title):self.equip('sieve',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def aspirator(self,x,y,w,h,tag,title):self.equip('aspirator',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def deck(self,x,y,w,h,tag,title):self.equip('deck',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def drum(self,x,y,w,h,tag,title):self.equip('drum',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def huller(self,cx,cy,r,tag,title):self.equip('huller',cx-r,cy-r,2*r,2*r,tag);self.name(cx,cy+r+18,tag,title)
+    def cyclone(self,x,y,w,h,tag,title):self.equip('cyclone',x,y,w,h,tag);self.name(x+w+40,y+h*0.35,tag,title)
+    def filter(self,x,y,w,h,tag,title):self.equip('filter',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def column(self,x,y,w,h,tag,title):self.equip('column',x,y,w,h,tag)
+    def cooler(self,x,y,w,h,tag,title):self.equip('cooler',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def steamer(self,x,y,w,h,tag,title):self.equip('steamer',x,y,w,h,tag);self.name(x+w/2,y+h/2,tag,title)
+    def rollmill(self,x,y,w,h,tag,title):self.equip('rollmill',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def hammermill(self,x,y,w,h,tag,title):self.equip('hammermill',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def plansifter(self,x,y,w,h,tag,title):self.equip('plansifter',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def beltdryer(self,x,y,w,h,tag,title):self.equip('beltdryer',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def weigher(self,cx,y,tag,title):self.equip('weigher',cx-40,y,80,64,tag);self.name(cx+80,y+30,tag,title)
+    def bagger(self,cx,y,tag,title):self.equip('bagger',cx-45,y,90,110,tag);self.name(cx+90,y+30,tag,title)
+    def boiler(self,x,y,w,h,tag,title):self.equip('boiler',x,y,w,h,tag);self.name(x+w/2,y+h/2+4,tag,title)
+    def vessel(self,x,y,w,h,tag,title):self.equip('vessel',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def box(self,x,y,w,h,tag,title,kind='box'):self.equip(kind,x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
     def frame(self,x,y,w,h,caption):
         self.under.append('<rect x="%s" y="%s" width="%s" height="%s" fill="#eeeeee" stroke="#c2c5c3"/>'%(x-4,y-4,w+8,h+8))
         self.text(x,y-10,caption,11,600,'start','#6d7270')
@@ -270,7 +267,7 @@ class Scene:
     def build(self,title):
         self.text(40,890,title,22,600,'start','#5a5e5c',self.over)
         self.text(1700,890,'SIMULATION',10,400,'end','#777',self.over)
-        canvas=[at(image('Piping',b64(svg(''.join(self.under),W,H)),title+' piping'),0,0,W,H)]+self.parts
+        canvas=[at(image('Piping',b64(svg(''.join(self.under),W,H)),title+' piping'),0,0,W,H)]+self.equipment+self.parts
         canvas.append(at(image('Labels',b64(svg(''.join(self.over),W,H)),title+' labels'),0,0,W,H))
         scene=node('ia.container.coord','root',{'mode':'fixed','style':{'backgroundColor':'transparent','overflow':'visible'}},canvas);scene.pop('position',None)
         if self.area!='overview':
@@ -313,13 +310,13 @@ def cleaning():
     s.stream('From raw oat silos',38,96,170,'intake');s.pipe('M208 110 H260 V140')
     s.bin(200,140,120,160,'BN201','Cleaning feed bin');s.pipe('M260 300 V430 H330')
     s.device('FC201','rotary',260,335,'feed','t/h',1)
-    s.box(240,375,40,26,'','',inner='<text x="260" y="393" font-size="10" text-anchor="middle" stroke="none" fill="#555">MAG</text>');s.text(300,393,'MG201',11,600,'start')
+    s.equip('magnet',240,375,40,26,'MG201');s.text(300,393,'MG201',11,600,'start')
     s.sieve(330,410,220,110,'SP201','Separator sieve');s.device('M-SP201','motor',440,370,'sieveAmps','A',1)
     s.pipe('M550 470 H610');s.aspirator(610,380,130,170,'AS201','Aspirator')
     s.air('M675 380 V290');s.cyclone(630,110,100,180,'CY201','Dust cyclone');s.air('M680 110 V80 H800');s.device('FN201','fan',820,80);s.text(940,85,'Exhaust',11,fill='#777')
     s.pipe('M740 500 H800');s.deck(800,420,200,110,'DS201','Destoner');s.device('M-DS201','motor',900,385,'stonerAmps','A',1)
     s.pipe('M1000 470 H1060');s.drum(1060,430,220,80,'TR201','Indented cylinder');s.device('M-TR201','motor',1170,395,'trieurSpeed','rpm',0)
-    s.pipe('M1280 470 H1330');s.box(1330,380,120,190,'CS201','Optical sorter',inner='<path d="M1345 420 l20 12 l-20 12 Z M1435 420 l-20 12 l20 12 Z" fill="#999"/>')
+    s.pipe('M1280 470 H1330');s.box(1330,380,120,190,'CS201','Optical sorter','sorter')
     s.pipe('M1450 470 H1540');s.stream('To dehulling',1540,456,160,'dehulling')
     for x,y in [(350,520),(950,540),(1110,510),(1350,570),(725,550)]:s.pipe('M%s %s V800'%(x,y),INK,1.2)
     s.conveyor(360,800,1150,'','');s.name(935,846,'CV205','Screenings conveyor');s.device('M-CV205','motor',340,850)
@@ -341,7 +338,7 @@ def dehulling():
     s.stream('From cleaning',38,96,160,'cleaning');s.pipe('M198 110 H260 V140')
     s.bin(200,140,120,150,'BN301','Huller feed bin');s.pipe('M260 290 V400 H420 V375')
     s.device('VF301','rotary',260,335,'feed','t/h',1)
-    s.huller(460,440,62,'HU301','Impact huller');s.shape('<path d="M440 360 h40 l-8 18 h-24 Z"/>');s.device('M-HU301','motor',380,560,'hullerAmps','A',1)
+    s.huller(460,440,62,'HU301','Impact huller');s.device('M-HU301','motor',380,560,'hullerAmps','A',1)
     s.pipe('M522 440 H600');s.aspirator(600,360,130,170,'AS301','Hull aspirator')
     s.air('M665 360 V300 H730 V170 H760');s.cyclone(760,110,100,170,'CY301','Hull cyclone');s.air('M810 110 V80 H900');s.device('FN301','fan',920,80);s.text(1040,85,'Exhaust',11,fill='#777')
     s.pipe('M810 280 V330 H1000',INK,1.6);s.device('RV301','rotary',810,305)
@@ -495,8 +492,8 @@ def packing():
         s.instrument(bagger.replace('BG','SI'),'SI',speed,'/min',1,x+130,440)
     s.conveyor(330,800,800,'','');s.name(730,846,'CV804','Pack collection conveyor');s.device('M-CV804','motor',310,850)
     s.pipe('M1130 810 H1160');s.box(1160,790,110,30,'CW801','Checkweigher')
-    s.pipe('M1270 805 H1300');s.box(1300,770,70,60,'MD801','Metal detector',inner='<path d="M1312 830 V782 H1358 V830" fill="none" stroke-width="3"/>')
-    s.pipe('M1370 805 H1420');s.box(1420,700,130,120,'PL801','Palletiser',inner='<rect x="1440" y="790" width="90" height="10" fill="#b9a27a"/><rect x="1445" y="740" width="80" height="48" fill="#ecebe5"/>')
+    s.pipe('M1270 805 H1300');s.box(1300,770,70,60,'MD801','Metal detector','detector')
+    s.pipe('M1370 805 H1420');s.box(1420,700,130,120,'PL801','Palletiser','palletiser')
     s.pipe('M1550 760 H1570');s.stream('To warehouse',1570,746,140)
     s.instrument('QI801','QI','rejects','%',2,1160,700)
     s.instrument('FQ801','FQ','pallets','/h',1,1560,640)
@@ -581,6 +578,7 @@ def page(name,title,subtitle,drawing,area=None):
 
 def build_scada():
     components()
+    equipment_templates()
     for fn in (overview,intake,cleaning,dehulling,kiln,flaking,cutting,milling,packing,utilities):fn()
     build_tags(AREA_TAGS)
     page('Demo/SCADA','Plant overview','From truck intake to pallet: live status of every process area.',HMI+'Drawing/Overview')

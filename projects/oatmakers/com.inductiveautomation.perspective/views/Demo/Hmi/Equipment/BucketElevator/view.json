@@ -1,0 +1,92 @@
+{
+  "custom": {},
+  "params": {
+    "tag": "",
+    "width": 100,
+    "height": 100
+  },
+  "propConfig": {
+    "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.width": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.height": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 100
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Shape"
+        },
+        "props": {
+          "source": "",
+          "altText": "BucketElevator",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "type": "expr-struct",
+              "config": {
+                "waitOnAll": true,
+                "struct": {
+                  "width": "{view.params.width}",
+                  "height": "{view.params.height}"
+                }
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\tbody = '<rect x=\"10\" y=\"34\" width=\"30\" height=\"%s\"/><path d=\"M0 0 h50 v34 h-50 Z\"/><path d=\"M2 %s h46 v26 h-46 Z\"/>' % (h-60, h-26)\n\tbody += '<path d=\"M19 40 V%s M31 40 V%s\" stroke-dasharray=\"6 5\" fill=\"none\" stroke-width=\"1\"/>' % (h-30, h-30)\n\treturn application.demo.scadaEquipmentSvg(body, w, h, [0, 0, 0, 0])"
+                }
+              ]
+            }
+          },
+          "props.altText": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(len({view.params.tag}) > 0, {view.params.tag}, \"BucketElevator\")"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

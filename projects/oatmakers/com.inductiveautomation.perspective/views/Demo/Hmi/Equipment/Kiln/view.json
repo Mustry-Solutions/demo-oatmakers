@@ -1,0 +1,92 @@
+{
+  "custom": {},
+  "params": {
+    "tag": "",
+    "width": 100,
+    "height": 100
+  },
+  "propConfig": {
+    "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.width": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.height": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 100
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Shape"
+        },
+        "props": {
+          "source": "",
+          "altText": "Kiln",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "type": "expr-struct",
+              "config": {
+                "waitOnAll": true,
+                "struct": {
+                  "width": "{view.params.width}",
+                  "height": "{view.params.height}"
+                }
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\tbody = '<path d=\"M0 20 Q%s -14 %s 20 V%s L%s %s H%s L0 %s Z\"/>' % (w/2, w, h-40, w/2+12, h, w/2-12, h-40)\n\tbody += ''.join('<path d=\"M3 %s h%s\" fill=\"none\" stroke=\"#c9a54e\" stroke-width=\"2.5\"/>' % (h*f, w-6) for f in (0.3, 0.5, 0.7))\n\treturn application.demo.scadaEquipmentSvg(body, w, h, [0, 14, 0, 0])"
+                }
+              ]
+            }
+          },
+          "props.altText": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(len({view.params.tag}) > 0, {view.params.tag}, \"Kiln\")"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}
