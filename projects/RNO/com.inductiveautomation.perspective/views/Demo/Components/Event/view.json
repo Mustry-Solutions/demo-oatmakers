@@ -36,10 +36,7 @@
       "name": "root"
     },
     "props": {
-      "direction": "column",
-      "style": {
-        "classes": "Demo/EventCard"
-      }
+      "direction": "column"
     },
     "children": [
       {
