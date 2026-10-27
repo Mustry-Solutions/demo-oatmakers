@@ -334,7 +334,7 @@
           }
         ],
         "meta": {
-          "name": "Flex_Ramp"
+          "name": "FlexRamp"
         },
         "position": {
           "shrink": 0
@@ -392,7 +392,7 @@
           }
         ],
         "meta": {
-          "name": "Flex_Sine"
+          "name": "FlexSine"
         },
         "position": {
           "shrink": 0
