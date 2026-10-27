@@ -403,7 +403,7 @@
           "name": "LineState"
         },
         "props": {
-          "path": "Templates/Hmi/AreaState",
+          "path": "Templates/Hmi/ProcessArea/AreaState",
           "params": {
             "tagPath": "[default]OatMill/Flaking/Area",
             "caption": "LINE 01"
@@ -446,7 +446,7 @@
           "name": "RV501"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Flaking/RV501"
           },
@@ -488,7 +488,7 @@
           "name": "PCV501"
         },
         "props": {
-          "path": "Templates/Hmi/Device/ControlValve",
+          "path": "Templates/Hmi/Valve/ControlValve",
           "params": {
             "tagPath": "[default]OatMill/Flaking/PCV501"
           },
@@ -508,7 +508,7 @@
           "name": "MFM501"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Flaking/M-FM501"
           },
@@ -572,7 +572,7 @@
           "name": "TIC501"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Flaking/TIC501",
             "colour": "#ffe044"
@@ -593,7 +593,7 @@
           "name": "PI501"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Flaking/PI501",
             "colour": "#f7f7f7"
@@ -614,7 +614,7 @@
           "name": "SI501"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Flaking/SI501",
             "colour": "#f7f7f7"
@@ -635,7 +635,7 @@
           "name": "ZI501"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Flaking/ZI501",
             "colour": "#f7f7f7"
@@ -656,7 +656,7 @@
           "name": "JI501"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Flaking/JI501",
             "colour": "#f7f7f7"
@@ -677,7 +677,7 @@
           "name": "TI502"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Flaking/TI502",
             "colour": "#f7f7f7"
@@ -698,7 +698,7 @@
           "name": "TI503"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Flaking/TI503",
             "colour": "#f7f7f7"
@@ -719,7 +719,7 @@
           "name": "MI501"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Flaking/MI501",
             "colour": "#f7f7f7"
@@ -740,7 +740,7 @@
           "name": "FT501"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Flaking/FT501",
             "colour": "#f7f7f7"
@@ -761,7 +761,7 @@
           "name": "TrendRate"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Flaking/FT501",
             "colour": "#626b75",
@@ -783,7 +783,7 @@
           "name": "TrendMoisture"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Flaking/MI501",
             "colour": "#626b75",
@@ -805,7 +805,7 @@
           "name": "TrendTemperature"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Flaking/TIC501",
             "colour": "#626b75",
@@ -827,7 +827,7 @@
           "name": "TrendPressure"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Flaking/PI501",
             "colour": "#626b75",

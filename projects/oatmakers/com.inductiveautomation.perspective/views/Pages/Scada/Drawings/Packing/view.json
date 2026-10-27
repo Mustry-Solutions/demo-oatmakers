@@ -601,7 +601,7 @@
           "name": "BN803"
         },
         "props": {
-          "path": "Templates/Hmi/Silo",
+          "path": "Templates/Hmi/Silo/Silo",
           "params": {
             "tagPath": "[default]OatMill/Packing/BN803",
             "height": 220
@@ -625,7 +625,7 @@
           "name": "WI803"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Packing/WI803",
             "colour": "#f7f7f7"
@@ -646,7 +646,7 @@
           "name": "SI803"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Packing/SI803",
             "colour": "#f7f7f7"
@@ -689,7 +689,7 @@
           "name": "BN802"
         },
         "props": {
-          "path": "Templates/Hmi/Silo",
+          "path": "Templates/Hmi/Silo/Silo",
           "params": {
             "tagPath": "[default]OatMill/Packing/BN802",
             "height": 220
@@ -713,7 +713,7 @@
           "name": "WI802"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Packing/WI802",
             "colour": "#f7f7f7"
@@ -734,7 +734,7 @@
           "name": "SI802"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Packing/SI802",
             "colour": "#f7f7f7"
@@ -777,7 +777,7 @@
           "name": "BN801"
         },
         "props": {
-          "path": "Templates/Hmi/Silo",
+          "path": "Templates/Hmi/Silo/Silo",
           "params": {
             "tagPath": "[default]OatMill/Packing/BN801",
             "height": 220
@@ -801,7 +801,7 @@
           "name": "WI801"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Packing/WI801",
             "colour": "#f7f7f7"
@@ -822,7 +822,7 @@
           "name": "SI801"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Packing/SI801",
             "colour": "#f7f7f7"
@@ -843,7 +843,7 @@
           "name": "MCV804"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Packing/M-CV804"
           },
@@ -885,7 +885,7 @@
           "name": "QI801"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Packing/QI801",
             "colour": "#f7f7f7"
@@ -906,7 +906,7 @@
           "name": "FQ801"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Packing/FQ801",
             "colour": "#f7f7f7"
@@ -927,7 +927,7 @@
           "name": "TrendPacksC"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Packing/SI803",
             "colour": "#626b75",
@@ -949,7 +949,7 @@
           "name": "TrendWeightC"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Packing/WI803",
             "colour": "#626b75",
@@ -971,7 +971,7 @@
           "name": "TrendRejects"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Packing/QI801",
             "colour": "#626b75",

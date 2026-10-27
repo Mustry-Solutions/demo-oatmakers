@@ -1,5 +1,5 @@
 """Build the oat mill SCADA: a plant overview and drill-down process area screens."""
-import json,re
+import json,re,shutil
 from view_primitives import *
 from build_tags import build_tags
 
@@ -13,6 +13,14 @@ ON='#a7dfa5'
 OFF='#b3b3b3'
 # Embedded SCADA templates; the area screens are pages and their drawings page content.
 HMI='Templates/Hmi/'
+# Everything for one UDT lives together: its screen templates and its faceplate.
+INSTRUMENT=HMI+'AnalogInput/Instrument'
+TREND=HMI+'AnalogInput/Trend'
+SILO=HMI+'Silo/Silo'
+AREA_STATE=HMI+'ProcessArea/AreaState'
+TILE=HMI+'ProcessArea/Tile'
+def device_view(kind):return HMI+('Motor/' if kind in DRIVES else 'Valve/')+DEVICES[kind][0]
+def faceplate_view(udt):return HMI+udt+'/Faceplate'
 SCREENS='Pages/Scada/'
 DRAWINGS='Pages/Scada/Drawings/'
 TAG_ROOT='[default]OatMill'
@@ -164,7 +172,7 @@ def components():
     members={'pv':'PV','unit':'Unit','decimals':'Decimals','kind':'Kind','alarm':'Alarm'}
     config={'custom.'+k:dict(tag_member(m),persistent=True) for k,m in members.items()}
     config['custom.text']=dict(expr(value_text),persistent=True)
-    view(HMI+'Instrument',clickable([shape,kind,value,tag],faceplate('AnalogInput'),mode='fixed'),params={'tagPath':'[default]OatMill/Intake/WT101','colour':'#f7f7f7'},
+    view(INSTRUMENT,clickable([shape,kind,value,tag],faceplate('AnalogInput'),mode='fixed'),params={'tagPath':'[default]OatMill/Intake/WT101','colour':'#f7f7f7'},
          custom={'pv':0,'unit':'','decimals':1,'kind':'','alarm':False,'text':''},config=config,height=51,width=130)
     # Area state badge (OatMill/ProcessArea).
     colour='case({view.custom.state}, "Stopped", "#f2b8b3", "Quality hold", "#f6dca6", "Recovering", "#c9d9ea", "#f7f7f7")'
@@ -172,7 +180,7 @@ def components():
     shape['propConfig']={'props.elements[1].fill.paint':expr(colour)}
     state=text_label('Value','',26,22,90,20,11.5,colour='#565957');state['propConfig']={'props.text':bind('view.custom.state')}
     caption=at(node('ia.display.label','Caption',{'text':'','style':{'classes':'Hmi/InstrumentTag'}}),0,0,130,15);caption['propConfig']={'props.text':bind('view.params.caption'),'meta.visible':expr(SHOW_LABELS)}
-    view(HMI+'AreaState',node('ia.container.coord','root',{'mode':'fixed'},[shape,text_label('Kind','ST',0,22,20,20,8,colour='#565957'),state,caption]),
+    view(AREA_STATE,node('ia.container.coord','root',{'mode':'fixed'},[shape,text_label('Kind','ST',0,22,20,20,8,colour='#565957'),state,caption]),
          params={'tagPath':'[default]OatMill/Flaking/Area','caption':'LINE 01'},custom={'state':''},config={'custom.state':dict(tag_member('State'),persistent=True)},height=51,width=130)
     # Devices: one drawing template per kind; paints follow the Running (motor) or Open (valve) member.
     for kind,(name,w,h,letter) in DEVICES.items():
@@ -192,7 +200,7 @@ def components():
         mode['propConfig']={'props.text':expr('if({view.custom.mode} = "Off", "OFF", "MAN")'),'meta.visible':expr('{view.custom.mode} != "Auto" && len({view.custom.mode}) > 0')}
         children+=[tag,mode]
         udt='Motor' if kind in DRIVES else 'Valve'
-        view(HMI+'Device/'+name,clickable(children,faceplate(udt),mode='fixed'),params={'tagPath':'[default]OatMill/Intake/M-CV101'},custom={'running':False,'mode':'Auto'},
+        view(device_view(kind),clickable(children,faceplate(udt),mode='fixed'),params={'tagPath':'[default]OatMill/Intake/M-CV101'},custom={'running':False,'mode':'Auto'},
              config={'custom.running':dict(tag_member('Running' if udt=='Motor' else 'Open'),persistent=True),'custom.mode':dict(tag_member('Mode'),persistent=True)},height=h,width=w)
     # Streams: an arrow box whose width follows view.params.width; connected streams navigate.
     width='{view.params.width}'
@@ -208,7 +216,7 @@ def components():
     # Trend: the last ten minutes of the instance's measured value.
     trend=full(drawing('Plot',[],280,70))
     trend['propConfig']={'props.elements':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','path':'{view.params.tagPath}','colour':'{view.params.colour}','sp':'{view.params.sp}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTrendElements(value["path"], value["colour"], value["sp"])'}]}}}
-    view(HMI+'Trend',node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'tagPath':'[default]OatMill/Intake/WT101','colour':'#626b75','sp':0},height=70,width=280)
+    view(TREND,node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'tagPath':'[default]OatMill/Intake/WT101','colour':'#626b75','sp':0},height=70,width=280)
     # Silo (OatMill/Silo): outline, product level and a level pill, drawn in 110 x 330 units and scaled to the instance.
     outline='M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z'
     silo=full(drawing('Shape',svg_elements('<path d="%s" fill="#e9e9e7"/><path d="M3 320 H107" fill="#d8cda8"/><path d="%s" fill="none" stroke="#666a68" stroke-width="2"/><rect x="22" y="104" width="66" height="22" rx="11" fill="#f7f7f7" stroke="#a9adab"/>'%(outline,outline)),110,330))
@@ -222,7 +230,7 @@ def components():
     tag['propConfig']={'props.text':expr(TAG_NAME),'meta.visible':expr(SHOW_LABELS),
         'position.y':expr('-21 / {view.params.height}'),'position.height':expr('16 / {view.params.height}')}
     root=clickable([silo,level,product,tag],faceplate('Silo'));root['props']['style']['overflow']='visible'
-    view(HMI+'Silo',root,params={'tagPath':'[default]OatMill/Intake/SI101','height':330},custom={'level':0,'product':'','alarm':False},
+    view(SILO,root,params={'tagPath':'[default]OatMill/Intake/SI101','height':330},custom={'level':0,'product':'','alarm':False},
          config={'custom.level':dict(tag_member('Level'),persistent=True),'custom.product':dict(tag_member('Product'),persistent=True),'custom.alarm':dict(tag_member('Alarm'),persistent=True)},height=330,width=110)
     # Tile: frame and state pill drawing, live texts as labels; tagPath is the area's ProcessArea instance.
     shape=at(drawing('Shape',svg_elements('<rect x="1" y="1" width="228" height="168" rx="4" fill="#f4f4f3" stroke="#9a9e9c" stroke-width="1.5"/><rect x="14" y="38" width="80" height="18" rx="3" fill="#dfe3e6"/>'),230,170),0,0,230,170)
@@ -237,7 +245,7 @@ def components():
         value['propConfig']={'props.text':expr('try({view.custom.tile.rows[%d].value}, "")'%i)}
         children+=[caption,value]
     children.append(text_label('Open','OPEN SCREEN \u203a',96,147,120,14,10.5,700,'#3f5a73','end'))
-    view(HMI+'Tile',clickable(children,'\tsystem.perspective.navigate(self.view.params.route)',mode='fixed'),params={'tagPath':'[default]OatMill/Intake/Area','route':'/scada/intake'},
+    view(TILE,clickable(children,'\tsystem.perspective.navigate(self.view.params.route)',mode='fixed'),params={'tagPath':'[default]OatMill/Intake/Area','route':'/scada/intake'},
          custom={'tile':{'title':'','state':'','pillFill':'#dfe3e6','pillText':'#4d555c','rows':[]}},
          config={'custom.tile':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','path':'{view.params.tagPath}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTile(value["path"])'}]},'persistent':True}},height=170,width=230)
     faceplates()
@@ -354,7 +362,7 @@ def faceplates():
         config['custom.history']={'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'path':'{view.params.tagPath}','hours':'{view.custom.hours}','tick':'now(10000)'}},
             'transforms':[{'type':'script','code':'\treturn application.demo.faceplateHistory(value["path"], value["hours"])'}]},'persistent':True}
         root=theme_root(flex('root',sections,classes='Demo/PopupRoot Hmi/Faceplate'))
-        view('Popups/Faceplates/'+udt,root,params={'tagPath':''},custom=custom,config=config,height=700,width=780)
+        view(faceplate_view(udt),root,params={'tagPath':''},custom=custom,config=config,height=700,width=780)
 
 
 # Equipment templates, ISA-101 greyscale. Each is an embedded view under
@@ -473,12 +481,12 @@ class Scene:
     # Live elements.
     def instrument(self,tag,kind,signal,unit,dec,x,y,lead=None,colour=None):
         self.register(tag,'AnalogInput',Kind=kind,Description=MEASURES[kind],Signal=signal,Unit=unit,Decimals=dec)
-        n=embed(tag,HMI+'Instrument',{'tagPath':self.path(tag),'colour':colour or '#f7f7f7'})
+        n=embed(tag,INSTRUMENT,{'tagPath':self.path(tag),'colour':colour or '#f7f7f7'})
         if lead is not None:
             self.pipe('M%s %s V%s'%(x+10,y+42 if lead>y else y+22,lead),INK,1)
         self.parts.append(at(n,x,y,130,51))
     def state(self,x,y,caption):
-        self.parts.append(at(embed('LineState',HMI+'AreaState',{'tagPath':self.path('Area'),'caption':caption}),x,y,130,51))
+        self.parts.append(at(embed('LineState',AREA_STATE,{'tagPath':self.path('Area'),'caption':caption}),x,y,130,51))
     def device(self,tag,kind,cx,cy,signal='',unit='',dec=1,standby=False):
         compact=kind in ('motor','fan','rotary')
         name,w,h,_=DEVICES[kind]
@@ -488,11 +496,11 @@ class Scene:
             self.register(tag,'Motor',Description=DRIVES[kind],Signal=signal,RatedCurrent=rated,Duty='Standby' if standby else 'Duty')
         else:
             self.register(tag,'Valve',Description='Control valve' if kind=='control' else 'Shut-off valve',Signal=signal)
-        n=embed(tag.replace('-',''),HMI+'Device/'+name,{'tagPath':self.path(tag)})
+        n=embed(tag.replace('-',''),device_view(kind),{'tagPath':self.path(tag)})
         self.parts.append(at(n,cx-20 if compact else cx-39,cy-30 if compact else cy-48,w,h))
     def silo(self,tag,signal,product,x,y,w=110,h=330):
         self.register(tag,'Silo',Description=product+' silo',Signal=signal,Product=product,Capacity=SILO_TONNES.get(product,60))
-        n=embed(tag,HMI+'Silo',{'tagPath':self.path(tag),'height':h})
+        n=embed(tag,SILO,{'tagPath':self.path(tag),'height':h})
         n['props']['style']={'overflow':'visible'}
         self.parts.append(at(n,x,y,w,h))
     def stream(self,text,x,y,w=170,target=None):
@@ -500,7 +508,7 @@ class Scene:
         self.parts.append(at(n,x,y,w,28))
     def trend(self,signal,x,y,w,h,caption,colour='#626b75',sp=0):
         self.frame(x,y,w,h,caption)
-        n=embed('Trend'+signal[0].upper()+signal[1:],HMI+'Trend',{'tagPath':signal,'colour':colour,'sp':sp})
+        n=embed('Trend'+signal[0].upper()+signal[1:],TREND,{'tagPath':signal,'colour':colour,'sp':sp})
         self.trends.append(n);self.parts.append(at(n,x,y,w,h))
 
     def build(self,title):
@@ -797,7 +805,7 @@ def overview():
     s.pipe('M%s 170 h40'%cols[0],INK,2.2);s.text(cols[0]+50,174,'Product flow',12,anchor='start')
     s.steam('M%s 200 h40'%cols[0]);s.text(cols[0]+50,204,'Steam',12,anchor='start')
     for key,(x,y) in place.items():
-        s.parts.append(at(embed(key.title()+'Tile',HMI+'Tile',{'tagPath':'%s/%s/Area'%(TAG_ROOT,key.title()),'route':ROUTE[key]}),x,y,230,170))
+        s.parts.append(at(embed(key.title()+'Tile',TILE,{'tagPath':'%s/%s/Area'%(TAG_ROOT,key.title()),'route':ROUTE[key]}),x,y,230,170))
     s.build('Oatmakers plant overview')
 
 
@@ -820,6 +828,10 @@ def page(name,title,subtitle,drawing,area=None):
     view(name,theme_root(flex('root',[header,pan],classes='Demo/Page Hmi/Page')),height=939)
 
 def build_scada():
+    # Templates used to be grouped by kind of view; they are now grouped per UDT.
+    for old in ('Instrument','AreaState','Device','Trend','Silo','Tile','Detail'):
+        if (V/HMI/old).exists():shutil.rmtree(V/HMI/old)
+    if (V/'Popups/Faceplates').exists():shutil.rmtree(V/'Popups/Faceplates')
     components()
     for fn in (overview,intake,cleaning,dehulling,kiln,flaking,cutting,milling,packing,utilities):fn()
     equipment_templates()

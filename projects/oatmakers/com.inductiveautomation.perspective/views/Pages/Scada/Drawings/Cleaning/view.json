@@ -561,7 +561,7 @@
           "name": "FC201"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/FC201"
           },
@@ -581,7 +581,7 @@
           "name": "MSP201"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/M-SP201"
           },
@@ -601,7 +601,7 @@
           "name": "FN201"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Fan",
+          "path": "Templates/Hmi/Motor/Fan",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/FN201"
           },
@@ -621,7 +621,7 @@
           "name": "MDS201"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/M-DS201"
           },
@@ -641,7 +641,7 @@
           "name": "MTR201"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/M-TR201"
           },
@@ -683,7 +683,7 @@
           "name": "MCV205"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/M-CV205"
           },
@@ -725,7 +725,7 @@
           "name": "FT201"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/FT201",
             "colour": "#f7f7f7"
@@ -746,7 +746,7 @@
           "name": "II201"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/II201",
             "colour": "#f7f7f7"
@@ -767,7 +767,7 @@
           "name": "PDI201"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/PDI201",
             "colour": "#f7f7f7"
@@ -788,7 +788,7 @@
           "name": "FI201"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/FI201",
             "colour": "#f7f7f7"
@@ -809,7 +809,7 @@
           "name": "II202"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/II202",
             "colour": "#f7f7f7"
@@ -830,7 +830,7 @@
           "name": "SI201"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/SI201",
             "colour": "#f7f7f7"
@@ -851,7 +851,7 @@
           "name": "QI201"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/QI201",
             "colour": "#f7f7f7"
@@ -872,7 +872,7 @@
           "name": "QI202"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/QI202",
             "colour": "#f7f7f7"
@@ -893,7 +893,7 @@
           "name": "TrendFeed"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/FT201",
             "colour": "#626b75",
@@ -915,7 +915,7 @@
           "name": "TrendRejects"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/QI201",
             "colour": "#626b75",

@@ -516,7 +516,7 @@
           "name": "P901"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Pump",
+          "path": "Templates/Hmi/Motor/Pump",
           "params": {
             "tagPath": "[default]OatMill/Utilities/P901"
           },
@@ -558,7 +558,7 @@
           "name": "FCV901"
         },
         "props": {
-          "path": "Templates/Hmi/Device/ControlValve",
+          "path": "Templates/Hmi/Valve/ControlValve",
           "params": {
             "tagPath": "[default]OatMill/Utilities/FCV901"
           },
@@ -578,7 +578,7 @@
           "name": "PCV901"
         },
         "props": {
-          "path": "Templates/Hmi/Device/ControlValve",
+          "path": "Templates/Hmi/Valve/ControlValve",
           "params": {
             "tagPath": "[default]OatMill/Utilities/PCV901"
           },
@@ -686,7 +686,7 @@
           "name": "LI902"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/LI902",
             "colour": "#f7f7f7"
@@ -707,7 +707,7 @@
           "name": "PI901"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/PI901",
             "colour": "#f7f7f7"
@@ -728,7 +728,7 @@
           "name": "TI901"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/TI901",
             "colour": "#f7f7f7"
@@ -749,7 +749,7 @@
           "name": "LIC901"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/LIC901",
             "colour": "#a7eef0"
@@ -770,7 +770,7 @@
           "name": "FI902"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/FI902",
             "colour": "#f7f7f7"
@@ -791,7 +791,7 @@
           "name": "FI901"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/FI901",
             "colour": "#f7f7f7"
@@ -812,7 +812,7 @@
           "name": "PIC902"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/PIC902",
             "colour": "#ffe044"
@@ -833,7 +833,7 @@
           "name": "MAC901"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Utilities/M-AC901"
           },
@@ -853,7 +853,7 @@
           "name": "MAC902"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Utilities/M-AC902"
           },
@@ -895,7 +895,7 @@
           "name": "II901"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/II901",
             "colour": "#f7f7f7"
@@ -916,7 +916,7 @@
           "name": "PI903"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/PI903",
             "colour": "#f7f7f7"
@@ -937,7 +937,7 @@
           "name": "TI903"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Utilities/TI903",
             "colour": "#f7f7f7"
@@ -958,7 +958,7 @@
           "name": "TrendHeaderPressure"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Utilities/PIC902",
             "colour": "#626b75",
@@ -980,7 +980,7 @@
           "name": "TrendAirPressure"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Utilities/PI903",
             "colour": "#626b75",

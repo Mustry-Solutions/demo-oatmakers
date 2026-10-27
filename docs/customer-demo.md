@@ -84,18 +84,19 @@ the current page is highlighted.
 Each area is a fixed 1740 by 910 drawing under `Pages/Scada/Drawings/`, embedded
 in Mustry Pan & Zoom by its page `Pages/Scada/<Area>` (the overview is
 `Pages/Scada/Overview`). The reusable SCADA views are templates under
-`Templates/Hmi/`:
+`Templates/Hmi/`, grouped per UDT so each type keeps its screen templates and
+its faceplate together:
 
-| Template | Parameters |
-|---|---|
-| `Instrument` | `tagPath` of an `AnalogInput`, optional `colour` for controllers |
-| `Device/Motor`, `Fan`, `RotaryValve`, `Pump` | `tagPath` of a `Motor` |
-| `Device/ControlValve`, `ShutoffValve` | `tagPath` of a `Valve` |
-| `Silo` | `tagPath` of a `Silo`, `height` |
-| `AreaState`, `Tile` | `tagPath` of a `ProcessArea` (`.../<Area>/Area`) |
-| `Trend` | `tagPath` of an `AnalogInput` or `Silo` |
-| `Stream` | `text`, `target` route, `width` |
-| `Equipment/*` (27 outlines) | `tag`, `title`, `width`, `height`, `labelX`, `labelY` |
+| Folder | Views | `tagPath` of |
+|---|---|---|
+| `AnalogInput/` | `Instrument` (optional `colour` for controllers), `Trend`, `Faceplate` | an `AnalogInput` (`Trend` also takes a `Silo`) |
+| `Motor/` | `Motor`, `Fan`, `RotaryValve`, `Pump`, `Faceplate` | a `Motor` |
+| `Valve/` | `ControlValve`, `ShutoffValve`, `Faceplate` | a `Valve` |
+| `Silo/` | `Silo` (plus `height`), `Faceplate` | a `Silo` |
+| `ProcessArea/` | `AreaState`, `Tile` | a `ProcessArea` (`.../<Area>/Area`) |
+
+`Stream` (`text`, `target` route, `width`) and the 27 `Equipment/*` outlines
+(`tag`, `title`, `width`, `height`, `labelX`, `labelY`) carry no tags.
 
 A live template only needs the full instance path, for example
 `[default]OatMill/Flaking/TIC501`: it reads value, unit, decimals, kind and
@@ -114,7 +115,7 @@ header has previous and next buttons in process order.
 ### Faceplates
 
 Clicking an instrument, motor, valve or silo opens its faceplate
-`Popups/Faceplates/<UDT>` with the instance path. A faceplate shows the name,
+`Templates/Hmi/<UDT>/Faceplate` as a popup with the instance path. A faceplate shows the name,
 description and full tag path, the live value with status, the operator
 settings, the Manual commands, and a chart with time and value axes over a 1 h,
 8 h or 24 h preset. Settings are staged: edit them, then press Write to send them

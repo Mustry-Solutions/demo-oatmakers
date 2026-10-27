@@ -485,7 +485,7 @@ def scadaTrendElements(tagPath, colour, setpoint):
 def openFaceplate(udt, tagPath):
 	if udt not in ('AnalogInput', 'Motor', 'Valve', 'Silo') or not _scadaInstance(tagPath):
 		raise ValueError('Unknown SCADA tag')
-	system.perspective.openPopup('faceplate', 'Popups/Faceplates/' + udt, params={'tagPath': tagPath},
+	system.perspective.openPopup('faceplate', 'Templates/Hmi/' + udt + '/Faceplate', params={'tagPath': tagPath},
 		title=tagPath.split('/')[-1], position={'width': 760, 'height': 640}, modal=False, draggable=True, resizable=True)
 
 

@@ -481,7 +481,7 @@
           "name": "LineState"
         },
         "props": {
-          "path": "Templates/Hmi/AreaState",
+          "path": "Templates/Hmi/ProcessArea/AreaState",
           "params": {
             "tagPath": "[default]OatMill/Milling/Area",
             "caption": "LINE 03"
@@ -568,7 +568,7 @@
           "name": "RV701"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Milling/RV701"
           },
@@ -610,7 +610,7 @@
           "name": "PCV701"
         },
         "props": {
-          "path": "Templates/Hmi/Device/ControlValve",
+          "path": "Templates/Hmi/Valve/ControlValve",
           "params": {
             "tagPath": "[default]OatMill/Milling/PCV701"
           },
@@ -630,7 +630,7 @@
           "name": "MHM701"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Milling/M-HM701"
           },
@@ -650,7 +650,7 @@
           "name": "FN701"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Fan",
+          "path": "Templates/Hmi/Motor/Fan",
           "params": {
             "tagPath": "[default]OatMill/Milling/FN701"
           },
@@ -670,7 +670,7 @@
           "name": "RV702"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Milling/RV702"
           },
@@ -734,7 +734,7 @@
           "name": "TIC701"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Milling/TIC701",
             "colour": "#ffe044"
@@ -755,7 +755,7 @@
           "name": "PI701"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Milling/PI701",
             "colour": "#f7f7f7"
@@ -776,7 +776,7 @@
           "name": "SI701"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Milling/SI701",
             "colour": "#f7f7f7"
@@ -797,7 +797,7 @@
           "name": "JI701"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Milling/JI701",
             "colour": "#f7f7f7"
@@ -818,7 +818,7 @@
           "name": "PDI701"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Milling/PDI701",
             "colour": "#f7f7f7"
@@ -839,7 +839,7 @@
           "name": "QI701"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Milling/QI701",
             "colour": "#f7f7f7"
@@ -860,7 +860,7 @@
           "name": "MI701"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Milling/MI701",
             "colour": "#f7f7f7"
@@ -881,7 +881,7 @@
           "name": "FT701"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Milling/FT701",
             "colour": "#f7f7f7"
@@ -902,7 +902,7 @@
           "name": "QI702"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Milling/QI702",
             "colour": "#f7f7f7"
@@ -923,7 +923,7 @@
           "name": "TrendRate"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Milling/FT701",
             "colour": "#626b75",
@@ -945,7 +945,7 @@
           "name": "TrendPower"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Milling/JI701",
             "colour": "#626b75",

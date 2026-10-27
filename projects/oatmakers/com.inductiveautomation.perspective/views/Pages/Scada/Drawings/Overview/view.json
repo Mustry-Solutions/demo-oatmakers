@@ -285,7 +285,7 @@
           "name": "IntakeTile"
         },
         "props": {
-          "path": "Templates/Hmi/Tile",
+          "path": "Templates/Hmi/ProcessArea/Tile",
           "params": {
             "tagPath": "[default]OatMill/Intake/Area",
             "route": "/scada/intake"
@@ -306,7 +306,7 @@
           "name": "CleaningTile"
         },
         "props": {
-          "path": "Templates/Hmi/Tile",
+          "path": "Templates/Hmi/ProcessArea/Tile",
           "params": {
             "tagPath": "[default]OatMill/Cleaning/Area",
             "route": "/scada/cleaning"
@@ -327,7 +327,7 @@
           "name": "DehullingTile"
         },
         "props": {
-          "path": "Templates/Hmi/Tile",
+          "path": "Templates/Hmi/ProcessArea/Tile",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/Area",
             "route": "/scada/dehulling"
@@ -348,7 +348,7 @@
           "name": "KilnTile"
         },
         "props": {
-          "path": "Templates/Hmi/Tile",
+          "path": "Templates/Hmi/ProcessArea/Tile",
           "params": {
             "tagPath": "[default]OatMill/Kiln/Area",
             "route": "/scada/kiln"
@@ -369,7 +369,7 @@
           "name": "FlakingTile"
         },
         "props": {
-          "path": "Templates/Hmi/Tile",
+          "path": "Templates/Hmi/ProcessArea/Tile",
           "params": {
             "tagPath": "[default]OatMill/Flaking/Area",
             "route": "/scada/flaking"
@@ -390,7 +390,7 @@
           "name": "CuttingTile"
         },
         "props": {
-          "path": "Templates/Hmi/Tile",
+          "path": "Templates/Hmi/ProcessArea/Tile",
           "params": {
             "tagPath": "[default]OatMill/Cutting/Area",
             "route": "/scada/cutting"
@@ -411,7 +411,7 @@
           "name": "MillingTile"
         },
         "props": {
-          "path": "Templates/Hmi/Tile",
+          "path": "Templates/Hmi/ProcessArea/Tile",
           "params": {
             "tagPath": "[default]OatMill/Milling/Area",
             "route": "/scada/milling"
@@ -432,7 +432,7 @@
           "name": "PackingTile"
         },
         "props": {
-          "path": "Templates/Hmi/Tile",
+          "path": "Templates/Hmi/ProcessArea/Tile",
           "params": {
             "tagPath": "[default]OatMill/Packing/Area",
             "route": "/scada/packing"
@@ -453,7 +453,7 @@
           "name": "UtilitiesTile"
         },
         "props": {
-          "path": "Templates/Hmi/Tile",
+          "path": "Templates/Hmi/ProcessArea/Tile",
           "params": {
             "tagPath": "[default]OatMill/Utilities/Area",
             "route": "/scada/utilities"

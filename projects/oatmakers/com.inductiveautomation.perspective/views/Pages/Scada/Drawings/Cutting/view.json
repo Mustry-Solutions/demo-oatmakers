@@ -428,7 +428,7 @@
           "name": "LineState"
         },
         "props": {
-          "path": "Templates/Hmi/AreaState",
+          "path": "Templates/Hmi/ProcessArea/AreaState",
           "params": {
             "tagPath": "[default]OatMill/Cutting/Area",
             "caption": "LINE 02"
@@ -471,7 +471,7 @@
           "name": "RV601"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Cutting/RV601"
           },
@@ -513,7 +513,7 @@
           "name": "PCV601"
         },
         "props": {
-          "path": "Templates/Hmi/Device/ControlValve",
+          "path": "Templates/Hmi/Valve/ControlValve",
           "params": {
             "tagPath": "[default]OatMill/Cutting/PCV601"
           },
@@ -533,7 +533,7 @@
           "name": "MGC601"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Cutting/M-GC601"
           },
@@ -553,7 +553,7 @@
           "name": "MGC602"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Cutting/M-GC602"
           },
@@ -617,7 +617,7 @@
           "name": "TIC601"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cutting/TIC601",
             "colour": "#ffe044"
@@ -638,7 +638,7 @@
           "name": "PI601"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cutting/PI601",
             "colour": "#f7f7f7"
@@ -659,7 +659,7 @@
           "name": "SI601"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cutting/SI601",
             "colour": "#f7f7f7"
@@ -680,7 +680,7 @@
           "name": "SI602"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cutting/SI602",
             "colour": "#f7f7f7"
@@ -701,7 +701,7 @@
           "name": "JI601"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cutting/JI601",
             "colour": "#f7f7f7"
@@ -722,7 +722,7 @@
           "name": "QI601"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cutting/QI601",
             "colour": "#f7f7f7"
@@ -743,7 +743,7 @@
           "name": "QI602"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cutting/QI602",
             "colour": "#f7f7f7"
@@ -764,7 +764,7 @@
           "name": "MI601"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cutting/MI601",
             "colour": "#f7f7f7"
@@ -785,7 +785,7 @@
           "name": "FT601"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Cutting/FT601",
             "colour": "#f7f7f7"
@@ -806,7 +806,7 @@
           "name": "TrendRate"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Cutting/FT601",
             "colour": "#626b75",
@@ -828,7 +828,7 @@
           "name": "TrendMoisture"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Cutting/MI601",
             "colour": "#626b75",

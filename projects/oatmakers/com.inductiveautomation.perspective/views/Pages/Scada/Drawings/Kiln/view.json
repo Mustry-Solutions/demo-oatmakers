@@ -411,7 +411,7 @@
           "name": "RV401"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Kiln/RV401"
           },
@@ -453,7 +453,7 @@
           "name": "FCV401"
         },
         "props": {
-          "path": "Templates/Hmi/Device/ControlValve",
+          "path": "Templates/Hmi/Valve/ControlValve",
           "params": {
             "tagPath": "[default]OatMill/Kiln/FCV401"
           },
@@ -473,7 +473,7 @@
           "name": "FN402"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Fan",
+          "path": "Templates/Hmi/Motor/Fan",
           "params": {
             "tagPath": "[default]OatMill/Kiln/FN402"
           },
@@ -493,7 +493,7 @@
           "name": "RV402"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Kiln/RV402"
           },
@@ -513,7 +513,7 @@
           "name": "FN401"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Fan",
+          "path": "Templates/Hmi/Motor/Fan",
           "params": {
             "tagPath": "[default]OatMill/Kiln/FN401"
           },
@@ -533,7 +533,7 @@
           "name": "SDV411"
         },
         "props": {
-          "path": "Templates/Hmi/Device/ShutoffValve",
+          "path": "Templates/Hmi/Valve/ShutoffValve",
           "params": {
             "tagPath": "[default]OatMill/Kiln/SDV411"
           },
@@ -575,7 +575,7 @@
           "name": "SDV412"
         },
         "props": {
-          "path": "Templates/Hmi/Device/ShutoffValve",
+          "path": "Templates/Hmi/Valve/ShutoffValve",
           "params": {
             "tagPath": "[default]OatMill/Kiln/SDV412"
           },
@@ -617,7 +617,7 @@
           "name": "SDV413"
         },
         "props": {
-          "path": "Templates/Hmi/Device/ShutoffValve",
+          "path": "Templates/Hmi/Valve/ShutoffValve",
           "params": {
             "tagPath": "[default]OatMill/Kiln/SDV413"
           },
@@ -659,7 +659,7 @@
           "name": "PI401"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Kiln/PI401",
             "colour": "#f7f7f7"
@@ -680,7 +680,7 @@
           "name": "FIC401"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Kiln/FIC401",
             "colour": "#ffe044"
@@ -701,7 +701,7 @@
           "name": "TIC401"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Kiln/TIC401",
             "colour": "#ffe044"
@@ -722,7 +722,7 @@
           "name": "TI402"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Kiln/TI402",
             "colour": "#f7f7f7"
@@ -743,7 +743,7 @@
           "name": "TI403"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Kiln/TI403",
             "colour": "#f7f7f7"
@@ -764,7 +764,7 @@
           "name": "MI401"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Kiln/MI401",
             "colour": "#f7f7f7"
@@ -785,7 +785,7 @@
           "name": "TI404"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Kiln/TI404",
             "colour": "#f7f7f7"
@@ -806,7 +806,7 @@
           "name": "FT401"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Kiln/FT401",
             "colour": "#f7f7f7"
@@ -827,7 +827,7 @@
           "name": "TrendKilnMid"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Kiln/TI402",
             "colour": "#626b75",
@@ -849,7 +849,7 @@
           "name": "TrendMoisture"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Kiln/MI401",
             "colour": "#626b75",
@@ -871,7 +871,7 @@
           "name": "TrendCoolerOut"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Kiln/TI404",
             "colour": "#626b75",

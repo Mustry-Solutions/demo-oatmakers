@@ -464,7 +464,7 @@
           "name": "VF301"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/VF301"
           },
@@ -484,7 +484,7 @@
           "name": "MHU301"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/M-HU301"
           },
@@ -504,7 +504,7 @@
           "name": "FN301"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Fan",
+          "path": "Templates/Hmi/Motor/Fan",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/FN301"
           },
@@ -524,7 +524,7 @@
           "name": "RV301"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/RV301"
           },
@@ -566,7 +566,7 @@
           "name": "MGS301"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/M-GS301"
           },
@@ -630,7 +630,7 @@
           "name": "FT301"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/FT301",
             "colour": "#f7f7f7"
@@ -651,7 +651,7 @@
           "name": "SI301"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/SI301",
             "colour": "#f7f7f7"
@@ -672,7 +672,7 @@
           "name": "II301"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/II301",
             "colour": "#f7f7f7"
@@ -693,7 +693,7 @@
           "name": "PDI301"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/PDI301",
             "colour": "#f7f7f7"
@@ -714,7 +714,7 @@
           "name": "FT303"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/FT303",
             "colour": "#f7f7f7"
@@ -735,7 +735,7 @@
           "name": "QI301"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/QI301",
             "colour": "#f7f7f7"
@@ -756,7 +756,7 @@
           "name": "QI302"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/QI302",
             "colour": "#f7f7f7"
@@ -777,7 +777,7 @@
           "name": "FT302"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/FT302",
             "colour": "#f7f7f7"
@@ -798,7 +798,7 @@
           "name": "TrendEfficiency"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/QI301",
             "colour": "#626b75",
@@ -820,7 +820,7 @@
           "name": "TrendRotorSpeed"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Dehulling/SI301",
             "colour": "#626b75",

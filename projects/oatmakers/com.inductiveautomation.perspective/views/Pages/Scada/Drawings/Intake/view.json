@@ -531,7 +531,7 @@
           "name": "MCV101"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Intake/M-CV101"
           },
@@ -551,7 +551,7 @@
           "name": "MEL101"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Intake/M-EL101"
           },
@@ -571,7 +571,7 @@
           "name": "MPC101"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Intake/M-PC101"
           },
@@ -613,7 +613,7 @@
           "name": "MCV102"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Intake/M-CV102"
           },
@@ -633,7 +633,7 @@
           "name": "SI101"
         },
         "props": {
-          "path": "Templates/Hmi/Silo",
+          "path": "Templates/Hmi/Silo/Silo",
           "params": {
             "tagPath": "[default]OatMill/Intake/SI101",
             "height": 330
@@ -657,7 +657,7 @@
           "name": "TI101"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Intake/TI101",
             "colour": "#f7f7f7"
@@ -678,7 +678,7 @@
           "name": "RV101"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Intake/RV101"
           },
@@ -698,7 +698,7 @@
           "name": "SI102"
         },
         "props": {
-          "path": "Templates/Hmi/Silo",
+          "path": "Templates/Hmi/Silo/Silo",
           "params": {
             "tagPath": "[default]OatMill/Intake/SI102",
             "height": 330
@@ -722,7 +722,7 @@
           "name": "TI102"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Intake/TI102",
             "colour": "#f7f7f7"
@@ -743,7 +743,7 @@
           "name": "RV102"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Intake/RV102"
           },
@@ -763,7 +763,7 @@
           "name": "SI103"
         },
         "props": {
-          "path": "Templates/Hmi/Silo",
+          "path": "Templates/Hmi/Silo/Silo",
           "params": {
             "tagPath": "[default]OatMill/Intake/SI103",
             "height": 330
@@ -787,7 +787,7 @@
           "name": "TI103"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Intake/TI103",
             "colour": "#f7f7f7"
@@ -808,7 +808,7 @@
           "name": "RV103"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Intake/RV103"
           },
@@ -828,7 +828,7 @@
           "name": "SI104"
         },
         "props": {
-          "path": "Templates/Hmi/Silo",
+          "path": "Templates/Hmi/Silo/Silo",
           "params": {
             "tagPath": "[default]OatMill/Intake/SI104",
             "height": 330
@@ -852,7 +852,7 @@
           "name": "TI104"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Intake/TI104",
             "colour": "#f7f7f7"
@@ -873,7 +873,7 @@
           "name": "RV104"
         },
         "props": {
-          "path": "Templates/Hmi/Device/RotaryValve",
+          "path": "Templates/Hmi/Motor/RotaryValve",
           "params": {
             "tagPath": "[default]OatMill/Intake/RV104"
           },
@@ -893,7 +893,7 @@
           "name": "MCV103"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Motor",
+          "path": "Templates/Hmi/Motor/Motor",
           "params": {
             "tagPath": "[default]OatMill/Intake/M-CV103"
           },
@@ -935,7 +935,7 @@
           "name": "FN101"
         },
         "props": {
-          "path": "Templates/Hmi/Device/Fan",
+          "path": "Templates/Hmi/Motor/Fan",
           "params": {
             "tagPath": "[default]OatMill/Intake/FN101"
           },
@@ -955,7 +955,7 @@
           "name": "WT101"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Intake/WT101",
             "colour": "#f7f7f7"
@@ -976,7 +976,7 @@
           "name": "MI101"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Intake/MI101",
             "colour": "#f7f7f7"
@@ -997,7 +997,7 @@
           "name": "PDI101"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Intake/PDI101",
             "colour": "#f7f7f7"
@@ -1018,7 +1018,7 @@
           "name": "II101"
         },
         "props": {
-          "path": "Templates/Hmi/Instrument",
+          "path": "Templates/Hmi/AnalogInput/Instrument",
           "params": {
             "tagPath": "[default]OatMill/Intake/II101",
             "colour": "#f7f7f7"
@@ -1039,7 +1039,7 @@
           "name": "TrendIntake"
         },
         "props": {
-          "path": "Templates/Hmi/Trend",
+          "path": "Templates/Hmi/AnalogInput/Trend",
           "params": {
             "tagPath": "[default]OatMill/Intake/WT101",
             "colour": "#626b75",
