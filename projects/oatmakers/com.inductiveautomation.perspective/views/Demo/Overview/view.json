@@ -103,7 +103,20 @@
               },
               "text": "SIMULATED FACTORY"
             },
-            "type": "ia.display.label"
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"HELLO KITTY EDITION\", \"SIMULATED FACTORY\")"
+                  }
+                }
+              }
+            }
           }
         ],
         "meta": {
@@ -722,22 +735,55 @@
                   },
                   "visible": true
                 }
-              ]
-            },
-            "type": "ia.chart.xy"
-          },
-          {
-            "events": {
-              "dom": {
-                "onClick": {
-                  "config": {
-                    "page": "/performance"
-                  },
-                  "scope": "C",
-                  "type": "nav"
-                }
+              ],
+              "legend": {
+                "enabled": false,
+                "position": "bottom"
+              },
+              "title": {
+                "text": ""
+              },
+              "cursor": {
+                "enabled": true,
+                "behavior": "zoomX"
+              },
+              "style": {
+                "classes": "Demo/Chart"
               }
             },
+            "position": {
+              "shrink": 0,
+              "basis": "235px"
+            },
+            "propConfig": {
+              "props.dataSources.history": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "view.custom.live.trend"
+                  }
+                }
+              },
+              "props.series[0].line.appearance.stroke.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#ac2454\", \"#2d8962\")"
+                  }
+                }
+              },
+              "props.series[0].line.appearance.fill.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#ac2454\", \"#2d8962\")"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
             "meta": {
               "name": "History"
             },
@@ -775,12 +821,15 @@
     "position": {
       "shrink": 0
     },
-    "props": {
-      "direction": "column",
-      "style": {
-        "classes": "Demo/Page"
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"Demo/Page Theme/HelloKitty\", \"Demo/Page\")"
+          }
+        }
       }
-    },
-    "type": "ia.container.flex"
+    }
   }
 }

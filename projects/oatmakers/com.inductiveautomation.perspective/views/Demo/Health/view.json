@@ -120,7 +120,20 @@
               },
               "text": "SIMULATED FACTORY"
             },
-            "type": "ia.display.label"
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"HELLO KITTY EDITION\", \"SIMULATED FACTORY\")"
+                  }
+                }
+              }
+            }
           }
         ],
         "meta": {
@@ -412,12 +425,15 @@
     "position": {
       "shrink": 0
     },
-    "props": {
-      "direction": "column",
-      "style": {
-        "classes": "Demo/Page"
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"Demo/Page Theme/HelloKitty\", \"Demo/Page\")"
+          }
+        }
       }
-    },
-    "type": "ia.container.flex"
+    }
   }
 }

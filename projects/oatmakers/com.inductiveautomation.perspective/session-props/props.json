@@ -4,7 +4,8 @@
       "scadaArea": "peeling",
       "scadaLine": 1,
       "scadaMetric": "temperature"
-    }
+    },
+    "theme": "standard"
   },
   "propConfig": {
     "props.auth": {
@@ -69,10 +70,10 @@
     }
   },
   "props": {
-    "address": "172.19.0.1",
+    "address": "172.20.0.1",
     "device": {},
     "geolocation": {},
-    "locale": "en-US",
+    "locale": "en-GB",
     "offline": {},
     "timeZoneId": "Europe/Brussels"
   }
