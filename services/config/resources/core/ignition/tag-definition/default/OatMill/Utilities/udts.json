@@ -1,0 +1,462 @@
+[
+  {
+    "name": "Area",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/ProcessArea",
+    "parameters": {
+      "Title": {
+        "dataType": "String",
+        "value": "Steam & compressed air"
+      }
+    }
+  },
+  {
+    "name": "FCV901",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Valve",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Control valve"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "gasFlow"
+      }
+    }
+  },
+  {
+    "name": "FI901",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 2
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "steamFlow"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "t/h"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 4.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 2.8
+      }
+    ]
+  },
+  {
+    "name": "FI902",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 0
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "gasFlow"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "Nm³/h"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 301.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 229.0
+      }
+    ]
+  },
+  {
+    "name": "II901",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Motor current"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "compAmps"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "A"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 112.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 80.0
+      }
+    ]
+  },
+  {
+    "name": "LI902",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 0
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Level"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "feedLevel"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "%"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 80.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 56.0
+      }
+    ]
+  },
+  {
+    "name": "LIC901",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Level"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "drumLevel"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "%"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 62.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 42.0
+      }
+    ]
+  },
+  {
+    "name": "M-AC901",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 16.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "compAmps"
+      }
+    }
+  },
+  {
+    "name": "M-AC902",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Standby"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 22.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "P901",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Pump"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 22.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "drumLevel"
+      }
+    }
+  },
+  {
+    "name": "PCV901",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Valve",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Control valve"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "headerPressure"
+      }
+    }
+  },
+  {
+    "name": "PI901",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Pressure"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "boilerPressure"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "bar"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 10.68
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 9.72
+      }
+    ]
+  },
+  {
+    "name": "PI903",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 2
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Pressure"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "airPressure"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "bar"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 7.52
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 6.88
+      }
+    ]
+  },
+  {
+    "name": "PIC902",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 2
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Pressure"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "headerPressure"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "bar"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 3.7
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 3.3
+      }
+    ]
+  },
+  {
+    "name": "TI901",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Temperature"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "steamTemp"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "°C"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 188.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 180.0
+      }
+    ]
+  },
+  {
+    "name": "TI903",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Temperature"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "dewPoint"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "°C"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": -37.3
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": -43.7
+      }
+    ]
+  }
+]

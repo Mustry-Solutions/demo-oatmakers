@@ -1,28 +1,7 @@
 {
-  "custom": {
-    "data": {
-      "running": true,
-      "state": ""
-    }
-  },
+  "custom": {},
   "params": {},
-  "propConfig": {
-    "custom.data": {
-      "binding": {
-        "type": "expr",
-        "config": {
-          "expression": "now(1000)"
-        },
-        "transforms": [
-          {
-            "type": "script",
-            "code": "\treturn application.demo.scadaData(\"overview\")"
-          }
-        ]
-      },
-      "persistent": true
-    }
-  },
+  "propConfig": {},
   "props": {
     "defaultSize": {
       "width": 1740,

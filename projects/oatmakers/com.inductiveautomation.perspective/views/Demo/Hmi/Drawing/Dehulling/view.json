@@ -1,28 +1,7 @@
 {
-  "custom": {
-    "data": {
-      "running": true,
-      "state": ""
-    }
-  },
+  "custom": {},
   "params": {},
-  "propConfig": {
-    "custom.data": {
-      "binding": {
-        "type": "expr",
-        "config": {
-          "expression": "now(1000)"
-        },
-        "transforms": [
-          {
-            "type": "script",
-            "code": "\treturn application.demo.scadaData(\"dehulling\")"
-          }
-        ]
-      },
-      "persistent": true
-    }
-  },
+  "propConfig": {},
   "props": {
     "defaultSize": {
       "width": 1740,
@@ -110,6 +89,16 @@
           "y": 305,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/VF301/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -137,6 +126,16 @@
           "y": 530,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/M-HU301/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -164,6 +163,16 @@
           "y": 50,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/FN301/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -191,6 +200,16 @@
           "y": 275,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/RV301/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -239,6 +258,16 @@
           "y": 355,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/M-GS301/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -312,9 +341,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.feed}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/FT301/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -322,6 +353,14 @@
                   "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/FT301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -355,9 +394,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.rotorSpeed}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/SI301/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -365,6 +406,14 @@
                   "code": "\treturn u\"{0:,.0f} rpm\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/SI301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -398,9 +447,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.hullerAmps}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/II301/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -408,6 +459,14 @@
                   "code": "\treturn u\"{0:,.1f} A\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/II301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -441,9 +500,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.aspDp}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/PDI301/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -451,6 +512,14 @@
                   "code": "\treturn u\"{0:,.1f} mbar\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/PDI301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -484,9 +553,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.hulls}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/FT303/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -494,6 +565,14 @@
                   "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/FT303/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -527,9 +606,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.efficiency}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/QI301/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -537,6 +618,14 @@
                   "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/QI301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -570,9 +659,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.broken}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/QI302/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -580,6 +671,14 @@
                   "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/QI302/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -613,9 +712,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.groats}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/FT302/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -623,6 +724,14 @@
                   "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/FT302/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }

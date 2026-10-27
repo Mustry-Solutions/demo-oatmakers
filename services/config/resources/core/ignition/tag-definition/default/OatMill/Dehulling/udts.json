@@ -1,0 +1,408 @@
+[
+  {
+    "name": "Area",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/ProcessArea",
+    "parameters": {
+      "Title": {
+        "dataType": "String",
+        "value": "Dehulling"
+      }
+    }
+  },
+  {
+    "name": "FN301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Fan"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 22.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "FT301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "feed"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "t/h"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 18.8
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 14.8
+      }
+    ]
+  },
+  {
+    "name": "FT302",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "groats"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "t/h"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 13.2
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 10.0
+      }
+    ]
+  },
+  {
+    "name": "FT303",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "hulls"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "t/h"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 5.7
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 4.1
+      }
+    ]
+  },
+  {
+    "name": "II301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Motor current"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "hullerAmps"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "A"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 72.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 52.0
+      }
+    ]
+  },
+  {
+    "name": "M-GS301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 28.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "M-HU301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 4.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "hullerAmps"
+      }
+    }
+  },
+  {
+    "name": "PDI301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Differential pressure"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "aspDp"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "mbar"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 9.7
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 6.5
+      }
+    ]
+  },
+  {
+    "name": "QI301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Quality"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "efficiency"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "%"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 95.6
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 89.2
+      }
+    ]
+  },
+  {
+    "name": "QI302",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Quality"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "broken"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "%"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 4.3
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 1.9
+      }
+    ]
+  },
+  {
+    "name": "RV301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Rotary valve"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 8.5
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "SI301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 0
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Speed"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "rotorSpeed"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "rpm"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 1528.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 1432.0
+      }
+    ]
+  },
+  {
+    "name": "VF301",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Rotary valve"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 17.5
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "feed"
+      }
+    }
+  }
+]

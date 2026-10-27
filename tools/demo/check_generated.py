@@ -1,6 +1,7 @@
 """Check that the generated demo resources still match tools/demo/build_views.py.
 
-The demo views, page routes, session props and stylesheet are generated. This
+The demo views, page routes, session props, stylesheet and OatMill SCADA tags
+(UDTs and instances under services/config) are generated. This
 check regenerates them and compares the result with what is committed, but
 semantically: JSON files are compared as data, resource.json manifests without
 the volatile lastModification metadata, and CSS without whitespace. A Designer
@@ -24,7 +25,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-PROJECT = 'projects/oatmakers'
+GENERATED = ['projects/oatmakers',
+             'services/config/resources/core/ignition/tag-type-definition/default/OatMill',
+             'services/config/resources/core/ignition/tag-definition/default/OatMill']
 
 
 def git(*args):
@@ -49,7 +52,7 @@ def normalize(path, data):
 
 
 def snapshot():
-    files = git('ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', PROJECT)
+    files = git('ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', *GENERATED)
     return {name: (ROOT / name).read_bytes()
             for name in files.split('\0') if name and (ROOT / name).is_file()}
 
@@ -87,4 +90,4 @@ if problems:
     print('Change tools/demo/build_views.py instead, run python3 tools/demo/build_views.py')
     print('and commit the regenerated files. See tools/demo/check_generated.py.')
     raise SystemExit(1)
-print('Generated demo views, routes, session props and stylesheet match the generator.')
+print('Generated demo views, routes, session props, stylesheet and SCADA tags match the generator.')

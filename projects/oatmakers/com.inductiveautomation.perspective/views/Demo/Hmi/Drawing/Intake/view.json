@@ -1,28 +1,7 @@
 {
-  "custom": {
-    "data": {
-      "running": true,
-      "state": ""
-    }
-  },
+  "custom": {},
   "params": {},
-  "propConfig": {
-    "custom.data": {
-      "binding": {
-        "type": "expr",
-        "config": {
-          "expression": "now(1000)"
-        },
-        "transforms": [
-          {
-            "type": "script",
-            "code": "\treturn application.demo.scadaData(\"intake\")"
-          }
-        ]
-      },
-      "persistent": true
-    }
-  },
+  "propConfig": {},
   "props": {
     "defaultSize": {
       "width": 1740,
@@ -110,6 +89,16 @@
           "y": 780,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/M-CV101/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -137,6 +126,16 @@
           "y": 40,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/M-EL101/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -164,6 +163,16 @@
           "y": 30,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/M-PC101/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -212,6 +221,16 @@
           "y": 210,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/M-CV102/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -240,9 +259,11 @@
         "propConfig": {
           "props.params.level": {
             "binding": {
-              "type": "property",
+              "type": "tag",
               "config": {
-                "path": "view.custom.data.lvl1"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/SI101/Level",
+                "fallbackDelay": 2.5
               }
             }
           }
@@ -277,9 +298,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.tg1}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/TI101/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -287,6 +310,14 @@
                   "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Intake/TI101/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -316,6 +347,16 @@
           "y": 705,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/RV101/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -344,9 +385,11 @@
         "propConfig": {
           "props.params.level": {
             "binding": {
-              "type": "property",
+              "type": "tag",
               "config": {
-                "path": "view.custom.data.lvl2"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/SI102/Level",
+                "fallbackDelay": 2.5
               }
             }
           }
@@ -381,9 +424,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.tg2}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/TI102/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -391,6 +436,14 @@
                   "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Intake/TI102/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -420,6 +473,16 @@
           "y": 705,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/RV102/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -448,9 +511,11 @@
         "propConfig": {
           "props.params.level": {
             "binding": {
-              "type": "property",
+              "type": "tag",
               "config": {
-                "path": "view.custom.data.lvl3"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/SI103/Level",
+                "fallbackDelay": 2.5
               }
             }
           }
@@ -485,9 +550,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.tg3}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/TI103/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -495,6 +562,14 @@
                   "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Intake/TI103/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -524,6 +599,16 @@
           "y": 705,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/RV103/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -552,9 +637,11 @@
         "propConfig": {
           "props.params.level": {
             "binding": {
-              "type": "property",
+              "type": "tag",
               "config": {
-                "path": "view.custom.data.lvl4"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/SI104/Level",
+                "fallbackDelay": 2.5
               }
             }
           }
@@ -589,9 +676,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.tg4}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/TI104/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -599,6 +688,14 @@
                   "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Intake/TI104/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -628,6 +725,16 @@
           "y": 705,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/RV104/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -655,6 +762,16 @@
           "y": 820,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/M-CV103/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -703,6 +820,16 @@
           "y": 60,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Intake/FN101/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -734,9 +861,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.intake}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/WT101/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -744,6 +873,14 @@
                   "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Intake/WT101/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -777,9 +914,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.moistIn}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/MI101/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -787,6 +926,14 @@
                   "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Intake/MI101/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -820,9 +967,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.filterDp}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/PDI101/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -830,6 +979,14 @@
                   "code": "\treturn u\"{0:,.1f} mbar\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Intake/PDI101/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -863,9 +1020,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.elevAmps}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Intake/II101/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -873,6 +1032,14 @@
                   "code": "\treturn u\"{0:,.1f} A\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Intake/II101/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }

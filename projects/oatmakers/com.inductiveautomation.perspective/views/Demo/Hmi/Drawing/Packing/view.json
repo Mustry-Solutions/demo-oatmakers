@@ -1,28 +1,7 @@
 {
-  "custom": {
-    "data": {
-      "running": true,
-      "state": ""
-    }
-  },
+  "custom": {},
   "params": {},
-  "propConfig": {
-    "custom.data": {
-      "binding": {
-        "type": "expr",
-        "config": {
-          "expression": "now(1000)"
-        },
-        "transforms": [
-          {
-            "type": "script",
-            "code": "\treturn application.demo.scadaData(\"packing\")"
-          }
-        ]
-      },
-      "persistent": true
-    }
-  },
+  "propConfig": {},
   "props": {
     "defaultSize": {
       "width": 1740,
@@ -111,9 +90,11 @@
         "propConfig": {
           "props.params.level": {
             "binding": {
-              "type": "property",
+              "type": "tag",
               "config": {
-                "path": "view.custom.data.lvlC"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/BN803/Level",
+                "fallbackDelay": 2.5
               }
             }
           }
@@ -148,9 +129,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.weightC}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/WI803/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -158,6 +141,14 @@
                   "code": "\treturn u\"{0:,.1f} g\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/WI803/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -191,9 +182,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.packsC}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/SI803/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -201,6 +194,14 @@
                   "code": "\treturn u\"{0:,.1f} /min\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/SI803/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -252,9 +253,11 @@
         "propConfig": {
           "props.params.level": {
             "binding": {
-              "type": "property",
+              "type": "tag",
               "config": {
-                "path": "view.custom.data.lvlB"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/BN802/Level",
+                "fallbackDelay": 2.5
               }
             }
           }
@@ -289,9 +292,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.weightB}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/WI802/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -299,6 +304,14 @@
                   "code": "\treturn u\"{0:,.1f} g\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/WI802/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -332,9 +345,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.packsB}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/SI802/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -342,6 +357,14 @@
                   "code": "\treturn u\"{0:,.1f} /min\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/SI802/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -393,9 +416,11 @@
         "propConfig": {
           "props.params.level": {
             "binding": {
-              "type": "property",
+              "type": "tag",
               "config": {
-                "path": "view.custom.data.lvlA"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/BN801/Level",
+                "fallbackDelay": 2.5
               }
             }
           }
@@ -430,9 +455,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.sackWeight}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/WI801/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -440,6 +467,14 @@
                   "code": "\treturn u\"{0:,.2f} kg\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/WI801/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -473,9 +508,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.sacksMin}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/SI801/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -483,6 +520,14 @@
                   "code": "\treturn u\"{0:,.1f} /min\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/SI801/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -512,6 +557,16 @@
           "y": 820,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Packing/M-CV804/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -564,9 +619,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.rejects}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/QI801/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -574,6 +631,14 @@
                   "code": "\treturn u\"{0:,.2f} %\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/QI801/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -607,9 +672,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.pallets}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/FQ801/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -617,6 +684,14 @@
                   "code": "\treturn u\"{0:,.1f} /h\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/FQ801/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }

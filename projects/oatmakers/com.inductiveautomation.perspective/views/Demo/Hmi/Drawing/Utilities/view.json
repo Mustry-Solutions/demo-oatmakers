@@ -1,28 +1,7 @@
 {
-  "custom": {
-    "data": {
-      "running": true,
-      "state": ""
-    }
-  },
+  "custom": {},
   "params": {},
-  "propConfig": {
-    "custom.data": {
-      "binding": {
-        "type": "expr",
-        "config": {
-          "expression": "now(1000)"
-        },
-        "transforms": [
-          {
-            "type": "script",
-            "code": "\treturn application.demo.scadaData(\"utilities\")"
-          }
-        ]
-      },
-      "persistent": true
-    }
-  },
+  "propConfig": {},
   "props": {
     "defaultSize": {
       "width": 1740,
@@ -110,6 +89,16 @@
           "y": 242,
           "width": 78,
           "height": 88
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Utilities/P901/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -158,6 +147,16 @@
           "y": 296,
           "width": 78,
           "height": 88
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Utilities/FCV901/Open}"
+              }
+            }
+          }
         }
       },
       {
@@ -185,6 +184,16 @@
           "y": 82,
           "width": 78,
           "height": 88
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Utilities/PCV901/Open}"
+              }
+            }
+          }
         }
       },
       {
@@ -300,9 +309,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.feedLevel}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/LI902/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -310,6 +321,14 @@
                   "code": "\treturn u\"{0:,.0f} %\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/LI902/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -343,9 +362,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.boilerPressure}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/PI901/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -353,6 +374,14 @@
                   "code": "\treturn u\"{0:,.1f} bar\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/PI901/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -386,9 +415,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.steamTemp}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/TI901/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -396,6 +427,14 @@
                   "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/TI901/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -429,9 +468,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.drumLevel}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/LIC901/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -439,6 +480,14 @@
                   "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/LIC901/Alarm}, \"#f2b8b3\", \"#a7eef0\")"
+              }
             }
           }
         }
@@ -472,9 +521,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.gasFlow}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/FI902/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -482,6 +533,14 @@
                   "code": "\treturn u\"{0:,.0f} Nm\u00b3/h\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/FI902/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -515,9 +574,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.steamFlow}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/FI901/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -525,6 +586,14 @@
                   "code": "\treturn u\"{0:,.2f} t/h\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/FI901/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -558,9 +627,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.headerPressure}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/PIC902/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -568,6 +639,14 @@
                   "code": "\treturn u\"{0:,.2f} bar\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/PIC902/Alarm}, \"#f2b8b3\", \"#ffe044\")"
+              }
             }
           }
         }
@@ -597,6 +676,16 @@
           "y": 455,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Utilities/M-AC901/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -612,7 +701,7 @@
             "signal": "",
             "unit": "A",
             "decimals": 1,
-            "running": false,
+            "running": true,
             "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUFDOTAyPC90ZXh0PjwvZz48L3N2Zz4=",
             "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUFDOTAyPC90ZXh0PjwvZz48L3N2Zz4="
           },
@@ -624,6 +713,16 @@
           "y": 655,
           "width": 110,
           "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Utilities/M-AC902/Running}"
+              }
+            }
+          }
         }
       },
       {
@@ -676,9 +775,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.compAmps}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/II901/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -686,6 +787,14 @@
                   "code": "\treturn u\"{0:,.1f} A\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/II901/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -719,9 +828,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.airPressure}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/PI903/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -729,6 +840,14 @@
                   "code": "\treturn u\"{0:,.2f} bar\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/PI903/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -762,9 +881,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.dewPoint}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Utilities/TI903/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -772,6 +893,14 @@
                   "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Utilities/TI903/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }

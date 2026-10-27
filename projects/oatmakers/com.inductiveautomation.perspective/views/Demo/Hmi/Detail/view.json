@@ -5,7 +5,8 @@
     "tag": "",
     "signal": "",
     "unit": "",
-    "decimals": 1
+    "decimals": 1,
+    "tagPath": ""
   },
   "propConfig": {
     "params.area": {
@@ -27,12 +28,16 @@
     "params.decimals": {
       "paramDirection": "input",
       "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
     }
   },
   "props": {
     "defaultSize": {
       "width": 1280,
-      "height": 300
+      "height": 320
     }
   },
   "root": {
@@ -76,6 +81,32 @@
       {
         "type": "ia.display.label",
         "meta": {
+          "name": "Path"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Demo/Muted"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.tagPath"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
           "name": "Mode"
         },
         "props": {
@@ -107,21 +138,14 @@
         "propConfig": {
           "props.text": {
             "binding": {
-              "type": "expr-struct",
+              "type": "expr",
               "config": {
-                "waitOnAll": true,
-                "struct": {
-                  "tick": "now(1000)",
-                  "area": "{view.params.area}",
-                  "signal": "{view.params.signal}",
-                  "unit": "{view.params.unit}",
-                  "decimals": "{view.params.decimals}"
-                }
+                "expression": "if(len({view.params.tagPath}) > 0, tag({view.params.tagPath}), 0)"
               },
               "transforms": [
                 {
                   "type": "script",
-                  "code": "\treturn application.demo.scadaDetailValue(value[\"area\"], value[\"signal\"], value[\"unit\"], value[\"decimals\"])"
+                  "code": "\tp = self.view.params\n\treturn application.demo._scadaFormat(value, p.unit, p.decimals)"
                 }
               ]
             }

@@ -2,7 +2,7 @@
 
 Open https://cloud.mustrysolutions.com/data/perspective/client/oatmakers/ or launch **Oatmakers | Connected factory demo** from the Perspective launcher. Reload an existing session after a release.
 
-All measurements and orders are simulated. Writes are confined to the `oat_demo` database schema and `[default]OatmakersDemo` memory tags. No screen controls equipment or changes customer records.
+All measurements and orders are simulated. Writes are confined to the `oat_demo` database schema and the `[default]OatmakersDemo` and `[default]OatMill` memory tags. No screen controls equipment or changes customer records.
 
 ## Screens
 
@@ -88,13 +88,32 @@ are reusable views under `Demo/Hmi/`. Blue stream links navigate to the area tha
 supplies or receives the product; grey links leave the plant. The page header has
 previous and next buttons in process order.
 
-Readings come from a deterministic, read-only simulation per area in
-`application.demo`. The line areas take throughput, temperature, moisture, steam
-pressure and power from the recorded line telemetry, follow the line state and
-trend the recorded last hour. No view writes to plant controls.
+The screens bind to real tags. `[default]OatMill/<Area>` holds one UDT instance
+per instrument, drive, valve and silo on the drawing, plus an `Area` instance
+with the area state:
 
-`tools/demo/build_scada.py` generates all drawings. Change it, run
-`build_views.py` and commit the result.
+| UDT | Members | Parameters |
+|---|---|---|
+| `OatMill/AnalogInput` | `PV`, `LowLimit`, `HighLimit`, `Alarm` (expression) | `Description`, `Signal`, `Unit`, `Decimals` |
+| `OatMill/Motor` | `Running`, `Fault`, `Mode`, `Current` | `Description`, `Signal`, `RatedCurrent`, `Duty` |
+| `OatMill/Valve` | `Open`, `Position` | `Description`, `Signal` |
+| `OatMill/Silo` | `Level`, `Content` (expression, tonnes) | `Description`, `Signal`, `Product`, `Capacity` |
+| `OatMill/ProcessArea` | `State`, `Running`, `LastUpdate` | `Title` |
+
+The `DemoContinuity` gateway timer writes the simulation into these memory tags
+every second. It finds the tags by browsing `[default]OatMill` and reads which
+signal each instance carries from its `Signal` parameter. The signals come from a
+deterministic model per area in `application.demo`. The line areas take
+throughput, temperature, moisture, steam pressure and power from the recorded
+line telemetry and follow the line state: a stopped line stops its drives and
+closes its valves. An instrument turns red when `Alarm` is true. Tiles read the
+tags and the detail popup shows the tag path. No view writes to the tags.
+
+`tools/demo/build_scada.py` generates all drawings and, through
+`tools/demo/build_tags.py`, the UDT definitions and instances. Change them, run
+`build_views.py` and commit the result. Alarm limits are instance values of the
+`LowLimit` and `HighLimit` members; a gateway only applies a changed value when
+it creates the tag.
 
 Performance initializes its picker outputs and embedded range parameters before
 bindings evaluate. Null or pending ranges return a valid empty chart. Error

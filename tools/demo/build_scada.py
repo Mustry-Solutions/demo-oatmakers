@@ -2,6 +2,7 @@
 import base64,json
 from html import escape
 from view_primitives import *
+from build_tags import build_tags
 
 W,H=1740,910
 INK='#565957'
@@ -14,6 +15,12 @@ EDGE='#666a68'
 ON='#a7dfa5'
 OFF='#b3b3b3'
 HMI='Demo/Hmi/'
+TAG_ROOT='[default]OatMill'
+# Tag instances per area, filled while the drawings are built.
+AREA_TAGS={}
+MEASURES={'FI':'Flow','FQ':'Totalised flow','II':'Motor current','JI':'Power','LI':'Level','MI':'Moisture','PDI':'Differential pressure',
+          'PI':'Pressure','QI':'Quality','SI':'Speed','TI':'Temperature','WI':'Weighed flow','ZI':'Gap'}
+DRIVES={'motor':'Motor','fan':'Fan','rotary':'Rotary valve','pump':'Pump'}
 
 # Process order drives the previous/next buttons and the menu.
 AREAS=[
@@ -28,6 +35,7 @@ AREAS=[
  ('utilities','/scada/utilities','Steam & compressed air','Utilities','Boiler house, steam distribution and compressed air.'),
 ]
 ROUTE={k:r for k,r,*_ in AREAS}
+SILO_TONNES={'Raw oats':450,'Rolled oats':60,'Steel-cut oats':40,'Oat flour':50}
 TITLE={k:t for k,_,t,*_ in AREAS}
 
 def b64(markup):return 'data:image/svg+xml;base64,'+base64.b64encode(markup.encode()).decode()
@@ -38,6 +46,11 @@ def at(n,x,y,w,h):
     n['position']={'x':x,'y':y,'width':w,'height':h};return n
 def bind(path):return {'binding':{'type':'property','config':{'path':path}}}
 def script_expr(expression,code):return {'binding':{'type':'expr','config':{'expression':expression},'transforms':[{'type':'script','code':code}]}}
+def expr(expression):return {'binding':{'type':'expr','config':{'expression':expression}}}
+def tag_binding(path,code=None):
+    b={'binding':{'type':'tag','config':{'mode':'direct','tagPath':path,'fallbackDelay':2.5}}}
+    if code:b['binding']['transforms']=[{'type':'script','code':code}]
+    return b
 def click(script):return {'dom':{'onClick':{'type':'script','scope':'G','config':{'script':script}}}}
 def clickable(children,script,cursor='pointer'):
     root=node('ia.container.coord','root',{'mode':'percent','style':{'cursor':cursor}},children);root['events']=click(script);return root
@@ -109,17 +122,24 @@ def components():
     tile['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTileSvg(value["area"])'}]}}}
     view(HMI+'Tile',clickable([tile],'\tsystem.perspective.navigate(self.view.params.route)'),params={'area':'intake','route':'/scada/intake'},height=170)
     value=label('Value','','Hmi/DetailValue')
-    value['propConfig']={'props.text':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(1000)','area':'{view.params.area}','signal':'{view.params.signal}','unit':'{view.params.unit}','decimals':'{view.params.decimals}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaDetailValue(value["area"], value["signal"], value["unit"], value["decimals"])'}]}}}
+    value['propConfig']={'props.text':{'binding':{'type':'expr','config':{'expression':'if(len({view.params.tagPath}) > 0, tag({view.params.tagPath}), 0)'},
+        'transforms':[{'type':'script','code':'\tp = self.view.params\n\treturn application.demo._scadaFormat(value, p.unit, p.decimals)'}]}}}
     plot=embed('Trend',HMI+'Trend',{'colour':'#626b75','sp':0},basis='160px')
     plot['propConfig']={'props.params.area':bind('view.params.area'),'props.params.signal':bind('view.params.signal')}
     caption=label('Caption','','Demo/Muted');caption['propConfig']={'props.text':script_expr('{view.params.area}','\treturn application.demo.scadaAreaTitle(value) + " | recent trend"')}
-    view(HMI+'Detail',flex('root',[bound_label('Title','view.params.tag','Demo/SectionTitle'),label('Mode','Read-only process simulation','Demo/Muted'),value,plot,caption],classes='Demo/PopupRoot'),params={'area':'intake','tag':'','signal':'','unit':'','decimals':1},height=300)
+    view(HMI+'Detail',flex('root',[bound_label('Title','view.params.tag','Demo/SectionTitle'),bound_label('Path','view.params.tagPath','Demo/Muted'),label('Mode','Read-only process simulation','Demo/Muted'),value,plot,caption],classes='Demo/PopupRoot'),params={'area':'intake','tag':'','signal':'','unit':'','decimals':1,'tagPath':''},height=320)
 
 
 class Scene:
     """One process drawing in fixed design coordinates: static vector layers with live views between them."""
     def __init__(self,area):
-        self.area=area;self.under=[];self.parts=[];self.over=[]
+        self.area=area;self.under=[];self.parts=[];self.over=[];self.tags={}
+    def path(self,tag):return '%s/%s/%s'%(TAG_ROOT,self.area.title(),tag)
+    def register(self,tag,udt,**params):
+        types={str:'String',int:'Int4',float:'Float8'}
+        cfg={'name':tag,'tagType':'UdtInstance','typeId':'OatMill/'+udt,
+             'parameters':{k:{'dataType':types[type(v)],'value':v} for k,v in sorted(params.items())}}
+        assert self.tags.setdefault(tag,cfg)==cfg,(self.area,tag)
     def pipe(self,d,colour=INK,width=1.8,dash=None):
         self.under.append('<path d="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linejoin="round"%s/>'%(d,colour,width,(' stroke-dasharray="%s"'%dash) if dash else ''))
     def steam(self,d):self.pipe(d,STEAM,1.7)
@@ -209,24 +229,35 @@ class Scene:
     # Live elements.
     def instrument(self,tag,kind,signal,unit,dec,x,y,lead=None,colour=None):
         n=embed(tag,HMI+'Instrument',{'area':self.area,'tag':tag,'kind':kind,'signal':signal,'unit':unit,'decimals':dec,'colour':colour or '#f7f7f7','value':'--'})
+        self.register(tag,'AnalogInput',Description=MEASURES[kind],Signal=signal,Unit=unit,Decimals=dec)
         fmt='\treturn u"{0:,.'+str(dec)+'f} '+unit+'".format(value or 0)' if unit else '\treturn u"{0:,.'+str(dec)+'f}".format(value or 0)'
-        n['propConfig']={'props.params.value':script_expr('try({view.custom.data.'+signal+'}, 0)',fmt)}
+        n['propConfig']={'props.params.value':tag_binding(self.path(tag)+'/PV',fmt),
+                         'props.params.colour':expr('if({%s/Alarm}, "#f2b8b3", "%s")'%(self.path(tag),colour or '#f7f7f7'))}
         if lead is not None:
             self.pipe('M%s %s V%s'%(x+10,y+42 if lead>y else y+22,lead),INK,1)
         self.parts.append(at(n,x,y,130,51))
     def state(self,x,y,tag):
         n=embed('LineState',HMI+'Instrument',{'area':self.area,'tag':tag,'kind':'ST','signal':'','unit':'','decimals':0,'value':'--','colour':'#f7f7f7'})
-        n['propConfig']={'props.params.value':bind('view.custom.data.state'),'props.params.colour':{'binding':{'type':'expr','config':{'expression':'case({view.custom.data.state}, "Stopped", "#f2b8b3", "Quality hold", "#f6dca6", "Recovering", "#c9d9ea", "#f7f7f7")'}}}}
+        state='{%s/State}'%self.path('Area')
+        n['propConfig']={'props.params.value':expr(state),'props.params.colour':expr('case('+state+', "Stopped", "#f2b8b3", "Quality hold", "#f6dca6", "Recovering", "#c9d9ea", "#f7f7f7")')}
         self.parts.append(at(n,x,y,130,51))
-    def device(self,tag,kind,cx,cy,signal='',unit='',dec=1,running=True):
+    def device(self,tag,kind,cx,cy,signal='',unit='',dec=1,standby=False):
         compact=kind in ('motor','fan','rotary')
         w,h=(110,60) if compact else (78,88)
-        n=embed(tag.replace('-',''),HMI+'Device',{'area':self.area,'tag':tag,'signal':signal,'unit':unit,'decimals':dec,'running':running is not False,'on':b64(symbol(kind,True,tag,w,h)),'off':b64(symbol(kind,False,tag,w,h))})
-        if running=='line':n['propConfig']={'props.params.running':bind('view.custom.data.running')}
+        n=embed(tag.replace('-',''),HMI+'Device',{'area':self.area,'tag':tag,'signal':signal,'unit':unit,'decimals':dec,'running':True,'on':b64(symbol(kind,True,tag,w,h)),'off':b64(symbol(kind,False,tag,w,h))})
+        if kind in DRIVES:
+            # Rated current is a fixed nameplate value per drive, derived from its tag name.
+            rated=float(round(4+sum(map(ord,tag))%7*(4.5 if kind=='rotary' else 9.0 if kind=='fan' else 6.0),1))
+            self.register(tag,'Motor',Description=DRIVES[kind],Signal=signal,RatedCurrent=rated,Duty='Standby' if standby else 'Duty')
+            n['propConfig']={'props.params.running':expr('{%s/Running}'%self.path(tag))}
+        else:
+            self.register(tag,'Valve',Description='Control valve' if kind=='control' else 'Shut-off valve',Signal=signal)
+            n['propConfig']={'props.params.running':expr('{%s/Open}'%self.path(tag))}
         self.parts.append(at(n,cx-20 if compact else cx-39,cy-30 if compact else cy-48,w,h))
     def silo(self,tag,signal,product,x,y,w=110,h=330):
         n=embed(tag,HMI+'Silo',{'area':self.area,'tag':tag,'signal':signal,'product':product,'level':0})
-        n['propConfig']={'props.params.level':bind('view.custom.data.'+signal)}
+        self.register(tag,'Silo',Description=product+' silo',Signal=signal,Product=product,Capacity=SILO_TONNES.get(product,60))
+        n['propConfig']={'props.params.level':tag_binding(self.path(tag)+'/Level')}
         self.parts.append(at(n,x,y,w,h))
         self.text(x+w/2+6,y-8,tag,12,600,'start',layer=self.over)
     def stream(self,text,x,y,w=170,target=None):
@@ -242,7 +273,10 @@ class Scene:
         canvas=[at(image('Piping',b64(svg(''.join(self.under),W,H)),title+' piping'),0,0,W,H)]+self.parts
         canvas.append(at(image('Labels',b64(svg(''.join(self.over),W,H)),title+' labels'),0,0,W,H))
         scene=node('ia.container.coord','root',{'mode':'fixed','style':{'backgroundColor':'transparent','overflow':'visible'}},canvas);scene.pop('position',None)
-        d=view(HMI+'Drawing/'+self.area.title(),scene,custom={'data':{'running':True,'state':''}},config={'custom.data':dict(script_expr('now(1000)','\treturn application.demo.scadaData('+json.dumps(self.area)+')'),persistent=True)},height=H)
+        if self.area!='overview':
+            self.register('Area','ProcessArea',Title=TITLE[self.area])
+            AREA_TAGS[self.area]=self.tags
+        d=view(HMI+'Drawing/'+self.area.title(),scene,height=H)
         d['props']['defaultSize']['width']=W
         write(V/HMI/'Drawing'/self.area.title()/'view.json',d)
 
@@ -364,10 +398,10 @@ def line_scene(area,number):
 def flaking():
     s=line_scene('flaking',1)
     s.stream('Groats from kiln',38,96,170,'kiln');s.pipe('M208 110 H260 V140')
-    s.bin(200,140,120,150,'BN501','Groat bin');s.pipe('M260 290 V380 H380 V110 H475 V150');s.device('RV501','rotary',260,330,'rate','kg/h',0,'line')
+    s.bin(200,140,120,150,'BN501','Groat bin');s.pipe('M260 290 V380 H380 V110 H475 V150');s.device('RV501','rotary',260,330,'rate','kg/h',0)
     s.steamer(420,150,110,300,'ST501','Steamer')
-    s.stream('Steam from boiler house',38,640,200,'utilities');s.steam('M238 654 H350 V400 H420');s.device('PCV501','control',300,654,'pressure','bar',2,'line')
-    s.pipe('M475 450 V500');s.rollmill(420,500,170,150,'FM501','Flaking mill');s.device('M-FM501','motor',620,520,'power','kW',1,'line')
+    s.stream('Steam from boiler house',38,640,200,'utilities');s.steam('M238 654 H350 V400 H420');s.device('PCV501','control',300,654,'pressure','bar',2)
+    s.pipe('M475 450 V500');s.rollmill(420,500,170,150,'FM501','Flaking mill');s.device('M-FM501','motor',620,520,'power','kW',1)
     s.pipe('M560 650 V715 H640');s.beltdryer(640,660,300,110,'DR501','Flake dryer')
     s.pipe('M940 715 H990');s.cooler(990,640,150,150,'CL501','Flake cooler')
     s.pipe('M1140 715 H1200');s.plansifter(1200,670,170,100,'SF501','Fines sifter')
@@ -391,12 +425,12 @@ def flaking():
 def cutting():
     s=line_scene('cutting',2)
     s.stream('Groats from kiln',38,96,170,'kiln');s.pipe('M208 110 H260 V140')
-    s.bin(200,140,120,150,'BN601','Groat bin');s.pipe('M260 290 V380');s.device('RV601','rotary',260,330,'rate','kg/h',0,'line')
+    s.bin(200,140,120,150,'BN601','Groat bin');s.pipe('M260 290 V380');s.device('RV601','rotary',260,330,'rate','kg/h',0)
     s.conveyor(230,382,240,'SC601','Steam conditioner','screw')
-    s.stream('Steam from boiler house',38,640,200,'utilities');s.steam('M238 654 H420 V402');s.device('PCV601','control',300,654,'pressure','bar',2,'line')
+    s.stream('Steam from boiler house',38,640,200,'utilities');s.steam('M238 654 H420 V402');s.device('PCV601','control',300,654,'pressure','bar',2)
     s.pipe('M470 392 H520 V345 H560');s.pipe('M520 392 V515 H560')
     s.drum(560,305,200,80,'GC601','Granulator 1');s.drum(560,475,200,80,'GC602','Granulator 2')
-    s.device('M-GC601','motor',640,270,'drum1','rpm',0,'line');s.device('M-GC602','motor',800,600,'drum2','rpm',0,'line')
+    s.device('M-GC601','motor',640,270,'drum1','rpm',0);s.device('M-GC602','motor',800,600,'drum2','rpm',0)
     s.pipe('M760 345 H820 V430 H880');s.pipe('M760 515 H820 V430')
     s.aspirator(880,350,130,170,'AS601','Aspirator');s.air('M945 350 V300 H1000');s.text(1010,304,'To dust filter',11,anchor='start',fill='#777')
     s.pipe('M1010 470 H1080');s.sieve(1080,400,180,120,'SF601','Grading sifter')
@@ -421,12 +455,12 @@ def milling():
     s.stream('Groats from kiln',38,96,170,'kiln');s.pipe('M208 110 H300 V140')
     s.stream('Fines from Line 01',38,166,170,'flaking');s.pipe('M208 180 H240')
     s.stream('Fines from Line 02',38,236,170,'cutting');s.pipe('M208 250 H240')
-    s.bin(240,140,120,180,'BN701','Mill feed bin');s.pipe('M300 320 V400');s.device('RV701','rotary',300,360,'rate','kg/h',0,'line')
+    s.bin(240,140,120,180,'BN701','Mill feed bin');s.pipe('M300 320 V400');s.device('RV701','rotary',300,360,'rate','kg/h',0)
     s.conveyor(270,402,240,'HT701','Heat treatment screw','screw')
-    s.stream('Steam from boiler house',38,640,200,'utilities');s.steam('M238 654 H470 V422');s.device('PCV701','control',300,654,'pressure','bar',2,'line')
-    s.pipe('M510 412 H560');s.hammermill(560,360,150,140,'HM701','Hammer mill');s.device('M-HM701','motor',635,320,'millSpeed','rpm',0,'line')
+    s.stream('Steam from boiler house',38,640,200,'utilities');s.steam('M238 654 H470 V422');s.device('PCV701','control',300,654,'pressure','bar',2)
+    s.pipe('M510 412 H560');s.hammermill(560,360,150,140,'HM701','Hammer mill');s.device('M-HM701','motor',635,320,'millSpeed','rpm',0)
     s.pipe('M710 430 H760 V140 H800');s.cyclone(800,110,110,190,'CY701','Product cyclone')
-    s.air('M855 110 V80 H1000');s.device('FN701','fan',1020,80,'pneuDp','mbar',0,'line');s.text(1150,85,'To dust filter',11,fill='#777')
+    s.air('M855 110 V80 H1000');s.device('FN701','fan',1020,80,'pneuDp','mbar',0);s.text(1150,85,'To dust filter',11,fill='#777')
     s.pipe('M855 300 V390');s.device('RV702','rotary',855,345)
     s.plansifter(780,390,160,180,'PS701','Plansifter')
     s.pipe('M940 440 H1540');s.stream('Oat flour to packing',1540,426,190,'packing')
@@ -492,7 +526,7 @@ def utilities():
     s.text(40,480,'COMPRESSED AIR',11,700,'start','#6d7270')
     for y,tag,run in [(520,'AC901',True),(720,'AC902',False)]:
         s.box(200,y,140,90,tag,'Compressor (duty)' if run else 'Compressor (standby)')
-        s.device('M-'+tag,'motor',270,y-35,'compAmps' if run else '','A',1,run)
+        s.device('M-'+tag,'motor',270,y-35,'compAmps' if run else '','A',1,standby=not run)
         s.pipe('M340 %s H420'%(y+45),AIR,1.7)
     s.pipe('M420 565 V765',AIR,1.7);s.pipe('M420 640 H520',AIR,1.7)
     s.vessel(520,520,80,220,'AR901','Air receiver');s.pipe('M600 640 H700',AIR,1.7)
@@ -548,6 +582,7 @@ def page(name,title,subtitle,drawing,area=None):
 def build_scada():
     components()
     for fn in (overview,intake,cleaning,dehulling,kiln,flaking,cutting,milling,packing,utilities):fn()
+    build_tags(AREA_TAGS)
     page('Demo/SCADA','Plant overview','From truck intake to pallet: live status of every process area.',HMI+'Drawing/Overview')
     for key,route,title,group,subtitle in AREAS:
         page(HMI+'Screen/'+key.title(),title,subtitle,HMI+'Drawing/'+key.title(),key)

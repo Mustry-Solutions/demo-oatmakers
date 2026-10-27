@@ -1,28 +1,7 @@
 {
-  "custom": {
-    "data": {
-      "running": true,
-      "state": ""
-    }
-  },
+  "custom": {},
   "params": {},
-  "propConfig": {
-    "custom.data": {
-      "binding": {
-        "type": "expr",
-        "config": {
-          "expression": "now(1000)"
-        },
-        "transforms": [
-          {
-            "type": "script",
-            "code": "\treturn application.demo.scadaData(\"cutting\")"
-          }
-        ]
-      },
-      "persistent": true
-    }
-  },
+  "propConfig": {},
   "props": {
     "defaultSize": {
       "width": 1740,
@@ -93,9 +72,9 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "property",
+              "type": "expr",
               "config": {
-                "path": "view.custom.data.state"
+                "expression": "{[default]OatMill/Cutting/Area/State}"
               }
             }
           },
@@ -103,7 +82,7 @@
             "binding": {
               "type": "expr",
               "config": {
-                "expression": "case({view.custom.data.state}, \"Stopped\", \"#f2b8b3\", \"Quality hold\", \"#f6dca6\", \"Recovering\", \"#c9d9ea\", \"#f7f7f7\")"
+                "expression": "case({[default]OatMill/Cutting/Area/State}, \"Stopped\", \"#f2b8b3\", \"Quality hold\", \"#f6dca6\", \"Recovering\", \"#c9d9ea\", \"#f7f7f7\")"
               }
             }
           }
@@ -159,9 +138,9 @@
         "propConfig": {
           "props.params.running": {
             "binding": {
-              "type": "property",
+              "type": "expr",
               "config": {
-                "path": "view.custom.data.running"
+                "expression": "{[default]OatMill/Cutting/RV601/Running}"
               }
             }
           }
@@ -217,9 +196,9 @@
         "propConfig": {
           "props.params.running": {
             "binding": {
-              "type": "property",
+              "type": "expr",
               "config": {
-                "path": "view.custom.data.running"
+                "expression": "{[default]OatMill/Cutting/PCV601/Open}"
               }
             }
           }
@@ -254,9 +233,9 @@
         "propConfig": {
           "props.params.running": {
             "binding": {
-              "type": "property",
+              "type": "expr",
               "config": {
-                "path": "view.custom.data.running"
+                "expression": "{[default]OatMill/Cutting/M-GC601/Running}"
               }
             }
           }
@@ -291,9 +270,9 @@
         "propConfig": {
           "props.params.running": {
             "binding": {
-              "type": "property",
+              "type": "expr",
               "config": {
-                "path": "view.custom.data.running"
+                "expression": "{[default]OatMill/Cutting/M-GC602/Running}"
               }
             }
           }
@@ -370,9 +349,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.temperature}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Cutting/TIC601/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -380,6 +361,14 @@
                   "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Cutting/TIC601/Alarm}, \"#f2b8b3\", \"#ffe044\")"
+              }
             }
           }
         }
@@ -413,9 +402,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.pressure}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Cutting/PI601/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -423,6 +414,14 @@
                   "code": "\treturn u\"{0:,.2f} bar\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Cutting/PI601/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -456,9 +455,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.drum1}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Cutting/SI601/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -466,6 +467,14 @@
                   "code": "\treturn u\"{0:,.0f} rpm\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Cutting/SI601/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -499,9 +508,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.drum2}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Cutting/SI602/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -509,6 +520,14 @@
                   "code": "\treturn u\"{0:,.0f} rpm\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Cutting/SI602/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -542,9 +561,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.power}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Cutting/JI601/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -552,6 +573,14 @@
                   "code": "\treturn u\"{0:,.1f} kW\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Cutting/JI601/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -585,9 +614,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.uniformity}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Cutting/QI601/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -595,6 +626,14 @@
                   "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Cutting/QI601/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -628,9 +667,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.oversize}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Cutting/QI602/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -638,6 +679,14 @@
                   "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Cutting/QI602/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -671,9 +720,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.moisture}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Cutting/MI601/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -681,6 +732,14 @@
                   "code": "\treturn u\"{0:,.2f} %\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Cutting/MI601/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }
@@ -714,9 +773,11 @@
         "propConfig": {
           "props.params.value": {
             "binding": {
-              "type": "expr",
+              "type": "tag",
               "config": {
-                "expression": "try({view.custom.data.rate}, 0)"
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Cutting/FT601/PV",
+                "fallbackDelay": 2.5
               },
               "transforms": [
                 {
@@ -724,6 +785,14 @@
                   "code": "\treturn u\"{0:,.0f} kg/h\".format(value or 0)"
                 }
               ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Cutting/FT601/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
             }
           }
         }

@@ -1,0 +1,615 @@
+[
+  {
+    "name": "Area",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/ProcessArea",
+    "parameters": {
+      "Title": {
+        "dataType": "String",
+        "value": "Intake & raw oat silos"
+      }
+    }
+  },
+  {
+    "name": "FN101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Fan"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 4.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "II101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Motor current"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "elevAmps"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "A"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 22.8
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 14.0
+      }
+    ]
+  },
+  {
+    "name": "M-CV101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 10.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "M-CV102",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 16.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "M-CV103",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 22.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "M-EL101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 4.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "elevAmps"
+      }
+    }
+  },
+  {
+    "name": "M-PC101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 16.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "MI101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Moisture"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "moistIn"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "%"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 14.8
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 12.4
+      }
+    ]
+  },
+  {
+    "name": "PDI101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Differential pressure"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "filterDp"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "mbar"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 12.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 7.2
+      }
+    ]
+  },
+  {
+    "name": "RV101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Rotary valve"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 31.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "RV102",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Rotary valve"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 4.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "RV103",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Rotary valve"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 8.5
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "RV104",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Rotary valve"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 13.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "SI101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Silo",
+    "parameters": {
+      "Capacity": {
+        "dataType": "Int4",
+        "value": 450
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Raw oats silo"
+      },
+      "Product": {
+        "dataType": "String",
+        "value": "Raw oats"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "lvl1"
+      }
+    }
+  },
+  {
+    "name": "SI102",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Silo",
+    "parameters": {
+      "Capacity": {
+        "dataType": "Int4",
+        "value": 450
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Raw oats silo"
+      },
+      "Product": {
+        "dataType": "String",
+        "value": "Raw oats"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "lvl2"
+      }
+    }
+  },
+  {
+    "name": "SI103",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Silo",
+    "parameters": {
+      "Capacity": {
+        "dataType": "Int4",
+        "value": 450
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Raw oats silo"
+      },
+      "Product": {
+        "dataType": "String",
+        "value": "Raw oats"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "lvl3"
+      }
+    }
+  },
+  {
+    "name": "SI104",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Silo",
+    "parameters": {
+      "Capacity": {
+        "dataType": "Int4",
+        "value": 450
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Raw oats silo"
+      },
+      "Product": {
+        "dataType": "String",
+        "value": "Raw oats"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "lvl4"
+      }
+    }
+  },
+  {
+    "name": "TI101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Temperature"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "tg1"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "°C"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 15.4
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 13.0
+      }
+    ]
+  },
+  {
+    "name": "TI102",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Temperature"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "tg2"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "°C"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 14.3
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 11.9
+      }
+    ]
+  },
+  {
+    "name": "TI103",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Temperature"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "tg3"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "°C"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 16.6
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 14.2
+      }
+    ]
+  },
+  {
+    "name": "TI104",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Temperature"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "tg4"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "°C"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 14.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 11.6
+      }
+    ]
+  },
+  {
+    "name": "WT101",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Weighed flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "intake"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "t/h"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 46.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 18.0
+      }
+    ]
+  }
+]

@@ -21,6 +21,10 @@ def tick():
 		_writeLiveTags(_queryJson('SELECT oat_demo.live_overview()'))
 	except (Exception, JavaException) as exc:
 		system.util.getLogger('Oatmakers.Demo').error('Demo continuity tick failed: {0}'.format(exc))
+	try:
+		_writeScadaTags()
+	except (Exception, JavaException) as exc:
+		system.util.getLogger('Oatmakers.Demo').error('SCADA tag simulation failed: {0}'.format(exc))
 
 
 def health():
@@ -305,8 +309,10 @@ def _writeLiveTags(data):
 
 # Process SCADA. Each area has deterministic signals (base, amplitude, period in
 # seconds); the production line areas take throughput, temperature, moisture,
-# steam pressure and power from the recorded line telemetry. Read-only: no view
-# writes plant tags or control setpoints.
+# steam pressure and power from the recorded line telemetry. The timer writes
+# them into the [default]OatMill UDT instances, which carry the signal name as
+# a parameter; the screens bind to those tags. Read-only: no view writes plant
+# tags or control setpoints.
 SCADA = {
 	'overview': {'title': 'Plant overview', 'line': 0, 'signals': {}},
 	'intake': {'title': 'Intake & raw oat silos', 'line': 0, 'signals': {
@@ -357,7 +363,7 @@ def _scadaWave(signal, spec, seconds):
 	import math
 	base, amplitude, period = spec
 	phase = sum(ord(c) for c in signal) % 17
-	return base + amplitude * math.sin(seconds / period + phase) + amplitude * 0.2 * math.sin(seconds / 3.1 + phase)
+	return base + amplitude * math.sin(seconds / period + phase) + amplitude * 0.2 * math.sin(seconds / max(3.1, period / 40.0) + phase)
 
 
 def _scadaArea(area):
@@ -370,7 +376,7 @@ def scadaAreaTitle(area):
 	return _scadaArea(area)['title']
 
 
-def scadaData(area):
+def _scadaSimulate(area):
 	spec = _scadaArea(area)
 	seconds = system.date.toMillis(system.date.now()) / 1000.0
 	data = dict((key, _scadaWave(key, value, seconds)) for key, value in spec['signals'].items())
@@ -448,15 +454,99 @@ def scadaTrendSvg(area, signal, colour, setpoint):
 	return _scadaSvg(body, 280, 70)
 
 
-def scadaDetailValue(area, signal, unit, decimals):
-	return _scadaFormat(scadaData(area).get(signal, 0), unit, decimals)
-
-
 def showScadaDetail(area, tag, signal, unit, decimals):
 	_scadaArea(area)
 	system.perspective.openPopup('scada-detail', 'Demo/Hmi/Detail',
-		params={'area': area, 'tag': tag, 'signal': signal, 'unit': unit, 'decimals': decimals}, title=tag,
-		position={'width': 520, 'height': 340}, modal=False, draggable=True, resizable=True)
+		params={'area': area, 'tag': tag, 'signal': signal, 'unit': unit, 'decimals': decimals,
+			'tagPath': scadaSignalPath(area, signal, tag)}, title=tag,
+		position={'width': 520, 'height': 360}, modal=False, draggable=True, resizable=True)
+
+
+SCADA_TAGS = '[default]OatMill'
+_scadaIndex = [0.0, {}]
+
+
+def _parameter(value):
+	# A ParameterValue holds a QualifiedValue; unwrap both to the plain value.
+	while hasattr(value, 'getValue'):
+		value = value.getValue()
+	return unicode(value) if isinstance(value, basestring) else value
+
+
+def _scadaTagIndex():
+	# (UDT, path, parameters) per area folder, refreshed every minute so new
+	# instances are picked up without a restart.
+	if _scadaIndex[1] and time.time() - _scadaIndex[0] < 60:
+		return _scadaIndex[1]
+	index = {}
+	for folder in system.tag.getConfiguration(SCADA_TAGS, True)[0]['tags']:
+		entries = []
+		for tag in folder['tags']:
+			if str(tag['tagType']) != 'UdtInstance':
+				continue
+			params = dict((str(key), _parameter(value)) for key, value in dict(tag['parameters']).items())
+			entries.append((str(tag['typeId']).split('/')[-1], '{0}/{1}/{2}'.format(SCADA_TAGS, folder['name'], tag['name']), params))
+		index[str(folder['name']).lower()] = entries
+	_scadaIndex[0], _scadaIndex[1] = time.time(), index
+	return index
+
+
+def _writeScadaTags():
+	import math
+	paths, values = [], []
+	now = system.date.now()
+	seconds = system.date.toMillis(now) / 1000.0
+	for area, entries in _scadaTagIndex().items():
+		if area not in SCADA:
+			continue
+		data = _scadaSimulate(area)
+		running = data['running']
+		for kind, path, params in entries:
+			signal = params.get('Signal')
+			if kind == 'AnalogInput' and signal in data:
+				paths.append(path + '/PV'); values.append(float(data[signal]))
+			elif kind == 'Silo' and signal in data:
+				paths.append(path + '/Level'); values.append(float(data[signal]))
+			elif kind == 'Motor':
+				on = running and params.get('Duty') != 'Standby'
+				if signal in data and signal.endswith('Amps'):
+					current = float(data[signal])
+				else:
+					current = float(params.get('RatedCurrent') or 10.0) * (0.82 + 0.04 * math.sin(seconds / 23.0 + len(path)))
+				paths.extend([path + '/Running', path + '/Current']); values.extend([on, current if on else 0.0])
+			elif kind == 'Valve':
+				control = params.get('Description') == 'Control valve'
+				position = 42.0 + 6.0 * math.sin(seconds / 37.0 + len(path)) if control else 100.0
+				paths.extend([path + '/Open', path + '/Position']); values.extend([running, position if running else 0.0])
+			elif kind == 'ProcessArea':
+				paths.extend([path + '/State', path + '/Running', path + '/LastUpdate']); values.extend([data['state'], running, now])
+	if paths:
+		qualities = system.tag.writeBlocking(paths, values)
+		bad = [path for path, quality in zip(paths, qualities) if not quality.isGood()]
+		if bad:
+			raise ValueError('{0} SCADA tag writes failed, first {1}'.format(len(bad), bad[0]))
+
+
+def scadaSignalPath(area, signal, tag=''):
+	# The instrument's own tag when it measures the signal, else the first one that does.
+	matches = [(name, kind, path) for kind, path, params in _scadaTagIndex().get(area, [])
+		for name in [path.split('/')[-1]] if kind in ('AnalogInput', 'Silo') and params.get('Signal') == signal]
+	matches.sort(key=lambda match: match[0] != tag)
+	for name, kind, path in matches:
+		return path + ('/PV' if kind == 'AnalogInput' else '/Level')
+	return ''
+
+
+def scadaValues(area):
+	keys, paths = [], []
+	for kind, path, params in _scadaTagIndex().get(area, []):
+		if kind in ('AnalogInput', 'Silo') and params.get('Signal') not in keys:
+			keys.append(params['Signal']); paths.append(path + ('/PV' if kind == 'AnalogInput' else '/Level'))
+		elif kind == 'ProcessArea':
+			keys.extend(['state', 'running']); paths.extend([path + '/State', path + '/Running'])
+	if not paths:
+		return {}
+	return dict(zip(keys, [qv.value if qv.quality.isGood() else None for qv in system.tag.readBlocking(paths)]))
 
 
 def scadaInstrumentSvg(tag, kind, value, colour):
@@ -469,15 +559,17 @@ def scadaInstrumentSvg(tag, kind, value, colour):
 
 def scadaTileSvg(area):
 	spec = _scadaArea(area)
-	data = scadaData(area)
-	state = data.get('state') or 'Running'
+	data = scadaValues(area)
+	state = data.get('state') or 'Starting'
 	pill = {'Stopped': ('#b23b34', '#ffffff'), 'Quality hold': ('#f6dca6', '#6b4a0c'), 'Recovering': ('#c9d9ea', '#24425f')}.get(state, ('#dfe3e6', '#4d555c'))
 	body = '<rect x="1" y="1" width="228" height="168" rx="4" fill="#f4f4f3" stroke="#9a9e9c" stroke-width="1.5"/>'
 	body += u'<text x="14" y="28" font-size="14" font-weight="700" fill="#3f4447">{0}</text>'.format(_escape(spec['title']))
 	body += u'<rect x="14" y="38" width="{0}" height="18" rx="3" fill="{1}"/><text x="20" y="51" font-size="10" font-weight="700" fill="{2}">{3}</text>'.format(len(state) * 6.6 + 12, pill[0], pill[1], _escape(state.upper()))
 	for i, (caption, signal, unit, decimals) in enumerate(spec['tile']):
 		y = 82 + i * 24
-		body += u'<text x="14" y="{0}" font-size="11.5" fill="#6d7270">{1}</text><text x="216" y="{0}" font-size="13" font-weight="700" text-anchor="end" fill="#333399">{2}</text>'.format(y, _escape(caption), _escape(_scadaFormat(data.get(signal, 0), unit, decimals)))
+		value = data.get(signal)
+		text = _scadaFormat(value, unit, decimals) if value is not None else '--'
+		body += u'<text x="14" y="{0}" font-size="11.5" fill="#6d7270">{1}</text><text x="216" y="{0}" font-size="13" font-weight="700" text-anchor="end" fill="#333399">{2}</text>'.format(y, _escape(caption), _escape(text))
 	body += '<text x="216" y="158" font-size="10.5" text-anchor="end" fill="#3f5a73" font-weight="700">OPEN SCREEN &#8250;</text>'
 	return _scadaSvg('<g font-family="Arial">' + body + '</g>', 230, 170)
 
