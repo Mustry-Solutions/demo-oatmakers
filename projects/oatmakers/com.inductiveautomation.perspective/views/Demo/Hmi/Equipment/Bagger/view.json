@@ -1,12 +1,12 @@
 {
   "custom": {},
   "params": {
-    "tag": "",
-    "title": "",
-    "width": 100,
-    "height": 100,
-    "labelX": 50,
-    "labelY": 118
+    "tag": "BG803",
+    "title": "500 g packs",
+    "width": 90,
+    "height": 110,
+    "labelX": 135,
+    "labelY": 30
   },
   "propConfig": {
     "params.tag": {
@@ -36,8 +36,8 @@
   },
   "props": {
     "defaultSize": {
-      "width": 1280,
-      "height": 100
+      "width": 94,
+      "height": 114
     }
   },
   "root": {

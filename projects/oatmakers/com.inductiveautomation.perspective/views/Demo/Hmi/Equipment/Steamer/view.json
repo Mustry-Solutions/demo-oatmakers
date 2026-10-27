@@ -1,12 +1,12 @@
 {
   "custom": {},
   "params": {
-    "tag": "",
-    "title": "",
-    "width": 100,
-    "height": 100,
-    "labelX": 50,
-    "labelY": 118
+    "tag": "ST501",
+    "title": "Steamer",
+    "width": 110,
+    "height": 300,
+    "labelX": 55.0,
+    "labelY": 150.0
   },
   "propConfig": {
     "params.tag": {
@@ -36,8 +36,8 @@
   },
   "props": {
     "defaultSize": {
-      "width": 1280,
-      "height": 100
+      "width": 114,
+      "height": 304
     }
   },
   "root": {

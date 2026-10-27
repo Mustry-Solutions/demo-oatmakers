@@ -1,12 +1,12 @@
 {
   "custom": {},
   "params": {
-    "tag": "",
-    "title": "",
-    "width": 100,
-    "height": 100,
-    "labelX": 50,
-    "labelY": 118
+    "tag": "MW803",
+    "title": "Weigher",
+    "width": 80,
+    "height": 64,
+    "labelX": 120,
+    "labelY": 30
   },
   "propConfig": {
     "params.tag": {
@@ -36,8 +36,8 @@
   },
   "props": {
     "defaultSize": {
-      "width": 1280,
-      "height": 100
+      "width": 84,
+      "height": 68
     }
   },
   "root": {

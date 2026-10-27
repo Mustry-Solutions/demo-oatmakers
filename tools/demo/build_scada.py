@@ -110,7 +110,7 @@ def components():
     detail='\tp = self.view.params\n\tif p.signal:\n\t\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, p.unit, p.decimals)'
     tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/InstrumentTag'}}),0,0,1,0.3)
     tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS)}
-    view(HMI+'Instrument',clickable([graphic,tag],detail),params={'area':'intake','tag':'TI101','kind':'TI','signal':'','unit':'','decimals':1,'value':'--','colour':'#f7f7f7'},height=51)
+    view(HMI+'Instrument',clickable([graphic,tag],detail),params={'area':'intake','tag':'TI101','kind':'TI','signal':'','unit':'','decimals':1,'value':'--','colour':'#f7f7f7'},height=51,width=130)
     device=full(image('Graphic','','Equipment'))
     device['propConfig']={'props.source':{'binding':{'type':'expr','config':{'expression':'if({view.params.running}, {view.params.on}, {view.params.off})'}}}}
     tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Tag'}}),0,0,1,1)
@@ -119,32 +119,32 @@ def components():
         'position.x':compact(0.38,0),'position.y':compact(0.37,0.81),'position.width':compact(0.62,1),'position.height':compact(0.25,0.17),
         'props.style.alignItems':compact('"flex-start"','"center"')}
     root=clickable([device,tag],'\tp = self.view.params\n\tif p.signal:\n\t\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, p.unit, p.decimals)')
-    view(HMI+'Device',root,params={'area':'intake','tag':'M101','signal':'','unit':'','decimals':1,'running':True,'on':'','off':'','compact':True},height=88)
+    view(HMI+'Device',root,params={'area':'intake','tag':'M101','signal':'','unit':'','decimals':1,'running':True,'on':'','off':'','compact':True},height=60,width=110)
     # Connected streams navigate to the area that supplies or receives them.
     link=full(image('Graphic','','Stream'));link['propConfig']={'props.source':bind('view.params.source')}
     root=clickable([link],'\tif self.view.params.target:\n\t\tsystem.perspective.navigate(self.view.params.target)')
     root['propConfig']={'props.style.cursor':{'binding':{'type':'expr','config':{'expression':'if(len({view.params.target}) > 0, "pointer", "default")'}}}}
-    view(HMI+'Stream',root,params={'source':'','target':''},height=28)
+    view(HMI+'Stream',root,params={'source':'','target':''},height=28,width=170)
     trend=full(image('Plot','','Trend'))
     trend['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}','signal':'{view.params.signal}','colour':'{view.params.colour}','sp':'{view.params.sp}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTrendSvg(value["area"], value["signal"], value["colour"], value["sp"])'}]}}}
-    view(HMI+'Trend',node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'area':'intake','signal':'','colour':'#626b75','sp':0},height=70)
+    view(HMI+'Trend',node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'area':'intake','signal':'','colour':'#626b75','sp':0},height=70,width=280)
     silo=full(image('Graphic','','Silo'))
     silo['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'level':'{view.params.level}','product':'{view.params.product}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaSiloSvg(value["level"], value["product"])'}]}}}
     tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Text Hmi/Tag','alignItems':'flex-start'}}),0.555,-0.06,1,0.05)
     tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS),
         'position.y':expr('-21 / {view.params.height}'),'position.height':expr('16 / {view.params.height}')}
     root=clickable([silo,tag],'\tp = self.view.params\n\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, "%", 0)');root['props']['style']['overflow']='visible'
-    view(HMI+'Silo',root,params={'area':'intake','tag':'SI101','signal':'','level':0,'product':'','height':330},height=330)
+    view(HMI+'Silo',root,params={'area':'intake','tag':'SI101','signal':'','level':0,'product':'','height':330},height=330,width=110)
     tile=full(image('Graphic','','Process area'))
     tile['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTileSvg(value["area"])'}]}}}
-    view(HMI+'Tile',clickable([tile],'\tsystem.perspective.navigate(self.view.params.route)'),params={'area':'intake','route':'/scada/intake'},height=170)
+    view(HMI+'Tile',clickable([tile],'\tsystem.perspective.navigate(self.view.params.route)'),params={'area':'intake','route':'/scada/intake'},height=170,width=230)
     value=label('Value','','Hmi/DetailValue')
     value['propConfig']={'props.text':{'binding':{'type':'expr','config':{'expression':'if(len({view.params.tagPath}) > 0, tag({view.params.tagPath}), 0)'},
         'transforms':[{'type':'script','code':'\tp = self.view.params\n\treturn application.demo._scadaFormat(value, p.unit, p.decimals)'}]}}}
     plot=embed('Trend',HMI+'Trend',{'colour':'#626b75','sp':0},basis='160px')
     plot['propConfig']={'props.params.area':bind('view.params.area'),'props.params.signal':bind('view.params.signal')}
     caption=label('Caption','','Demo/Muted');caption['propConfig']={'props.text':script_expr('{view.params.area}','\treturn application.demo.scadaAreaTitle(value) + " | recent trend"')}
-    view(HMI+'Detail',flex('root',[bound_label('Title','view.params.tag','Demo/SectionTitle'),bound_label('Path','view.params.tagPath','Demo/Muted'),label('Mode','Read-only process simulation','Demo/Muted'),value,plot,caption],classes='Demo/PopupRoot'),params={'area':'intake','tag':'','signal':'','unit':'','decimals':1,'tagPath':''},height=320)
+    view(HMI+'Detail',flex('root',[bound_label('Title','view.params.tag','Demo/SectionTitle'),bound_label('Path','view.params.tagPath','Demo/Muted'),label('Mode','Read-only process simulation','Demo/Muted'),value,plot,caption],classes='Demo/PopupRoot'),params={'area':'intake','tag':'','signal':'','unit':'','decimals':1,'tagPath':''},height=360,width=520)
 
 # Equipment templates, ISA-101 greyscale. Each is an embedded view under
 # Demo/Hmi/Equipment/ that draws its outline from its width and height params;
@@ -181,6 +181,9 @@ EQUIPMENT={
 }
 
 
+# Body size, label offset, tag and title of each template's first instance: the template's defaults.
+SAMPLE={}
+
 def equipment_templates():
     for kind,(name,pad,code) in EQUIPMENT.items():
         left,top,right,bottom=[v+2 for v in pad]
@@ -197,7 +200,9 @@ def equipment_templates():
         title['propConfig']={'props.text':bind('view.params.title'),'meta.visible':expr(SHOW_LABELS+' && len({view.params.title}) > 0'),
                              'position.x':expr('{view.params.labelX} + %d'%(left-150)),'position.y':expr('{view.params.labelY} + %d'%(top+4))}
         root=node('ia.container.coord','root',{'mode':'fixed','style':{'overflow':'visible'}},[shape,tag,title]);root.pop('position',None)
-        view(HMI+'Equipment/'+name,root,params={'tag':'','title':'','width':100,'height':100,'labelX':50,'labelY':118},height=100)
+        w,h,lx,ly,tag,title=SAMPLE[kind]
+        view(HMI+'Equipment/'+name,root,params={'tag':tag,'title':title,'width':w,'height':h,'labelX':lx,'labelY':ly},
+             height=h+top+bottom,width=w+left+right)
 
 
 class Scene:
@@ -216,7 +221,7 @@ class Scene:
     def air(self,d):self.pipe(d,AIR,1,'4 3')
     def text(self,x,y,t,size=12,weight=400,anchor='middle',fill='#555',toggle=True):
         self.texts.append(text_node('Text%d'%(len(self.texts)+1),x,y,t,size,weight,anchor,fill,toggle))
-    def equip(self,kind,x,y,w,h,tag='',title='',label=None):
+    def equip(self,kind,x,y,w,h,tag='',title='',label=None,sample=True):
         """Place an equipment template; label is the absolute centre of the tag's baseline."""
         name,(left,top,right,bottom),_=EQUIPMENT[kind]
         key=(tag or name).replace('-','')
@@ -224,10 +229,11 @@ class Scene:
         lx,ly=label or (x+w/2,y+h+18)
         n=embed(key+('' if self.counts[key]==1 else str(self.counts[key]))+'Shape',HMI+'Equipment/'+name,
                 {'tag':tag,'title':title,'width':w,'height':h,'labelX':round(lx-x,1),'labelY':round(ly-y,1)})
+        if sample:SAMPLE.setdefault(kind,(w,h,round(lx-x,1),round(ly-y,1),tag,title))
         n['props']['style']={'overflow':'visible'}
         self.equipment.append(at(n,x-left-2,y-top-2,w+left+right+4,h+top+bottom+4))
     def bin(self,x,y,w,h,tag,title):self.equip('bin',x,y,w,h,tag,title,(x+w/2,y+h*0.42))
-    def conveyor(self,x,y,w,tag,title,kind='chain',label=None):self.equip(kind,x,y,w,20,tag,title,label or (x+w/2,y+36))
+    def conveyor(self,x,y,w,tag,title,kind='chain',label=None):self.equip(kind,x,y,w,20,tag,title,label or (x+w/2,y+36),label is None)
     def elevator(self,x,top,bottom,tag,title):self.equip('elevator',x-10,top,50,bottom-top,tag,title,(x-46,(top+bottom)/2))
     def sieve(self,x,y,w,h,tag,title):self.equip('sieve',x,y,w,h,tag,title)
     def aspirator(self,x,y,w,h,tag,title):self.equip('aspirator',x,y,w,h,tag,title)
@@ -237,7 +243,7 @@ class Scene:
     def cyclone(self,x,y,w,h,tag,title):self.equip('cyclone',x,y,w,h,tag,title,(x+w+40,y+h*0.35))
     def filter(self,x,y,w,h,tag,title):self.equip('filter',x,y,w,h,tag,title)
     def column(self,x,y,w,h,tag,title):self.equip('column',x,y,w,h,tag,title,(x+w/2,y+h*0.37))
-    def cooler(self,x,y,w,h,tag,title,label=None):self.equip('cooler',x,y,w,h,tag,title,label)
+    def cooler(self,x,y,w,h,tag,title,label=None):self.equip('cooler',x,y,w,h,tag,title,label,label is None)
     def steamer(self,x,y,w,h,tag,title):self.equip('steamer',x,y,w,h,tag,title,(x+w/2,y+h/2))
     def rollmill(self,x,y,w,h,tag,title):self.equip('rollmill',x,y,w,h,tag,title)
     def hammermill(self,x,y,w,h,tag,title):self.equip('hammermill',x,y,w,h,tag,title)
@@ -608,8 +614,8 @@ def page(name,title,subtitle,drawing,area=None):
 
 def build_scada():
     components()
-    equipment_templates()
     for fn in (overview,intake,cleaning,dehulling,kiln,flaking,cutting,milling,packing,utilities):fn()
+    equipment_templates()
     build_tags(AREA_TAGS)
     page('Demo/SCADA','Plant overview','From truck intake to pallet: live status of every process area.',HMI+'Drawing/Overview')
     for key,route,title,group,subtitle in AREAS:

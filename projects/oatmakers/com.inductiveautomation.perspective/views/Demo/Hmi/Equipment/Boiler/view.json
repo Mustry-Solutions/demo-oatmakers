@@ -1,12 +1,12 @@
 {
   "custom": {},
   "params": {
-    "tag": "",
-    "title": "",
-    "width": 100,
-    "height": 100,
-    "labelX": 50,
-    "labelY": 118
+    "tag": "B901",
+    "title": "Steam boiler",
+    "width": 300,
+    "height": 150,
+    "labelX": 150.0,
+    "labelY": 79.0
   },
   "propConfig": {
     "params.tag": {
@@ -36,8 +36,8 @@
   },
   "props": {
     "defaultSize": {
-      "width": 1280,
-      "height": 100
+      "width": 344,
+      "height": 214
     }
   },
   "root": {

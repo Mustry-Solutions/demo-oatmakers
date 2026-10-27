@@ -1,12 +1,12 @@
 {
   "custom": {},
   "params": {
-    "tag": "",
-    "title": "",
-    "width": 100,
-    "height": 100,
-    "labelX": 50,
-    "labelY": 118
+    "tag": "CV101",
+    "title": "Intake chain conveyor",
+    "width": 250,
+    "height": 20,
+    "labelX": 125.0,
+    "labelY": 36
   },
   "propConfig": {
     "params.tag": {
@@ -36,8 +36,8 @@
   },
   "props": {
     "defaultSize": {
-      "width": 1280,
-      "height": 100
+      "width": 254,
+      "height": 24
     }
   },
   "root": {

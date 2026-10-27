@@ -1,12 +1,12 @@
 {
   "custom": {},
   "params": {
-    "tag": "",
-    "title": "",
-    "width": 100,
-    "height": 100,
-    "labelX": 50,
-    "labelY": 118
+    "tag": "IP101",
+    "title": "Intake pit",
+    "width": 140,
+    "height": 110,
+    "labelX": 70.0,
+    "labelY": 46.2
   },
   "propConfig": {
     "params.tag": {
@@ -36,8 +36,8 @@
   },
   "props": {
     "defaultSize": {
-      "width": 1280,
-      "height": 100
+      "width": 144,
+      "height": 114
     }
   },
   "root": {

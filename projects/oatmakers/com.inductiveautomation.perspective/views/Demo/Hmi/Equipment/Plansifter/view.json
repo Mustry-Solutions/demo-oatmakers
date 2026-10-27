@@ -1,12 +1,12 @@
 {
   "custom": {},
   "params": {
-    "tag": "",
-    "title": "",
-    "width": 100,
-    "height": 100,
-    "labelX": 50,
-    "labelY": 118
+    "tag": "GR401",
+    "title": "Groat grader",
+    "width": 170,
+    "height": 90,
+    "labelX": 85.0,
+    "labelY": 108
   },
   "propConfig": {
     "params.tag": {
@@ -36,8 +36,8 @@
   },
   "props": {
     "defaultSize": {
-      "width": 1280,
-      "height": 100
+      "width": 174,
+      "height": 94
     }
   },
   "root": {

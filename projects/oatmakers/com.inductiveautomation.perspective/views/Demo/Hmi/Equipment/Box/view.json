@@ -1,12 +1,12 @@
 {
   "custom": {},
   "params": {
-    "tag": "",
-    "title": "",
-    "width": 100,
-    "height": 100,
-    "labelX": 50,
-    "labelY": 118
+    "tag": "CW801",
+    "title": "Checkweigher",
+    "width": 110,
+    "height": 30,
+    "labelX": 55.0,
+    "labelY": 48
   },
   "propConfig": {
     "params.tag": {
@@ -36,8 +36,8 @@
   },
   "props": {
     "defaultSize": {
-      "width": 1280,
-      "height": 100
+      "width": 114,
+      "height": 34
     }
   },
   "root": {

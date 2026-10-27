@@ -1,12 +1,12 @@
 {
   "custom": {},
   "params": {
-    "tag": "",
-    "title": "",
-    "width": 100,
-    "height": 100,
-    "labelX": 50,
-    "labelY": 118
+    "tag": "PC101",
+    "title": "Drum pre-cleaner",
+    "width": 170,
+    "height": 70,
+    "labelX": 85.0,
+    "labelY": 88
   },
   "propConfig": {
     "params.tag": {
@@ -36,8 +36,8 @@
   },
   "props": {
     "defaultSize": {
-      "width": 1280,
-      "height": 100
+      "width": 174,
+      "height": 74
     }
   },
   "root": {
