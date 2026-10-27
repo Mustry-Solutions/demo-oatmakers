@@ -5,8 +5,15 @@ M='mustrysolutions.perspective.'
 EMPTY_RANGE={'start':0,'end':0,'valid':False,'realtime':False}
 EMPTY_HISTORY={'points':[],'count':0,'message':'Loading recorded history...'}
 COLORS=['#39444f','#77889a','#aeb8c0']
+THEME_COLORS={'hello-kitty':['#ac2454','#246b80','#857038']}
 LINES=[(0,'All lines'),(1,'Rolling line 01'),(2,'Cutting line 02'),(3,'Milling line 03')]
 METRICS={'rate':('Throughput','Throughput','kg/h'),'temperature':('Temperature','Temperature','°C'),'moisture':('Moisture','Moisture','%'),'pressure':('Pressure','Pressure','bar'),'power':('Power','Power','kW')}
+
+def theme_series(n,colours):
+    for i,colour in enumerate(colours):
+        values={'standard':colour}|{t:c[i] for t,c in THEME_COLORS.items()}
+        for key in ('stroke.color','fill.color'):n['propConfig'][f'props.series[{i}].line.appearance.{key}']=themed(values)
+    return n
 
 def bind_script(path,code):
     return {'binding':{'type':'property','config':{'path':path},'transforms':[{'type':'script','code':code}]}}
@@ -63,6 +70,7 @@ hchart['props']['yAxes'][0]['value']['range']['min']=''
 for i in range(3):
     hchart['propConfig'][f'props.series[{i}].visible']=expr('{view.params.lineNumber} = 0 || {view.params.lineNumber} = '+str(i+1))
     hchart['propConfig'][f'props.series[{i}].hiddenInLegend']=expr('{view.params.lineNumber} != 0 && {view.params.lineNumber} != '+str(i+1))
+theme_series(hchart,COLORS)
 hchart['propConfig']['props.yAxes[0].label.enabled']={'persistent':True};hchart['props']['yAxes'][0]['label']['enabled']=True
 hchart['propConfig']['props.yAxes[0].label.text']=bind_script('view.params.metric','\treturn application.demo.METRICS.get(value or "rate", application.demo.METRICS["rate"])[2]')
 history_root=flex('root',[control,hchart,bound_label('HistoryMessage','view.custom.history.message','Demo/Muted')],classes='Demo/HistoryRoot')
@@ -77,7 +85,7 @@ for path in ['Demo/HistoryChart']:
 # Minimal fixed-height headers leave the operational content its space.
 EMPTY_LIVE={'ready':False,'metrics':[],'lines':[],'trend':[],'updatedEpochMs':0,'updatedAt':'','shiftStart':''}
 def page(name,title,subtitle,body,custom=None,config=None,live_header=True):
-    header=flex('Header',[flex('Identity',[label('Eyebrow','OATMAKERS / LIVE OPERATIONS','Demo/Eyebrow'),label('Title',title,'Demo/PageTitle'),label('Subtitle',subtitle,'Demo/Subtitle')],grow=1),label('Mode','SIMULATED FACTORY','Demo/DemoBadge')],'row','Demo/PageHeader')
+    header=flex('Header',[flex('Identity',[label('Eyebrow','OATMAKERS / LIVE OPERATIONS','Demo/Eyebrow'),label('Title',title,'Demo/PageTitle'),label('Subtitle',subtitle,'Demo/Subtitle')],grow=1),theme_badge(label('Mode','SIMULATED FACTORY','Demo/DemoBadge'))],'row','Demo/PageHeader')
     children=[header]
     if live_header:
         live_label=label('LiveStatus','','Demo/LiveStatus')
@@ -85,14 +93,14 @@ def page(name,title,subtitle,body,custom=None,config=None,live_header=True):
         children.append(live_label)
     cfg={'custom.live':struct_binding({'tick':'now(1000)'},'\treturn application.demo.live()')} if live_header else {}
     cfg.update(config or {})
-    return view(name,flex('root',children+body,classes='Demo/Page'),custom=({'live':EMPTY_LIVE} if live_header else {})|(custom or {}),config=cfg)
+    return view(name,theme_root(flex('root',children+body,classes='Demo/Page')),custom=({'live':EMPTY_LIVE} if live_header else {})|(custom or {}),config=cfg)
 
 def line_cards():
     return repeater('Lines','Demo/Components/LineCard','view.custom.live.lines','auto')
 def live_metrics():
     n=repeater('LiveMetrics','Demo/Components/Metric','view.custom.live.metrics','auto');return n
 
-live_plot=chart('LiveTrend',[('rate','Throughput (t/h)','#2d8962')],source='view.custom.live.trend',height='235px');live_plot['props']['legend']['enabled']=False
+live_plot=chart('LiveTrend',[('rate','Throughput (t/h)','#2d8962')],source='view.custom.live.trend',height='235px');live_plot['props']['legend']['enabled']=False;theme_series(live_plot,['#2d8962'])
 page('Demo/Overview','What is happening now','Live production rates, shift output and process alerts.',[
  live_metrics(),line_cards(),panel('LiveTrendPanel','Factory throughput','The latest ten minutes of recorded one-second telemetry.',[live_plot,button('History','Choose a history range',page='/performance',classes='Demo/QuietButton')],grow=0)])
 
@@ -128,6 +136,7 @@ for name,title,key,unit in [('Output','GOOD OUTPUT','good_kg','kg'),('Moisture',
     card=embed(name,'Demo/Components/Metric',{'title':title,'unit':unit,'hint':''},basis='240px',grow=1)
     card['propConfig']={'props.params.value':bind_script('view.custom.batch','\treturn value.get("'+key+'", "n/a")')};batch_cards.append(card)
 batch_root=flex('root',[bound_label('BatchTitle','view.params.reference','Demo/SectionTitle'),bound_label('Product','view.custom.batch.product','Demo/Subtitle'),bound_label('Status','view.custom.batch.status','Demo/Badge'),flex('Measurements',batch_cards,'row','Demo/Wrap'),qc,bound_label('Result','view.custom.result','Demo/Muted')],classes='Demo/PopupRoot')
+theme_root(batch_root)
 view('Demo/BatchDetails',batch_root,params={'reference':''},custom={'batch':{'available':False,'product':'','status':'Loading'},'result':''},config={'custom.batch':bind_script('view.params.reference','\treturn application.demo.batchDetails(value)')},height=400)
 
 # Record actual output against an existing completed batch.
@@ -173,23 +182,39 @@ from build_separator import build_separator, SEPARATOR_CSS
 build_separator()
 
 popup_history=embed('History','Demo/HistoryChart',{'showSelectors':False},basis='0px',grow=1);popup_history['position']['shrink']=1;popup_history['propConfig']={'props.params.lineNumber':prop('view.params.lineNumber'),'props.params.metric':prop('view.params.metric')}
-view('Demo/TagHistory',flex('root',[bound_label('Title','view.params.title','Demo/SectionTitle'),bound_label('Tag','view.params.tagPath','Demo/Muted'),popup_history],classes='Demo/PopupRoot'),params={'lineNumber':1,'metric':'temperature','title':'Temperature','tagPath':''},height=560)
+view('Demo/TagHistory',theme_root(flex('root',[bound_label('Title','view.params.title','Demo/SectionTitle'),bound_label('Tag','view.params.tagPath','Demo/Muted'),popup_history],classes='Demo/PopupRoot')),params={'lineNumber':1,'metric':'temperature','title':'Temperature','tagPath':''},height=560)
 
 health_cards=[]
 for name,title,key,unit,hint in [('Age','LIVE DATA AGE','liveAgeSeconds','sec','One-second recorded telemetry'),('History','HISTORY','coverageDays','days','Minute history, capped at three months'),('Lines','LINES','lineCount','','Three simulated production lines')]:
     card=embed(name,'Demo/Components/Metric',{'title':title,'unit':unit,'hint':hint},basis='240px',grow=1);card['propConfig']={'props.params.value':prop('view.custom.health.'+key)};health_cards.append(card)
 page('Demo/Health','Demo health','Data freshness and automatic retention.',[flex('Metrics',health_cards,'row','Demo/Wrap'),label('Policy','One-second telemetry is retained for 6 hours. Minute history, recorded batch output and inspections are retained for at most 90 days or three calendar months.','Demo/Body')],custom={'health':{'liveAgeSeconds':'n/a','coverageDays':'n/a','lineCount':'n/a'}},config={'custom.health':struct_binding({'refresh':'now(5000)'},'\treturn application.demo.health()')})
 
+# Session settings: the theme applies to every page, popup and the navigation.
+theme_picker=select('Theme',THEMES,'session.custom.theme',width='40px');theme_picker['props']['style']['maxWidth']='320px'
+page('Demo/Settings','Settings','Choose how the demo looks for this session.',[
+ panel('Appearance','Theme','Standard follows high-performance HMI practice. Hello Kitty is the pink edition.',[theme_picker],grow=0)],live_header=False)
+
 routes=[('/','Factory overview','Demo/Overview'),('/scada','SCADA','Demo/SCADA'),('/production','Production planning','Demo/Production'),('/performance','Performance','Demo/Performance'),('/quality','Quality & traceability','Demo/Quality'),('/operator','Batch output','Demo/Operator')]
 logo=base64.b64encode((ROOT/'tools/demo/scada-assets/oatmakers-logo.svg').read_bytes()).decode()
-nav=[node('ia.display.image','Brand',{'source':'data:image/svg+xml;base64,'+logo,'altText':'Oatmakers','fit':{'mode':'contain'},'style':{'classes':'Demo/BrandLogo'}},basis='74px'),label('BrandDetail','CONNECTED OPERATIONS','Demo/NavEyebrow'),label('DemoLabel','LIVE SIMULATION','Demo/NavBadge')]
+kitty=base64.b64encode((ROOT/'tools/demo/scada-assets/hello-kitty.png').read_bytes()).decode()
+brand=node('ia.display.image','Brand',{'source':'data:image/svg+xml;base64,'+logo,'altText':'Oatmakers','fit':{'mode':'contain'},'style':{'classes':'Demo/BrandLogo'}},basis='74px')
+kitty_brand=node('ia.display.image','KittyBrand',{'source':'data:image/png;base64,'+kitty,'altText':'Hello Kitty with her red bow','fit':{'mode':'contain'},'style':{'classes':'Demo/BrandLogo'}},basis='130px')
+brand['propConfig']={'position.display':themed({'standard':True,'hello-kitty':False})};kitty_brand['propConfig']={'position.display':themed({'standard':False,'hello-kitty':True})}
+detail=label('BrandDetail','CONNECTED OPERATIONS','Demo/NavEyebrow');detail['propConfig']={'props.text':themed({'standard':'CONNECTED OPERATIONS','hello-kitty':'Hello Kitty operations'})}
+nav=[brand,kitty_brand,detail,label('DemoLabel','LIVE SIMULATION','Demo/NavBadge')]
+ACTIVE_NAV={'standard':'#3d474f','hello-kitty':'#f9d7e5'}
+NAV_ICONS={'/':'dashboard','/scada':'account_tree','/production':'calendar_today','/performance':'show_chart','/quality':'fact_check','/operator':'assignment_turned_in','/settings':'settings','/demo/health':'favorite'}
+def nav_icon(b,path):
+    b['props']['image']={'icon':{'path':'material/'+NAV_ICONS[path],'color':'#d5dade','style':{}},'position':'left','width':18,'height':18}
+    b.setdefault('propConfig',{})['props.image.icon.color']=themed({'standard':'#d5dade','hello-kitty':'#ac2454'});return b
 for i,(path,title,_) in enumerate(routes):
-    b=button('Nav'+str(i),title,page=path,classes='Demo/NavButton');b['position']['basis']='45px';b['propConfig']={'props.style.backgroundColor':expr('if({page.props.path} = '+json.dumps(path)+', "#3d474f", "transparent")')};nav.append(b)
-nav += [flex('Spacer',[],grow=1),button('Health','Demo health',page='/demo/health',classes='Demo/NavButton'),label('Footer','Mustry Solutions','Demo/NavFooter')]
-view('Sidenav',flex('root',nav,classes='Demo/Navigation'),height=900)
+    b=button('Nav'+str(i),title,page=path,classes='Demo/NavButton');b['position']['basis']='45px';active=themed(ACTIVE_NAV)['binding']['config']['expression']
+    b['propConfig']={'props.style.backgroundColor':expr('if({page.props.path} = '+json.dumps(path)+', '+active+', "transparent")')};nav.append(nav_icon(b,path))
+nav += [flex('Spacer',[],grow=1),nav_icon(button('Settings','Settings',page='/settings',classes='Demo/NavButton'),'/settings'),nav_icon(button('Health','Demo health',page='/demo/health',classes='Demo/NavButton'),'/demo/health'),label('Footer','Mustry Solutions','Demo/NavFooter')]
+view('Sidenav',theme_root(flex('root',nav,classes='Demo/Navigation')),height=900)
 config=json.loads((P/'page-config/config.json').read_text());config['pages'].pop('/components',None)
 for route,title,path in routes:config['pages'][route]={'title':title,'viewPath':path}
-config['pages']['/process']={'title':'SCADA','viewPath':'Demo/SCADA'};config['pages']['/demo/health']={'title':'Demo health','viewPath':'Demo/Health'}
+config['pages']['/process']={'title':'SCADA','viewPath':'Demo/SCADA'};config['pages']['/demo/health']={'title':'Demo health','viewPath':'Demo/Health'};config['pages']['/settings']={'title':'Settings','viewPath':'Demo/Settings'}
 config['pages']['/oee']={'title':'Performance','viewPath':'Demo/Performance'};config['pages']['/demo/input-fields']={'title':'Batch output','viewPath':'Demo/Operator'}
 nav_docks=config.get('sharedDocks', {})
 if not nav_docks.get('left'):
@@ -198,7 +223,7 @@ for route,definition in config['pages'].items():
     definition.pop('docks', None)
 config['sharedDocks']=copy.deepcopy(nav_docks)
 write(P/'page-config/config.json',config)
-write(P/'session-props/props.json',{'custom':{'demo':{'scadaLine':1,'scadaArea':'peeling','scadaMetric':'temperature'}},'props':{'theme':'light'}});resource(P/'session-props',['props.json'])
+write(P/'session-props/props.json',{'custom':{'demo':{'scadaLine':1,'scadaArea':'peeling','scadaMetric':'temperature'},'theme':'standard'},'props':{'theme':'light'}});resource(P/'session-props',['props.json'])
 for old in ['Demo/ComponentsGallery','Demo/Process']:
     if (V/old).exists():shutil.rmtree(V/old)
 
@@ -266,11 +291,64 @@ css='''
 .psc-Demo\\/Brand { font-size:24px; font-weight:800; letter-spacing:1.2px; color:#f2f4f5; padding:0 9px; }
 .psc-Demo\\/NavEyebrow { font-size:9px; letter-spacing:1.3px; color:#a6aeb4; padding:0 9px; }
 .psc-Demo\\/NavBadge { font-size:9px; color:#c8ced3; background:#3a434a; padding:9px; border-radius:3px; margin:15px 0; }
-.psc-Demo\\/NavButton { background:transparent; color:#d5dade; border:0; border-radius:4px; padding:10px 12px; font-size:12px; }
+.psc-Demo\\/NavButton { background:transparent; color:#d5dade; border:0; border-radius:4px; padding:10px 12px; font-size:12px; text-align:left; }
+/* The button centres its icon and text inline; menu items read better left-aligned. */
+.psc-Demo\\/NavButton > div { width:100%; justify-content:flex-start !important; gap:10px; }
+.psc-Demo\\/NavButton .text { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .psc-Demo\\/NavButton:hover { background:#3d474f; }
 .psc-Demo\\/NavFooter { font-size:10px; color:#98a1a8; padding:4px 9px; }
 @container demo (max-width:900px) { .psc-Demo\\/Workspace { flex-wrap:wrap !important; } .psc-Demo\\/Workspace > * { flex-basis:100% !important; } .psc-Demo\\/PageHeader { flex-wrap:wrap !important; } }
 @media(max-width:650px) { .psc-Demo\\/Page { padding:14px; } .psc-Demo\\/PageTitle { font-size:24px; } .psc-Demo\\/Filters { flex-wrap:wrap !important; } }
+
+/* Hello Kitty theme: the root of every page, popup and the navigation carries
+   Theme/HelloKitty when the session chooses it on the settings page. */
+.psc-Theme\\/HelloKitty {
+  --demo-ink:#3b3038; --demo-muted:#75606d; --demo-bg:#fff5f8;
+  --demo-line:#edc9d6; --demo-surface:#fff; --demo-accent:#ac2454;
+  --demo-alarm:#b23b34; --demo-warn:#956000; --demo-info:#246b80;
+  font-family:"Trebuchet MS","Verdana",sans-serif; letter-spacing:0;
+}
+.psc-Theme\\/HelloKitty.psc-Demo\\/Page {
+  background-color:var(--demo-bg);
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 31px,#f9e6ed 31px,#f9e6ed 32px);
+  padding:24px 28px; gap:18px; font-family:"Trebuchet MS","Verdana",sans-serif;
+}
+.psc-Theme\\/HelloKitty .psc-Demo\\/PageHeader { border-bottom:2px solid #edb3c8; padding-bottom:16px; gap:16px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/PageTitle { font-size:27px; color:#8d2149; line-height:1.3; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Eyebrow,.psc-Theme\\/HelloKitty .psc-Demo\\/NavEyebrow,.psc-Theme\\/HelloKitty .psc-Demo\\/NavBadge,
+.psc-Theme\\/HelloKitty .psc-Demo\\/DemoBadge,.psc-Theme\\/HelloKitty .psc-Demo\\/Brand { letter-spacing:0; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Eyebrow { color:#8d3655; font-size:11px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/SectionTitle { color:#713048; font-size:17px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Metric { border-radius:8px; border-top:3px solid #dc779b; padding:18px; background:#fff; box-shadow:0 2px 0 #f4dce6; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/MetricValue { font-size:32px; color:#70203f; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/MetricUnit { color:#75606d; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Panel { border:0; border-top:1px solid var(--demo-line); border-radius:0; padding:18px 0; background:transparent; box-shadow:none; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Repeater .psc-Demo\\/Panel { background:#fff; border:1px solid var(--demo-line); border-radius:8px; border-top:3px solid #d990ac; padding:18px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/LineValue { color:#70203f; font-size:28px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/DemoBadge,.psc-Theme\\/HelloKitty .psc-Demo\\/Badge { background:#fbe2ec; color:#772343; border-radius:4px; white-space:normal; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Button { background:#ac2454; border-color:#ac2454; border-radius:6px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Button:hover:enabled { background:#8d2149; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/QuietButton,.psc-Theme\\/HelloKitty .psc-Demo\\/ReadingButton { border-color:#e4b7c8; color:#713048; background:#fff; border-radius:6px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/QuietButton:hover,.psc-Theme\\/HelloKitty .psc-Demo\\/ReadingButton:hover { background:#fce5ee; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Button:focus-visible,.psc-Theme\\/HelloKitty .psc-Demo\\/NavButton:focus-visible,
+.psc-Theme\\/HelloKitty .psc-Demo\\/QuietButton:focus-visible,.psc-Theme\\/HelloKitty .psc-Demo\\/ReadingButton:focus-visible { outline:3px solid #246b80; outline-offset:2px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Select { border-color:#ddb0c2; border-radius:6px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/DataGrid { --dg-header-bg:#fbe8ef; border-radius:6px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/PlanningTimeline { --tml-group-bg:#fbe8ef; border-radius:6px; }
+.psc-Theme\\/HelloKitty.psc-Demo\\/Navigation { background:#fff; color:#713048; border-right:1px solid #edc9d6; padding:20px 14px; gap:8px; font-family:"Trebuchet MS","Verdana",sans-serif; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/BrandLogo { background:transparent; padding:0; margin:0; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/NavEyebrow { color:#75606d; font-size:11px; padding:0 10px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/NavBadge { color:#8d2149; background:#fce5ee; margin:8px 0; padding:9px 10px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/NavButton { color:#713048; border-radius:6px; font-size:13px; padding:10px; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/NavButton:hover { background:#fce5ee !important; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/NavFooter { color:#75606d; white-space:normal; }
+.psc-Theme\\/HelloKitty.psc-Demo\\/PopupRoot { background:#fff5f8; }
+.psc-Theme\\/HelloKitty .psc-Separator\\/PanZoom.mustry-panzoom { --pz-bg:#fff5f8; --pz-accent:#ac2454; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/PageHeader > * { min-width:0; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Filters { flex-wrap:wrap !important; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Filters > *,.psc-Theme\\/HelloKitty .psc-Demo\\/Workspace > * { max-width:100%; min-width:0; }
+.psc-Theme\\/HelloKitty .psc-Demo\\/Workspace { flex-wrap:wrap; }
+@media(max-width:650px) { .psc-Theme\\/HelloKitty.psc-Demo\\/Page { padding:14px; } .psc-Theme\\/HelloKitty .psc-Demo\\/PageTitle { font-size:23px; } .psc-Theme\\/HelloKitty .psc-Demo\\/DemoBadge { font-size:10px; } }
 '''
 p=P/'stylesheet';(p/'stylesheet.css').write_text(css+SEPARATOR_CSS);resource(p,['stylesheet.css'])
 print('Built operational screens with Mustry UI, SCADA and range-controlled history.')

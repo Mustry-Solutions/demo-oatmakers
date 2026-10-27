@@ -138,6 +138,16 @@
             "position": {
               "shrink": 0,
               "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"HELLO KITTY EDITION\", \"SIMULATED FACTORY\")"
+                  }
+                }
+              }
             }
           }
         ],
@@ -768,6 +778,22 @@
                     "path": "view.custom.live.trend"
                   }
                 }
+              },
+              "props.series[0].line.appearance.stroke.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#ac2454\", \"#2d8962\")"
+                  }
+                }
+              },
+              "props.series[0].line.appearance.fill.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"#ac2454\", \"#2d8962\")"
+                  }
+                }
               }
             }
           },
@@ -807,6 +833,16 @@
     ],
     "position": {
       "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"Demo/Page Theme/HelloKitty\", \"Demo/Page\")"
+          }
+        }
+      }
     }
   }
 }
