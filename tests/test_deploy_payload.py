@@ -5,6 +5,7 @@ tags" steps of .github/workflows/deploy.yml against a throwaway repository.
 Needs git, bash and PyYAML.
 """
 from pathlib import Path
+import json
 import os
 import subprocess
 import tempfile
@@ -41,7 +42,7 @@ with tempfile.TemporaryDirectory() as temporary:
     git('config', 'user.name', 'Payload Test')
 
     # oatmakers@v5.0.0 carries the gateway-level payload.
-    write('projects/oatmakers/project.json', 'oatmakers v5.0.0')
+    write('projects/oatmakers/project.json', '{"title":"Oatmakers","description":"Oatmakers project"}')
     write('services/config/resources/core/ignition/database-connection/OatmakersDemo/config.json', 'db v5.0.0')
     write('services/config/resources/core/ignition/system-properties/config.json', 'local identity')
     write('services/modules.json', 'manifest v5.0.0')
@@ -54,7 +55,7 @@ with tempfile.TemporaryDirectory() as temporary:
     git('tag', 'oatmakers@v5.0.0')
 
     # A student project, tagged later, while main moves on.
-    write('projects/wout/project.json', 'wout v1.0.0')
+    write('projects/wout/project.json', '{"title":"Wout","description":"Wout project"}')
     git('add', '.')
     git('commit', '-qm', 'wout v1.0.0')
     git('tag', 'wout@v1.0.0')
@@ -82,8 +83,12 @@ with tempfile.TemporaryDirectory() as temporary:
     run(PARSE)
     run(ASSEMBLE)
     payload = repo / 'payload'
-    assert (payload / 'projects/oatmakers/project.json').read_text() == 'oatmakers v5.0.0'
-    assert (payload / 'projects/wout/project.json').read_text() == 'wout v1.0.0'
+    oatmakers_project = json.loads((payload / 'projects/oatmakers/project.json').read_text())
+    wout_project = json.loads((payload / 'projects/wout/project.json').read_text())
+    assert oatmakers_project['description'] == 'Oatmakers project (v5.0.0)'
+    assert wout_project['description'] == 'Wout project (v1.0.0)'
+    tagged_project = json.loads(git('show', 'oatmakers@v5.0.0:projects/oatmakers/project.json'))
+    assert tagged_project['description'] == 'Oatmakers project'
     assert not (payload / 'projects/stephan').exists(), 'an unpinned project shipped'
     assert (payload / 'services/modules.json').read_text() == 'manifest v5.0.0'
     assert (payload / 'services/config/resources/core/ignition/database-connection/OatmakersDemo/config.json').exists()
