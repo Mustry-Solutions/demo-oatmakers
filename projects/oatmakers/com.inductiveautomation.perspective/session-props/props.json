@@ -1,5 +1,6 @@
 {
   "custom": {
+    "showLabels": true,
     "demo": {
       "scadaLine": 1,
       "scadaArea": "peeling",

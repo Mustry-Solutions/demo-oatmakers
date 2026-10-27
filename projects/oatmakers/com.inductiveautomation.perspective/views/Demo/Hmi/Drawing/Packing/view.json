@@ -27,7 +27,7 @@
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMjQ4IDExMCBIOTk1IFYzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNOTk1IDUyMCBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTk5NSA1OTQgVjYzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05OTUgNzQwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjQ4IDE4MCBINjc1IFYzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNjc1IDUyMCBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTY3NSA1OTQgVjYzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik02NzUgNzQwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjQ4IDI1MCBIMzU1IFYzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMzU1IDUyMCBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTM1NSA1OTQgVjYzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0zNTUgNzQwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTEzMCA4MTAgSDExNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTI3MCA4MDUgSDEzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTM3MCA4MDUgSDE0MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTU1MCA3NjAgSDE1NzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSIxMjM2IiB5PSIxNzYiIHdpZHRoPSIyODgiIGhlaWdodD0iNzgiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjx0ZXh0IHg9IjEyNDAiIHk9IjE3MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPlJvbGxlZCBvYXRzIGxpbmUgKHBhY2tzL21pbik8L3RleHQ+PHJlY3QgeD0iMTIzNiIgeT0iMzE2IiB3aWR0aD0iMjg4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48dGV4dCB4PSIxMjQwIiB5PSIzMTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5Sb2xsZWQgb2F0cyBwYWNrIHdlaWdodCAoZyk8L3RleHQ+PHJlY3QgeD0iMTIzNiIgeT0iNDU2IiB3aWR0aD0iMjg4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48dGV4dCB4PSIxMjQwIiB5PSI0NTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5DaGVja3dlaWdoZXIgcmVqZWN0cyAoJSk8L3RleHQ+PC9zdmc+",
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMjQ4IDExMCBIOTk1IFYzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNOTk1IDUyMCBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTk5NSA1OTQgVjYzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05OTUgNzQwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjQ4IDE4MCBINjc1IFYzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNjc1IDUyMCBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTY3NSA1OTQgVjYzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik02NzUgNzQwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjQ4IDI1MCBIMzU1IFYzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMzU1IDUyMCBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTM1NSA1OTQgVjYzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0zNTUgNzQwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTEzMCA4MTAgSDExNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTI3MCA4MDUgSDEzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTM3MCA4MDUgSDE0MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTU1MCA3NjAgSDE1NzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSIxMjM2IiB5PSIxNzYiIHdpZHRoPSIyODgiIGhlaWdodD0iNzgiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjxyZWN0IHg9IjEyMzYiIHk9IjMxNiIgd2lkdGg9IjI4OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHJlY3QgeD0iMTIzNiIgeT0iNDU2IiB3aWR0aD0iMjg4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48L3N2Zz4=",
           "altText": "Packing & palletising piping",
           "fit": {
             "mode": "fill"
@@ -52,11 +52,17 @@
           "path": "Demo/Hmi/Equipment/Weigher",
           "params": {
             "tag": "MW803",
+            "title": "Weigher",
             "width": 80,
-            "height": 64
+            "height": 64,
+            "labelX": 120,
+            "labelY": 30
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 953,
@@ -74,11 +80,17 @@
           "path": "Demo/Hmi/Equipment/Bagger",
           "params": {
             "tag": "BG803",
+            "title": "500 g packs",
             "width": 90,
-            "height": 110
+            "height": 110,
+            "labelX": 135,
+            "labelY": 30
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 948,
@@ -96,11 +108,17 @@
           "path": "Demo/Hmi/Equipment/Weigher",
           "params": {
             "tag": "MW802",
+            "title": "Weigher",
             "width": 80,
-            "height": 64
+            "height": 64,
+            "labelX": 120,
+            "labelY": 30
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 633,
@@ -118,11 +136,17 @@
           "path": "Demo/Hmi/Equipment/Bagger",
           "params": {
             "tag": "BG802",
+            "title": "1 kg packs",
             "width": 90,
-            "height": 110
+            "height": 110,
+            "labelX": 135,
+            "labelY": 30
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 628,
@@ -140,11 +164,17 @@
           "path": "Demo/Hmi/Equipment/Weigher",
           "params": {
             "tag": "AF801",
+            "title": "Auger filler",
             "width": 80,
-            "height": 64
+            "height": 64,
+            "labelX": 120,
+            "labelY": 30
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 313,
@@ -162,11 +192,17 @@
           "path": "Demo/Hmi/Equipment/Bagger",
           "params": {
             "tag": "BG801",
+            "title": "25 kg sacks",
             "width": 90,
-            "height": 110
+            "height": 110,
+            "labelX": 135,
+            "labelY": 30
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 308,
@@ -178,17 +214,23 @@
       {
         "type": "ia.display.view",
         "meta": {
-          "name": "ChainConveyorShape"
+          "name": "CV804Shape"
         },
         "props": {
           "path": "Demo/Hmi/Equipment/ChainConveyor",
           "params": {
-            "tag": "",
+            "tag": "CV804",
+            "title": "Pack collection conveyor",
             "width": 800,
-            "height": 20
+            "height": 20,
+            "labelX": 400,
+            "labelY": 46
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 328,
@@ -206,11 +248,17 @@
           "path": "Demo/Hmi/Equipment/Box",
           "params": {
             "tag": "CW801",
+            "title": "Checkweigher",
             "width": 110,
-            "height": 30
+            "height": 30,
+            "labelX": 55.0,
+            "labelY": 48
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 1158,
@@ -228,11 +276,17 @@
           "path": "Demo/Hmi/Equipment/MetalDetector",
           "params": {
             "tag": "MD801",
+            "title": "Metal detector",
             "width": 70,
-            "height": 60
+            "height": 60,
+            "labelX": 35.0,
+            "labelY": 78
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 1298,
@@ -250,11 +304,17 @@
           "path": "Demo/Hmi/Equipment/Palletiser",
           "params": {
             "tag": "PL801",
+            "title": "Palletiser",
             "width": 130,
-            "height": 120
+            "height": 120,
+            "labelX": 65.0,
+            "labelY": 138
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 1418,
@@ -296,10 +356,14 @@
             "tag": "BN803",
             "signal": "lvlC",
             "product": "Rolled oats",
-            "level": 0
+            "level": 0,
+            "height": 220
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 940,
@@ -459,10 +523,14 @@
             "tag": "BN802",
             "signal": "lvlB",
             "product": "Steel-cut oats",
-            "level": 0
+            "level": 0,
+            "height": 220
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 620,
@@ -622,10 +690,14 @@
             "tag": "BN801",
             "signal": "lvlA",
             "product": "Oat flour",
-            "level": 0
+            "level": 0,
+            "height": 220
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 300,
@@ -766,8 +838,9 @@
             "unit": "",
             "decimals": 1,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUNWODA0PC90ZXh0PjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUNWODA0PC90ZXh0PjwvZz48L3N2Zz4="
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "compact": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -986,25 +1059,148 @@
         }
       },
       {
-        "type": "ia.display.image",
+        "type": "ia.display.label",
         "meta": {
-          "name": "Labels"
+          "name": "Text1"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48dGV4dCB4PSIxMDAxLjAiIHk9IjI5MiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5CTjgwMzwvdGV4dD48dGV4dCB4PSIxMDc1IiB5PSI1OTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPk1XODAzPC90ZXh0Pjx0ZXh0IHg9IjEwNzUiIHk9IjYwNCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5XZWlnaGVyPC90ZXh0Pjx0ZXh0IHg9IjEwODUiIHk9IjY2MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+Qkc4MDM8L3RleHQ+PHRleHQgeD0iMTA4NSIgeT0iNjc0IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPjUwMCBnIHBhY2tzPC90ZXh0Pjx0ZXh0IHg9IjY4MS4wIiB5PSIyOTIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+Qk44MDI8L3RleHQ+PHRleHQgeD0iNzU1IiB5PSI1OTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPk1XODAyPC90ZXh0Pjx0ZXh0IHg9Ijc1NSIgeT0iNjA0IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPldlaWdoZXI8L3RleHQ+PHRleHQgeD0iNzY1IiB5PSI2NjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkJHODAyPC90ZXh0Pjx0ZXh0IHg9Ijc2NSIgeT0iNjc0IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPjEga2cgcGFja3M8L3RleHQ+PHRleHQgeD0iMzYxLjAiIHk9IjI5MiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5CTjgwMTwvdGV4dD48dGV4dCB4PSI0MzUiIHk9IjU5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+QUY4MDE8L3RleHQ+PHRleHQgeD0iNDM1IiB5PSI2MDQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+QXVnZXIgZmlsbGVyPC90ZXh0Pjx0ZXh0IHg9IjQ0NSIgeT0iNjYwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5CRzgwMTwvdGV4dD48dGV4dCB4PSI0NDUiIHk9IjY3NCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj4yNSBrZyBzYWNrczwvdGV4dD48dGV4dCB4PSI3MzAiIHk9Ijg0NiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+Q1Y4MDQ8L3RleHQ+PHRleHQgeD0iNzMwIiB5PSI4NjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+UGFjayBjb2xsZWN0aW9uIGNvbnZleW9yPC90ZXh0Pjx0ZXh0IHg9IjEyMTUuMCIgeT0iODM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5DVzgwMTwvdGV4dD48dGV4dCB4PSIxMjE1LjAiIHk9Ijg1MiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5DaGVja3dlaWdoZXI8L3RleHQ+PHRleHQgeD0iMTMzNS4wIiB5PSI4NDgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPk1EODAxPC90ZXh0Pjx0ZXh0IHg9IjEzMzUuMCIgeT0iODYyIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPk1ldGFsIGRldGVjdG9yPC90ZXh0Pjx0ZXh0IHg9IjE0ODUuMCIgeT0iODM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5QTDgwMTwvdGV4dD48dGV4dCB4PSIxNDg1LjAiIHk9Ijg1MiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5QYWxsZXRpc2VyPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSI4OTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWE1ZTVjIiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+UGFja2luZyAmYW1wOyBwYWxsZXRpc2luZzwvdGV4dD48dGV4dCB4PSIxNzAwIiB5PSI4OTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPlNJTVVMQVRJT048L3RleHQ+PC9zdmc+",
-          "altText": "Packing & palletising labels",
-          "fit": {
-            "mode": "fill"
-          },
+          "text": "Rolled oats line (packs/min)",
           "style": {
-            "pointerEvents": "none"
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
           }
         },
         "position": {
-          "x": 0,
-          "y": 0,
-          "width": 1740,
-          "height": 910
+          "x": 1240,
+          "y": 159,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text2"
+        },
+        "props": {
+          "text": "Rolled oats pack weight (g)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1240,
+          "y": 299,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text3"
+        },
+        "props": {
+          "text": "Checkweigher rejects (%)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1240,
+          "y": 439,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text4"
+        },
+        "props": {
+          "text": "Packing & palletising",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "22px",
+            "fontWeight": 600,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "29px"
+          }
+        },
+        "position": {
+          "x": 40,
+          "y": 868,
+          "width": 300,
+          "height": 29
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text5"
+        },
+        "props": {
+          "text": "SIMULATION",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "flex-end",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1400,
+          "y": 880,
+          "width": 300,
+          "height": 13
         }
       }
     ]

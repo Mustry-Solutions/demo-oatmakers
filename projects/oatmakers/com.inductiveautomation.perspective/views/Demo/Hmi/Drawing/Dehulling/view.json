@@ -27,7 +27,7 @@
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTk4IDExMCBIMjYwIFYxNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjYwIDI5MCBWNDAwIEg0MjAgVjM3NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik01MjIgNDQwIEg2MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNjY1IDM2MCBWMzAwIEg3MzAgVjE3MCBINzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+PHBhdGggZD0iTTgxMCAxMTAgVjgwIEg5MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48dGV4dCB4PSIxMDQwIiB5PSI4NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3Ij5FeGhhdXN0PC90ZXh0PjxwYXRoIGQ9Ik04MTAgMjgwIFYzMzAgSDEwMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTEzMCAzMjUgSDE1NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNzMwIDQ3MCBIODIwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEwNDAgNDUwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTk5MCA1MzAgVjY1MCBIMzMwIFY0NDAgSDM5OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjx0ZXh0IHg9IjYzMCIgeT0iNjQyIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciPlVuaHVsbGVkIG9hdHMgcmV0dXJuIHRvIGh1bGxlcjwvdGV4dD48cGF0aCBkPSJNNzE1IDUzMCBWNzgwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEyMTAgMjcyIFYzMjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTExNzAgMzk3IFY0NTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEzMzAgMzk3IFY0NTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0NjAgNTIyIFY0NTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iMTA1NiIgeT0iNTc2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48dGV4dCB4PSIxMDYwIiB5PSI1NzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5IdWxsaW5nIGVmZmljaWVuY3kgKCUpPC90ZXh0PjxyZWN0IHg9IjEzMTYiIHk9IjU3NiIgd2lkdGg9IjI0OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHRleHQgeD0iMTMyMCIgeT0iNTcwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzZkNzI3MCI+SHVsbGVyIHJvdG9yIHNwZWVkIChycG0pPC90ZXh0Pjwvc3ZnPg==",
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTk4IDExMCBIMjYwIFYxNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjYwIDI5MCBWNDAwIEg0MjAgVjM3NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik01MjIgNDQwIEg2MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNjY1IDM2MCBWMzAwIEg3MzAgVjE3MCBINzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+PHBhdGggZD0iTTgxMCAxMTAgVjgwIEg5MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48cGF0aCBkPSJNODEwIDI4MCBWMzMwIEgxMDAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS42IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTExMzAgMzI1IEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS42IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTczMCA0NzAgSDgyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDQwIDQ1MCBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05OTAgNTMwIFY2NTAgSDMzMCBWNDQwIEgzOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNzE1IDUzMCBWNzgwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEyMTAgMjcyIFYzMjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTExNzAgMzk3IFY0NTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEzMzAgMzk3IFY0NTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0NjAgNTIyIFY0NTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iMTA1NiIgeT0iNTc2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48cmVjdCB4PSIxMzE2IiB5PSI1NzYiIHdpZHRoPSIyNDgiIGhlaWdodD0iNzgiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjwvc3ZnPg==",
           "altText": "Dehulling piping",
           "fit": {
             "mode": "fill"
@@ -52,11 +52,17 @@
           "path": "Demo/Hmi/Equipment/Bin",
           "params": {
             "tag": "BN301",
+            "title": "Huller feed bin",
             "width": 120,
-            "height": 150
+            "height": 150,
+            "labelX": 60.0,
+            "labelY": 63.0
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 198,
@@ -74,11 +80,17 @@
           "path": "Demo/Hmi/Equipment/ImpactHuller",
           "params": {
             "tag": "HU301",
+            "title": "Impact huller",
             "width": 124,
-            "height": 124
+            "height": 124,
+            "labelX": 62.0,
+            "labelY": 142
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 396,
@@ -96,11 +108,17 @@
           "path": "Demo/Hmi/Equipment/Aspirator",
           "params": {
             "tag": "AS301",
+            "title": "Hull aspirator",
             "width": 130,
-            "height": 170
+            "height": 170,
+            "labelX": 65.0,
+            "labelY": 188
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 598,
@@ -118,11 +136,17 @@
           "path": "Demo/Hmi/Equipment/Cyclone",
           "params": {
             "tag": "CY301",
+            "title": "Hull cyclone",
             "width": 100,
-            "height": 170
+            "height": 170,
+            "labelX": 140,
+            "labelY": 59.5
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 758,
@@ -140,11 +164,17 @@
           "path": "Demo/Hmi/Equipment/HammerMill",
           "params": {
             "tag": "HG301",
+            "title": "Hull grinder",
             "width": 130,
-            "height": 110
+            "height": 110,
+            "labelX": 65.0,
+            "labelY": 128
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 998,
@@ -162,11 +192,17 @@
           "path": "Demo/Hmi/Equipment/Destoner",
           "params": {
             "tag": "GS301",
+            "title": "Groat separator",
             "width": 220,
-            "height": 130
+            "height": 130,
+            "labelX": 110.0,
+            "labelY": 148
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 818,
@@ -210,8 +246,9 @@
             "unit": "t/h",
             "decimals": 1,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+VkYzMDE8L3RleHQ+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+VkYzMDE8L3RleHQ+PC9nPjwvc3ZnPg=="
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "compact": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -247,8 +284,9 @@
             "unit": "A",
             "decimals": 1,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUhVMzAxPC90ZXh0PjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUhVMzAxPC90ZXh0PjwvZz48L3N2Zz4="
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "compact": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -284,8 +322,9 @@
             "unit": "",
             "decimals": 1,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5GTjMwMTwvdGV4dD48L2c+PC9zdmc+",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5GTjMwMTwvdGV4dD48L2c+PC9zdmc+"
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
+            "compact": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -321,8 +360,9 @@
             "unit": "",
             "decimals": 1,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlYzMDE8L3RleHQ+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlYzMDE8L3RleHQ+PC9nPjwvc3ZnPg=="
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "compact": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -379,8 +419,9 @@
             "unit": "",
             "decimals": 1,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUdTMzAxPC90ZXh0PjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUdTMzAxPC90ZXh0PjwvZz48L3N2Zz4="
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "compact": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -915,25 +956,181 @@
         }
       },
       {
-        "type": "ia.display.image",
+        "type": "ia.display.label",
         "meta": {
-          "name": "Labels"
+          "name": "Text1"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48dGV4dCB4PSIyNjAuMCIgeT0iMjAzLjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkJOMzAxPC90ZXh0Pjx0ZXh0IHg9IjI2MC4wIiB5PSIyMTcuMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5IdWxsZXIgZmVlZCBiaW48L3RleHQ+PHRleHQgeD0iNDYwIiB5PSI1MjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkhVMzAxPC90ZXh0Pjx0ZXh0IHg9IjQ2MCIgeT0iNTM0IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkltcGFjdCBodWxsZXI8L3RleHQ+PHRleHQgeD0iNjY1LjAiIHk9IjU0OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+QVMzMDE8L3RleHQ+PHRleHQgeD0iNjY1LjAiIHk9IjU2MiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5IdWxsIGFzcGlyYXRvcjwvdGV4dD48dGV4dCB4PSI5MDAiIHk9IjE2OS41IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5DWTMwMTwvdGV4dD48dGV4dCB4PSI5MDAiIHk9IjE4My41IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkh1bGwgY3ljbG9uZTwvdGV4dD48dGV4dCB4PSIxMDY1LjAiIHk9IjM5OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+SEczMDE8L3RleHQ+PHRleHQgeD0iMTA2NS4wIiB5PSI0MTIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+SHVsbCBncmluZGVyPC90ZXh0Pjx0ZXh0IHg9IjkzMC4wIiB5PSI1NDgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkdTMzAxPC90ZXh0Pjx0ZXh0IHg9IjkzMC4wIiB5PSI1NjIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+R3JvYXQgc2VwYXJhdG9yPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSI4OTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWE1ZTVjIiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+RGVodWxsaW5nPC90ZXh0Pjx0ZXh0IHg9IjE3MDAiIHk9Ijg5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+U0lNVUxBVElPTjwvdGV4dD48L3N2Zz4=",
-          "altText": "Dehulling labels",
-          "fit": {
-            "mode": "fill"
-          },
+          "text": "Exhaust",
           "style": {
-            "pointerEvents": "none"
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "center",
+            "lineHeight": "14px"
           }
         },
         "position": {
-          "x": 0,
-          "y": 0,
-          "width": 1740,
-          "height": 910
+          "x": 890.0,
+          "y": 74,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text2"
+        },
+        "props": {
+          "text": "Unhulled oats return to huller",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "center",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 480.0,
+          "y": 631,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text3"
+        },
+        "props": {
+          "text": "Hulling efficiency (%)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1060,
+          "y": 559,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text4"
+        },
+        "props": {
+          "text": "Huller rotor speed (rpm)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1320,
+          "y": 559,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text5"
+        },
+        "props": {
+          "text": "Dehulling",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "22px",
+            "fontWeight": 600,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "29px"
+          }
+        },
+        "position": {
+          "x": 40,
+          "y": 868,
+          "width": 300,
+          "height": 29
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text6"
+        },
+        "props": {
+          "text": "SIMULATION",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "flex-end",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1400,
+          "y": 880,
+          "width": 300,
+          "height": 13
         }
       }
     ]

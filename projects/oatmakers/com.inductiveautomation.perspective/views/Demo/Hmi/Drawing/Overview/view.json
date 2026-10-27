@@ -27,7 +27,7 @@
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMzIwIDQ0NSBIMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTM2MCA0NDUgbC0xMCAtNiB2MTIgWiIgZmlsbD0iIzU2NTk1NyIvPjxwYXRoIGQ9Ik01OTAgNDQ1IEg2MzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNjMwIDQ0NSBsLTEwIC02IHYxMiBaIiBmaWxsPSIjNTY1OTU3Ii8+PHBhdGggZD0iTTg2MCA0NDUgSDkwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05MDAgNDQ1IGwtMTAgLTYgdjEyIFoiIGZpbGw9IiM1NjU5NTciLz48cGF0aCBkPSJNMTEzMCA0NDUgSDExNTAgVjIxNSBIMTE3MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMTcwIDIxNSBsLTEwIC02IHYxMiBaIiBmaWxsPSIjNTY1OTU3Ii8+PHBhdGggZD0iTTExMzAgNDQ1IEgxMTUwIFY0NDUgSDExNzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTE3MCA0NDUgbC0xMCAtNiB2MTIgWiIgZmlsbD0iIzU2NTk1NyIvPjxwYXRoIGQ9Ik0xMTMwIDQ0NSBIMTE1MCBWNjc1IEgxMTcwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTExNzAgNjc1IGwtMTAgLTYgdjEyIFoiIGZpbGw9IiM1NjU5NTciLz48cGF0aCBkPSJNMTQwMCAyMTUgSDE0MjAgVjQ0NSBIMTQ0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNDQwIDQ0NSBsLTEwIC02IHYxMiBaIiBmaWxsPSIjNTY1OTU3Ii8+PHBhdGggZD0iTTE0MDAgNDQ1IEgxNDIwIFY0NDUgSDE0NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTQ0MCA0NDUgbC0xMCAtNiB2MTIgWiIgZmlsbD0iIzU2NTk1NyIvPjxwYXRoIGQ9Ik0xNDAwIDY3NSBIMTQyMCBWNDQ1IEgxNDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0NDAgNDQ1IGwtMTAgLTYgdjEyIFoiIGZpbGw9IiM1NjU5NTciLz48cGF0aCBkPSJNODYwIDcyNSBIMTAxNSBWNTMwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEwMTUgNTMwIGwtNiAxMCBoMTIgWiIgZmlsbD0iI2M5YTU0ZSIvPjx0ZXh0IHg9IjkwIiB5PSIzMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5SRUNFSVZJTkc8L3RleHQ+PHRleHQgeD0iNjMwIiB5PSIzMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5HUk9BVCBQUk9DRVNTSU5HPC90ZXh0Pjx0ZXh0IHg9IjExNzAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPlBST0RVQ1RJT04gTElORVM8L3RleHQ+PHRleHQgeD0iMTQ0MCIgeT0iMzMwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzZkNzI3MCI+RklOSVNIRUQgR09PRFM8L3RleHQ+PHRleHQgeD0iNjMwIiB5PSI2MjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5VVElMSVRJRVM8L3RleHQ+PHRleHQgeD0iOTAiIHk9IjEzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1YTVlNWMiPkNsaWNrIGEgcHJvY2VzcyBhcmVhIHRvIG9wZW4gaXRzIFNDQURBIHNjcmVlbi48L3RleHQ+PHBhdGggZD0iTTkwIDE3MCBoNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48dGV4dCB4PSIxNDAiIHk9IjE3NCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1NTUiPlByb2R1Y3QgZmxvdzwvdGV4dD48cGF0aCBkPSJNOTAgMjAwIGg0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhNTRlIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjx0ZXh0IHg9IjE0MCIgeT0iMjA0IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzU1NSI+U3RlYW08L3RleHQ+PC9zdmc+",
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMzIwIDQ0NSBIMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTM2MCA0NDUgbC0xMCAtNiB2MTIgWiIgZmlsbD0iIzU2NTk1NyIvPjxwYXRoIGQ9Ik01OTAgNDQ1IEg2MzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNjMwIDQ0NSBsLTEwIC02IHYxMiBaIiBmaWxsPSIjNTY1OTU3Ii8+PHBhdGggZD0iTTg2MCA0NDUgSDkwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05MDAgNDQ1IGwtMTAgLTYgdjEyIFoiIGZpbGw9IiM1NjU5NTciLz48cGF0aCBkPSJNMTEzMCA0NDUgSDExNTAgVjIxNSBIMTE3MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMTcwIDIxNSBsLTEwIC02IHYxMiBaIiBmaWxsPSIjNTY1OTU3Ii8+PHBhdGggZD0iTTExMzAgNDQ1IEgxMTUwIFY0NDUgSDExNzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTE3MCA0NDUgbC0xMCAtNiB2MTIgWiIgZmlsbD0iIzU2NTk1NyIvPjxwYXRoIGQ9Ik0xMTMwIDQ0NSBIMTE1MCBWNjc1IEgxMTcwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTExNzAgNjc1IGwtMTAgLTYgdjEyIFoiIGZpbGw9IiM1NjU5NTciLz48cGF0aCBkPSJNMTQwMCAyMTUgSDE0MjAgVjQ0NSBIMTQ0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNDQwIDQ0NSBsLTEwIC02IHYxMiBaIiBmaWxsPSIjNTY1OTU3Ii8+PHBhdGggZD0iTTE0MDAgNDQ1IEgxNDIwIFY0NDUgSDE0NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTQ0MCA0NDUgbC0xMCAtNiB2MTIgWiIgZmlsbD0iIzU2NTk1NyIvPjxwYXRoIGQ9Ik0xNDAwIDY3NSBIMTQyMCBWNDQ1IEgxNDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0NDAgNDQ1IGwtMTAgLTYgdjEyIFoiIGZpbGw9IiM1NjU5NTciLz48cGF0aCBkPSJNODYwIDcyNSBIMTAxNSBWNTMwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEwMTUgNTMwIGwtNiAxMCBoMTIgWiIgZmlsbD0iI2M5YTU0ZSIvPjxwYXRoIGQ9Ik05MCAxNzAgaDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTkwIDIwMCBoNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YTU0ZSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=",
           "altText": "Oatmakers plant overview piping",
           "fit": {
             "mode": "fill"
@@ -233,25 +233,313 @@
         }
       },
       {
-        "type": "ia.display.image",
+        "type": "ia.display.label",
         "meta": {
-          "name": "Labels"
+          "name": "Text1"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48dGV4dCB4PSI0MCIgeT0iODkwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVhNWU1YyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPk9hdG1ha2VycyBwbGFudCBvdmVydmlldzwvdGV4dD48dGV4dCB4PSIxNzAwIiB5PSI4OTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPlNJTVVMQVRJT048L3RleHQ+PC9zdmc+",
-          "altText": "Oatmakers plant overview labels",
-          "fit": {
-            "mode": "fill"
-          },
+          "text": "RECEIVING",
           "style": {
-            "pointerEvents": "none"
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
           }
         },
         "position": {
-          "x": 0,
-          "y": 0,
-          "width": 1740,
-          "height": 910
+          "x": 90,
+          "y": 320,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text2"
+        },
+        "props": {
+          "text": "GROAT PROCESSING",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 630,
+          "y": 320,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text3"
+        },
+        "props": {
+          "text": "PRODUCTION LINES",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1170,
+          "y": 90,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text4"
+        },
+        "props": {
+          "text": "FINISHED GOODS",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1440,
+          "y": 320,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text5"
+        },
+        "props": {
+          "text": "UTILITIES",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 630,
+          "y": 610,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text6"
+        },
+        "props": {
+          "text": "Click a process area to open its SCADA screen.",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "14px",
+            "fontWeight": 400,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "18px"
+          }
+        },
+        "position": {
+          "x": 90,
+          "y": 116,
+          "width": 300,
+          "height": 18
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text7"
+        },
+        "props": {
+          "text": "Product flow",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "12px",
+            "fontWeight": 400,
+            "color": "#555",
+            "alignItems": "flex-start",
+            "lineHeight": "16px"
+          }
+        },
+        "position": {
+          "x": 140,
+          "y": 162,
+          "width": 300,
+          "height": 16
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text8"
+        },
+        "props": {
+          "text": "Steam",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "12px",
+            "fontWeight": 400,
+            "color": "#555",
+            "alignItems": "flex-start",
+            "lineHeight": "16px"
+          }
+        },
+        "position": {
+          "x": 140,
+          "y": 192,
+          "width": 300,
+          "height": 16
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text9"
+        },
+        "props": {
+          "text": "Oatmakers plant overview",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "22px",
+            "fontWeight": 600,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "29px"
+          }
+        },
+        "position": {
+          "x": 40,
+          "y": 868,
+          "width": 300,
+          "height": 29
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text10"
+        },
+        "props": {
+          "text": "SIMULATION",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "flex-end",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1400,
+          "y": 880,
+          "width": 300,
+          "height": 13
         }
       }
     ]

@@ -87,8 +87,11 @@ Mustry Pan & Zoom by a screen under `Demo/Hmi/Screen/` (the overview is
 are reusable views under `Demo/Hmi/`. Every piece of process equipment (bin,
 conveyor, elevator, sieve, kiln, mills, weigher, boiler and so on) is an
 embedded instance of a template under `Demo/Hmi/Equipment/` that draws its
-outline from its `width` and `height` params. Only the piping and the labels
-are one static SVG per drawing. Blue stream links navigate to the area that
+outline from its `width` and `height` params and carries its own tag and title
+labels, positioned by its `labelX` and `labelY` params and allowed to overflow
+the template. Only the piping is one static SVG per drawing; every other text is
+a Label component. The session property `showLabels` (default on) shows or hides
+all labels, and the Labels switch in the SCADA header toggles it for the session. Blue stream links navigate to the area that
 supplies or receives the product; grey links leave the plant. The page header has
 previous and next buttons in process order.
 

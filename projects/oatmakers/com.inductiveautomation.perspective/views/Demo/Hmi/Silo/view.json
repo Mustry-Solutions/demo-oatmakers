@@ -5,7 +5,8 @@
     "tag": "SI101",
     "signal": "",
     "level": 0,
-    "product": ""
+    "product": "",
+    "height": 330
   },
   "propConfig": {
     "params.area": {
@@ -27,6 +28,10 @@
     "params.product": {
       "paramDirection": "input",
       "persistent": true
+    },
+    "params.height": {
+      "paramDirection": "input",
+      "persistent": true
     }
   },
   "props": {
@@ -43,7 +48,8 @@
     "props": {
       "mode": "percent",
       "style": {
-        "cursor": "pointer"
+        "cursor": "pointer",
+        "overflow": "visible"
       }
     },
     "children": [
@@ -85,6 +91,59 @@
                   "code": "\treturn application.demo.scadaSiloSvg(value[\"level\"], value[\"product\"])"
                 }
               ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Tag"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Text Hmi/Tag",
+            "alignItems": "flex-start"
+          }
+        },
+        "position": {
+          "x": 0.555,
+          "y": -0.06,
+          "width": 1,
+          "height": 0.05
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.tag"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          },
+          "position.y": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "-21 / {view.params.height}"
+              }
+            }
+          },
+          "position.height": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "16 / {view.params.height}"
+              }
             }
           }
         }

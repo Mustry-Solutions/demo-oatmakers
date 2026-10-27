@@ -2,11 +2,18 @@
   "custom": {},
   "params": {
     "tag": "",
+    "title": "",
     "width": 100,
-    "height": 100
+    "height": 100,
+    "labelX": 50,
+    "labelY": 118
   },
   "propConfig": {
     "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.title": {
       "paramDirection": "input",
       "persistent": true
     },
@@ -15,6 +22,14 @@
       "persistent": true
     },
     "params.height": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.labelX": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.labelY": {
       "paramDirection": "input",
       "persistent": true
     }
@@ -31,7 +46,10 @@
       "name": "root"
     },
     "props": {
-      "mode": "percent"
+      "mode": "fixed",
+      "style": {
+        "overflow": "visible"
+      }
     },
     "children": [
       {
@@ -52,8 +70,8 @@
         "position": {
           "x": 0,
           "y": 0,
-          "width": 1,
-          "height": 1
+          "width": 100,
+          "height": 100
         },
         "propConfig": {
           "props.source": {
@@ -81,12 +99,129 @@
                 "expression": "if(len({view.params.tag}) > 0, {view.params.tag}, \"Bin\")"
               }
             }
+          },
+          "position.width": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.width} + 4"
+              }
+            }
+          },
+          "position.height": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.height} + 4"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Tag"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Text Hmi/Tag"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 300,
+          "height": 16
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.tag"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels} && len({view.params.tag}) > 0"
+              }
+            }
+          },
+          "position.x": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelX} + -148"
+              }
+            }
+          },
+          "position.y": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelY} + -10"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Title"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Text Hmi/Title"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.title"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels} && len({view.params.title}) > 0"
+              }
+            }
+          },
+          "position.x": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelX} + -148"
+              }
+            }
+          },
+          "position.y": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelY} + 6"
+              }
+            }
           }
         }
       }
-    ],
-    "position": {
-      "shrink": 0
-    }
+    ]
   }
 }

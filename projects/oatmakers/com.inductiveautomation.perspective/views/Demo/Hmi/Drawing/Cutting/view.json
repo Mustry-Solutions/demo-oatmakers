@@ -27,7 +27,7 @@
           "name": "Piping"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMjA4IDExMCBIMjYwIFYxNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjYwIDI5MCBWMzgwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTIzOCA2NTQgSDQyMCBWNDAyIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTQ3MCAzOTIgSDUyMCBWMzQ1IEg1NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNTIwIDM5MiBWNTE1IEg1NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNzYwIDM0NSBIODIwIFY0MzAgSDg4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik03NjAgNTE1IEg4MjAgVjQzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05NDUgMzUwIFYzMDAgSDEwMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48dGV4dCB4PSIxMDEwIiB5PSIzMDQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNzc3Ij5UbyBkdXN0IGZpbHRlcjwvdGV4dD48cGF0aCBkPSJNMTAxMCA0NzAgSDEwODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTI2MCA0NDAgSDE1NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTEwMCA1MjAgVjcwMCBINTIwIFY1MTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48dGV4dCB4PSI4NDAiIHk9IjY5MiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3Ij5PdmVyc2l6ZSByZXR1cm4gdG8gZ3JhbnVsYXRvcnM8L3RleHQ+PHBhdGggZD0iTTEyMzAgNTIwIFY3ODAgSDE1NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTMxMCAzODIgVjQ0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTQ2MCAzODIgVjQ0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSIxMjQ2IiB5PSIxNjYiIHdpZHRoPSIyNjgiIGhlaWdodD0iNzgiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjx0ZXh0IHg9IjEyNTAiIHk9IjE2MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPlRocm91Z2hwdXQgKGtnL2gpPC90ZXh0PjxyZWN0IHg9IjEyODYiIHk9IjY2NiIgd2lkdGg9IjIyOCIgaGVpZ2h0PSI2OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHRleHQgeD0iMTI5MCIgeT0iNjYwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzZkNzI3MCI+TW9pc3R1cmUgKCUpPC90ZXh0Pjwvc3ZnPg==",
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMjA4IDExMCBIMjYwIFYxNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjYwIDI5MCBWMzgwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTIzOCA2NTQgSDQyMCBWNDAyIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTQ3MCAzOTIgSDUyMCBWMzQ1IEg1NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNTIwIDM5MiBWNTE1IEg1NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNzYwIDM0NSBIODIwIFY0MzAgSDg4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik03NjAgNTE1IEg4MjAgVjQzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05NDUgMzUwIFYzMDAgSDEwMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48cGF0aCBkPSJNMTAxMCA0NzAgSDEwODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTI2MCA0NDAgSDE1NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTEwMCA1MjAgVjcwMCBINTIwIFY1MTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTIzMCA1MjAgVjc4MCBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMzEwIDM4MiBWNDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNDYwIDM4MiBWNDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9IjEyNDYiIHk9IjE2NiIgd2lkdGg9IjI2OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHJlY3QgeD0iMTI4NiIgeT0iNjY2IiB3aWR0aD0iMjI4IiBoZWlnaHQ9IjY4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48L3N2Zz4=",
           "altText": "Line 02 \u00b7 Groat cutting piping",
           "fit": {
             "mode": "fill"
@@ -52,11 +52,17 @@
           "path": "Demo/Hmi/Equipment/Bin",
           "params": {
             "tag": "BN601",
+            "title": "Groat bin",
             "width": 120,
-            "height": 150
+            "height": 150,
+            "labelX": 60.0,
+            "labelY": 63.0
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 198,
@@ -74,11 +80,17 @@
           "path": "Demo/Hmi/Equipment/ScrewConveyor",
           "params": {
             "tag": "SC601",
+            "title": "Steam conditioner",
             "width": 240,
-            "height": 20
+            "height": 20,
+            "labelX": 120.0,
+            "labelY": 36
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 228,
@@ -96,11 +108,17 @@
           "path": "Demo/Hmi/Equipment/Drum",
           "params": {
             "tag": "GC601",
+            "title": "Granulator 1",
             "width": 200,
-            "height": 80
+            "height": 80,
+            "labelX": 100.0,
+            "labelY": 98
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 558,
@@ -118,11 +136,17 @@
           "path": "Demo/Hmi/Equipment/Drum",
           "params": {
             "tag": "GC602",
+            "title": "Granulator 2",
             "width": 200,
-            "height": 80
+            "height": 80,
+            "labelX": 100.0,
+            "labelY": 98
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 558,
@@ -140,11 +164,17 @@
           "path": "Demo/Hmi/Equipment/Aspirator",
           "params": {
             "tag": "AS601",
+            "title": "Aspirator",
             "width": 130,
-            "height": 170
+            "height": 170,
+            "labelX": 65.0,
+            "labelY": 188
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 878,
@@ -162,11 +192,17 @@
           "path": "Demo/Hmi/Equipment/Sieve",
           "params": {
             "tag": "SF601",
+            "title": "Grading sifter",
             "width": 180,
-            "height": 120
+            "height": 120,
+            "labelX": 90.0,
+            "labelY": 138
           },
           "useDefaultViewWidth": false,
-          "useDefaultViewHeight": false
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
         },
         "position": {
           "x": 1078,
@@ -255,8 +291,9 @@
             "unit": "kg/h",
             "decimals": 0,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlY2MDE8L3RleHQ+PC9nPjwvc3ZnPg==",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlY2MDE8L3RleHQ+PC9nPjwvc3ZnPg=="
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "compact": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -313,8 +350,9 @@
             "unit": "bar",
             "decimals": 2,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UENWNjAxPC90ZXh0PjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UENWNjAxPC90ZXh0PjwvZz48L3N2Zz4="
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48L2c+PC9zdmc+",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48L2c+PC9zdmc+",
+            "compact": false
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -350,8 +388,9 @@
             "unit": "rpm",
             "decimals": 0,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUdDNjAxPC90ZXh0PjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUdDNjAxPC90ZXh0PjwvZz48L3N2Zz4="
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "compact": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -387,8 +426,9 @@
             "unit": "rpm",
             "decimals": 0,
             "running": true,
-            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUdDNjAyPC90ZXh0PjwvZz48L3N2Zz4=",
-            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUdDNjAyPC90ZXh0PjwvZz48L3N2Zz4="
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "compact": true
           },
           "useDefaultViewWidth": false,
           "useDefaultViewHeight": false
@@ -976,25 +1016,181 @@
         }
       },
       {
-        "type": "ia.display.image",
+        "type": "ia.display.label",
         "meta": {
-          "name": "Labels"
+          "name": "Text1"
         },
         "props": {
-          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48dGV4dCB4PSIyNjAuMCIgeT0iMjAzLjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkJONjAxPC90ZXh0Pjx0ZXh0IHg9IjI2MC4wIiB5PSIyMTcuMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5Hcm9hdCBiaW48L3RleHQ+PHRleHQgeD0iMzUwLjAiIHk9IjQxOCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+U0M2MDE8L3RleHQ+PHRleHQgeD0iMzUwLjAiIHk9IjQzMiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5TdGVhbSBjb25kaXRpb25lcjwvdGV4dD48dGV4dCB4PSI2NjAuMCIgeT0iNDAzIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5HQzYwMTwvdGV4dD48dGV4dCB4PSI2NjAuMCIgeT0iNDE3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkdyYW51bGF0b3IgMTwvdGV4dD48dGV4dCB4PSI2NjAuMCIgeT0iNTczIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5HQzYwMjwvdGV4dD48dGV4dCB4PSI2NjAuMCIgeT0iNTg3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkdyYW51bGF0b3IgMjwvdGV4dD48dGV4dCB4PSI5NDUuMCIgeT0iNTM4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5BUzYwMTwvdGV4dD48dGV4dCB4PSI5NDUuMCIgeT0iNTUyIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkFzcGlyYXRvcjwvdGV4dD48dGV4dCB4PSIxMTcwLjAiIHk9IjUzOCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+U0Y2MDE8L3RleHQ+PHRleHQgeD0iMTE3MC4wIiB5PSI1NTIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+R3JhZGluZyBzaWZ0ZXI8L3RleHQ+PHRleHQgeD0iNDAiIHk9Ijg5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1YTVlNWMiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5MaW5lIDAyIMK3IEdyb2F0IGN1dHRpbmc8L3RleHQ+PHRleHQgeD0iMTcwMCIgeT0iODkwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5TSU1VTEFUSU9OPC90ZXh0Pjwvc3ZnPg==",
-          "altText": "Line 02 \u00b7 Groat cutting labels",
-          "fit": {
-            "mode": "fill"
-          },
+          "text": "To dust filter",
           "style": {
-            "pointerEvents": "none"
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
           }
         },
         "position": {
-          "x": 0,
-          "y": 0,
-          "width": 1740,
-          "height": 910
+          "x": 1010,
+          "y": 293,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text2"
+        },
+        "props": {
+          "text": "Oversize return to granulators",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "center",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 690.0,
+          "y": 681,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text3"
+        },
+        "props": {
+          "text": "Throughput (kg/h)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1250,
+          "y": 149,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text4"
+        },
+        "props": {
+          "text": "Moisture (%)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1290,
+          "y": 649,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text5"
+        },
+        "props": {
+          "text": "Line 02 \u00b7 Groat cutting",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "22px",
+            "fontWeight": 600,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "29px"
+          }
+        },
+        "position": {
+          "x": 40,
+          "y": 868,
+          "width": 300,
+          "height": 29
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text6"
+        },
+        "props": {
+          "text": "SIMULATION",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "flex-end",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1400,
+          "y": 880,
+          "width": 300,
+          "height": 13
         }
       }
     ]

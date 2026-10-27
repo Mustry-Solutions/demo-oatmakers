@@ -74,6 +74,11 @@
 .psc-Hmi\/NavButton { flex:0 0 auto !important; height:34px; padding:6px 12px; font-size:12px; white-space:nowrap; }
 .psc-Hmi\/PanZoom.mustry-panzoom { border:0; border-radius:0; --pz-canvas:#e6e6e6; --pz-bg:#e6e6e6; --pz-accent:#565957; }
 .psc-Hmi\/PanZoom .mustry-pz-content { background:transparent; box-shadow:none; border:0; }
+.psc-Hmi\/Text { color:#555; font-family:Arial,sans-serif; white-space:nowrap; overflow:visible; pointer-events:none; text-shadow:0 0 2px #e6e6e6,0 0 2px #e6e6e6,0 0 3px #e6e6e6,0 0 4px #e6e6e6; }
+.psc-Hmi\/Tag { font-size:12px; font-weight:600; color:#555; align-items:center; line-height:16px; white-space:nowrap; pointer-events:none; }
+.psc-Hmi\/Title { font-size:10.5px; color:#777; align-items:center; line-height:14px; }
+.psc-Hmi\/InstrumentTag { font-family:Arial,sans-serif; font-size:12px; color:#565957; align-items:flex-start; justify-content:flex-end; white-space:nowrap; pointer-events:none; }
+.psc-Hmi\/LabelToggle { gap:4px; align-items:center; margin-right:8px; }
 .psc-Hmi\/DetailValue { font-size:28px; color:#444; }
 .psc-Demo\/Menu { background:transparent; color:#d5dade; font-size:12px; }
 .psc-Demo\/Menu .menu-wrapper,.psc-Demo\/Menu .wrapper-submenu { background:#2b3238 !important; height:100%; }

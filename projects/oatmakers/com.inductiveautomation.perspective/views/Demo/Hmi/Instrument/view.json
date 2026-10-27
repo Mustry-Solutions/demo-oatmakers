@@ -90,7 +90,6 @@
               "config": {
                 "waitOnAll": true,
                 "struct": {
-                  "tag": "{view.params.tag}",
                   "kind": "{view.params.kind}",
                   "value": "{view.params.value}",
                   "colour": "{view.params.colour}"
@@ -99,9 +98,45 @@
               "transforms": [
                 {
                   "type": "script",
-                  "code": "\treturn application.demo.scadaInstrumentSvg(value[\"tag\"], value[\"kind\"], value[\"value\"], value[\"colour\"])"
+                  "code": "\treturn application.demo.scadaInstrumentSvg(value[\"kind\"], value[\"value\"], value[\"colour\"])"
                 }
               ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Tag"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/InstrumentTag"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 0.3
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.tag"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
             }
           }
         }

@@ -109,6 +109,62 @@
             },
             "children": [
               {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "Labels"
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "classes": "Hmi/LabelToggle"
+                  }
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "Caption"
+                    },
+                    "props": {
+                      "text": "Labels",
+                      "style": {
+                        "classes": "Demo/Muted"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0,
+                      "basis": "auto"
+                    }
+                  },
+                  {
+                    "type": "ia.input.toggle-switch",
+                    "meta": {
+                      "name": "LabelSwitch"
+                    },
+                    "props": {
+                      "selected": true
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.selected": {
+                        "binding": {
+                          "type": "property",
+                          "config": {
+                            "path": "session.custom.showLabels",
+                            "bidirectional": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "position": {
+                  "shrink": 0
+                }
+              },
+              {
                 "type": "ia.input.button",
                 "meta": {
                   "name": "Overview"

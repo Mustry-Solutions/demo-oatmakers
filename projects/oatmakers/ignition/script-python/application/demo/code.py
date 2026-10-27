@@ -557,8 +557,9 @@ def scadaEquipmentSvg(body, width, height, padding):
 	return _scadaSvg(content, width + left + right, height + top + bottom)
 
 
-def scadaInstrumentSvg(tag, kind, value, colour):
-	body = u'<g font-family="Arial" fill="#565957"><text x="0" y="12" font-size="12">{0}</text>'.format(_escape(tag))
+def scadaInstrumentSvg(kind, value, colour):
+	# The tag itself is a Label in Demo/Hmi/Instrument, so it follows the label toggle.
+	body = u'<g font-family="Arial" fill="#565957">'
 	body += u'<circle cx="10" cy="32" r="10" fill="#e6e6e6" stroke="#7d817f" stroke-width="1"/><text x="10" y="35" text-anchor="middle" font-size="8">{0}</text>'.format(_escape(kind))
 	pill_width = min(102, max(64, len(unicode(value)) * 6 + 14))
 	body += u'<rect x="26" y="22" width="{2}" height="20" rx="10" fill="{0}"/><text x="{3}" y="36" text-anchor="middle" font-size="11.5">{1}</text></g>'.format(_escape(colour), _escape(value), pill_width, 26 + pill_width / 2.0)

@@ -49,6 +49,16 @@ def tag_binding(path,code=None):
     b={'binding':{'type':'tag','config':{'mode':'direct','tagPath':path,'fallbackDelay':2.5}}}
     if code:b['binding']['transforms']=[{'type':'script','code':code}]
     return b
+# Every name, caption and annotation is a Label component; session.custom.showLabels
+# switches them all on or off.
+SHOW_LABELS='{session.custom.showLabels}'
+# Perspective labels are column flexboxes: alignItems sets the horizontal alignment.
+ALIGN={'start':'flex-start','middle':'center','end':'flex-end'}
+def text_node(name,x,y,text,size=12,weight=400,anchor='middle',fill='#555',toggle=True,width=300):
+    left={'start':x,'middle':x-width/2,'end':x-width}[anchor];line=round(size*1.3)
+    n=node('ia.display.label',name,{'text':text,'style':{'classes':'Hmi/Text','fontSize':'%spx'%size,'fontWeight':weight,'color':fill,'alignItems':ALIGN[anchor],'lineHeight':'%spx'%line}})
+    if toggle:n['propConfig']={'meta.visible':expr(SHOW_LABELS)}
+    return at(n,left,round(y-size),width,line)
 def click(script):return {'dom':{'onClick':{'type':'script','scope':'G','config':{'script':script}}}}
 def clickable(children,script,cursor='pointer'):
     root=node('ia.container.coord','root',{'mode':'percent','style':{'cursor':cursor}},children);root['events']=click(script);return root
@@ -58,7 +68,7 @@ def full(n):
 # Valves and pumps share the separator's flow axis (y=48 in an 88 high box).
 # Compact symbols (motors, fans, rotary valves) are centred on (20,30) with
 # their tag to the right, so they sit on a pipe in either direction.
-def symbol(kind,active,tag,w=78,h=88):
+def symbol(kind,active,w=78,h=88):
     fill=ON if active else OFF
     body=''
     if kind in ('block','control','pump'):
@@ -75,7 +85,6 @@ def symbol(kind,active,tag,w=78,h=88):
                 body+='<path d="M%s %s a14 12 0 0 1 28 0 Z" fill="%s" stroke="#555" stroke-width="1.4"/><text x="%s" y="%s" font-size="12">A</text>'%(cx-14,cy-22,fill,cx+20,cy-23)
             else:
                 body+='<rect x="%s" y="%s" width="20" height="12" fill="%s" stroke="#555" stroke-width="1.4"/><path d="M%s %s h20 M%s %s v12" stroke="#555"/>'%(cx-10,cy-34,fill,cx-10,cy-28,cx,cy-34)
-        body+='<text x="%s" y="%s" text-anchor="middle" font-size="12" font-weight="600">%s</text>'%(cx,h-5,escape(tag))
     else:
         cx,cy=20,30
         if kind=='motor':
@@ -86,7 +95,6 @@ def symbol(kind,active,tag,w=78,h=88):
                 body+='<path d="M%s %s q-3 -12 7 -13 q4 6 -7 13 Z" transform="rotate(%d %s %s)" fill="#555"/>'%(cx,cy,r,cx,cy)
         else:
             body+='<circle cx="%s" cy="%s" r="14" fill="%s" stroke="#555" stroke-width="1.6"/><path d="M%s %s h28 M%s %s v28 M%s %s l20 20 M%s %s l-20 20" stroke="#555" stroke-width="1"/>'%(cx,cy,fill,cx-14,cy,cx,cy-14,cx-10,cy-10,cx+10,cy-10)
-        body+='<text x="42" y="34" font-size="12" font-weight="600">%s</text>'%escape(tag)
     return svg('<g font-family="Arial" fill="#555">'+body+'</g>',w,h)
 
 def stream_svg(text,w,target):
@@ -98,13 +106,20 @@ def stream_svg(text,w,target):
 
 def components():
     graphic=full(image('Graphic','','Instrument'))
-    graphic['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tag':'{view.params.tag}','kind':'{view.params.kind}','value':'{view.params.value}','colour':'{view.params.colour}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaInstrumentSvg(value["tag"], value["kind"], value["value"], value["colour"])'}]}}}
+    graphic['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'kind':'{view.params.kind}','value':'{view.params.value}','colour':'{view.params.colour}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaInstrumentSvg(value["kind"], value["value"], value["colour"])'}]}}}
     detail='\tp = self.view.params\n\tif p.signal:\n\t\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, p.unit, p.decimals)'
-    view(HMI+'Instrument',clickable([graphic],detail),params={'area':'intake','tag':'TI101','kind':'TI','signal':'','unit':'','decimals':1,'value':'--','colour':'#f7f7f7'},height=51)
+    tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/InstrumentTag'}}),0,0,1,0.3)
+    tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS)}
+    view(HMI+'Instrument',clickable([graphic,tag],detail),params={'area':'intake','tag':'TI101','kind':'TI','signal':'','unit':'','decimals':1,'value':'--','colour':'#f7f7f7'},height=51)
     device=full(image('Graphic','','Equipment'))
     device['propConfig']={'props.source':{'binding':{'type':'expr','config':{'expression':'if({view.params.running}, {view.params.on}, {view.params.off})'}}}}
-    root=clickable([device],'\tp = self.view.params\n\tif p.signal:\n\t\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, p.unit, p.decimals)')
-    view(HMI+'Device',root,params={'area':'intake','tag':'M101','signal':'','unit':'','decimals':1,'running':True,'on':'','off':''},height=88)
+    tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Tag'}}),0,0,1,1)
+    compact=lambda a,b:expr('if({view.params.compact}, %s, %s)'%(a,b))
+    tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS),
+        'position.x':compact(0.38,0),'position.y':compact(0.37,0.81),'position.width':compact(0.62,1),'position.height':compact(0.25,0.17),
+        'props.style.alignItems':compact('"flex-start"','"center"')}
+    root=clickable([device,tag],'\tp = self.view.params\n\tif p.signal:\n\t\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, p.unit, p.decimals)')
+    view(HMI+'Device',root,params={'area':'intake','tag':'M101','signal':'','unit':'','decimals':1,'running':True,'on':'','off':'','compact':True},height=88)
     # Connected streams navigate to the area that supplies or receives them.
     link=full(image('Graphic','','Stream'));link['propConfig']={'props.source':bind('view.params.source')}
     root=clickable([link],'\tif self.view.params.target:\n\t\tsystem.perspective.navigate(self.view.params.target)')
@@ -115,7 +130,11 @@ def components():
     view(HMI+'Trend',node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'area':'intake','signal':'','colour':'#626b75','sp':0},height=70)
     silo=full(image('Graphic','','Silo'))
     silo['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'level':'{view.params.level}','product':'{view.params.product}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaSiloSvg(value["level"], value["product"])'}]}}}
-    view(HMI+'Silo',clickable([silo],'\tp = self.view.params\n\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, "%", 0)'),params={'area':'intake','tag':'SI101','signal':'','level':0,'product':''},height=330)
+    tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Text Hmi/Tag','alignItems':'flex-start'}}),0.555,-0.06,1,0.05)
+    tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS),
+        'position.y':expr('-21 / {view.params.height}'),'position.height':expr('16 / {view.params.height}')}
+    root=clickable([silo,tag],'\tp = self.view.params\n\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, "%", 0)');root['props']['style']['overflow']='visible'
+    view(HMI+'Silo',root,params={'area':'intake','tag':'SI101','signal':'','level':0,'product':'','height':330},height=330)
     tile=full(image('Graphic','','Process area'))
     tile['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTileSvg(value["area"])'}]}}}
     view(HMI+'Tile',clickable([tile],'\tsystem.perspective.navigate(self.view.params.route)'),params={'area':'intake','route':'/scada/intake'},height=170)
@@ -164,17 +183,27 @@ EQUIPMENT={
 
 def equipment_templates():
     for kind,(name,pad,code) in EQUIPMENT.items():
-        shape=full(image('Shape','',name))
+        left,top,right,bottom=[v+2 for v in pad]
+        shape=at(image('Shape','',name),0,0,100,100)
         script='\tw, h = float(value["width"]), float(value["height"])\n'+''.join('\t'+line+'\n' for line in code.split('\n'))+'\treturn application.demo.scadaEquipmentSvg(body, w, h, %s)'%json.dumps(list(pad))
         shape['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'width':'{view.params.width}','height':'{view.params.height}'}},'transforms':[{'type':'script','code':script}]}},
-                           'props.altText':expr('if(len({view.params.tag}) > 0, {view.params.tag}, "%s")'%name)}
-        view(HMI+'Equipment/'+name,node('ia.container.coord','root',{'mode':'percent'},[shape]),params={'tag':'','width':100,'height':100},height=100)
+                             'props.altText':expr('if(len({view.params.tag}) > 0, {view.params.tag}, "%s")'%name),
+                             'position.width':expr('{view.params.width} + %d'%(left+right)),'position.height':expr('{view.params.height} + %d'%(top+bottom))}
+        # labelX/labelY is the centre of the tag's baseline in body coordinates.
+        tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Text Hmi/Tag'}}),0,0,300,16)
+        tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS+' && len({view.params.tag}) > 0'),
+                           'position.x':expr('{view.params.labelX} + %d'%(left-150)),'position.y':expr('{view.params.labelY} + %d'%(top-12))}
+        title=at(node('ia.display.label','Title',{'text':'','style':{'classes':'Hmi/Text Hmi/Title'}}),0,0,300,14)
+        title['propConfig']={'props.text':bind('view.params.title'),'meta.visible':expr(SHOW_LABELS+' && len({view.params.title}) > 0'),
+                             'position.x':expr('{view.params.labelX} + %d'%(left-150)),'position.y':expr('{view.params.labelY} + %d'%(top+4))}
+        root=node('ia.container.coord','root',{'mode':'fixed','style':{'overflow':'visible'}},[shape,tag,title]);root.pop('position',None)
+        view(HMI+'Equipment/'+name,root,params={'tag':'','title':'','width':100,'height':100,'labelX':50,'labelY':118},height=100)
 
 
 class Scene:
     """One process drawing in fixed design coordinates: static vector layers with live views between them."""
     def __init__(self,area):
-        self.area=area;self.under=[];self.parts=[];self.over=[];self.tags={};self.equipment=[];self.counts={}
+        self.area=area;self.under=[];self.parts=[];self.tags={};self.equipment=[];self.counts={};self.texts=[]
     def path(self,tag):return '%s/%s/%s'%(TAG_ROOT,self.area.title(),tag)
     def register(self,tag,udt,**params):
         types={str:'String',int:'Int4',float:'Float8'}
@@ -185,41 +214,40 @@ class Scene:
         self.under.append('<path d="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linejoin="round"%s/>'%(d,colour,width,(' stroke-dasharray="%s"'%dash) if dash else ''))
     def steam(self,d):self.pipe(d,STEAM,1.7)
     def air(self,d):self.pipe(d,AIR,1,'4 3')
-    def text(self,x,y,t,size=12,weight=400,anchor='middle',fill='#555',layer=None):
-        halo=' stroke="#e6e6e6" stroke-width="4" paint-order="stroke"' if layer is self.over else ''
-        (self.under if layer is None else layer).append('<text x="%s" y="%s" font-family="Arial" font-size="%s" font-weight="%s" text-anchor="%s" fill="%s"%s>%s</text>'%(x,y,size,weight,anchor,fill,halo,escape(t)))
-    def name(self,x,y,tag,title):
-        if tag:self.text(x,y,tag,12,600,layer=self.over)
-        if title:self.text(x,y+14,title,10.5,400,fill='#777',layer=self.over)
-    def equip(self,kind,x,y,w,h,tag=''):
+    def text(self,x,y,t,size=12,weight=400,anchor='middle',fill='#555',toggle=True):
+        self.texts.append(text_node('Text%d'%(len(self.texts)+1),x,y,t,size,weight,anchor,fill,toggle))
+    def equip(self,kind,x,y,w,h,tag='',title='',label=None):
+        """Place an equipment template; label is the absolute centre of the tag's baseline."""
         name,(left,top,right,bottom),_=EQUIPMENT[kind]
         key=(tag or name).replace('-','')
         self.counts[key]=self.counts.get(key,0)+1
-        n=embed(key+('' if self.counts[key]==1 else str(self.counts[key]))+'Shape',HMI+'Equipment/'+name,{'tag':tag,'width':w,'height':h})
+        lx,ly=label or (x+w/2,y+h+18)
+        n=embed(key+('' if self.counts[key]==1 else str(self.counts[key]))+'Shape',HMI+'Equipment/'+name,
+                {'tag':tag,'title':title,'width':w,'height':h,'labelX':round(lx-x,1),'labelY':round(ly-y,1)})
+        n['props']['style']={'overflow':'visible'}
         self.equipment.append(at(n,x-left-2,y-top-2,w+left+right+4,h+top+bottom+4))
-    # Equipment: a template instance plus its tag and title in the label layer.
-    def bin(self,x,y,w,h,tag,title):self.equip('bin',x,y,w,h,tag);self.name(x+w/2,y+h*0.42,tag,title)
-    def conveyor(self,x,y,w,tag,title,kind='chain'):self.equip(kind,x,y,w,20,tag);self.name(x+w/2,y+36,tag,title)
-    def elevator(self,x,top,bottom,tag,title):self.equip('elevator',x-10,top,50,bottom-top,tag);self.name(x-46,(top+bottom)/2,tag,title)
-    def sieve(self,x,y,w,h,tag,title):self.equip('sieve',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def aspirator(self,x,y,w,h,tag,title):self.equip('aspirator',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def deck(self,x,y,w,h,tag,title):self.equip('deck',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def drum(self,x,y,w,h,tag,title):self.equip('drum',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def huller(self,cx,cy,r,tag,title):self.equip('huller',cx-r,cy-r,2*r,2*r,tag);self.name(cx,cy+r+18,tag,title)
-    def cyclone(self,x,y,w,h,tag,title):self.equip('cyclone',x,y,w,h,tag);self.name(x+w+40,y+h*0.35,tag,title)
-    def filter(self,x,y,w,h,tag,title):self.equip('filter',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def column(self,x,y,w,h,tag,title):self.equip('column',x,y,w,h,tag)
-    def cooler(self,x,y,w,h,tag,title):self.equip('cooler',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def steamer(self,x,y,w,h,tag,title):self.equip('steamer',x,y,w,h,tag);self.name(x+w/2,y+h/2,tag,title)
-    def rollmill(self,x,y,w,h,tag,title):self.equip('rollmill',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def hammermill(self,x,y,w,h,tag,title):self.equip('hammermill',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def plansifter(self,x,y,w,h,tag,title):self.equip('plansifter',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def beltdryer(self,x,y,w,h,tag,title):self.equip('beltdryer',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def weigher(self,cx,y,tag,title):self.equip('weigher',cx-40,y,80,64,tag);self.name(cx+80,y+30,tag,title)
-    def bagger(self,cx,y,tag,title):self.equip('bagger',cx-45,y,90,110,tag);self.name(cx+90,y+30,tag,title)
-    def boiler(self,x,y,w,h,tag,title):self.equip('boiler',x,y,w,h,tag);self.name(x+w/2,y+h/2+4,tag,title)
-    def vessel(self,x,y,w,h,tag,title):self.equip('vessel',x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
-    def box(self,x,y,w,h,tag,title,kind='box'):self.equip(kind,x,y,w,h,tag);self.name(x+w/2,y+h+18,tag,title)
+    def bin(self,x,y,w,h,tag,title):self.equip('bin',x,y,w,h,tag,title,(x+w/2,y+h*0.42))
+    def conveyor(self,x,y,w,tag,title,kind='chain',label=None):self.equip(kind,x,y,w,20,tag,title,label or (x+w/2,y+36))
+    def elevator(self,x,top,bottom,tag,title):self.equip('elevator',x-10,top,50,bottom-top,tag,title,(x-46,(top+bottom)/2))
+    def sieve(self,x,y,w,h,tag,title):self.equip('sieve',x,y,w,h,tag,title)
+    def aspirator(self,x,y,w,h,tag,title):self.equip('aspirator',x,y,w,h,tag,title)
+    def deck(self,x,y,w,h,tag,title):self.equip('deck',x,y,w,h,tag,title)
+    def drum(self,x,y,w,h,tag,title):self.equip('drum',x,y,w,h,tag,title)
+    def huller(self,cx,cy,r,tag,title):self.equip('huller',cx-r,cy-r,2*r,2*r,tag,title)
+    def cyclone(self,x,y,w,h,tag,title):self.equip('cyclone',x,y,w,h,tag,title,(x+w+40,y+h*0.35))
+    def filter(self,x,y,w,h,tag,title):self.equip('filter',x,y,w,h,tag,title)
+    def column(self,x,y,w,h,tag,title):self.equip('column',x,y,w,h,tag,title,(x+w/2,y+h*0.37))
+    def cooler(self,x,y,w,h,tag,title,label=None):self.equip('cooler',x,y,w,h,tag,title,label)
+    def steamer(self,x,y,w,h,tag,title):self.equip('steamer',x,y,w,h,tag,title,(x+w/2,y+h/2))
+    def rollmill(self,x,y,w,h,tag,title):self.equip('rollmill',x,y,w,h,tag,title)
+    def hammermill(self,x,y,w,h,tag,title):self.equip('hammermill',x,y,w,h,tag,title)
+    def plansifter(self,x,y,w,h,tag,title):self.equip('plansifter',x,y,w,h,tag,title)
+    def beltdryer(self,x,y,w,h,tag,title):self.equip('beltdryer',x,y,w,h,tag,title)
+    def weigher(self,cx,y,tag,title):self.equip('weigher',cx-40,y,80,64,tag,title,(cx+80,y+30))
+    def bagger(self,cx,y,tag,title):self.equip('bagger',cx-45,y,90,110,tag,title,(cx+90,y+30))
+    def boiler(self,x,y,w,h,tag,title):self.equip('boiler',x,y,w,h,tag,title,(x+w/2,y+h/2+4))
+    def vessel(self,x,y,w,h,tag,title):self.equip('vessel',x,y,w,h,tag,title)
+    def box(self,x,y,w,h,tag,title,kind='box'):self.equip(kind,x,y,w,h,tag,title)
     def frame(self,x,y,w,h,caption):
         self.under.append('<rect x="%s" y="%s" width="%s" height="%s" fill="#eeeeee" stroke="#c2c5c3"/>'%(x-4,y-4,w+8,h+8))
         self.text(x,y-10,caption,11,600,'start','#6d7270')
@@ -241,7 +269,7 @@ class Scene:
     def device(self,tag,kind,cx,cy,signal='',unit='',dec=1,standby=False):
         compact=kind in ('motor','fan','rotary')
         w,h=(110,60) if compact else (78,88)
-        n=embed(tag.replace('-',''),HMI+'Device',{'area':self.area,'tag':tag,'signal':signal,'unit':unit,'decimals':dec,'running':True,'on':b64(symbol(kind,True,tag,w,h)),'off':b64(symbol(kind,False,tag,w,h))})
+        n=embed(tag.replace('-',''),HMI+'Device',{'area':self.area,'tag':tag,'signal':signal,'unit':unit,'decimals':dec,'running':True,'on':b64(symbol(kind,True,w,h)),'off':b64(symbol(kind,False,w,h)),'compact':compact})
         if kind in DRIVES:
             # Rated current is a fixed nameplate value per drive, derived from its tag name.
             rated=float(round(4+sum(map(ord,tag))%7*(4.5 if kind=='rotary' else 9.0 if kind=='fan' else 6.0),1))
@@ -252,11 +280,11 @@ class Scene:
             n['propConfig']={'props.params.running':expr('{%s/Open}'%self.path(tag))}
         self.parts.append(at(n,cx-20 if compact else cx-39,cy-30 if compact else cy-48,w,h))
     def silo(self,tag,signal,product,x,y,w=110,h=330):
-        n=embed(tag,HMI+'Silo',{'area':self.area,'tag':tag,'signal':signal,'product':product,'level':0})
+        n=embed(tag,HMI+'Silo',{'area':self.area,'tag':tag,'signal':signal,'product':product,'level':0,'height':h})
+        n['props']['style']={'overflow':'visible'}
         self.register(tag,'Silo',Description=product+' silo',Signal=signal,Product=product,Capacity=SILO_TONNES.get(product,60))
         n['propConfig']={'props.params.level':tag_binding(self.path(tag)+'/Level')}
         self.parts.append(at(n,x,y,w,h))
-        self.text(x+w/2+6,y-8,tag,12,600,'start',layer=self.over)
     def stream(self,text,x,y,w=170,target=None):
         n=embed(''.join(c for c in text.title() if c.isalnum())+'Link',HMI+'Stream',{'target':ROUTE.get(target,''),'source':b64(stream_svg(text,w,target))})
         self.parts.append(at(n,x,y,w,28))
@@ -265,10 +293,9 @@ class Scene:
         self.parts.append(at(embed('Trend'+signal[0].upper()+signal[1:],HMI+'Trend',{'area':self.area,'signal':signal,'colour':colour,'sp':sp}),x,y,w,h))
 
     def build(self,title):
-        self.text(40,890,title,22,600,'start','#5a5e5c',self.over)
-        self.text(1700,890,'SIMULATION',10,400,'end','#777',self.over)
-        canvas=[at(image('Piping',b64(svg(''.join(self.under),W,H)),title+' piping'),0,0,W,H)]+self.equipment+self.parts
-        canvas.append(at(image('Labels',b64(svg(''.join(self.over),W,H)),title+' labels'),0,0,W,H))
+        self.text(40,890,title,22,600,'start','#5a5e5c',toggle=False)
+        self.text(1700,890,'SIMULATION',10,400,'end','#777',toggle=False)
+        canvas=[at(image('Piping',b64(svg(''.join(self.under),W,H)),title+' piping'),0,0,W,H)]+self.equipment+self.parts+self.texts
         scene=node('ia.container.coord','root',{'mode':'fixed','style':{'backgroundColor':'transparent','overflow':'visible'}},canvas);scene.pop('position',None)
         if self.area!='overview':
             self.register('Area','ProcessArea',Title=TITLE[self.area])
@@ -286,7 +313,7 @@ def intake():
     s.pipe('M500 756 H520');s.elevator(520,100,800,'EL101','Bucket elevator');s.device('M-EL101','motor',540,70,'elevAmps','A',1)
     s.pipe('M570 135 H640');s.drum(640,100,170,70,'PC101','Drum pre-cleaner');s.device('M-PC101','motor',705,60)
     s.pipe('M725 170 V300 H760',INK,1.2);s.stream('To screenings bin',760,286,150)
-    s.pipe('M810 135 H850 V230');s.conveyor(840,230,690,'','','chain');s.name(1185,206,'CV102','Silo fill conveyor')
+    s.pipe('M810 135 H850 V230');s.conveyor(840,230,690,'CV102','Silo fill conveyor',label=(1185,206))
     s.device('M-CV102','motor',1560,240)
     for i,(x,lvl,tg) in enumerate([(880,'lvl1','tg1'),(1040,'lvl2','tg2'),(1200,'lvl3','tg3'),(1360,'lvl4','tg4')]):
         cx=x+55
@@ -294,7 +321,7 @@ def intake():
         s.silo('SI10%d'%(i+1),lvl,'Raw oats',x,360,110,330)
         s.instrument('TI10%d'%(i+1),'TI',tg,'°C',1,cx+8,286,lead=None)
         s.pipe('M%s 690 V800'%cx);s.device('RV10%d'%(i+1),'rotary',cx,735)
-    s.conveyor(900,800,620,'','');s.name(1210,846,'CV103','Silo reclaim conveyor');s.device('M-CV103','motor',880,850)
+    s.conveyor(900,800,620,'CV103','Silo reclaim conveyor',label=(1210,846));s.device('M-CV103','motor',880,850)
     s.pipe('M1520 810 H1540');s.stream('To cleaning',1540,796,160,'cleaning')
     s.filter(200,140,110,180,'F101','Dust filter');s.device('FN101','fan',255,90)
     s.air('M255 140 V112');s.air('M280 620 V560 H240 V320');s.air('M510 117 H460 V230 H310')
@@ -310,7 +337,7 @@ def cleaning():
     s.stream('From raw oat silos',38,96,170,'intake');s.pipe('M208 110 H260 V140')
     s.bin(200,140,120,160,'BN201','Cleaning feed bin');s.pipe('M260 300 V430 H330')
     s.device('FC201','rotary',260,335,'feed','t/h',1)
-    s.equip('magnet',240,375,40,26,'MG201');s.text(300,393,'MG201',11,600,'start')
+    s.equip('magnet',240,375,40,26,'MG201',label=(320,393))
     s.sieve(330,410,220,110,'SP201','Separator sieve');s.device('M-SP201','motor',440,370,'sieveAmps','A',1)
     s.pipe('M550 470 H610');s.aspirator(610,380,130,170,'AS201','Aspirator')
     s.air('M675 380 V290');s.cyclone(630,110,100,180,'CY201','Dust cyclone');s.air('M680 110 V80 H800');s.device('FN201','fan',820,80);s.text(940,85,'Exhaust',11,fill='#777')
@@ -319,7 +346,7 @@ def cleaning():
     s.pipe('M1280 470 H1330');s.box(1330,380,120,190,'CS201','Optical sorter','sorter')
     s.pipe('M1450 470 H1540');s.stream('To dehulling',1540,456,160,'dehulling')
     for x,y in [(350,520),(950,540),(1110,510),(1350,570),(725,550)]:s.pipe('M%s %s V800'%(x,y),INK,1.2)
-    s.conveyor(360,800,1150,'','');s.name(935,846,'CV205','Screenings conveyor');s.device('M-CV205','motor',340,850)
+    s.conveyor(360,800,1150,'CV205','Screenings conveyor',label=(935,846));s.device('M-CV205','motor',340,850)
     s.pipe('M1510 810 H1540');s.stream('Screenings to by-products',1540,796,190)
     s.instrument('FT201','FI','feed','t/h',1,60,320)
     s.instrument('II201','II','sieveAmps','A',1,420,580)
@@ -366,10 +393,10 @@ def kiln():
     s.conveyor(230,382,240,'SC401','Steam conditioner','screw');s.pipe('M470 392 H520 V100 H600 V130')
     s.stream('Steam from boiler house',38,640,200,'utilities')
     s.steam('M238 654 H420 V402');s.steam('M420 654 H540 V400 H562');s.device('FCV401','control',300,654,'steamFlow','kg/h',0)
-    s.column(560,130,140,330,'KL401','Kiln');s.name(630,252,'KL401','Kiln')
+    s.column(560,130,140,330,'KL401','Kiln')
     s.air('M670 120 V80 H760');s.device('FN402','fan',780,80);s.text(900,85,'Kiln exhaust',11,fill='#777')
     s.pipe('M630 460 V560');s.device('RV402','rotary',630,510)
-    s.cooler(560,560,140,190,'','');s.name(490,600,'CL401','Counterflow cooler');s.air('M700 640 H740');s.device('FN401','fan',760,640)
+    s.cooler(560,560,140,190,'CL401','Counterflow cooler',label=(490,600));s.air('M700 640 H740');s.device('FN401','fan',760,640)
     s.pipe('M630 750 V790 H920');s.plansifter(920,740,170,90,'GR401','Groat grader')
     s.pipe('M1090 785 H1200 V200 H1540');s.pipe('M1200 330 H1540');s.pipe('M1200 460 H1540')
     for y,tag,target,text in [(200,'SDV411','flaking','Groats to Line 01'),(330,'SDV412','cutting','Groats to Line 02'),(460,'SDV413','milling','Groats to Line 03')]:
@@ -490,7 +517,7 @@ def packing():
         s.pipe('M%s 740 V800'%cx)
         s.instrument(bagger.replace('BG','WI'),'WI',weight,unit,2 if unit=='kg' else 1,x+130,380)
         s.instrument(bagger.replace('BG','SI'),'SI',speed,'/min',1,x+130,440)
-    s.conveyor(330,800,800,'','');s.name(730,846,'CV804','Pack collection conveyor');s.device('M-CV804','motor',310,850)
+    s.conveyor(330,800,800,'CV804','Pack collection conveyor',label=(730,846));s.device('M-CV804','motor',310,850)
     s.pipe('M1130 810 H1160');s.box(1160,790,110,30,'CW801','Checkweigher')
     s.pipe('M1270 805 H1300');s.box(1300,770,70,60,'MD801','Metal detector','detector')
     s.pipe('M1370 805 H1420');s.box(1420,700,130,120,'PL801','Palletiser','palletiser')
@@ -567,6 +594,9 @@ def page(name,title,subtitle,drawing,area=None):
         if i<len(keys)-1:nav.append(button('Next',TITLE[keys[i+1]]+' ›',page=ROUTE[keys[i+1]],classes='Demo/QuietButton'))
     group=next((a[3] for a in AREAS if a[0]==area),'')
     for b in nav:b['props'].setdefault('style',{})['classes']='Demo/QuietButton Hmi/NavButton'
+    switch=node('ia.input.toggle-switch','LabelSwitch',{'selected':True})
+    switch['propConfig']={'props.selected':{'binding':{'type':'property','config':{'path':'session.custom.showLabels','bidirectional':True}}}}
+    nav.insert(0,flex('Labels',[label('Caption','Labels','Demo/Muted'),switch],'row','Hmi/LabelToggle'))
     header=flex('Header',[flex('Identity',[label('Eyebrow','OATMAKERS / SCADA'+(' / '+group.upper() if group else ''),'Demo/Eyebrow'),label('Title',title,'Demo/PageTitle'),label('Subtitle',subtitle+' Drag to pan, scroll to zoom.','Demo/Subtitle')],grow=1),flex('Navigation',nav,'row','Hmi/Navigation'),label('Mode','SIMULATED FACTORY','Demo/DemoBadge')],'row','Demo/PageHeader')
     pan=node('mustrysolutions.perspective.display.panzoomview','ProcessViewport',{
         'config':{'viewPath':drawing,'viewParams':[],'contentWidth':W,'contentHeight':H,'minZoom':0.2,'maxZoom':4,
@@ -594,6 +624,11 @@ SCADA_CSS='''
 .psc-Hmi\\/NavButton { flex:0 0 auto !important; height:34px; padding:6px 12px; font-size:12px; white-space:nowrap; }
 .psc-Hmi\\/PanZoom.mustry-panzoom { border:0; border-radius:0; --pz-canvas:#e6e6e6; --pz-bg:#e6e6e6; --pz-accent:#565957; }
 .psc-Hmi\\/PanZoom .mustry-pz-content { background:transparent; box-shadow:none; border:0; }
+.psc-Hmi\\/Text { color:#555; font-family:Arial,sans-serif; white-space:nowrap; overflow:visible; pointer-events:none; text-shadow:0 0 2px #e6e6e6,0 0 2px #e6e6e6,0 0 3px #e6e6e6,0 0 4px #e6e6e6; }
+.psc-Hmi\\/Tag { font-size:12px; font-weight:600; color:#555; align-items:center; line-height:16px; white-space:nowrap; pointer-events:none; }
+.psc-Hmi\\/Title { font-size:10.5px; color:#777; align-items:center; line-height:14px; }
+.psc-Hmi\\/InstrumentTag { font-family:Arial,sans-serif; font-size:12px; color:#565957; align-items:flex-start; justify-content:flex-end; white-space:nowrap; pointer-events:none; }
+.psc-Hmi\\/LabelToggle { gap:4px; align-items:center; margin-right:8px; }
 .psc-Hmi\\/DetailValue { font-size:28px; color:#444; }
 .psc-Demo\\/Menu { background:transparent; color:#d5dade; font-size:12px; }
 .psc-Demo\\/Menu .menu-wrapper,.psc-Demo\\/Menu .wrapper-submenu { background:#2b3238 !important; height:100%; }
