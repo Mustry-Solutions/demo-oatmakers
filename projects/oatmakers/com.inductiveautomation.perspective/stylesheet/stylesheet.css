@@ -146,6 +146,18 @@
 .psc-Hmi\/Shape { font-family:Arial,sans-serif; white-space:nowrap; justify-content:center; pointer-events:none; line-height:1; }
 .psc-Hmi\/LabelToggle { gap:4px; align-items:center; margin-right:8px; }
 .psc-Hmi\/DetailValue { font-size:28px; color:#444; }
+.psc-Hmi\/Faceplate { gap:12px; }
+.psc-Hmi\/FaceplateHeader { gap:2px; }
+.psc-Hmi\/TagPath { font-family:Menlo,Consolas,monospace; font-size:11px; color:#6d7270; }
+.psc-Hmi\/FaceplateValues { gap:12px; align-items:center; flex-wrap:wrap; }
+.psc-Hmi\/Chip { padding:3px 8px; border-radius:3px; color:#fff; font-size:11px; font-weight:700; letter-spacing:0.4px; }
+.psc-Hmi\/FaceplateSettings { gap:16px; flex-wrap:wrap; padding:10px 12px; background:rgba(63,90,115,0.06); border:1px solid #dde1e4; border-radius:4px; }
+.psc-Hmi\/FieldGroup { gap:4px; }
+.psc-Hmi\/Field { height:32px; font-size:13px; }
+.psc-Hmi\/ModeButtons { height:32px; font-size:12px; }
+.psc-Hmi\/FaceplateRanges { gap:6px; align-items:center; }
+.psc-Hmi\/RangeButton { flex:0 0 auto !important; height:30px; padding:4px 12px; font-size:12px; }
+.psc-Hmi\/RangeActive { background:#3f5a73 !important; color:#fff !important; border-color:#3f5a73 !important; }
 .psc-Demo\/Menu { background:transparent; color:#d5dade; font-size:12px; }
 .psc-Demo\/Menu .menu-wrapper,.psc-Demo\/Menu .wrapper-submenu { background:#2b3238 !important; height:100%; }
 .psc-Demo\/Menu .ia_menuTreeComponent__item { background:transparent; color:#d5dade; border:0; border-radius:4px; min-height:42px; padding:0 10px; margin-bottom:4px; cursor:pointer; }

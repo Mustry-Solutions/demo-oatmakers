@@ -1,0 +1,1026 @@
+{
+  "custom": {},
+  "params": {},
+  "propConfig": {},
+  "props": {
+    "defaultSize": {
+      "width": 1740,
+      "height": 910
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "backgroundColor": "transparent",
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.shapes.svg",
+        "meta": {
+          "name": "Piping"
+        },
+        "props": {
+          "viewBox": "0 0 1740 910",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "path",
+              "name": "path0",
+              "d": "M208 110 H260 V140",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path1",
+              "d": "M260 290 V380 H380 V110 H475 V150",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path2",
+              "d": "M238 654 H350 V400 H420",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#c9a54e",
+                "width": "1.7",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path3",
+              "d": "M475 450 V466 H505 V482",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path4",
+              "d": "M560 650 V715 H640",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path5",
+              "d": "M940 715 H990",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path6",
+              "d": "M1140 715 H1200",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path7",
+              "d": "M1370 720 H1540",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.8",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path8",
+              "d": "M1340 770 V820 H1540",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path9",
+              "d": "M1400 652 V720",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "1",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect10",
+              "x": "816",
+              "y": "186",
+              "width": "308",
+              "height": "83",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect11",
+              "x": "1176",
+              "y": "186",
+              "width": "308",
+              "height": "83",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect12",
+              "x": "816",
+              "y": "376",
+              "width": "308",
+              "height": "83",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect13",
+              "x": "1176",
+              "y": "376",
+              "width": "308",
+              "height": "83",
+              "fill": {
+                "paint": "#eeeeee"
+              },
+              "stroke": {
+                "paint": "#c2c5c3"
+              }
+            }
+          ],
+          "style": {
+            "pointerEvents": "none",
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "BN501Shape"
+        },
+        "props": {
+          "path": "Templates/Hmi/Equipment/Bin",
+          "params": {
+            "tag": "BN501",
+            "title": "Groat bin",
+            "width": 120,
+            "height": 150,
+            "labelX": 60.0,
+            "labelY": 63.0
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 198,
+          "y": 138,
+          "width": 124,
+          "height": 154
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "ST501Shape"
+        },
+        "props": {
+          "path": "Templates/Hmi/Equipment/Steamer",
+          "params": {
+            "tag": "ST501",
+            "title": "Steamer",
+            "width": 110,
+            "height": 300,
+            "labelX": 55.0,
+            "labelY": 150.0
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 418,
+          "y": 148,
+          "width": 114,
+          "height": 304
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FM501Shape"
+        },
+        "props": {
+          "path": "Templates/Hmi/Equipment/FlakingMill",
+          "params": {
+            "tag": "FM501",
+            "title": "Flaking mill",
+            "width": 170,
+            "height": 150,
+            "labelX": 85.0,
+            "labelY": 168
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 418,
+          "y": 480,
+          "width": 174,
+          "height": 172
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "DR501Shape"
+        },
+        "props": {
+          "path": "Templates/Hmi/Equipment/BeltDryer",
+          "params": {
+            "tag": "DR501",
+            "title": "Flake dryer",
+            "width": 300,
+            "height": 110,
+            "labelX": 150.0,
+            "labelY": 128
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 638,
+          "y": 646,
+          "width": 304,
+          "height": 126
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "CL501Shape"
+        },
+        "props": {
+          "path": "Templates/Hmi/Equipment/Cooler",
+          "params": {
+            "tag": "CL501",
+            "title": "Flake cooler",
+            "width": 150,
+            "height": 150,
+            "labelX": 75.0,
+            "labelY": 168
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 988,
+          "y": 638,
+          "width": 154,
+          "height": 154
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SF501Shape"
+        },
+        "props": {
+          "path": "Templates/Hmi/Equipment/Plansifter",
+          "params": {
+            "tag": "SF501",
+            "title": "Fines sifter",
+            "width": 170,
+            "height": 100,
+            "labelX": 85.0,
+            "labelY": 118
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 1198,
+          "y": 668,
+          "width": 174,
+          "height": 104
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "LineState"
+        },
+        "props": {
+          "path": "Templates/Hmi/AreaState",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/Area",
+            "caption": "LINE 01"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1380,
+          "y": 40,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "GroatsFromKilnLink"
+        },
+        "props": {
+          "path": "Templates/Hmi/Stream",
+          "params": {
+            "text": "Groats from kiln",
+            "target": "/scada/kiln",
+            "width": 170
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 96,
+          "width": 170,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "RV501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Device/RotaryValve",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/RV501"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 240,
+          "y": 300,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SteamFromBoilerHouseLink"
+        },
+        "props": {
+          "path": "Templates/Hmi/Stream",
+          "params": {
+            "text": "Steam from boiler house",
+            "target": "/scada/utilities",
+            "width": 200
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 640,
+          "width": 200,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PCV501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Device/ControlValve",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/PCV501"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 261,
+          "y": 606,
+          "width": 78,
+          "height": 88
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MFM501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Device/Motor",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/M-FM501"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 600,
+          "y": 490,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "RolledOatsToPackingLink"
+        },
+        "props": {
+          "path": "Templates/Hmi/Stream",
+          "params": {
+            "text": "Rolled oats to packing",
+            "target": "/scada/packing",
+            "width": 190
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 706,
+          "width": 190,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FinesToLine03Link"
+        },
+        "props": {
+          "path": "Templates/Hmi/Stream",
+          "params": {
+            "text": "Fines to Line 03",
+            "target": "/scada/milling",
+            "width": 190
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 806,
+          "width": 190,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TIC501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Instrument",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/TIC501",
+            "colour": "#ffe044"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 560,
+          "y": 190,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PI501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Instrument",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/PI501",
+            "colour": "#f7f7f7"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 90,
+          "y": 560,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SI501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Instrument",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/SI501",
+            "colour": "#f7f7f7"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 620,
+          "y": 360,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "ZI501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Instrument",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/ZI501",
+            "colour": "#f7f7f7"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 620,
+          "y": 430,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "JI501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Instrument",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/JI501",
+            "colour": "#f7f7f7"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 640,
+          "y": 580,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TI502"
+        },
+        "props": {
+          "path": "Templates/Hmi/Instrument",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/TI502",
+            "colour": "#f7f7f7"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 760,
+          "y": 580,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TI503"
+        },
+        "props": {
+          "path": "Templates/Hmi/Instrument",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/TI503",
+            "colour": "#f7f7f7"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1000,
+          "y": 560,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MI501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Instrument",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/MI501",
+            "colour": "#f7f7f7"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1150,
+          "y": 580,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FT501"
+        },
+        "props": {
+          "path": "Templates/Hmi/Instrument",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/FT501",
+            "colour": "#f7f7f7"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1390,
+          "y": 610,
+          "width": 130,
+          "height": 51
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendRate"
+        },
+        "props": {
+          "path": "Templates/Hmi/Trend",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/FT501",
+            "colour": "#626b75",
+            "sp": 1920
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 820,
+          "y": 190,
+          "width": 300,
+          "height": 75
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendMoisture"
+        },
+        "props": {
+          "path": "Templates/Hmi/Trend",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/MI501",
+            "colour": "#626b75",
+            "sp": 11.4
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1180,
+          "y": 190,
+          "width": 300,
+          "height": 75
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendTemperature"
+        },
+        "props": {
+          "path": "Templates/Hmi/Trend",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/TIC501",
+            "colour": "#626b75",
+            "sp": 82
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 820,
+          "y": 380,
+          "width": 300,
+          "height": 75
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendPressure"
+        },
+        "props": {
+          "path": "Templates/Hmi/Trend",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/PI501",
+            "colour": "#626b75",
+            "sp": 2.4
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1180,
+          "y": 380,
+          "width": 300,
+          "height": 75
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text1"
+        },
+        "props": {
+          "text": "Throughput (kg/h)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 820,
+          "y": 169,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text2"
+        },
+        "props": {
+          "text": "Flake moisture (%)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1180,
+          "y": 169,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text3"
+        },
+        "props": {
+          "text": "Steamer temperature (\u00b0C)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 820,
+          "y": 359,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text4"
+        },
+        "props": {
+          "text": "Steam pressure (bar)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1180,
+          "y": 359,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text5"
+        },
+        "props": {
+          "text": "Line 01 \u00b7 Steaming & flaking",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "22px",
+            "fontWeight": 600,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "29px"
+          }
+        },
+        "position": {
+          "x": 40,
+          "y": 868,
+          "width": 300,
+          "height": 29
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text6"
+        },
+        "props": {
+          "text": "SIMULATION",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "flex-end",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1400,
+          "y": 880,
+          "width": 300,
+          "height": 13
+        }
+      }
+    ]
+  }
+}

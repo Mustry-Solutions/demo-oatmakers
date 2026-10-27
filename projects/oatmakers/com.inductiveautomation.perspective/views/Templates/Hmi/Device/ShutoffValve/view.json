@@ -1,0 +1,249 @@
+{
+  "custom": {
+    "running": false,
+    "mode": "Auto"
+  },
+  "params": {
+    "tagPath": "[default]OatMill/Intake/M-CV101"
+  },
+  "propConfig": {
+    "custom.running": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/Open",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "custom.mode": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/Mode",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 78,
+      "height": 88
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "cursor": "pointer"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.shapes.svg",
+        "meta": {
+          "name": "Shape"
+        },
+        "props": {
+          "viewBox": "0 0 78 88",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "group",
+              "name": "g0",
+              "fill": {
+                "paint": "#555"
+              },
+              "elements": [
+                {
+                  "type": "path",
+                  "name": "path0",
+                  "d": "M24.0 40.0 L54.0 56.0 V40.0 L24.0 56.0 Z",
+                  "fill": {
+                    "paint": "#a7dfa5"
+                  },
+                  "stroke": {
+                    "paint": "#555",
+                    "width": "1.6"
+                  }
+                },
+                {
+                  "type": "path",
+                  "name": "path1",
+                  "d": "M39.0 26.0 V48.0",
+                  "stroke": {
+                    "paint": "#555",
+                    "width": "1.4"
+                  }
+                },
+                {
+                  "type": "rect",
+                  "name": "rect2",
+                  "x": "29.0",
+                  "y": "14.0",
+                  "width": "20",
+                  "height": "12",
+                  "fill": {
+                    "paint": "#a7dfa5"
+                  },
+                  "stroke": {
+                    "paint": "#555",
+                    "width": "1.4"
+                  }
+                },
+                {
+                  "type": "path",
+                  "name": "path3",
+                  "d": "M29.0 20.0 h20 M39.0 14.0 v12",
+                  "stroke": {
+                    "paint": "#555"
+                  }
+                }
+              ]
+            }
+          ],
+          "style": {
+            "pointerEvents": "none",
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 78,
+          "height": 88
+        },
+        "propConfig": {
+          "props.elements[0].elements[0].fill.paint": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({view.custom.running}, \"#a7dfa5\", \"#b3b3b3\")"
+              }
+            }
+          },
+          "props.elements[0].elements[2].fill.paint": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({view.custom.running}, \"#a7dfa5\", \"#b3b3b3\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Tag"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Tag",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 71,
+          "width": 78,
+          "height": 15
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "substring({view.params.tagPath}, lastIndexOf({view.params.tagPath}, \"/\") + 1)"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Mode"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "8px",
+            "fontWeight": 700,
+            "color": "#ffffff",
+            "alignItems": "center",
+            "backgroundColor": "#6b4a0c",
+            "borderRadius": "2px"
+          }
+        },
+        "position": {
+          "x": 48,
+          "y": 2,
+          "width": 28,
+          "height": 12
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({view.custom.mode} = \"Off\", \"OFF\", \"HAND\")"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.custom.mode} != \"Auto\" && len({view.custom.mode}) > 0"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    },
+    "events": {
+      "dom": {
+        "onClick": {
+          "type": "script",
+          "scope": "G",
+          "config": {
+            "script": "\tapplication.demo.openFaceplate(\"Valve\", self.view.params.tagPath)"
+          }
+        }
+      }
+    }
+  }
+}

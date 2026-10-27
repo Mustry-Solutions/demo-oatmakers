@@ -1,0 +1,320 @@
+{
+  "custom": {},
+  "params": {},
+  "propConfig": {},
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 939
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Demo/Page Hmi/Page"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Header"
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "classes": "Demo/PageHeader"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Identity"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Eyebrow"
+                },
+                "props": {
+                  "text": "OATMAKERS / SCADA / UTILITIES",
+                  "style": {
+                    "classes": "Demo/Eyebrow"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Title"
+                },
+                "props": {
+                  "text": "Steam & compressed air",
+                  "style": {
+                    "classes": "Demo/PageTitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Subtitle"
+                },
+                "props": {
+                  "text": "Boiler house, steam distribution and compressed air. Drag to pan, scroll to zoom.",
+                  "style": {
+                    "classes": "Demo/Subtitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0,
+              "grow": 1
+            }
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Navigation"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "classes": "Hmi/Navigation"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "Labels"
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "classes": "Hmi/LabelToggle"
+                  }
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "Caption"
+                    },
+                    "props": {
+                      "text": "Labels",
+                      "style": {
+                        "classes": "Demo/Muted"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0,
+                      "basis": "auto"
+                    }
+                  },
+                  {
+                    "type": "ia.input.toggle-switch",
+                    "meta": {
+                      "name": "LabelSwitch"
+                    },
+                    "props": {
+                      "selected": true
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.selected": {
+                        "binding": {
+                          "type": "property",
+                          "config": {
+                            "path": "session.custom.showLabels",
+                            "bidirectional": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "position": {
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "Overview"
+                },
+                "props": {
+                  "text": "\u2039 Plant overview",
+                  "style": {
+                    "classes": "Demo/QuietButton Hmi/NavButton"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "40px"
+                },
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "type": "nav",
+                      "scope": "C",
+                      "config": {
+                        "page": "/scada"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "Previous"
+                },
+                "props": {
+                  "text": "\u2039 Packing & palletising",
+                  "style": {
+                    "classes": "Demo/QuietButton Hmi/NavButton"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "40px"
+                },
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "type": "nav",
+                      "scope": "C",
+                      "config": {
+                        "page": "/scada/packing"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Mode"
+            },
+            "props": {
+              "text": "SIMULATED FACTORY",
+              "style": {
+                "classes": "Demo/DemoBadge"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"HELLO KITTY EDITION\", \"SIMULATED FACTORY\")"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "mustrysolutions.perspective.display.panzoomview",
+        "meta": {
+          "name": "ProcessViewport"
+        },
+        "props": {
+          "config": {
+            "viewPath": "Pages/Scada/Drawings/Utilities",
+            "viewParams": [],
+            "contentWidth": 1740,
+            "contentHeight": 910,
+            "minZoom": 0.2,
+            "maxZoom": 4,
+            "zoomStep": 1.25,
+            "wheelZoom": true,
+            "doubleClickZoom": true,
+            "showControls": true,
+            "showMinimap": true,
+            "showPoiList": false,
+            "flyToMs": 250,
+            "home": {
+              "x": -1,
+              "y": -1,
+              "zoom": 0
+            }
+          },
+          "state": {
+            "zoom": 0,
+            "center": {
+              "x": 0,
+              "y": 0
+            },
+            "target": ""
+          },
+          "data": {
+            "pois": []
+          },
+          "style": {
+            "classes": "Hmi/PanZoom",
+            "minHeight": "0px"
+          }
+        },
+        "position": {
+          "shrink": 1,
+          "basis": "0px",
+          "grow": 1
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "if(try({session.custom.theme}, \"\") = \"hello-kitty\", \"Demo/Page Hmi/Page Theme/HelloKitty\", \"Demo/Page Hmi/Page\")"
+          }
+        }
+      }
+    }
+  }
+}

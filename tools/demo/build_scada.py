@@ -11,7 +11,10 @@ WATER='#93bcd1'
 GAS='#b3a4c9'
 ON='#a7dfa5'
 OFF='#b3b3b3'
-HMI='Demo/Hmi/'
+# Embedded SCADA templates; the area screens are pages and their drawings page content.
+HMI='Templates/Hmi/'
+SCREENS='Pages/Scada/'
+DRAWINGS='Pages/Scada/Drawings/'
 TAG_ROOT='[default]OatMill'
 # Tag instances per area, filled while the drawings are built.
 AREA_TAGS={}
@@ -67,6 +70,16 @@ def at(n,x,y,w,h):
 def bind(path):return {'binding':{'type':'property','config':{'path':path}}}
 def script_expr(expression,code):return {'binding':{'type':'expr','config':{'expression':expression},'transforms':[{'type':'script','code':code}]}}
 def expr(expression):return {'binding':{'type':'expr','config':{'expression':expression}}}
+def tag_member(member,code=None):
+    """Indirect tag binding to a member of the instance in view.params.tagPath."""
+    b={'binding':{'type':'tag','config':{'mode':'indirect','tagPath':'{path}/'+member,'references':{'path':'{view.params.tagPath}'},'fallbackDelay':2.5}}}
+    if code:b['binding']['transforms']=[{'type':'script','code':code}]
+    return b
+def tag_write(member):
+    b=tag_member(member);b['binding']['config']['bidirectional']=True;return b
+TAG_NAME='substring({view.params.tagPath}, lastIndexOf({view.params.tagPath}, "/") + 1)'
+def faceplate(udt):
+    return '\tapplication.demo.openFaceplate("%s", self.view.params.tagPath)'%udt
 def tag_binding(path,code=None):
     b={'binding':{'type':'tag','config':{'mode':'direct','tagPath':path,'fallbackDelay':2.5}}}
     if code:b['binding']['transforms']=[{'type':'script','code':code}]
@@ -136,31 +149,51 @@ def state_bindings(on,off,path='props.elements'):
     return config
 
 def components():
-    # Devices used to be one image view; their templates now live under Demo/Hmi/Device/.
-    for old in ('view.json','resource.json'):(V/HMI/'Device'/old).unlink(missing_ok=True)
-    detail='\tp = self.view.params\n\tif p.signal:\n\t\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, p.unit, p.decimals)'
-    # Instrument: kind bubble and value pill, the pill stretching with the value.
-    pill='max(64, min(102, len(toStr({view.params.value})) * 6 + 14))'
+    # Every live template takes the full path of its UDT instance in view.params.tagPath
+    # and reads value, unit, decimals and state from that instance's members.
+    # Instrument (OatMill/AnalogInput): kind bubble, value pill stretching with the value.
+    value_text=('numberFormat({view.custom.pv}, "#,##0" + if({view.custom.decimals} > 0, "." + substring("000000", 0, {view.custom.decimals}), ""))'
+                ' + if(len({view.custom.unit}) > 0, " " + {view.custom.unit}, "")')
+    pill='max(64, min(102, len({view.custom.text}) * 6 + 14))'
     shape=at(drawing('Shape',svg_elements('<circle cx="10" cy="32" r="10" fill="#e6e6e6" stroke="#7d817f" stroke-width="1"/><rect x="26" y="22" width="64" height="20" rx="10" fill="#f7f7f7"/>'),130,51),0,0,130,51)
-    shape['propConfig']={'props.elements[1].width':expr(pill),'props.elements[1].fill.paint':bind('view.params.colour')}
-    kind=text_label('Kind','',0,22,20,20,8,colour='#565957');kind['propConfig']={'props.text':bind('view.params.kind')}
-    value=text_label('Value','',26,22,64,20,11.5,colour='#565957');value['propConfig']={'props.text':bind('view.params.value'),'position.width':expr(pill)}
+    shape['propConfig']={'props.elements[1].width':expr(pill),'props.elements[1].fill.paint':expr('if({view.custom.alarm}, "#f2b8b3", {view.params.colour})')}
+    kind=text_label('Kind','',0,22,20,20,8,colour='#565957');kind['propConfig']={'props.text':bind('view.custom.kind')}
+    value=text_label('Value','',26,22,64,20,11.5,colour='#565957');value['propConfig']={'props.text':bind('view.custom.text'),'position.width':expr(pill)}
     tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/InstrumentTag'}}),0,0,130,15)
-    tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS)}
-    view(HMI+'Instrument',clickable([shape,kind,value,tag],detail,mode='fixed'),params={'area':'intake','tag':'TI101','kind':'TI','signal':'','unit':'','decimals':1,'value':'--','colour':'#f7f7f7'},height=51,width=130)
-    # Devices: one drawing template per kind; paints follow view.params.running.
+    tag['propConfig']={'props.text':expr(TAG_NAME),'meta.visible':expr(SHOW_LABELS)}
+    members={'pv':'PV','unit':'Unit','decimals':'Decimals','kind':'Kind','alarm':'Alarm'}
+    config={'custom.'+k:dict(tag_member(m),persistent=True) for k,m in members.items()}
+    config['custom.text']=dict(expr(value_text),persistent=True)
+    view(HMI+'Instrument',clickable([shape,kind,value,tag],faceplate('AnalogInput'),mode='fixed'),params={'tagPath':'[default]OatMill/Intake/WT101','colour':'#f7f7f7'},
+         custom={'pv':0,'unit':'','decimals':1,'kind':'','alarm':False,'text':''},config=config,height=51,width=130)
+    # Area state badge (OatMill/ProcessArea).
+    colour='case({view.custom.state}, "Stopped", "#f2b8b3", "Quality hold", "#f6dca6", "Recovering", "#c9d9ea", "#f7f7f7")'
+    shape=at(drawing('Shape',svg_elements('<circle cx="10" cy="32" r="10" fill="#e6e6e6" stroke="#7d817f" stroke-width="1"/><rect x="26" y="22" width="90" height="20" rx="10" fill="#f7f7f7"/>'),130,51),0,0,130,51)
+    shape['propConfig']={'props.elements[1].fill.paint':expr(colour)}
+    state=text_label('Value','',26,22,90,20,11.5,colour='#565957');state['propConfig']={'props.text':bind('view.custom.state')}
+    caption=at(node('ia.display.label','Caption',{'text':'','style':{'classes':'Hmi/InstrumentTag'}}),0,0,130,15);caption['propConfig']={'props.text':bind('view.params.caption'),'meta.visible':expr(SHOW_LABELS)}
+    view(HMI+'AreaState',node('ia.container.coord','root',{'mode':'fixed'},[shape,text_label('Kind','ST',0,22,20,20,8,colour='#565957'),state,caption]),
+         params={'tagPath':'[default]OatMill/Flaking/Area','caption':'LINE 01'},custom={'state':''},config={'custom.state':dict(tag_member('State'),persistent=True)},height=51,width=130)
+    # Devices: one drawing template per kind; paints follow the Running (motor) or Open (valve) member.
     for kind,(name,w,h,letter) in DEVICES.items():
         on,off=svg_elements(symbol(kind,True,w,h)),svg_elements(symbol(kind,False,w,h))
-        shape=at(drawing('Shape',on,w,h),0,0,w,h);shape['propConfig']=state_bindings(on,off)
+        shape=at(drawing('Shape',on,w,h),0,0,w,h)
+        shape['propConfig']={k:expr(v['binding']['config']['expression'].replace('{view.params.running}','{view.custom.running}')) for k,v in state_bindings(on,off).items()}
         children=[shape]
         if letter:
             text,x,y,size=letter
             children.append(text_label('Letter',text,x,y,30 if w==110 else 15,size+4,size,700 if w==110 else 400,'#555','center' if w==110 else 'start'))
         compact=w==110
         tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Tag','alignItems':'flex-start' if compact else 'center'}}),42 if compact else 0,22 if compact else h-17,w-42 if compact else w,15)
-        tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS)}
-        children.append(tag)
-        view(HMI+'Device/'+name,clickable(children,detail,mode='fixed'),params={'area':'intake','tag':'M101','signal':'','unit':'','decimals':1,'running':True},height=h,width=w)
+        tag['propConfig']={'props.text':expr(TAG_NAME),'meta.visible':expr(SHOW_LABELS)}
+        # Hand or Off overrides the process: shown as a small mode flag.
+        mode=text_label('Mode','',(2 if compact else w-30),(2 if compact else 2),28,12,8,700,'#ffffff')
+        mode['props']['style'].update({'backgroundColor':'#6b4a0c','borderRadius':'2px'})
+        mode['propConfig']={'props.text':expr('if({view.custom.mode} = "Off", "OFF", "HAND")'),'meta.visible':expr('{view.custom.mode} != "Auto" && len({view.custom.mode}) > 0')}
+        children+=[tag,mode]
+        udt='Motor' if kind in DRIVES else 'Valve'
+        view(HMI+'Device/'+name,clickable(children,faceplate(udt),mode='fixed'),params={'tagPath':'[default]OatMill/Intake/M-CV101'},custom={'running':False,'mode':'Auto'},
+             config={'custom.running':dict(tag_member('Running' if udt=='Motor' else 'Open'),persistent=True),'custom.mode':dict(tag_member('Mode'),persistent=True)},height=h,width=w)
     # Streams: an arrow box whose width follows view.params.width; connected streams navigate.
     width='{view.params.width}'
     shape=at(drawing('Shape',svg_elements('<path d="M0 0 H156 a14 14 0 0 1 0 28 H0 Z" fill="#3f5a73"/><circle cx="156" cy="14" r="9" fill="#cdd0cd"/><path d="M153 8 l7 6 -7 6 Z" fill="#60645f"/>'),170,28),0,0,170,28)
@@ -172,24 +205,26 @@ def components():
     root=clickable([shape,text],'\tif self.view.params.target:\n\t\tsystem.perspective.navigate(self.view.params.target)',mode='fixed')
     root['propConfig']={'props.style.cursor':expr('if(len({view.params.target}) > 0, "pointer", "default")')}
     view(HMI+'Stream',root,params={'text':'','target':'','width':170},height=28,width=170)
-    # Trend: a drawing whose elements the gateway computes from history or the model.
+    # Trend: the last ten minutes of the instance's measured value.
     trend=full(drawing('Plot',[],280,70))
-    trend['propConfig']={'props.elements':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}','signal':'{view.params.signal}','colour':'{view.params.colour}','sp':'{view.params.sp}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTrendElements(value["area"], value["signal"], value["colour"], value["sp"])'}]}}}
-    view(HMI+'Trend',node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'area':'intake','signal':'','colour':'#626b75','sp':0},height=70,width=280)
-    # Silo: outline, product level and a level pill, drawn in 110 x 330 units and scaled to the instance.
+    trend['propConfig']={'props.elements':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','path':'{view.params.tagPath}','colour':'{view.params.colour}','sp':'{view.params.sp}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTrendElements(value["path"], value["colour"], value["sp"])'}]}}}
+    view(HMI+'Trend',node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'tagPath':'[default]OatMill/Intake/WT101','colour':'#626b75','sp':0},height=70,width=280)
+    # Silo (OatMill/Silo): outline, product level and a level pill, drawn in 110 x 330 units and scaled to the instance.
     outline='M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z'
     silo=full(drawing('Shape',svg_elements('<path d="%s" fill="#e9e9e7"/><path d="M3 320 H107" fill="#d8cda8"/><path d="%s" fill="none" stroke="#666a68" stroke-width="2"/><rect x="22" y="104" width="66" height="22" rx="11" fill="#f7f7f7" stroke="#a9adab"/>'%(outline,outline)),110,330))
-    silo['propConfig']={'props.elements[1].d':{'binding':{'type':'property','config':{'path':'view.params.level'},'transforms':[{'type':'script','code':'\treturn application.demo.scadaSiloLevel(value)'}]}}}
+    silo['propConfig']={'props.elements[1].d':{'binding':{'type':'property','config':{'path':'view.custom.level'},'transforms':[{'type':'script','code':'\treturn application.demo.scadaSiloLevel(value)'}]}},
+                        'props.elements[3].fill.paint':expr('if({view.custom.alarm}, "#f2b8b3", "#f7f7f7")')}
     level=at(node('ia.display.label','Level',{'text':'','style':{'classes':'Hmi/Shape','fontSize':'13px','fontWeight':700,'color':'#333399','alignItems':'center'}}),0.2,0.315,0.6,0.067)
-    level['propConfig']={'props.text':expr('numberFormat({view.params.level}, "0") + " %"')}
+    level['propConfig']={'props.text':expr('numberFormat({view.custom.level}, "0") + " %"')}
     product=at(node('ia.display.label','Product',{'text':'','style':{'classes':'Hmi/Shape','fontSize':'10.5px','color':'#565957','alignItems':'center'}}),0,0.41,1,0.045)
-    product['propConfig']={'props.text':bind('view.params.product')}
+    product['propConfig']={'props.text':bind('view.custom.product')}
     tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Text Hmi/Tag','alignItems':'flex-start'}}),0.555,-0.06,1,0.05)
-    tag['propConfig']={'props.text':bind('view.params.tag'),'meta.visible':expr(SHOW_LABELS),
+    tag['propConfig']={'props.text':expr(TAG_NAME),'meta.visible':expr(SHOW_LABELS),
         'position.y':expr('-21 / {view.params.height}'),'position.height':expr('16 / {view.params.height}')}
-    root=clickable([silo,level,product,tag],'\tp = self.view.params\n\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, "%", 0)');root['props']['style']['overflow']='visible'
-    view(HMI+'Silo',root,params={'area':'intake','tag':'SI101','signal':'','level':0,'product':'','height':330},height=330,width=110)
-    # Tile: frame and state pill drawing, live texts as labels.
+    root=clickable([silo,level,product,tag],faceplate('Silo'));root['props']['style']['overflow']='visible'
+    view(HMI+'Silo',root,params={'tagPath':'[default]OatMill/Intake/SI101','height':330},custom={'level':0,'product':'','alarm':False},
+         config={'custom.level':dict(tag_member('Level'),persistent=True),'custom.product':dict(tag_member('Product'),persistent=True),'custom.alarm':dict(tag_member('Alarm'),persistent=True)},height=330,width=110)
+    # Tile: frame and state pill drawing, live texts as labels; tagPath is the area's ProcessArea instance.
     shape=at(drawing('Shape',svg_elements('<rect x="1" y="1" width="228" height="168" rx="4" fill="#f4f4f3" stroke="#9a9e9c" stroke-width="1.5"/><rect x="14" y="38" width="80" height="18" rx="3" fill="#dfe3e6"/>'),230,170),0,0,230,170)
     shape['propConfig']={'props.elements[1].width':expr('len({view.custom.tile.state}) * 6.6 + 12'),'props.elements[1].fill.paint':bind('view.custom.tile.pillFill')}
     children=[shape,text_label('Title','',14,14,210,18,14,700,'#3f4447','start'),text_label('State','',20,38,190,18,10,700,'#4d555c','start')]
@@ -201,17 +236,90 @@ def components():
         value=text_label('Value%d'%(i+1),'',96,70+i*24,120,16,13,700,'#333399','end')
         value['propConfig']={'props.text':expr('try({view.custom.tile.rows[%d].value}, "")'%i)}
         children+=[caption,value]
-    children.append(text_label('Open','OPEN SCREEN ›',96,147,120,14,10.5,700,'#3f5a73','end'))
-    view(HMI+'Tile',clickable(children,'\tsystem.perspective.navigate(self.view.params.route)',mode='fixed'),params={'area':'intake','route':'/scada/intake'},
+    children.append(text_label('Open','OPEN SCREEN \u203a',96,147,120,14,10.5,700,'#3f5a73','end'))
+    view(HMI+'Tile',clickable(children,'\tsystem.perspective.navigate(self.view.params.route)',mode='fixed'),params={'tagPath':'[default]OatMill/Intake/Area','route':'/scada/intake'},
          custom={'tile':{'title':'','state':'','pillFill':'#dfe3e6','pillText':'#4d555c','rows':[]}},
-         config={'custom.tile':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTile(value["area"])'}]},'persistent':True}},height=170,width=230)
-    value=label('Value','','Hmi/DetailValue')
-    value['propConfig']={'props.text':{'binding':{'type':'expr','config':{'expression':'if(len({view.params.tagPath}) > 0, tag({view.params.tagPath}), 0)'},
-        'transforms':[{'type':'script','code':'\tp = self.view.params\n\treturn application.demo._scadaFormat(value, p.unit, p.decimals)'}]}}}
-    plot=embed('Trend',HMI+'Trend',{'colour':'#626b75','sp':0},basis='160px')
-    plot['propConfig']={'props.params.area':bind('view.params.area'),'props.params.signal':bind('view.params.signal')}
-    caption=label('Caption','','Demo/Muted');caption['propConfig']={'props.text':script_expr('{view.params.area}','\treturn application.demo.scadaAreaTitle(value) + " | recent trend"')}
-    view(HMI+'Detail',theme_root(flex('root',[bound_label('Title','view.params.tag','Demo/SectionTitle'),bound_label('Path','view.params.tagPath','Demo/Muted'),label('Mode','Read-only process simulation','Demo/Muted'),value,plot,caption],classes='Demo/PopupRoot')),params={'area':'intake','tag':'','signal':'','unit':'','decimals':1,'tagPath':''},height=360,width=520)
+         config={'custom.tile':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','path':'{view.params.tagPath}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTile(value["path"])'}]},'persistent':True}},height=170,width=230)
+    faceplates()
+
+
+# Faceplates: one popup per UDT, opened with the full instance path. They show the
+# live state, write the operator settings back to the instance and chart its history
+# over a preset range.
+FACEPLATES={
+ # udt: (value member, value series title, extra status, writable fields, limit series)
+ 'AnalogInput':('PV','Measured value',[('Alarm','if({view.custom.alarm}, "ALARM", "NORMAL")','if({view.custom.alarm}, "#b23b34", "#4d555c")')],
+                [('LowLimit','Low alarm limit','numeric'),('HighLimit','High alarm limit','numeric')],True),
+ 'Motor':('Current','Motor current',[('Running','if({view.custom.running}, "RUNNING", "STOPPED")','if({view.custom.running}, "#2d6a35", "#4d555c")'),
+                                    ('Duty','upper({view.custom.duty})','"#4d555c"')],
+          [('Mode','Mode','mode')],False),
+ 'Valve':('Position','Valve position',[('Open','if({view.custom.open}, "OPEN", "CLOSED")','if({view.custom.open}, "#2d6a35", "#4d555c")')],
+          [('Mode','Mode','mode'),('PositionSP','Position in Hand (%)','numeric')],False),
+ 'Silo':('Level','Silo level',[('Alarm','if({view.custom.alarm}, "ALARM", "NORMAL")','if({view.custom.alarm}, "#b23b34", "#4d555c")'),
+                               ('Content','numberFormat({view.custom.content}, "#,##0.0") + " t " + {view.custom.product}','"#4d555c"')],
+         [('LowLimit','Low level limit (%)','numeric'),('HighLimit','High level limit (%)','numeric')],True),
+}
+READ={'AnalogInput':['PV','Unit','Decimals','Description','Alarm'],'Motor':['Current','Running','Duty','Description','Mode'],
+      'Valve':['Position','Open','Description','Mode'],'Silo':['Level','Content','Product','Description','Alarm']}
+RANGES=[(1,'1 h'),(8,'8 h'),(24,'24 h')]
+MODES=('Auto','Hand','Off')
+
+def custom_name(member):return 'pv' if member=='PV' else member[0].lower()+member[1:]
+
+def field(member,caption,kind):
+    if kind=='mode':
+        # The multi-state button only indicates numeric state values: 0 Auto, 1 Hand, 2 Off.
+        states=[{'text':t,'value':v,'selectedStyle':{'classes':'','backgroundColor':'#3f5a73','color':'#ffffff'},'unselectedStyle':{'classes':'','backgroundColor':'#eceeef','color':'#3f4447'}} for v,t in enumerate(MODES)]
+        n=node('ia.input.multi-state-button',member,{'states':states,'orientation':'row','controlValue':0,'indicatorValue':0,'defaultSelectedStyle':{'backgroundColor':'#3f5a73','color':'#ffffff'},
+                                                    'defaultUnselectedStyle':{'backgroundColor':'#eceeef','color':'#3f4447'},'style':{'classes':'Hmi/ModeButtons'}},basis='34px')
+        write='\tif previousValue is not None and currentValue.value is not None:\n\t\tsystem.tag.writeBlocking([self.view.params.tagPath + "/%s"], [%r[int(currentValue.value)]])'%(member,list(MODES))
+        n['propConfig']={'props.indicatorValue':expr('case({view.custom.%s}, "Hand", 1, "Off", 2, 0)'%custom_name(member)),
+                         'props.controlValue':{'onChange':{'enabled':None,'script':write}}}
+    else:
+        n=node('ia.input.numeric-entry-field',member,{'value':0,'format':'0,0.##','spinner':{'enabled':False},'style':{'classes':'Hmi/Field'}},basis='34px')
+        n['propConfig']={'props.value':tag_write(member)}
+        if member=='PositionSP':n['propConfig']['props.enabled']=expr('{view.custom.mode} = "Hand"')
+    return flex(member+'Field',[label(member+'Caption',caption,'Demo/Muted'),n],classes='Hmi/FieldGroup',basis='190px')
+
+def faceplates():
+    for udt,(member,title,status,fields,limits) in FACEPLATES.items():
+        name=label('Name','','Demo/SectionTitle');name['propConfig']={'props.text':expr(TAG_NAME)}
+        description=label('Description','','Demo/Muted');description['propConfig']={'props.text':bind('view.custom.description')}
+        path=label('Path','','Hmi/TagPath');path['propConfig']={'props.text':bind('view.params.tagPath')}
+        if udt=='AnalogInput':
+            text=('numberFormat({view.custom.pv}, "#,##0" + if({view.custom.decimals} > 0, "." + substring("000000", 0, {view.custom.decimals}), ""))'
+                  ' + if(len({view.custom.unit}) > 0, " " + {view.custom.unit}, "")')
+        else:
+            text='numberFormat({view.custom.%s}, "#,##0.0") + " %s"'%(custom_name(member),{'Motor':'A','Valve':'%','Silo':'%'}[udt])
+        value=label('Value','','Hmi/DetailValue');value['propConfig']={'props.text':expr(text)}
+        chips=[]
+        for key,chip_text,chip_colour in status:
+            chip=label(key+'Chip','','Hmi/Chip');chip['propConfig']={'props.text':expr(chip_text),'props.style.backgroundColor':expr(chip_colour)};chips.append(chip)
+        values=flex('Values',[value]+chips,'row','Hmi/FaceplateValues')
+        settings=flex('Settings',[field(*f) for f in fields],'row','Hmi/FaceplateSettings')
+        buttons=[]
+        for hours,caption in RANGES:
+            b=button('Range%dh'%hours,caption,script='\tself.view.custom.hours = %d'%hours,classes='Demo/QuietButton Hmi/RangeButton')
+            b['propConfig']={'props.style.classes':expr('if({view.custom.hours} = %d, "Demo/QuietButton Hmi/RangeButton Hmi/RangeActive", "Demo/QuietButton Hmi/RangeButton")'%hours)}
+            buttons.append(b)
+        ranges=flex('Ranges',[label('HistoryCaption','History','Demo/Muted')]+buttons,'row','Hmi/FaceplateRanges')
+        series=[('value',title,'#3f5a73')]+([('low','Low limit','#b23b34'),('high','High limit','#b23b34')] if limits else [])
+        plot=chart('History',series,source='view.custom.history.points',height='260px')
+        plot['props']['yAxes'][0]['value']['range']['min']='';plot['props']['xAxes'][0]['date']['format']='HH:mm'
+        plot['props']['yAxes'][0]['label']['enabled']=True
+        plot['propConfig']['props.yAxes[0].label.text']=bind('view.custom.history.unit')
+        for s_ in plot['props']['series']:
+            s_['line']['appearance']['stroke']['width']=2
+            if s_['name']!=title:s_['line']['appearance']['stroke']['dashArray']='4,3';s_['line']['appearance']['stroke']['width']=1;s_['line']['appearance']['fill']['opacity']=0
+        plot['position'].update({'grow':1,'shrink':1})
+        message=label('HistoryMessage','','Demo/Muted');message['propConfig']={'props.text':bind('view.custom.history.message')}
+        custom={custom_name(m):'' for m in READ[udt]};custom.update({'hours':1,'history':{'points':[],'unit':'','message':''}})
+        config={'custom.'+custom_name(m):dict(tag_member(m),persistent=True) for m in READ[udt]}
+        config['custom.history']={'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'path':'{view.params.tagPath}','hours':'{view.custom.hours}','tick':'now(10000)'}},
+            'transforms':[{'type':'script','code':'\treturn application.demo.faceplateHistory(value["path"], value["hours"])'}]},'persistent':True}
+        root=theme_root(flex('root',[flex('Header',[name,description,path],classes='Hmi/FaceplateHeader'),values,settings,ranges,plot,message],classes='Demo/PopupRoot Hmi/Faceplate'))
+        view('Popups/Faceplates/'+udt,root,params={'tagPath':''},custom=custom,config=config,height=640,width=760)
+
 
 # Equipment templates, ISA-101 greyscale. Each is an embedded view under
 # Demo/Hmi/Equipment/ that draws its outline from its width and height params;
@@ -277,7 +385,7 @@ def equipment_templates():
 class Scene:
     """One process drawing in fixed design coordinates: static vector layers with live views between them."""
     def __init__(self,area):
-        self.area=area;self.under=[];self.parts=[];self.tags={};self.equipment=[];self.counts={};self.texts=[]
+        self.area=area;self.under=[];self.parts=[];self.tags={};self.equipment=[];self.counts={};self.texts=[];self.trends=[]
     def path(self,tag):return '%s/%s/%s'%(TAG_ROOT,self.area.title(),tag)
     def register(self,tag,udt,**params):
         types={str:'String',int:'Int4',float:'Float8'}
@@ -328,56 +436,53 @@ class Scene:
         self.text(x,y-10,caption,11,600,'start','#6d7270')
     # Live elements.
     def instrument(self,tag,kind,signal,unit,dec,x,y,lead=None,colour=None):
-        n=embed(tag,HMI+'Instrument',{'area':self.area,'tag':tag,'kind':kind,'signal':signal,'unit':unit,'decimals':dec,'colour':colour or '#f7f7f7','value':'--'})
-        self.register(tag,'AnalogInput',Description=MEASURES[kind],Signal=signal,Unit=unit,Decimals=dec)
-        fmt='\treturn u"{0:,.'+str(dec)+'f} '+unit+'".format(value or 0)' if unit else '\treturn u"{0:,.'+str(dec)+'f}".format(value or 0)'
-        n['propConfig']={'props.params.value':tag_binding(self.path(tag)+'/PV',fmt),
-                         'props.params.colour':expr('if({%s/Alarm}, "#f2b8b3", "%s")'%(self.path(tag),colour or '#f7f7f7'))}
+        self.register(tag,'AnalogInput',Kind=kind,Description=MEASURES[kind],Signal=signal,Unit=unit,Decimals=dec)
+        n=embed(tag,HMI+'Instrument',{'tagPath':self.path(tag),'colour':colour or '#f7f7f7'})
         if lead is not None:
             self.pipe('M%s %s V%s'%(x+10,y+42 if lead>y else y+22,lead),INK,1)
         self.parts.append(at(n,x,y,130,51))
-    def state(self,x,y,tag):
-        n=embed('LineState',HMI+'Instrument',{'area':self.area,'tag':tag,'kind':'ST','signal':'','unit':'','decimals':0,'value':'--','colour':'#f7f7f7'})
-        state='{%s/State}'%self.path('Area')
-        n['propConfig']={'props.params.value':expr(state),'props.params.colour':expr('case('+state+', "Stopped", "#f2b8b3", "Quality hold", "#f6dca6", "Recovering", "#c9d9ea", "#f7f7f7")')}
-        self.parts.append(at(n,x,y,130,51))
+    def state(self,x,y,caption):
+        self.parts.append(at(embed('LineState',HMI+'AreaState',{'tagPath':self.path('Area'),'caption':caption}),x,y,130,51))
     def device(self,tag,kind,cx,cy,signal='',unit='',dec=1,standby=False):
         compact=kind in ('motor','fan','rotary')
         name,w,h,_=DEVICES[kind]
-        n=embed(tag.replace('-',''),HMI+'Device/'+name,{'area':self.area,'tag':tag,'signal':signal,'unit':unit,'decimals':dec,'running':True})
         if kind in DRIVES:
             # Rated current is a fixed nameplate value per drive, derived from its tag name.
             rated=float(round(4+sum(map(ord,tag))%7*(4.5 if kind=='rotary' else 9.0 if kind=='fan' else 6.0),1))
             self.register(tag,'Motor',Description=DRIVES[kind],Signal=signal,RatedCurrent=rated,Duty='Standby' if standby else 'Duty')
-            n['propConfig']={'props.params.running':expr('{%s/Running}'%self.path(tag))}
         else:
             self.register(tag,'Valve',Description='Control valve' if kind=='control' else 'Shut-off valve',Signal=signal)
-            n['propConfig']={'props.params.running':expr('{%s/Open}'%self.path(tag))}
+        n=embed(tag.replace('-',''),HMI+'Device/'+name,{'tagPath':self.path(tag)})
         self.parts.append(at(n,cx-20 if compact else cx-39,cy-30 if compact else cy-48,w,h))
     def silo(self,tag,signal,product,x,y,w=110,h=330):
-        n=embed(tag,HMI+'Silo',{'area':self.area,'tag':tag,'signal':signal,'product':product,'level':0,'height':h})
-        n['props']['style']={'overflow':'visible'}
         self.register(tag,'Silo',Description=product+' silo',Signal=signal,Product=product,Capacity=SILO_TONNES.get(product,60))
-        n['propConfig']={'props.params.level':tag_binding(self.path(tag)+'/Level')}
+        n=embed(tag,HMI+'Silo',{'tagPath':self.path(tag),'height':h})
+        n['props']['style']={'overflow':'visible'}
         self.parts.append(at(n,x,y,w,h))
     def stream(self,text,x,y,w=170,target=None):
         n=embed(''.join(c for c in text.title() if c.isalnum())+'Link',HMI+'Stream',{'text':text,'target':ROUTE.get(target,''),'width':w})
         self.parts.append(at(n,x,y,w,28))
     def trend(self,signal,x,y,w,h,caption,colour='#626b75',sp=0):
         self.frame(x,y,w,h,caption)
-        self.parts.append(at(embed('Trend'+signal[0].upper()+signal[1:],HMI+'Trend',{'area':self.area,'signal':signal,'colour':colour,'sp':sp}),x,y,w,h))
+        n=embed('Trend'+signal[0].upper()+signal[1:],HMI+'Trend',{'tagPath':signal,'colour':colour,'sp':sp})
+        self.trends.append(n);self.parts.append(at(n,x,y,w,h))
 
     def build(self,title):
         self.text(40,890,title,22,600,'start','#5a5e5c',toggle=False)
         self.text(1700,890,'SIMULATION',10,400,'end','#777',toggle=False)
         canvas=[at(drawing('Piping',svg_elements(''.join(self.under)),W,H),0,0,W,H)]+self.equipment+self.parts+self.texts
         scene=node('ia.container.coord','root',{'mode':'fixed','style':{'backgroundColor':'transparent','overflow':'visible'}},canvas);scene.pop('position',None)
+        # A trend shows the instrument (or silo) that measures its signal.
+        for n in self.trends:
+            signal=n['props']['params']['tagPath']
+            tag=next(t for t in self.tags.values() if t['typeId'] in ('OatMill/AnalogInput','OatMill/Silo') and t['parameters']['Signal']['value']==signal)
+            n['props']['params']['tagPath']=self.path(tag['name'])
         if self.area!='overview':
             self.register('Area','ProcessArea',Title=TITLE[self.area])
             AREA_TAGS[self.area]=self.tags
-        d=view(HMI+'Drawing/'+self.area.title(),scene,height=H)
+        d=view(DRAWINGS+self.area.title(),scene,height=H)
         d['props']['defaultSize']['width']=W
-        write(V/HMI/'Drawing'/self.area.title()/'view.json',d)
+        write(V/DRAWINGS/self.area.title()/'view.json',d)
 
 
 def intake():
@@ -656,7 +761,7 @@ def overview():
     s.pipe('M%s 170 h40'%cols[0],INK,2.2);s.text(cols[0]+50,174,'Product flow',12,anchor='start')
     s.steam('M%s 200 h40'%cols[0]);s.text(cols[0]+50,204,'Steam',12,anchor='start')
     for key,(x,y) in place.items():
-        s.parts.append(at(embed(key.title()+'Tile',HMI+'Tile',{'area':key,'route':ROUTE[key]}),x,y,230,170))
+        s.parts.append(at(embed(key.title()+'Tile',HMI+'Tile',{'tagPath':'%s/%s/Area'%(TAG_ROOT,key.title()),'route':ROUTE[key]}),x,y,230,170))
     s.build('Oatmakers plant overview')
 
 
@@ -686,10 +791,10 @@ def build_scada():
     for fn in (overview,intake,cleaning,dehulling,kiln,flaking,cutting,milling,packing,utilities):fn()
     equipment_templates()
     build_tags(AREA_TAGS)
-    page('Demo/SCADA','Plant overview','From truck intake to pallet: live status of every process area.',HMI+'Drawing/Overview')
+    page('Pages/Scada/Overview','Plant overview','From truck intake to pallet: live status of every process area.',DRAWINGS+'Overview')
     for key,route,title,group,subtitle in AREAS:
-        page(HMI+'Screen/'+key.title(),title,subtitle,HMI+'Drawing/'+key.title(),key)
-    return [(route,title,HMI+'Screen/'+key.title()) for key,route,title,*_ in AREAS]
+        page(SCREENS+key.title(),title,subtitle,DRAWINGS+key.title(),key)
+    return [(route,title,SCREENS+key.title()) for key,route,title,*_ in AREAS]
 
 
 SCADA_CSS='''
@@ -706,6 +811,18 @@ SCADA_CSS='''
 .psc-Hmi\\/Shape { font-family:Arial,sans-serif; white-space:nowrap; justify-content:center; pointer-events:none; line-height:1; }
 .psc-Hmi\\/LabelToggle { gap:4px; align-items:center; margin-right:8px; }
 .psc-Hmi\\/DetailValue { font-size:28px; color:#444; }
+.psc-Hmi\\/Faceplate { gap:12px; }
+.psc-Hmi\\/FaceplateHeader { gap:2px; }
+.psc-Hmi\\/TagPath { font-family:Menlo,Consolas,monospace; font-size:11px; color:#6d7270; }
+.psc-Hmi\\/FaceplateValues { gap:12px; align-items:center; flex-wrap:wrap; }
+.psc-Hmi\\/Chip { padding:3px 8px; border-radius:3px; color:#fff; font-size:11px; font-weight:700; letter-spacing:0.4px; }
+.psc-Hmi\\/FaceplateSettings { gap:16px; flex-wrap:wrap; padding:10px 12px; background:rgba(63,90,115,0.06); border:1px solid #dde1e4; border-radius:4px; }
+.psc-Hmi\\/FieldGroup { gap:4px; }
+.psc-Hmi\\/Field { height:32px; font-size:13px; }
+.psc-Hmi\\/ModeButtons { height:32px; font-size:12px; }
+.psc-Hmi\\/FaceplateRanges { gap:6px; align-items:center; }
+.psc-Hmi\\/RangeButton { flex:0 0 auto !important; height:30px; padding:4px 12px; font-size:12px; }
+.psc-Hmi\\/RangeActive { background:#3f5a73 !important; color:#fff !important; border-color:#3f5a73 !important; }
 .psc-Demo\\/Menu { background:transparent; color:#d5dade; font-size:12px; }
 .psc-Demo\\/Menu .menu-wrapper,.psc-Demo\\/Menu .wrapper-submenu { background:#2b3238 !important; height:100%; }
 .psc-Demo\\/Menu .ia_menuTreeComponent__item { background:transparent; color:#d5dade; border:0; border-radius:4px; min-height:42px; padding:0 10px; margin-bottom:4px; cursor:pointer; }

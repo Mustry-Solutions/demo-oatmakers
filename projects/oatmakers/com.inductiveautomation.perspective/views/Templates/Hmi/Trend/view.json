@@ -1,0 +1,85 @@
+{
+  "custom": {},
+  "params": {
+    "tagPath": "[default]OatMill/Intake/WT101",
+    "colour": "#626b75",
+    "sp": 0
+  },
+  "propConfig": {
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.colour": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.sp": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 280,
+      "height": 70
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "children": [
+      {
+        "type": "ia.shapes.svg",
+        "meta": {
+          "name": "Plot"
+        },
+        "props": {
+          "viewBox": "0 0 280 70",
+          "preserveAspectRatio": "none",
+          "elements": [],
+          "style": {
+            "pointerEvents": "none",
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "propConfig": {
+          "props.elements": {
+            "binding": {
+              "type": "expr-struct",
+              "config": {
+                "waitOnAll": true,
+                "struct": {
+                  "tick": "now(2000)",
+                  "path": "{view.params.tagPath}",
+                  "colour": "{view.params.colour}",
+                  "sp": "{view.params.sp}"
+                }
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn application.demo.scadaTrendElements(value[\"path\"], value[\"colour\"], value[\"sp\"])"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

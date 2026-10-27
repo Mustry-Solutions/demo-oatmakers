@@ -46,6 +46,10 @@
         "dataType": "String",
         "value": "Flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "feed"
@@ -80,6 +84,10 @@
       "Description": {
         "dataType": "String",
         "value": "Flow"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
       },
       "Signal": {
         "dataType": "String",
@@ -116,6 +124,10 @@
         "dataType": "String",
         "value": "Flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "hulls"
@@ -150,6 +162,10 @@
       "Description": {
         "dataType": "String",
         "value": "Motor current"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "II"
       },
       "Signal": {
         "dataType": "String",
@@ -232,6 +248,10 @@
         "dataType": "String",
         "value": "Differential pressure"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "PDI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "aspDp"
@@ -267,6 +287,10 @@
         "dataType": "String",
         "value": "Quality"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "QI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "efficiency"
@@ -301,6 +325,10 @@
       "Description": {
         "dataType": "String",
         "value": "Quality"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "QI"
       },
       "Signal": {
         "dataType": "String",
@@ -359,6 +387,10 @@
       "Description": {
         "dataType": "String",
         "value": "Speed"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "SI"
       },
       "Signal": {
         "dataType": "String",

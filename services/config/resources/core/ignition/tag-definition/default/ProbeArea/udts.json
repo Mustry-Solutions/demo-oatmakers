@@ -1,0 +1,17 @@
+[
+  {
+    "name": "X1",
+    "parameters": {
+      "Dec": {
+        "dataType": "Integer",
+        "value": 2
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
+      }
+    },
+    "tagType": "UdtInstance",
+    "typeId": "Probe2"
+  }
+]

@@ -38,6 +38,10 @@
         "dataType": "String",
         "value": "Flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "steamFlow"
@@ -72,6 +76,10 @@
       "Description": {
         "dataType": "String",
         "value": "Flow"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
       },
       "Signal": {
         "dataType": "String",
@@ -108,6 +116,10 @@
         "dataType": "String",
         "value": "Motor current"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "II"
+      },
       "Signal": {
         "dataType": "String",
         "value": "compAmps"
@@ -143,6 +155,10 @@
         "dataType": "String",
         "value": "Level"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "LI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "feedLevel"
@@ -177,6 +193,10 @@
       "Description": {
         "dataType": "String",
         "value": "Level"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "LI"
       },
       "Signal": {
         "dataType": "String",
@@ -297,6 +317,10 @@
         "dataType": "String",
         "value": "Pressure"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "PI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "boilerPressure"
@@ -331,6 +355,10 @@
       "Description": {
         "dataType": "String",
         "value": "Pressure"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "PI"
       },
       "Signal": {
         "dataType": "String",
@@ -367,6 +395,10 @@
         "dataType": "String",
         "value": "Pressure"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "PI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "headerPressure"
@@ -402,6 +434,10 @@
         "dataType": "String",
         "value": "Temperature"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "steamTemp"
@@ -436,6 +472,10 @@
       "Description": {
         "dataType": "String",
         "value": "Temperature"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
       },
       "Signal": {
         "dataType": "String",

@@ -1,0 +1,201 @@
+{
+  "custom": {
+    "state": ""
+  },
+  "params": {
+    "tagPath": "[default]OatMill/Flaking/Area",
+    "caption": "LINE 01"
+  },
+  "propConfig": {
+    "custom.state": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/State",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.caption": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 130,
+      "height": 51
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed"
+    },
+    "children": [
+      {
+        "type": "ia.shapes.svg",
+        "meta": {
+          "name": "Shape"
+        },
+        "props": {
+          "viewBox": "0 0 130 51",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "circle",
+              "name": "circle0",
+              "cx": "10",
+              "cy": "32",
+              "r": "10",
+              "fill": {
+                "paint": "#e6e6e6"
+              },
+              "stroke": {
+                "paint": "#7d817f",
+                "width": "1"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect1",
+              "x": "26",
+              "y": "22",
+              "width": "90",
+              "height": "20",
+              "rx": "10",
+              "fill": {
+                "paint": "#f7f7f7"
+              }
+            }
+          ],
+          "style": {
+            "pointerEvents": "none",
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.elements[1].fill.paint": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "case({view.custom.state}, \"Stopped\", \"#f2b8b3\", \"Quality hold\", \"#f6dca6\", \"Recovering\", \"#c9d9ea\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Kind"
+        },
+        "props": {
+          "text": "ST",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "8px",
+            "fontWeight": 400,
+            "color": "#565957",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 22,
+          "width": 20,
+          "height": 20
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Value"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "11.5px",
+            "fontWeight": 400,
+            "color": "#565957",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 26,
+          "y": 22,
+          "width": 90,
+          "height": 20
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.state"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Caption"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/InstrumentTag"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 130,
+          "height": 15
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.caption"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

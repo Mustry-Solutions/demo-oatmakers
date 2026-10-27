@@ -265,7 +265,7 @@ def batchDetails(reference):
 def showBatch(reference):
 	if not str(reference).startswith('OM-'):
 		return   # a stop or changeover bar carries no batch record
-	system.perspective.openPopup('batch-details', 'Demo/BatchDetails',
+	system.perspective.openPopup('batch-details', 'Popups/BatchDetails',
 		params={'reference': str(reference)}, title='Batch details',
 		position={'width': 920, 'height': 400}, modal=False, draggable=True, resizable=True)
 
@@ -275,7 +275,7 @@ def showHistory(line, metric):
 	if line not in (1,2,3) or metric not in METRICS:
 		raise ValueError('Unknown demonstration tag')
 	name, title, _unit = METRICS[metric]
-	system.perspective.openPopup('history-{0}-{1}'.format(line,metric), 'Demo/TagHistory',
+	system.perspective.openPopup('history-{0}-{1}'.format(line,metric), 'Popups/TagHistory',
 		params={'lineNumber': line, 'metric': metric, 'title': title,
 			'tagPath': '{0}/Line{1}/{2}'.format(TAG_ROOT,line,name)},
 		title='Line {0} / {1}'.format(line,title), position={'width': 980, 'height': 620},
@@ -448,7 +448,12 @@ def scadaSiloLevel(level):
 	return 'M{0:.1f} {1:.1f} H{2:.1f} L64 326 H46 Z'.format(3 + 43 * t, top, 107 - 43 * t)
 
 
-def scadaTrendElements(area, signal, colour, setpoint):
+def scadaTrendElements(tagPath, colour, setpoint):
+	found = _scadaInstance(tagPath)
+	if not found:
+		return []
+	area, _kind, params = found
+	signal = params.get('Signal')
 	spec = _scadaArea(area)
 	end = system.date.toMillis(system.date.now())
 	values = []
@@ -477,12 +482,11 @@ def scadaTrendElements(area, signal, colour, setpoint):
 	return elements
 
 
-def showScadaDetail(area, tag, signal, unit, decimals):
-	_scadaArea(area)
-	system.perspective.openPopup('scada-detail', 'Demo/Hmi/Detail',
-		params={'area': area, 'tag': tag, 'signal': signal, 'unit': unit, 'decimals': decimals,
-			'tagPath': scadaSignalPath(area, signal, tag)}, title=tag,
-		position={'width': 520, 'height': 360}, modal=False, draggable=True, resizable=True)
+def openFaceplate(udt, tagPath):
+	if udt not in ('AnalogInput', 'Motor', 'Valve', 'Silo') or not _scadaInstance(tagPath):
+		raise ValueError('Unknown SCADA tag')
+	system.perspective.openPopup('faceplate', 'Popups/Faceplates/' + udt, params={'tagPath': tagPath},
+		title=tagPath.split('/')[-1], position={'width': 760, 'height': 640}, modal=False, draggable=True, resizable=True)
 
 
 SCADA_TAGS = '[default]OatMill'
@@ -514,12 +518,26 @@ def _scadaTagIndex():
 	return index
 
 
+def _scadaInstance(tagPath):
+	# (area, UDT, parameters) of an OatMill instance path, or None.
+	for area, entries in _scadaTagIndex().items():
+		for kind, path, params in entries:
+			if path == tagPath:
+				return area, kind, params
+	return None
+
+
 def _writeScadaTags():
 	import math
 	paths, values = [], []
 	now = system.date.now()
 	seconds = system.date.toMillis(now) / 1000.0
-	for area, entries in _scadaTagIndex().items():
+	index = _scadaTagIndex()
+	# Operator settings written from the faceplates: Mode (Auto, Hand, Off) and the valve position in Hand.
+	settings = [path + member for entries in index.values() for kind, path, params in entries if kind in ('Motor', 'Valve')
+		for member in (('/Mode', '/PositionSP') if kind == 'Valve' else ('/Mode',))]
+	operator = dict(zip(settings, [qv.value for qv in system.tag.readBlocking(settings)])) if settings else {}
+	for area, entries in index.items():
 		if area not in SCADA:
 			continue
 		data = _scadaSimulate(area)
@@ -531,16 +549,21 @@ def _writeScadaTags():
 			elif kind == 'Silo' and signal in data:
 				paths.append(path + '/Level'); values.append(float(data[signal]))
 			elif kind == 'Motor':
-				on = running and params.get('Duty') != 'Standby'
+				mode = operator.get(path + '/Mode') or 'Auto'
+				on = mode == 'Hand' or (mode == 'Auto' and running and params.get('Duty') != 'Standby')
 				if signal in data and signal.endswith('Amps'):
 					current = float(data[signal])
 				else:
 					current = float(params.get('RatedCurrent') or 10.0) * (0.82 + 0.04 * math.sin(seconds / 23.0 + len(path)))
 				paths.extend([path + '/Running', path + '/Current']); values.extend([on, current if on else 0.0])
 			elif kind == 'Valve':
+				mode = operator.get(path + '/Mode') or 'Auto'
 				control = params.get('Description') == 'Control valve'
 				position = 42.0 + 6.0 * math.sin(seconds / 37.0 + len(path)) if control else 100.0
-				paths.extend([path + '/Open', path + '/Position']); values.extend([running, position if running else 0.0])
+				if mode == 'Hand':
+					position = float(operator.get(path + '/PositionSP') or 0.0)
+				opened = mode == 'Hand' or (mode == 'Auto' and running)
+				paths.extend([path + '/Open', path + '/Position']); values.extend([opened and position > 0, position if opened else 0.0])
 			elif kind == 'ProcessArea':
 				paths.extend([path + '/State', path + '/Running', path + '/LastUpdate']); values.extend([data['state'], running, now])
 	if paths:
@@ -548,16 +571,6 @@ def _writeScadaTags():
 		bad = [path for path, quality in zip(paths, qualities) if not quality.isGood()]
 		if bad:
 			raise ValueError('{0} SCADA tag writes failed, first {1}'.format(len(bad), bad[0]))
-
-
-def scadaSignalPath(area, signal, tag=''):
-	# The instrument's own tag when it measures the signal, else the first one that does.
-	matches = [(name, kind, path) for kind, path, params in _scadaTagIndex().get(area, [])
-		for name in [path.split('/')[-1]] if kind in ('AnalogInput', 'Silo') and params.get('Signal') == signal]
-	matches.sort(key=lambda match: match[0] != tag)
-	for name, kind, path in matches:
-		return path + ('/PV' if kind == 'AnalogInput' else '/Level')
-	return ''
 
 
 def scadaValues(area):
@@ -579,10 +592,65 @@ def scadaEquipmentElements(body, width, height, padding):
 	return scadaElements(u'<g transform="translate({0} {1})" fill="#d7d9d8" stroke="#666a68" stroke-width="1.4">{2}</g>'.format(left, top, body))
 
 
+def faceplateHistory(tagPath, hours):
+	# Points for the faceplate chart: recorded line history where it exists,
+	# otherwise the same deterministic model that drives the tag.
+	import math
+	found = _scadaInstance(tagPath)
+	if not found:
+		return {'points': [], 'unit': '', 'message': 'Unknown tag.'}
+	area, kind, params = found
+	spec = _scadaArea(area)
+	signal = params.get('Signal') or ''
+	hours = max(1, min(24, int(hours or 1)))
+	end = system.date.toMillis(system.date.now())
+	start = end - hours * 3600 * 1000
+	times = [start + (end - start) * i / 239 for i in range(240)]
+	unit = {'Motor': 'A', 'Valve': '%', 'Silo': '%'}.get(kind, params.get('Unit') or '')
+	running = dict((t, True) for t in times)
+	points, source = [], 'Simulated process model'
+	if spec['line']:
+		# A stopped line stops its drives: take the line state from recorded throughput.
+		rate = history(start, end, spec['line'], 'rate').get('points', [])
+		recorded = [(p['ts'], p.get('line' + str(spec['line']))) for p in rate if p.get('line' + str(spec['line'])) is not None]
+		if recorded:
+			for t in times:
+				nearest = min(recorded, key=lambda point: abs(point[0] - t))
+				running[t] = nearest[1] > 1
+	if kind in ('AnalogInput', 'Silo') and spec['line'] and signal in SCADA_LIVE:
+		result = history(start, end, spec['line'], signal)
+		points = [{'ts': p['ts'], 'value': p.get('line' + str(spec['line']))} for p in result.get('points', []) if p.get('line' + str(spec['line'])) is not None]
+		source = 'Recorded line history'
+	elif kind in ('AnalogInput', 'Silo') and signal in spec['signals']:
+		points = [{'ts': t, 'value': _scadaWave(signal, spec['signals'][signal], t / 1000.0)} for t in times]
+	elif kind == 'Motor':
+		amps = signal.endswith('Amps') and signal in spec['signals']
+		rated = float(params.get('RatedCurrent') or 10.0)
+		for t in times:
+			on = running[t] and params.get('Duty') != 'Standby'
+			value = _scadaWave(signal, spec['signals'][signal], t / 1000.0) if amps else rated * (0.82 + 0.04 * math.sin(t / 1000.0 / 23.0 + len(tagPath)))
+			points.append({'ts': t, 'value': value if on else 0.0})
+	elif kind == 'Valve':
+		control = params.get('Description') == 'Control valve'
+		for t in times:
+			value = 42.0 + 6.0 * math.sin(t / 1000.0 / 37.0 + len(tagPath)) if control else 100.0
+			points.append({'ts': t, 'value': value if running[t] else 0.0})
+	if kind in ('AnalogInput', 'Silo') and points:
+		low, high = [qv.value for qv in system.tag.readBlocking([tagPath + '/LowLimit', tagPath + '/HighLimit'])]
+		# Signals without real limits carry +/-1e9 placeholders; leave those off the chart.
+		for point in points:
+			if low is not None and abs(low) < 1e8:
+				point['low'] = low
+			if high is not None and abs(high) < 1e8:
+				point['high'] = high
+	return {'points': points, 'unit': unit, 'message': u'{0}, last {1} h. Mode changes and limits apply from now on.'.format(source, hours)}
+
+
 SCADA_PILLS = {'Stopped': ('#b23b34', '#ffffff'), 'Quality hold': ('#f6dca6', '#6b4a0c'), 'Recovering': ('#c9d9ea', '#24425f')}
 
 
-def scadaTile(area):
+def scadaTile(tagPath):
+	area = tagPath.split('/')[-2].lower()
 	spec = _scadaArea(area)
 	data = scadaValues(area)
 	state = data.get('state') or 'Starting'

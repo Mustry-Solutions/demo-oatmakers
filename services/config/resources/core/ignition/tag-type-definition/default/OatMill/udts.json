@@ -3,6 +3,10 @@
     "name": "AnalogInput",
     "tagType": "UdtType",
     "parameters": {
+      "Kind": {
+        "dataType": "String",
+        "value": ""
+      },
       "Description": {
         "dataType": "String",
         "value": ""
@@ -26,8 +30,14 @@
         "tagType": "AtomicTag",
         "valueSource": "memory",
         "dataType": "Float8",
-        "engUnit": "{Unit}",
-        "documentation": "{Description}",
+        "engUnit": {
+          "bindType": "parameter",
+          "binding": "{Unit}"
+        },
+        "documentation": {
+          "bindType": "parameter",
+          "binding": "{Description}"
+        },
         "formatString": "#,##0.##"
       },
       {
@@ -35,7 +45,10 @@
         "tagType": "AtomicTag",
         "valueSource": "memory",
         "dataType": "Float8",
-        "engUnit": "{Unit}",
+        "engUnit": {
+          "bindType": "parameter",
+          "binding": "{Unit}"
+        },
         "value": 0.0
       },
       {
@@ -43,7 +56,10 @@
         "tagType": "AtomicTag",
         "valueSource": "memory",
         "dataType": "Float8",
-        "engUnit": "{Unit}",
+        "engUnit": {
+          "bindType": "parameter",
+          "binding": "{Unit}"
+        },
         "value": 100.0
       },
       {
@@ -52,6 +68,34 @@
         "valueSource": "expr",
         "dataType": "Boolean",
         "expression": "{[.]PV} < {[.]LowLimit} || {[.]PV} > {[.]HighLimit}"
+      },
+      {
+        "name": "Kind",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "String",
+        "expression": "{Kind}"
+      },
+      {
+        "name": "Description",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "String",
+        "expression": "{Description}"
+      },
+      {
+        "name": "Unit",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "String",
+        "expression": "{Unit}"
+      },
+      {
+        "name": "Decimals",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "Int4",
+        "expression": "{Decimals}"
       }
     ]
   },
@@ -94,7 +138,8 @@
         "tagType": "AtomicTag",
         "valueSource": "memory",
         "dataType": "String",
-        "value": "Auto"
+        "value": "Auto",
+        "documentation": "Auto, Hand or Off"
       },
       {
         "name": "Current",
@@ -102,7 +147,31 @@
         "valueSource": "memory",
         "dataType": "Float8",
         "engUnit": "A",
-        "documentation": "{Description} current"
+        "documentation": {
+          "bindType": "parameter",
+          "binding": "{Description}"
+        }
+      },
+      {
+        "name": "Description",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "String",
+        "expression": "{Description}"
+      },
+      {
+        "name": "Duty",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "String",
+        "expression": "{Duty}"
+      },
+      {
+        "name": "RatedCurrent",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "Float8",
+        "expression": "{RatedCurrent}"
       }
     ]
   },
@@ -132,7 +201,34 @@
         "valueSource": "memory",
         "dataType": "Float8",
         "engUnit": "%",
-        "documentation": "{Description} position"
+        "documentation": {
+          "bindType": "parameter",
+          "binding": "{Description}"
+        }
+      },
+      {
+        "name": "Mode",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "String",
+        "value": "Auto",
+        "documentation": "Auto, Hand or Off"
+      },
+      {
+        "name": "PositionSP",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Float8",
+        "engUnit": "%",
+        "value": 50.0,
+        "documentation": "Position in Hand"
+      },
+      {
+        "name": "Description",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "String",
+        "expression": "{Description}"
       }
     ]
   },
@@ -164,7 +260,33 @@
         "valueSource": "memory",
         "dataType": "Float8",
         "engUnit": "%",
-        "documentation": "{Description} level"
+        "documentation": {
+          "bindType": "parameter",
+          "binding": "{Description}"
+        }
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Float8",
+        "engUnit": "%",
+        "value": 10.0
+      },
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Float8",
+        "engUnit": "%",
+        "value": 95.0
+      },
+      {
+        "name": "Alarm",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "Boolean",
+        "expression": "{[.]Level} < {[.]LowLimit} || {[.]Level} > {[.]HighLimit}"
       },
       {
         "name": "Content",
@@ -172,7 +294,28 @@
         "valueSource": "expr",
         "dataType": "Float8",
         "engUnit": "t",
-        "expression": "{[.]Level} * {Capacity} / 100"
+        "expression": "{[.]Level} * {[.]Capacity} / 100"
+      },
+      {
+        "name": "Description",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "String",
+        "expression": "{Description}"
+      },
+      {
+        "name": "Product",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "String",
+        "expression": "{Product}"
+      },
+      {
+        "name": "Capacity",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "Float8",
+        "expression": "{Capacity}"
       }
     ]
   },
@@ -204,6 +347,13 @@
         "tagType": "AtomicTag",
         "valueSource": "memory",
         "dataType": "DateTime"
+      },
+      {
+        "name": "Title",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "String",
+        "expression": "{Title}"
       }
     ]
   }

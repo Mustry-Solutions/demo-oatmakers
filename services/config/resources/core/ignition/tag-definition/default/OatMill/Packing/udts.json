@@ -92,6 +92,10 @@
         "dataType": "String",
         "value": "Totalised flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "FQ"
+      },
       "Signal": {
         "dataType": "String",
         "value": "pallets"
@@ -150,6 +154,10 @@
         "dataType": "String",
         "value": "Quality"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "QI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "rejects"
@@ -184,6 +192,10 @@
       "Description": {
         "dataType": "String",
         "value": "Speed"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "SI"
       },
       "Signal": {
         "dataType": "String",
@@ -220,6 +232,10 @@
         "dataType": "String",
         "value": "Speed"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "SI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "packsB"
@@ -254,6 +270,10 @@
       "Description": {
         "dataType": "String",
         "value": "Speed"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "SI"
       },
       "Signal": {
         "dataType": "String",
@@ -290,6 +310,10 @@
         "dataType": "String",
         "value": "Weighed flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "WI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "sackWeight"
@@ -325,6 +349,10 @@
         "dataType": "String",
         "value": "Weighed flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "WI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "weightB"
@@ -359,6 +387,10 @@
       "Description": {
         "dataType": "String",
         "value": "Weighed flow"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "WI"
       },
       "Signal": {
         "dataType": "String",

@@ -30,21 +30,41 @@ def udt(name,params,tags):
     return {'name':name,'tagType':'UdtType','parameters':{k:param(v) for k,v in params.items()},'tags':tags}
 
 
+def bound(param):
+    """A tag property bound to a UDT parameter; plain braces in a property stay literal."""
+    return {'bindType':'parameter','binding':'{%s}'%param}
+
+
+def info(name,param,dataType='String'):
+    """Expression member exposing a UDT parameter, so a template only needs the instance path."""
+    return member(name,dataType,valueSource='expr',expression='{%s}'%param)
+
+
+# Templates and faceplates get the full instance path and read everything from
+# these members. Mode, PositionSP and the alarm limits are written from the
+# faceplates; the simulation writes the rest.
 UDTS=[
- udt('AnalogInput',{'Description':'','Signal':'','Unit':'','Decimals':1},[
-  member('PV','Float8',engUnit='{Unit}',documentation='{Description}',formatString='#,##0.##'),
-  member('LowLimit','Float8',engUnit='{Unit}',value=0.0),member('HighLimit','Float8',engUnit='{Unit}',value=100.0),
-  member('Alarm','Boolean',valueSource='expr',expression='{[.]PV} < {[.]LowLimit} || {[.]PV} > {[.]HighLimit}')]),
+ udt('AnalogInput',{'Kind':'','Description':'','Signal':'','Unit':'','Decimals':1},[
+  member('PV','Float8',engUnit=bound('Unit'),documentation=bound('Description'),formatString='#,##0.##'),
+  member('LowLimit','Float8',engUnit=bound('Unit'),value=0.0),member('HighLimit','Float8',engUnit=bound('Unit'),value=100.0),
+  member('Alarm','Boolean',valueSource='expr',expression='{[.]PV} < {[.]LowLimit} || {[.]PV} > {[.]HighLimit}'),
+  info('Kind','Kind'),info('Description','Description'),info('Unit','Unit'),info('Decimals','Decimals','Int4')]),
  udt('Motor',{'Description':'','Signal':'','RatedCurrent':10.0,'Duty':'Duty'},[
-  member('Running','Boolean'),member('Fault','Boolean'),member('Mode','String',value='Auto'),
-  member('Current','Float8',engUnit='A',documentation='{Description} current')]),
+  member('Running','Boolean'),member('Fault','Boolean'),member('Mode','String',value='Auto',documentation='Auto, Hand or Off'),
+  member('Current','Float8',engUnit='A',documentation=bound('Description')),
+  info('Description','Description'),info('Duty','Duty'),info('RatedCurrent','RatedCurrent','Float8')]),
  udt('Valve',{'Description':'','Signal':''},[
-  member('Open','Boolean'),member('Position','Float8',engUnit='%',documentation='{Description} position')]),
+  member('Open','Boolean'),member('Position','Float8',engUnit='%',documentation=bound('Description')),
+  member('Mode','String',value='Auto',documentation='Auto, Hand or Off'),member('PositionSP','Float8',engUnit='%',value=50.0,documentation='Position in Hand'),
+  info('Description','Description')]),
  udt('Silo',{'Description':'','Signal':'','Product':'','Capacity':60},[
-  member('Level','Float8',engUnit='%',documentation='{Description} level'),
-  member('Content','Float8',valueSource='expr',engUnit='t',expression='{[.]Level} * {Capacity} / 100')]),
+  member('Level','Float8',engUnit='%',documentation=bound('Description')),
+  member('LowLimit','Float8',engUnit='%',value=10.0),member('HighLimit','Float8',engUnit='%',value=95.0),
+  member('Alarm','Boolean',valueSource='expr',expression='{[.]Level} < {[.]LowLimit} || {[.]Level} > {[.]HighLimit}'),
+  member('Content','Float8',valueSource='expr',engUnit='t',expression='{[.]Level} * {[.]Capacity} / 100'),
+  info('Description','Description'),info('Product','Product'),info('Capacity','Capacity','Float8')]),
  udt('ProcessArea',{'Title':''},[
-  member('State','String',value='Starting'),member('Running','Boolean'),member('LastUpdate','DateTime')]),
+  member('State','String',value='Starting'),member('Running','Boolean'),member('LastUpdate','DateTime'),info('Title','Title')]),
 ]
 
 

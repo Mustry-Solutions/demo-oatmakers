@@ -45,7 +45,7 @@ def picker(name='DateRange'):
 
 # Common visual components.
 metric=flex('root',[bound_label('Title','view.params.title','Demo/Eyebrow'),flex('Reading',[bound_label('Value','view.params.value','Demo/MetricValue'),bound_label('Unit','view.params.unit','Demo/MetricUnit')],'row','Demo/MetricReading'),bound_label('Hint','view.params.hint','Demo/Muted')],classes='Demo/Metric')
-view('Demo/Components/Metric',metric,params={'title':'','value':'','unit':'','hint':''},height=135)
+view('Templates/Cards/Metric',metric,params={'title':'','value':'','unit':'','hint':''},height=135)
 
 line_children=[flex('Heading',[bound_label('Name','view.params.name','Demo/SectionTitle'),bound_label('State','view.params.state','Demo/Badge')],'row','Demo/Spread'),bound_label('Product','view.params.product','Demo/Muted'),label('SpeedCaption','LIVE THROUGHPUT','Demo/Eyebrow')]
 rate=bound_label('Rate','view.params.rate','Demo/LineValue');rate['propConfig']['props.text']=bind_script('view.params.rate','\treturn "{0:,.0f} kg/h".format(value or 0)');line_children.append(rate)
@@ -56,7 +56,7 @@ for key in ['temperature','moisture','pressure']:
     b['propConfig']={'props.text':bind_script('view.params.'+key,'\treturn u"{0:.1f} {1}".format(value or 0, '+'u'+json.dumps(METRICS[key][2])+')')};readings.append(b)
 line_children += [flex('Readings',readings,'row','Demo/Wrap'),button('Scada','Open SCADA',script='\tsystem.perspective.navigate({1: "/scada/flaking", 2: "/scada/cutting", 3: "/scada/milling"}.get(int(self.view.params.lineNumber), "/scada"))',classes='Demo/QuietButton')]
 line_root=flex('root',line_children,classes='Demo/Panel');line_root['children'][0]['children'][1]['propConfig']['props.style.color']=prop('view.params.colour')
-view('Demo/Components/LineCard',line_root,params={'lineNumber':1,'name':'','state':'','product':'','rate':0,'temperature':0,'moisture':0,'pressure':0,'colour':'#2d8962'},height=270)
+view('Templates/Cards/LineCard',line_root,params={'lineNumber':1,'name':'','state':'','product':'','rate':0,'temperature':0,'moisture':0,'pressure':0,'colour':'#2d8962'},height=270)
 
 # Shared history view: the Mustry picker output is the source of the query.
 control=flex('Controls',[picker(),select('Line',LINES,'view.params.lineNumber'),select('Measurement',[(k,v[1]) for k,v in METRICS.items()],'view.params.metric')],'row','Demo/Filters')
@@ -75,9 +75,9 @@ hchart['propConfig']['props.yAxes[0].label.enabled']={'persistent':True};hchart[
 hchart['propConfig']['props.yAxes[0].label.text']=bind_script('view.params.metric','\treturn application.demo.METRICS.get(value or "rate", application.demo.METRICS["rate"])[2]')
 history_root=flex('root',[control,hchart,bound_label('HistoryMessage','view.custom.history.message','Demo/Muted')],classes='Demo/HistoryRoot')
 range_cfg={'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'start':'try({/root/Controls/DateRange.props.output.startEpochMs}, 0)','end':'try({/root/Controls/DateRange.props.output.endEpochMs}, 0)','valid':'try({/root/Controls/DateRange.props.output.isValid}, false)','realtime':'try({/root/Controls/DateRange.props.output.isRealtime}, false)'}}}}
-view('Demo/HistoryChart',history_root,params={'lineNumber':0,'metric':'rate','showSelectors':True,'range':copy.deepcopy(EMPTY_RANGE)},custom={'range':copy.deepcopy(EMPTY_RANGE),'history':copy.deepcopy(EMPTY_HISTORY)},config={'custom.range':dict(range_cfg,persistent=True),'params.lineNumber':{'paramDirection':'inout','persistent':True},'params.metric':{'paramDirection':'inout','persistent':True},'params.range':dict(prop('view.custom.range'),paramDirection='output',persistent=True),'custom.history':struct_binding({'range':'{view.custom.range}','line':'{view.params.lineNumber}','metric':'{view.params.metric}','refresh':'now(5000)'},'\tvalue = value or {}\n\trange_value = value.get("range") or {}\n\tif not range_value.get("valid", False):\n\t\treturn {"points": [], "count": 0, "message": "Loading recorded history..."}\n\treturn application.demo.history(range_value.get("start", 0), range_value.get("end", 0), value.get("line", 0), value.get("metric", "rate"))')},height=430)
+view('Templates/Charts/HistoryChart',history_root,params={'lineNumber':0,'metric':'rate','showSelectors':True,'range':copy.deepcopy(EMPTY_RANGE)},custom={'range':copy.deepcopy(EMPTY_RANGE),'history':copy.deepcopy(EMPTY_HISTORY)},config={'custom.range':dict(range_cfg,persistent=True),'params.lineNumber':{'paramDirection':'inout','persistent':True},'params.metric':{'paramDirection':'inout','persistent':True},'params.range':dict(prop('view.custom.range'),paramDirection='output',persistent=True),'custom.history':struct_binding({'range':'{view.custom.range}','line':'{view.params.lineNumber}','metric':'{view.params.metric}','refresh':'now(5000)'},'\tvalue = value or {}\n\trange_value = value.get("range") or {}\n\tif not range_value.get("valid", False):\n\t\treturn {"points": [], "count": 0, "message": "Loading recorded history..."}\n\treturn application.demo.history(range_value.get("start", 0), range_value.get("end", 0), value.get("line", 0), value.get("metric", "rate"))')},height=430)
 
-for path in ['Demo/HistoryChart']:
+for path in ['Templates/Charts/HistoryChart']:
     file=V/path/'view.json';data=json.loads(file.read_text())
     data['propConfig']['custom.history']['persistent']=True
     write(file,data)
@@ -96,12 +96,12 @@ def page(name,title,subtitle,body,custom=None,config=None,live_header=True):
     return view(name,theme_root(flex('root',children+body,classes='Demo/Page')),custom=({'live':EMPTY_LIVE} if live_header else {})|(custom or {}),config=cfg)
 
 def line_cards():
-    return repeater('Lines','Demo/Components/LineCard','view.custom.live.lines','auto')
+    return repeater('Lines','Templates/Cards/LineCard','view.custom.live.lines','auto')
 def live_metrics():
-    n=repeater('LiveMetrics','Demo/Components/Metric','view.custom.live.metrics','auto');return n
+    n=repeater('LiveMetrics','Templates/Cards/Metric','view.custom.live.metrics','auto');return n
 
 live_plot=chart('LiveTrend',[('rate','Throughput (t/h)','#2d8962')],source='view.custom.live.trend',height='235px');live_plot['props']['legend']['enabled']=False;theme_series(live_plot,['#2d8962'])
-page('Demo/Overview','What is happening now','Live production rates, shift output and process alerts.',[
+page('Pages/Overview','What is happening now','Live production rates, shift output and process alerts.',[
  live_metrics(),line_cards(),panel('LiveTrendPanel','Factory throughput','The latest ten minutes of recorded one-second telemetry.',[live_plot,button('History','Choose a history range',page='/performance',classes='Demo/QuietButton')],grow=0)])
 
 # The resource timeline owns its window; only visible batches are fetched.
@@ -109,12 +109,12 @@ resources=[{'id':str(i),'label':name,'group':'Oat processing','color':COLORS[i-1
 timeline=node(M+'display.resourcetimeline','Timeline',{'config':{'resources':resources,'rowHeight':76,'timezone':'Europe/Brussels','locale':'en-GB','showToolbar':True,'showMiniNav':True,'showLegend':True,'refreshSeconds':5,'editable':False,'selectable':False,'builtInEditor':False,'showExport':True,'categories':[{'id':k,'label':t,'color':c} for k,t,c in [('planned','Scheduled','#9aa3ab'),('running','In production','#4d5862'),('quality','Quality review','#b57a17'),('complete','Completed','#c3cad0'),('stop','Unplanned stop','#b23b34'),('changeover','Changeover / CIP','#7d8891')]],'shifts':[{'label':'Early','start':'06:00'},{'label':'Late','start':'14:00'},{'label':'Night','start':'22:00'}]},'data':{'events':[]},'state':{'zoom':'shift','followNow':True},'style':{'classes':'Demo/PlanningTimeline'}},basis='480px')
 timeline['propConfig']={'props.data.events':prop('view.custom.events')}
 timeline['events']={'component':{'onEventClick':{'type':'script','scope':'G','config':{'script':'\tapplication.demo.showBatch(event.id)'}}}}
-page('Demo/Production','Production planning','Browse shifts, pan through the schedule and open a batch for details.',[
+page('Pages/Production','Production planning','Browse shifts, pan through the schedule and open a batch for details.',[
  timeline,label('PlanningHelp','Use Hour, Day, Shift or Week to change the scale. Click a batch to inspect its production and quality record.','Demo/Muted')],custom={'events':[]},config={'custom.events':struct_binding({'start':'{/root/Timeline.props.output.visibleStartMs}','end':'{/root/Timeline.props.output.visibleEndMs}','refresh':'now(5000)'},'\treturn application.demo.timeline(value["start"], value["end"])')})
 
-history=embed('History','Demo/HistoryChart',{'lineNumber':0,'metric':'rate','showSelectors':True,'range':copy.deepcopy(EMPTY_RANGE)},basis='460px')
-page('Demo/Performance','Performance & history','Pick exact dates or a live preset. Every chart uses that recorded range.',[
- history,repeater('Metrics','Demo/Components/Metric','view.custom.summary.metrics','auto'),
+history=embed('History','Templates/Charts/HistoryChart',{'lineNumber':0,'metric':'rate','showSelectors':True,'range':copy.deepcopy(EMPTY_RANGE)},basis='460px')
+page('Pages/Performance','Performance & history','Pick exact dates or a live preset. Every chart uses that recorded range.',[
+ history,repeater('Metrics','Templates/Cards/Metric','view.custom.summary.metrics','auto'),
  grid('Losses','view.custom.summary.losses',[('reason','Loss reason',250),('minutes','Line minutes',140),('lost_kg','Lost output kg',160)],key='reason',height='250px')],custom={'summary':{'metrics':[],'losses':[]}},config={'custom.summary':struct_binding({'start':'try({/root/History.props.params.range.start}, 0)','end':'try({/root/History.props.params.range.end}, 0)','line':'{/root/History.props.params.lineNumber}','refresh':'now(10000)'},'\treturn application.demo.rangeSnapshot(value["start"], value["end"], value["line"])')},live_header=False)
 
 # One modern record grid, with an explicit inspect action.
@@ -125,7 +125,7 @@ qgrid=grid('BatchGrid','view.custom.batches',[('reference','Batch',190),('produc
 inspect=button('InspectBatch','Inspect selected batch',script='\tapplication.demo.showBatch(self.view.custom.selected)',classes='Demo/Button');inspect['propConfig']={'props.enabled':expr('len({view.custom.selected}) > 0')}
 inspect['position']={'basis':'auto','grow':0,'shrink':0}
 inspect['props']['style'].update({'height':'40px','minWidth':'180px','whiteSpace':'nowrap'})
-page('Demo/Quality','Quality & traceability','Find a production batch and inspect its measurements.',[
+page('Pages/Quality','Quality & traceability','Find a production batch and inspect its measurements.',[
  flex('QualityFilters',[quality_picker,inspect],'row','Demo/Filters'),qgrid],custom={'batches':[],'selected':''},config={'custom.batches':struct_binding({'start':'{/root/QualityFilters/QualityRange.props.output.startEpochMs}','end':'{/root/QualityFilters/QualityRange.props.output.endEpochMs}','refresh':'now(10000)'},'\treturn application.demo.batches(value["start"], value["end"])'),'custom.selected':bind_script('/root/BatchGrid.props.state.selection','\treturn str(value[0]) if value else ""')},live_header=False)
 
 # Detail popups have their own range-controlled history and compact measurements.
@@ -133,11 +133,11 @@ qc=button('Inspect','Record demo inspection',script='\ttry:\n\t\tself.view.custo
 qc['propConfig']={'props.enabled':expr('{view.custom.batch.available} && {view.custom.batch.status} != "Scheduled"')}
 batch_cards=[]
 for name,title,key,unit in [('Output','GOOD OUTPUT','good_kg','kg'),('Moisture','PEAK MOISTURE','peak_moisture','%'),('Temperature','AVERAGE TEMPERATURE','temperature','°C')]:
-    card=embed(name,'Demo/Components/Metric',{'title':title,'unit':unit,'hint':''},basis='240px',grow=1)
+    card=embed(name,'Templates/Cards/Metric',{'title':title,'unit':unit,'hint':''},basis='240px',grow=1)
     card['propConfig']={'props.params.value':bind_script('view.custom.batch','\treturn value.get("'+key+'", "n/a")')};batch_cards.append(card)
 batch_root=flex('root',[bound_label('BatchTitle','view.params.reference','Demo/SectionTitle'),bound_label('Product','view.custom.batch.product','Demo/Subtitle'),bound_label('Status','view.custom.batch.status','Demo/Badge'),flex('Measurements',batch_cards,'row','Demo/Wrap'),qc,bound_label('Result','view.custom.result','Demo/Muted')],classes='Demo/PopupRoot')
 theme_root(batch_root)
-view('Demo/BatchDetails',batch_root,params={'reference':''},custom={'batch':{'available':False,'product':'','status':'Loading'},'result':''},config={'custom.batch':bind_script('view.params.reference','\treturn application.demo.batchDetails(value)')},height=400)
+view('Popups/BatchDetails',batch_root,params={'reference':''},custom={'batch':{'available':False,'product':'','status':'Loading'},'result':''},config={'custom.batch':bind_script('view.params.reference','\treturn application.demo.batchDetails(value)')},height=400)
 
 # Record actual output against an existing completed batch.
 reference=node('ia.input.dropdown','Reference',{'options':[],'value':'','placeholder':'Select a completed batch','search':{'enabled':True},'style':{'classes':'Demo/Select'}},basis='42px')
@@ -161,13 +161,13 @@ output_grid['position']={'basis':'0px','grow':1,'shrink':1}
 output_panel=panel('OutputList','Recorded output','',[output_grid],basis='560px',grow=1)
 output_panel['props']['style'].update({'height':'calc(100vh - 215px)','minHeight':'400px','overflow':'hidden'})
 workspace=flex('Workspace',[form,output_panel],'row','Demo/Workspace')
-page('Demo/Operator','Batch output','Record actual production for a completed batch.',[workspace],custom={'values':{},'validation':{'valid':False,'message':'Select a completed batch and enter its output.'},'requestId':'','busy':False,'saved':False,'result':'','batches':[],'records':[],'selected':{'reference':'','product':'','line':'','completed':'','recorded':False}},config={
+page('Pages/Operator','Batch output','Record actual production for a completed batch.',[workspace],custom={'values':{},'validation':{'valid':False,'message':'Select a completed batch and enter its output.'},'requestId':'','busy':False,'saved':False,'result':'','batches':[],'records':[],'selected':{'reference':'','product':'','line':'','completed':'','recorded':False}},config={
  'custom.values':dict(struct_binding({'reference':'{/root/Workspace/Form/Reference.props.value}','quantity':'{/root/Workspace/Form/Quantity.props.text}','bags':'{/root/Workspace/Form/Bags.props.text}'},'\treturn value'),onChange={'enabled':True,'script':'\tself.custom.requestId = ""\n\tself.custom.saved = False\n\tself.custom.result = ""'}),
  'custom.validation':bind_script('view.custom.values','\treturn application.demo.validateBatchOutput(value)'),
  'custom.batches':struct_binding({'refresh':'now(10000)'},'\treturn application.demo.completedOutputBatches()'),
  'custom.records':struct_binding({'refresh':'now(5000)'},'\treturn application.demo.recentBatchOutputs()'),
  'custom.selected':struct_binding({'reference':'try({/root/Workspace/Form/Reference.props.value}, "")','batches':'{view.custom.batches}'},'\tfor row in value["batches"] or []:\n\t\tif row["reference"] == value["reference"]:\n\t\t\treturn row\n\treturn {"reference": "", "product": "", "line": "", "completed": "", "recorded": False}')})
-operator_file=V/'Demo/Operator/view.json'
+operator_file=V/'Pages/Operator/view.json'
 operator=json.loads(operator_file.read_text())
 def trim_empty_captions(component):
     if 'children' in component:
@@ -181,20 +181,20 @@ write(operator_file,operator)
 from build_scada import build_scada, SCADA_CSS, AREAS
 scada_routes=build_scada()
 
-popup_history=embed('History','Demo/HistoryChart',{'showSelectors':False},basis='0px',grow=1);popup_history['position']['shrink']=1;popup_history['propConfig']={'props.params.lineNumber':prop('view.params.lineNumber'),'props.params.metric':prop('view.params.metric')}
-view('Demo/TagHistory',theme_root(flex('root',[bound_label('Title','view.params.title','Demo/SectionTitle'),bound_label('Tag','view.params.tagPath','Demo/Muted'),popup_history],classes='Demo/PopupRoot')),params={'lineNumber':1,'metric':'temperature','title':'Temperature','tagPath':''},height=560)
+popup_history=embed('History','Templates/Charts/HistoryChart',{'showSelectors':False},basis='0px',grow=1);popup_history['position']['shrink']=1;popup_history['propConfig']={'props.params.lineNumber':prop('view.params.lineNumber'),'props.params.metric':prop('view.params.metric')}
+view('Popups/TagHistory',theme_root(flex('root',[bound_label('Title','view.params.title','Demo/SectionTitle'),bound_label('Tag','view.params.tagPath','Demo/Muted'),popup_history],classes='Demo/PopupRoot')),params={'lineNumber':1,'metric':'temperature','title':'Temperature','tagPath':''},height=560)
 
 health_cards=[]
 for name,title,key,unit,hint in [('Age','LIVE DATA AGE','liveAgeSeconds','sec','One-second recorded telemetry'),('History','HISTORY','coverageDays','days','Minute history, capped at three months'),('Lines','LINES','lineCount','','Three simulated production lines')]:
-    card=embed(name,'Demo/Components/Metric',{'title':title,'unit':unit,'hint':hint},basis='240px',grow=1);card['propConfig']={'props.params.value':prop('view.custom.health.'+key)};health_cards.append(card)
-page('Demo/Health','Demo health','Data freshness and automatic retention.',[flex('Metrics',health_cards,'row','Demo/Wrap'),label('Policy','One-second telemetry is retained for 6 hours. Minute history, recorded batch output and inspections are retained for at most 90 days or three calendar months.','Demo/Body')],custom={'health':{'liveAgeSeconds':'n/a','coverageDays':'n/a','lineCount':'n/a'}},config={'custom.health':struct_binding({'refresh':'now(5000)'},'\treturn application.demo.health()')})
+    card=embed(name,'Templates/Cards/Metric',{'title':title,'unit':unit,'hint':hint},basis='240px',grow=1);card['propConfig']={'props.params.value':prop('view.custom.health.'+key)};health_cards.append(card)
+page('Pages/Health','Demo health','Data freshness and automatic retention.',[flex('Metrics',health_cards,'row','Demo/Wrap'),label('Policy','One-second telemetry is retained for 6 hours. Minute history, recorded batch output and inspections are retained for at most 90 days or three calendar months.','Demo/Body')],custom={'health':{'liveAgeSeconds':'n/a','coverageDays':'n/a','lineCount':'n/a'}},config={'custom.health':struct_binding({'refresh':'now(5000)'},'\treturn application.demo.health()')})
 
 # Session settings: the theme applies to every page, popup and the navigation.
 theme_picker=select('Theme',THEMES,'session.custom.theme',width='40px');theme_picker['props']['style']['maxWidth']='320px'
-page('Demo/Settings','Settings','Choose how the demo looks for this session.',[
+page('Pages/Settings','Settings','Choose how the demo looks for this session.',[
  panel('Appearance','Theme','Standard follows high-performance HMI practice. Hello Kitty is the pink edition.',[theme_picker],grow=0)],live_header=False)
 
-routes=[('/','Factory overview','Demo/Overview'),('/scada','SCADA','Demo/SCADA'),('/production','Production planning','Demo/Production'),('/performance','Performance','Demo/Performance'),('/quality','Quality & traceability','Demo/Quality'),('/operator','Batch output','Demo/Operator')]
+routes=[('/','Factory overview','Pages/Overview'),('/scada','SCADA','Pages/Scada/Overview'),('/production','Production planning','Pages/Production'),('/performance','Performance','Pages/Performance'),('/quality','Quality & traceability','Pages/Quality'),('/operator','Batch output','Pages/Operator')]
 logo=base64.b64encode((ROOT/'tools/demo/scada-assets/oatmakers-logo.svg').read_bytes()).decode()
 kitty=base64.b64encode((ROOT/'tools/demo/scada-assets/hello-kitty.png').read_bytes()).decode()
 brand=node('ia.display.image','Brand',{'source':'data:image/svg+xml;base64,'+logo,'altText':'Oatmakers','fit':{'mode':'contain'},'style':{'classes':'Demo/BrandLogo'}},basis='74px')
@@ -217,20 +217,25 @@ def nav_icon(b,path):
     b['props']['image']={'icon':{'path':'material/'+NAV_ICONS[path],'color':'#d5dade','style':{}},'position':'left','width':18,'height':18}
     b.setdefault('propConfig',{})['props.image.icon.color']=themed({'standard':'#d5dade','hello-kitty':'#ac2454'});return b
 nav += [nav_icon(button('Settings','Settings',page='/settings',classes='Demo/NavButton'),'/settings'),nav_icon(button('Health','Demo health',page='/demo/health',classes='Demo/NavButton'),'/demo/health'),label('Footer','Mustry Solutions','Demo/NavFooter')]
-view('Sidenav',theme_root(flex('root',nav,classes='Demo/Navigation')),height=900)
+view('Docks/Sidenav',theme_root(flex('root',nav,classes='Demo/Navigation')),height=900)
 config=json.loads((P/'page-config/config.json').read_text());config['pages'].pop('/components',None)
 for route,title,path in routes+scada_routes:config['pages'][route]={'title':title,'viewPath':path}
-config['pages']['/process']={'title':'SCADA','viewPath':'Demo/SCADA'};config['pages']['/demo/health']={'title':'Demo health','viewPath':'Demo/Health'};config['pages']['/settings']={'title':'Settings','viewPath':'Demo/Settings'}
-config['pages']['/oee']={'title':'Performance','viewPath':'Demo/Performance'};config['pages']['/demo/input-fields']={'title':'Batch output','viewPath':'Demo/Operator'}
+config['pages']['/process']={'title':'SCADA','viewPath':'Pages/Scada/Overview'};config['pages']['/demo/health']={'title':'Demo health','viewPath':'Pages/Health'};config['pages']['/settings']={'title':'Settings','viewPath':'Pages/Settings'}
+config['pages']['/observatory']['viewPath']='Pages/Observatory';config['pages']['/makeramaigreatagain']['viewPath']='Pages/MakeRamaiGreatAgain'
+config['pages']['/oee']={'title':'Performance','viewPath':'Pages/Performance'};config['pages']['/demo/input-fields']={'title':'Batch output','viewPath':'Pages/Operator'}
 nav_docks=config.get('sharedDocks', {})
 if not nav_docks.get('left'):
     nav_docks=next((p.get('docks') for p in config['pages'].values() if p.get('docks',{}).get('left')), {})
 for route,definition in config['pages'].items():
     definition.pop('docks', None)
 config['sharedDocks']=copy.deepcopy(nav_docks)
+for dock in config['sharedDocks'].get('left',[]):
+    if dock.get('id')=='sidenav':dock['viewPath']='Docks/Sidenav'
 write(P/'page-config/config.json',config)
 write(P/'session-props/props.json',{'custom':{'showLabels':True,'demo':{'scadaLine':1,'scadaArea':'peeling','scadaMetric':'temperature'},'theme':'standard'},'props':{'theme':'light'}});resource(P/'session-props',['props.json'])
-for old in ['Demo/ComponentsGallery','Demo/Process','Demo/Separator']:
+# Views live in Pages (one per route), Templates (embedded), Popups and Docks.
+# The generator used to write everything under Demo/; remove what is left of it.
+for old in ['Demo','Sidenav']:
     if (V/old).exists():shutil.rmtree(V/old)
 
 css='''
