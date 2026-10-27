@@ -16,6 +16,14 @@
       "title": "",
       "viewPath": "Demo/MakeRamaiGreatAgain"
     },
+    "/demo/health": {
+      "title": "Demo health",
+      "viewPath": "Demo/Health"
+    },
+    "/demo/input-fields": {
+      "title": "Batch output",
+      "viewPath": "Demo/Operator"
+    },
     "/observatory": {
       "title": "Gateway Observatory",
       "viewPath": "Showcase/Gateway Observatory"
@@ -31,6 +39,13 @@
     "/performance": {
       "title": "Performance",
       "viewPath": "Demo/Performance"
+    "/operator": {
+      "title": "Batch output",
+      "viewPath": "Demo/Operator"
+    },
+    "/performance": {
+      "title": "Performance",
+      "viewPath": "Demo/Performance"
     },
     "/process": {
       "title": "SCADA",
@@ -39,8 +54,12 @@
     "/production": {
       "title": "Production planning",
       "viewPath": "Demo/Production"
+    "/production": {
+      "title": "Production planning",
+      "viewPath": "Demo/Production"
     },
     "/quality": {
+      "title": "Quality \u0026 traceability",
       "title": "Quality \u0026 traceability",
       "viewPath": "Demo/Quality"
     },
