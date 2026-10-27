@@ -159,6 +159,12 @@
     "onStartup": "enabled",
     "certFingerprint": "88338069eb9c3f2d46a4baf701e4fa71bf073293"
   },
+  "com.mussonindustrial.embr.charts": {
+    "filename": "/third-party-modules/Embr-Charts-Ignition83-6.0.5.modl",
+    "onStartup": "enabled",
+    "certFingerprint": "e5a3cf3f06627c175b68b0122ac8f2c3f9c992e2",
+    "licenseAgreementHash": 3266212556
+  },
   "com.mustry.historian.timescaledb": {
     "filename": "/third-party-modules/TimescaleDB-Historian.modl",
     "onStartup": "enabled",
