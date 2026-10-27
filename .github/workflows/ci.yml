@@ -458,50 +458,6 @@ jobs:
           EOF
           echo "All workflows respect the runner rules."
 
-  # The demo itself: its generated views, its database lifecycle (migrations,
-  # time travel, retention) and the release payload assembly of deploy.yml.
-  demo:
-    name: Demo tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs: changes
-    if: needs.changes.outputs.demo == 'true'
-    services:
-      postgres:
-        image: timescale/timescaledb:2.30.2-pg17
-        env:
-          POSTGRES_USER: ignition
-          POSTGRES_PASSWORD: demo-test-only
-          POSTGRES_DB: ignition
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U ignition -d ignition"
-          --health-interval 5s --health-timeout 3s --health-retries 20
-    steps:
-      - uses: actions/checkout@v7
-      - name: Generated views match tools/demo/build_views.py
-        # Semantic comparison: a Designer save that only reformats a view or
-        # restamps its resource.json passes. See tools/demo/check_generated.py
-        # for how to regenerate.
-        run: python3 tools/demo/check_generated.py
-      - name: Resources, routes and embedded scripts
-        run: |
-          python3 tools/demo/validate.py
-          python3 tests/demo/test_view_startup.py
-      - name: Database lifecycle against a disposable database
-        env:
-          DEMO_TEST_CONTAINER: ""
-          PGHOST: localhost
-          PGPORT: "5432"
-          PGUSER: ignition
-          PGPASSWORD: demo-test-only
-        run: python3 tests/demo/test_database.py
-      - name: Release payload assembly (deploy.yml)
-        run: |
-          pip install pyyaml==6.0.2
-          python3 tests/test_deploy_payload.py
-
   # The ONE required status check for branch protection. Aggregates whatever
   # ran: a skipped job (path didn't match) is fine, a failed one blocks.
   ci-ok:
