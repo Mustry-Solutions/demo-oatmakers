@@ -5,8 +5,8 @@ from types import SimpleNamespace
 
 ROOT=Path(__file__).resolve().parents[2]
 V=ROOT/'projects/oatmakers/com.inductiveautomation.perspective/views'
-history=json.loads((V/'Demo/HistoryChart/view.json').read_text())
-performance=json.loads((V/'Demo/Performance/view.json').read_text())
+history=json.loads((V/'Templates/Charts/HistoryChart/view.json').read_text())
+performance=json.loads((V/'Pages/Performance/view.json').read_text())
 code=history['propConfig']['custom.history']['binding']['transforms'][0]['code']
 calls=[]
 def query(start,end,line,metric):

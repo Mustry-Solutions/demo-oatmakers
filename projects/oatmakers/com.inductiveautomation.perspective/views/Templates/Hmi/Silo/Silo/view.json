@@ -1,0 +1,303 @@
+{
+  "custom": {
+    "level": 0,
+    "product": "",
+    "alarm": false
+  },
+  "params": {
+    "tagPath": "[default]OatMill/Intake/SI101",
+    "height": 330
+  },
+  "propConfig": {
+    "custom.level": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/Level",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "custom.product": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/Product",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "custom.alarm": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/Alarm",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.height": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 110,
+      "height": 330
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "cursor": "pointer",
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.shapes.svg",
+        "meta": {
+          "name": "Shape"
+        },
+        "props": {
+          "viewBox": "0 0 110 330",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "path",
+              "name": "path0",
+              "d": "M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z",
+              "fill": {
+                "paint": "#e9e9e7"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path1",
+              "d": "M3 320 H107",
+              "fill": {
+                "paint": "#d8cda8"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path2",
+              "d": "M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#666a68",
+                "width": "2"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect3",
+              "x": "22",
+              "y": "104",
+              "width": "66",
+              "height": "22",
+              "rx": "11",
+              "fill": {
+                "paint": "#f7f7f7"
+              },
+              "stroke": {
+                "paint": "#a9adab"
+              }
+            }
+          ],
+          "style": {
+            "pointerEvents": "none",
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "propConfig": {
+          "props.elements[1].d": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.level"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn application.demo.scadaSiloLevel(value)"
+                }
+              ]
+            }
+          },
+          "props.elements[3].fill.paint": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({view.custom.alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Level"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "13px",
+            "fontWeight": 700,
+            "color": "#333399",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 0.2,
+          "y": 0.315,
+          "width": 0.6,
+          "height": 0.067
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "numberFormat({view.custom.level}, \"0\") + \" %\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Product"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "10.5px",
+            "color": "#565957",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0.41,
+          "width": 1,
+          "height": 0.045
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.product"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Tag"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Text Hmi/Tag",
+            "alignItems": "flex-start"
+          }
+        },
+        "position": {
+          "x": 0.555,
+          "y": -0.06,
+          "width": 1,
+          "height": 0.05
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "substring({view.params.tagPath}, lastIndexOf({view.params.tagPath}, \"/\") + 1)"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          },
+          "position.y": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "-21 / {view.params.height}"
+              }
+            }
+          },
+          "position.height": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "16 / {view.params.height}"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    },
+    "events": {
+      "dom": {
+        "onClick": {
+          "type": "script",
+          "scope": "G",
+          "config": {
+            "script": "\tapplication.demo.openFaceplate(\"Silo\", self.view.params.tagPath)"
+          }
+        }
+      }
+    }
+  }
+}

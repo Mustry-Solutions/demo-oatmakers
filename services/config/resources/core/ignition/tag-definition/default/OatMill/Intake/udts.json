@@ -46,6 +46,10 @@
         "dataType": "String",
         "value": "Motor current"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "II"
+      },
       "Signal": {
         "dataType": "String",
         "value": "elevAmps"
@@ -196,6 +200,10 @@
         "dataType": "String",
         "value": "Moisture"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "MI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "moistIn"
@@ -230,6 +238,10 @@
       "Description": {
         "dataType": "String",
         "value": "Differential pressure"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "PDI"
       },
       "Signal": {
         "dataType": "String",
@@ -450,6 +462,10 @@
         "dataType": "String",
         "value": "Temperature"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "tg1"
@@ -484,6 +500,10 @@
       "Description": {
         "dataType": "String",
         "value": "Temperature"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
       },
       "Signal": {
         "dataType": "String",
@@ -520,6 +540,10 @@
         "dataType": "String",
         "value": "Temperature"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "tg3"
@@ -555,6 +579,10 @@
         "dataType": "String",
         "value": "Temperature"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "tg4"
@@ -589,6 +617,10 @@
       "Description": {
         "dataType": "String",
         "value": "Weighed flow"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "WI"
       },
       "Signal": {
         "dataType": "String",

@@ -1,0 +1,311 @@
+{
+  "custom": {
+    "pv": 0,
+    "unit": "",
+    "decimals": 1,
+    "kind": "",
+    "alarm": false,
+    "text": ""
+  },
+  "params": {
+    "tagPath": "[default]OatMill/Intake/WT101",
+    "colour": "#f7f7f7"
+  },
+  "propConfig": {
+    "custom.pv": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/PV",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "custom.unit": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/Unit",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "custom.decimals": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/Decimals",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "custom.kind": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/Kind",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "custom.alarm": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/Alarm",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true
+    },
+    "custom.text": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "numberFormat({view.custom.pv}, \"#,##0\" + if({view.custom.decimals} > 0, \".\" + substring(\"000000\", 0, {view.custom.decimals}), \"\")) + if(len({view.custom.unit}) > 0, \" \" + {view.custom.unit}, \"\")"
+        }
+      },
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.colour": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 130,
+      "height": 51
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "cursor": "pointer"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.shapes.svg",
+        "meta": {
+          "name": "Shape"
+        },
+        "props": {
+          "viewBox": "0 0 130 51",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "circle",
+              "name": "circle0",
+              "cx": "10",
+              "cy": "32",
+              "r": "10",
+              "fill": {
+                "paint": "#e6e6e6"
+              },
+              "stroke": {
+                "paint": "#7d817f",
+                "width": "1"
+              }
+            },
+            {
+              "type": "rect",
+              "name": "rect1",
+              "x": "26",
+              "y": "22",
+              "width": "64",
+              "height": "20",
+              "rx": "10",
+              "fill": {
+                "paint": "#f7f7f7"
+              }
+            }
+          ],
+          "style": {
+            "pointerEvents": "none",
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.elements[1].width": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "max(64, min(102, len({view.custom.text}) * 6 + 14))"
+              }
+            }
+          },
+          "props.elements[1].fill.paint": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({view.custom.alarm}, \"#f2b8b3\", {view.params.colour})"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Kind"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "8px",
+            "fontWeight": 400,
+            "color": "#565957",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 22,
+          "width": 20,
+          "height": 20
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.kind"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Value"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Shape",
+            "fontSize": "11.5px",
+            "fontWeight": 400,
+            "color": "#565957",
+            "alignItems": "center"
+          }
+        },
+        "position": {
+          "x": 26,
+          "y": 22,
+          "width": 64,
+          "height": 20
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.custom.text"
+              }
+            }
+          },
+          "position.width": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "max(64, min(102, len({view.custom.text}) * 6 + 14))"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Tag"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/InstrumentTag"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 130,
+          "height": 15
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "substring({view.params.tagPath}, lastIndexOf({view.params.tagPath}, \"/\") + 1)"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    },
+    "events": {
+      "dom": {
+        "onClick": {
+          "type": "script",
+          "scope": "G",
+          "config": {
+            "script": "\tapplication.demo.openFaceplate(\"AnalogInput\", self.view.params.tagPath)"
+          }
+        }
+      }
+    }
+  }
+}

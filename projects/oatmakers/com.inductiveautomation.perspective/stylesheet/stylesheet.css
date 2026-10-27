@@ -143,8 +143,28 @@
 .psc-Hmi\/Tag { font-size:12px; font-weight:600; color:#555; align-items:center; line-height:16px; white-space:nowrap; pointer-events:none; }
 .psc-Hmi\/Title { font-size:10.5px; color:#777; align-items:center; line-height:14px; }
 .psc-Hmi\/InstrumentTag { font-family:Arial,sans-serif; font-size:12px; color:#565957; align-items:flex-start; justify-content:flex-end; white-space:nowrap; pointer-events:none; }
+.psc-Hmi\/Shape { font-family:Arial,sans-serif; white-space:nowrap; justify-content:center; pointer-events:none; line-height:1; }
 .psc-Hmi\/LabelToggle { gap:4px; align-items:center; margin-right:8px; }
 .psc-Hmi\/DetailValue { font-size:28px; color:#444; }
+.psc-Hmi\/Faceplate { gap:12px; }
+.psc-Hmi\/FaceplateHeader { gap:2px; }
+.psc-Hmi\/TagPath { font-family:Menlo,Consolas,monospace; font-size:11px; color:#6d7270; }
+.psc-Hmi\/FaceplateValues { gap:12px; align-items:center; flex-wrap:wrap; }
+.psc-Hmi\/Chip { padding:3px 8px; border-radius:3px; color:#fff; font-size:11px; font-weight:700; letter-spacing:0.4px; }
+.psc-Hmi\/FaceplateSettings { gap:16px; flex-wrap:wrap; padding:10px 12px; background:rgba(63,90,115,0.06); border:1px solid #dde1e4; border-radius:4px; }
+.psc-Hmi\/FieldGroup { gap:4px; }
+.psc-Hmi\/Field { height:32px; font-size:13px; }
+.psc-Hmi\/ModeButtons { height:32px; font-size:12px; }
+.psc-Hmi\/FaceplateRanges { gap:6px; align-items:center; }
+.psc-Hmi\/RangeButton { flex:0 0 auto !important; height:30px; padding:4px 12px; font-size:12px; }
+.psc-Hmi\/ActionButton { flex:0 0 auto !important; height:32px; padding:4px 16px; font-size:12px; }
+.psc-Hmi\/ActionButton:disabled,.psc-Hmi\/ActionButton.ia_button--disabled { opacity:0.45; box-shadow:none; cursor:default; }
+.psc-Hmi\/FaceplateActions { gap:8px; align-items:flex-end; align-self:flex-end; }
+.psc-Hmi\/Faceplate,.psc-Hmi\/Faceplate .psc-Hmi\/FaceplateSettings,.psc-Hmi\/Faceplate .psc-Hmi\/FaceplateRanges,.psc-Hmi\/FieldGroup,.psc-Hmi\/FaceplateActions,.psc-Hmi\/ModeButtons,.psc-Hmi\/Navigation,.psc-Hmi\/HeaderDock,.psc-Hmi\/LabelToggle { overflow:visible !important; }
+.psc-Hmi\/FaceplateRanges,.psc-Hmi\/FaceplateSettings,.psc-Hmi\/Navigation { padding-bottom:4px; }
+.psc-Hmi\/HeaderDock { height:100%; align-items:center; justify-content:space-between; padding:0 20px; background:#f4f5f5; border-bottom:1px solid #dde1e4; }
+.psc-Hmi\/HeaderWhere { font-size:11px; font-weight:700; letter-spacing:1.2px; color:#6d7270; }
+.psc-Hmi\/RangeActive { background:#3f5a73 !important; color:#fff !important; border-color:#3f5a73 !important; }
 .psc-Demo\/Menu { background:transparent; color:#d5dade; font-size:12px; }
 .psc-Demo\/Menu .menu-wrapper,.psc-Demo\/Menu .wrapper-submenu { background:#2b3238 !important; height:100%; }
 .psc-Demo\/Menu .ia_menuTreeComponent__item { background:transparent; color:#d5dade; border:0; border-radius:4px; min-height:42px; padding:0 10px; margin-bottom:4px; cursor:pointer; }

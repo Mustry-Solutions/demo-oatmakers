@@ -38,6 +38,10 @@
         "dataType": "String",
         "value": "Flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "steamFlow"
@@ -119,6 +123,10 @@
         "dataType": "String",
         "value": "Flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "feed"
@@ -154,6 +162,10 @@
         "dataType": "String",
         "value": "Moisture"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "MI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "moisture"
@@ -188,6 +200,10 @@
       "Description": {
         "dataType": "String",
         "value": "Pressure"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "PI"
       },
       "Signal": {
         "dataType": "String",
@@ -315,6 +331,10 @@
         "dataType": "String",
         "value": "Temperature"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "kilnMid"
@@ -349,6 +369,10 @@
       "Description": {
         "dataType": "String",
         "value": "Temperature"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
       },
       "Signal": {
         "dataType": "String",
@@ -385,6 +409,10 @@
         "dataType": "String",
         "value": "Temperature"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "coolerOut"
@@ -419,6 +447,10 @@
       "Description": {
         "dataType": "String",
         "value": "Temperature"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
       },
       "Signal": {
         "dataType": "String",

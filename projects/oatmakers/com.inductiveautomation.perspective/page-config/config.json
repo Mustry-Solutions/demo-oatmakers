@@ -2,91 +2,91 @@
   "pages": {
     "/": {
       "title": "Factory overview",
-      "viewPath": "Demo/Overview"
+      "viewPath": "Pages/Overview"
     },
     "/demo/health": {
       "title": "Demo health",
-      "viewPath": "Demo/Health"
+      "viewPath": "Pages/Health"
     },
     "/demo/input-fields": {
       "title": "Batch output",
-      "viewPath": "Demo/Operator"
+      "viewPath": "Pages/Operator"
     },
     "/makeramaigreatagain": {
       "title": "",
-      "viewPath": "Demo/MakeRamaiGreatAgain"
+      "viewPath": "Pages/MakeRamaiGreatAgain"
     },
     "/observatory": {
       "title": "Gateway Observatory",
-      "viewPath": "Showcase/Gateway Observatory"
+      "viewPath": "Pages/Observatory"
     },
     "/oee": {
       "title": "Performance",
-      "viewPath": "Demo/Performance"
+      "viewPath": "Pages/Performance"
     },
     "/operator": {
       "title": "Batch output",
-      "viewPath": "Demo/Operator"
+      "viewPath": "Pages/Operator"
     },
     "/performance": {
       "title": "Performance",
-      "viewPath": "Demo/Performance"
+      "viewPath": "Pages/Performance"
     },
     "/process": {
       "title": "SCADA",
-      "viewPath": "Demo/SCADA"
+      "viewPath": "Pages/Scada/Overview"
     },
     "/production": {
       "title": "Production planning",
-      "viewPath": "Demo/Production"
+      "viewPath": "Pages/Production"
     },
     "/quality": {
       "title": "Quality & traceability",
-      "viewPath": "Demo/Quality"
+      "viewPath": "Pages/Quality"
     },
     "/scada": {
       "title": "SCADA",
-      "viewPath": "Demo/SCADA"
+      "viewPath": "Pages/Scada/Overview"
     },
     "/settings": {
       "title": "Settings",
-      "viewPath": "Demo/Settings"
+      "viewPath": "Pages/Settings"
     },
     "/scada/intake": {
       "title": "Intake & raw oat silos",
-      "viewPath": "Demo/Hmi/Screen/Intake"
+      "viewPath": "Pages/Scada/Intake"
     },
     "/scada/cleaning": {
       "title": "Cleaning",
-      "viewPath": "Demo/Hmi/Screen/Cleaning"
+      "viewPath": "Pages/Scada/Cleaning"
     },
     "/scada/dehulling": {
       "title": "Dehulling",
-      "viewPath": "Demo/Hmi/Screen/Dehulling"
+      "viewPath": "Pages/Scada/Dehulling"
     },
     "/scada/kiln": {
       "title": "Kilning & stabilisation",
-      "viewPath": "Demo/Hmi/Screen/Kiln"
+      "viewPath": "Pages/Scada/Kiln"
     },
     "/scada/flaking": {
       "title": "Line 01 \u00b7 Steaming & flaking",
-      "viewPath": "Demo/Hmi/Screen/Flaking"
+      "viewPath": "Pages/Scada/Flaking"
     },
     "/scada/cutting": {
       "title": "Line 02 \u00b7 Groat cutting",
-      "viewPath": "Demo/Hmi/Screen/Cutting"
+      "viewPath": "Pages/Scada/Cutting"
     },
     "/scada/milling": {
       "title": "Line 03 \u00b7 Oat flour milling",
-      "viewPath": "Demo/Hmi/Screen/Milling"
+      "viewPath": "Pages/Scada/Milling"
     },
     "/scada/packing": {
       "title": "Packing & palletising",
-      "viewPath": "Demo/Hmi/Screen/Packing"
+      "viewPath": "Pages/Scada/Packing"
     },
     "/scada/utilities": {
       "title": "Steam & compressed air",
-      "viewPath": "Demo/Hmi/Screen/Utilities"
+      "viewPath": "Pages/Scada/Utilities"
     }
   },
   "sharedDocks": {
@@ -104,7 +104,23 @@
         "show": "visible",
         "size": 225,
         "viewParams": {},
-        "viewPath": "Sidenav"
+        "viewPath": "Docks/Sidenav"
+      }
+    ],
+    "top": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 0,
+        "content": "push",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "header",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 40,
+        "viewParams": {},
+        "viewPath": "Docks/Header"
       }
     ]
   }

@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Probe2",
+    "parameters": {
+      "Dec": {
+        "dataType": "Integer",
+        "value": 1
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": ""
+      }
+    },
+    "tagType": "UdtType",
+    "tags": [
+      {
+        "dataType": "String",
+        "expression": "{Kind}",
+        "name": "K1",
+        "tagType": "AtomicTag",
+        "valueSource": "expr"
+      },
+      {
+        "dataType": "String",
+        "name": "K2",
+        "tagType": "AtomicTag",
+        "value": "{Kind}",
+        "valueSource": "memory"
+      },
+      {
+        "dataType": "Int4",
+        "expression": "{Dec}",
+        "name": "K3",
+        "tagType": "AtomicTag",
+        "valueSource": "expr"
+      },
+      {
+        "dataType": "Float8",
+        "documentation": "doc {Kind}",
+        "engUnit": "{Kind}",
+        "formatString": "#,##0.{Dec}",
+        "name": "PV",
+        "tagType": "AtomicTag",
+        "valueSource": "memory"
+      }
+    ]
+  }
+]

@@ -33,7 +33,7 @@ def walk(value,file):
             else:walk(item,file)
     elif isinstance(value,list):
         for item in value:walk(item,file)
-for folder in ['Demo','Templates/InputFields']:
+for folder in ['Pages','Templates','Popups','Docks']:
     for file in (views/folder).rglob('view.json'):
         walk(json.loads(file.read_text()),file)
         for parent in file.parent.parents:

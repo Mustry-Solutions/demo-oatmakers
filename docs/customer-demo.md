@@ -2,7 +2,7 @@
 
 Open https://cloud.mustrysolutions.com/data/perspective/client/oatmakers/ or launch **Oatmakers | Connected factory demo** from the Perspective launcher. Reload an existing session after a release.
 
-All measurements and orders are simulated. Writes are confined to the `oat_demo` database schema and the `[default]OatmakersDemo` and `[default]OatMill` memory tags. No screen controls equipment or changes customer records.
+All measurements and orders are simulated. Writes are confined to the `oat_demo` database schema and the `[default]OatmakersDemo` and `[default]OatMill` memory tags. The SCADA faceplates write operator settings (mode, Manual commands, valve position, alarm limits) to the simulated `OatMill` tags; no screen controls real equipment or changes customer records.
 
 ## Screens
 
@@ -22,7 +22,7 @@ Legacy `/process`, `/oee` and `/demo/input-fields` links open SCADA, Performance
 ## Demonstration walkthrough
 
 1. Watch the factory throughput and line readings change every second.
-2. Open SCADA in the menu and drill down to a process group and area, or open the plant overview and click a tile. Click a blue stream link to follow the product to the next area, and click an instrument for its live detail popup.
+2. Open SCADA in the menu and drill down to a process group and area, or open the plant overview and click a tile. Click a blue stream link to follow the product to the next area, and click an instrument, motor, valve or silo for its faceplate: change its mode or alarm limits there and watch the drawing follow.
 3. On Performance, choose a live preset or exact calendar dates and times. The selected range controls the database query. Manual selections stop following the clock.
 4. Open Production planning, change between shift and week scales, and inspect a batch.
 5. In Quality, choose older dates, select a batch, inspect its measurements and record a demo inspection.
@@ -81,46 +81,90 @@ packing, and the steam and compressed air utilities. The sidebar menu is a
 Perspective Menu Tree: SCADA drills down into its process groups and areas, and
 the current page is highlighted.
 
-Each area is a fixed 1740 by 910 drawing under `Demo/Hmi/Drawing/`, embedded in
-Mustry Pan & Zoom by a screen under `Demo/Hmi/Screen/` (the overview is
-`Demo/SCADA`). Instrument, device, silo, stream, trend, tile and detail elements
-are reusable views under `Demo/Hmi/`. Every piece of process equipment (bin,
-conveyor, elevator, sieve, kiln, mills, weigher, boiler and so on) is an
-embedded instance of a template under `Demo/Hmi/Equipment/` that draws its
-outline from its `width` and `height` params and carries its own tag and title
-labels, positioned by its `labelX` and `labelY` params and allowed to overflow
-the template. Only the piping is one static SVG per drawing; every other text is
-a Label component. The session property `showLabels` (default on) shows or hides
-all labels, and the Labels switch in the SCADA header toggles it for the session. Blue stream links navigate to the area that
-supplies or receives the product; grey links leave the plant. The page header has
-previous and next buttons in process order.
+Each area is a fixed 1740 by 910 drawing under `Pages/Scada/Drawings/`, embedded
+in Mustry Pan & Zoom by its page `Pages/Scada/<Area>` (the overview is
+`Pages/Scada/Overview`). The reusable SCADA views are templates under
+`Templates/Hmi/`, grouped per UDT so each type keeps its screen templates and
+its faceplate together:
 
-The screens bind to real tags. `[default]OatMill/<Area>` holds one UDT instance
-per instrument, drive, valve and silo on the drawing, plus an `Area` instance
-with the area state:
-
-| UDT | Members | Parameters |
+| Folder | Views | `tagPath` of |
 |---|---|---|
-| `OatMill/AnalogInput` | `PV`, `LowLimit`, `HighLimit`, `Alarm` (expression) | `Description`, `Signal`, `Unit`, `Decimals` |
-| `OatMill/Motor` | `Running`, `Fault`, `Mode`, `Current` | `Description`, `Signal`, `RatedCurrent`, `Duty` |
-| `OatMill/Valve` | `Open`, `Position` | `Description`, `Signal` |
-| `OatMill/Silo` | `Level`, `Content` (expression, tonnes) | `Description`, `Signal`, `Product`, `Capacity` |
-| `OatMill/ProcessArea` | `State`, `Running`, `LastUpdate` | `Title` |
+| `AnalogInput/` | `Instrument` (optional `colour` for controllers), `Trend`, `Faceplate` | an `AnalogInput` (`Trend` also takes a `Silo`) |
+| `Motor/` | `Motor`, `Fan`, `RotaryValve`, `Pump`, `Faceplate` | a `Motor` |
+| `Valve/` | `ControlValve`, `ShutoffValve`, `Faceplate` | a `Valve` |
+| `Silo/` | `Silo` (plus `height`), `Faceplate` | a `Silo` |
+| `ProcessArea/` | `AreaState`, `Tile` | a `ProcessArea` (`.../<Area>/Area`) |
 
-The `DemoContinuity` gateway timer writes the simulation into these memory tags
-every second. It finds the tags by browsing `[default]OatMill` and reads which
-signal each instance carries from its `Signal` parameter. The signals come from a
-deterministic model per area in `application.demo`. The line areas take
-throughput, temperature, moisture, steam pressure and power from the recorded
-line telemetry and follow the line state: a stopped line stops its drives and
-closes its valves. An instrument turns red when `Alarm` is true. Tiles read the
-tags and the detail popup shows the tag path. No view writes to the tags.
+`Stream` (`text`, `target` route, `width`) and the 27 `Equipment/*` outlines
+(`tag`, `title`, `width`, `height`, `labelX`, `labelY`) carry no tags.
 
-`tools/demo/build_scada.py` generates all drawings and, through
-`tools/demo/build_tags.py`, the UDT definitions and instances. Change them, run
-`build_views.py` and commit the result. Alarm limits are instance values of the
-`LowLimit` and `HighLimit` members; a gateway only applies a changed value when
-it creates the tag.
+A live template only needs the full instance path, for example
+`[default]OatMill/Flaking/TIC501`: it reads value, unit, decimals, kind and
+alarm state from the instance's members through indirect tag bindings, and its
+tag label is the last path element. The equipment outlines carry no tags.
+
+All graphics are Perspective drawings (`ia.shapes.svg`), never images: the
+piping is one drawing per area, live state binds to drawing element properties
+(fill paint, path, width, viewBox), and every text is a Label component. The
+session property `showLabels` (default on) shows or hides all labels; the Labels
+switch in the header dock (`Docks/Header`, on every page next to the breadcrumb)
+toggles it. Blue stream links navigate to the area
+that supplies or receives the product; grey links leave the plant. The page
+header has previous and next buttons in process order.
+
+### Faceplates
+
+Clicking an instrument, motor, valve or silo opens its faceplate
+`Templates/Hmi/<UDT>/Faceplate` as a popup with the instance path. A faceplate shows the name,
+description and full tag path, the live value with status, the operator
+settings, the Manual commands, and a chart with time and value axes over a 1 h,
+8 h or 24 h preset. Settings are staged: edit them, then press Write to send them
+to the tag (Cancel takes the live values back). Manual commands act immediately
+and are only enabled in Manual:
+
+| Faceplate | Writes | Chart |
+|---|---|---|
+| `AnalogInput` | `LowLimit`, `HighLimit` | measured value and alarm limits |
+| `Motor` | `Mode` (Auto, Manual, Off); Start and Stop in Manual (`ManualRun`) | motor current |
+| `Valve` | `Mode`, `PositionSP` (control valves in Manual); Open and Close in Manual (`ManualOpen`) | valve position |
+| `Silo` | `LowLimit`, `HighLimit` | level and limits |
+
+The chart uses the recorded line history for the line measurements and the
+same deterministic model that drives the tags elsewhere. Written settings act
+at once: Off stops a drive or closes a valve, Manual hands it to the Start/Stop
+or Open/Close commands whatever the process state, and a limit change switches
+the alarm. Switching to Manual is bumpless: the Manual command starts from the
+current running or open state.
+
+### Tags
+
+`[default]OatMill/<Area>` holds one UDT instance per instrument, drive, valve
+and silo on the drawing, plus an `Area` instance with the area state. UDT
+parameters are exposed as expression members, so templates and faceplates can
+read them from the instance path:
+
+| UDT | Process members | Settings (written from faceplates) | Parameter members |
+|---|---|---|---|
+| `OatMill/AnalogInput` | `PV`, `Alarm` | `LowLimit`, `HighLimit` | `Kind`, `Description`, `Unit`, `Decimals` |
+| `OatMill/Motor` | `Running`, `Fault`, `Current` | `Mode`, `ManualRun` | `Description`, `Duty`, `RatedCurrent` |
+| `OatMill/Valve` | `Open`, `Position` | `Mode`, `ManualOpen`, `PositionSP` | `Description` |
+| `OatMill/Silo` | `Level`, `Content`, `Alarm` | `LowLimit`, `HighLimit` | `Description`, `Product`, `Capacity` |
+| `OatMill/ProcessArea` | `State`, `Running`, `LastUpdate` | | `Title` |
+
+The `DemoContinuity` gateway timer writes the simulation into the process
+members every second. It finds the instances by browsing `[default]OatMill`,
+reads which model signal each carries from its `Signal` parameter, and respects
+the written `Mode`, Manual commands and `PositionSP`. The line areas take throughput,
+temperature, moisture, steam pressure and power from the recorded line
+telemetry and follow the line state: a stopped line stops its drives and closes
+its valves (in Auto). A plain tag property does not substitute UDT parameters,
+so `engUnit` and `documentation` are bound to them explicitly.
+
+`tools/demo/build_scada.py` generates the drawings, templates and faceplates
+and, through `tools/demo/build_tags.py`, the UDT definitions and instances.
+Change them, run `build_views.py` and commit the result. Initial alarm limits
+are instance values of the `LowLimit` and `HighLimit` members; a gateway only
+applies a changed initial value when it creates the tag.
 
 Performance initializes its picker outputs and embedded range parameters before
 bindings evaluate. Null or pending ranges return a valid empty chart. Error

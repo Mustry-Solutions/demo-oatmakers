@@ -1,0 +1,226 @@
+{
+  "custom": {},
+  "params": {
+    "tag": "ST501",
+    "title": "Steamer",
+    "width": 110,
+    "height": 300,
+    "labelX": 55.0,
+    "labelY": 150.0
+  },
+  "propConfig": {
+    "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.title": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.width": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.height": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.labelX": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.labelY": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 114,
+      "height": 304
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.shapes.svg",
+        "meta": {
+          "name": "Shape"
+        },
+        "props": {
+          "viewBox": "0 0 100 100",
+          "preserveAspectRatio": "none",
+          "elements": [],
+          "style": {
+            "pointerEvents": "none",
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100
+        },
+        "propConfig": {
+          "props.elements": {
+            "binding": {
+              "type": "expr-struct",
+              "config": {
+                "waitOnAll": true,
+                "struct": {
+                  "width": "{view.params.width}",
+                  "height": "{view.params.height}"
+                }
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\tbody = '<rect width=\"%s\" height=\"%s\" rx=\"%s\"/>' % (w, h, w/2)\n\treturn application.demo.scadaEquipmentElements(body, w, h, [0, 0, 0, 0])"
+                }
+              ]
+            }
+          },
+          "props.viewBox": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "\"0 0 \" + ({view.params.width} + 4) + \" \" + ({view.params.height} + 4)"
+              }
+            }
+          },
+          "position.width": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.width} + 4"
+              }
+            }
+          },
+          "position.height": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.height} + 4"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Tag"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Text Hmi/Tag"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 300,
+          "height": 16
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.tag"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels} && len({view.params.tag}) > 0"
+              }
+            }
+          },
+          "position.x": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelX} + -148"
+              }
+            }
+          },
+          "position.y": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelY} + -10"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Title"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Text Hmi/Title"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.title"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels} && len({view.params.title}) > 0"
+              }
+            }
+          },
+          "position.x": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelX} + -148"
+              }
+            }
+          },
+          "position.y": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelY} + 6"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

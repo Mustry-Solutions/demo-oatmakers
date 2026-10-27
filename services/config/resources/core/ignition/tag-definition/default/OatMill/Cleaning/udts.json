@@ -46,6 +46,10 @@
         "dataType": "String",
         "value": "Flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "airFlow"
@@ -104,6 +108,10 @@
         "dataType": "String",
         "value": "Flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "feed"
@@ -139,6 +147,10 @@
         "dataType": "String",
         "value": "Motor current"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "II"
+      },
       "Signal": {
         "dataType": "String",
         "value": "sieveAmps"
@@ -173,6 +185,10 @@
       "Description": {
         "dataType": "String",
         "value": "Motor current"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "II"
       },
       "Signal": {
         "dataType": "String",
@@ -301,6 +317,10 @@
         "dataType": "String",
         "value": "Differential pressure"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "PDI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "aspDp"
@@ -335,6 +355,10 @@
       "Description": {
         "dataType": "String",
         "value": "Quality"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "QI"
       },
       "Signal": {
         "dataType": "String",
@@ -371,6 +395,10 @@
         "dataType": "String",
         "value": "Quality"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "QI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "purity"
@@ -405,6 +433,10 @@
       "Description": {
         "dataType": "String",
         "value": "Speed"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "SI"
       },
       "Signal": {
         "dataType": "String",

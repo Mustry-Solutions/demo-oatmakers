@@ -23,6 +23,10 @@
         "dataType": "String",
         "value": "Flow"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "FI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "rate"
@@ -57,6 +61,10 @@
       "Description": {
         "dataType": "String",
         "value": "Power"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "JI"
       },
       "Signal": {
         "dataType": "String",
@@ -116,6 +124,10 @@
         "dataType": "String",
         "value": "Moisture"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "MI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "moisture"
@@ -165,6 +177,10 @@
       "Description": {
         "dataType": "String",
         "value": "Pressure"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "PI"
       },
       "Signal": {
         "dataType": "String",
@@ -224,6 +240,10 @@
         "dataType": "String",
         "value": "Speed"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "SI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "rollSpeed"
@@ -258,6 +278,10 @@
       "Description": {
         "dataType": "String",
         "value": "Temperature"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
       },
       "Signal": {
         "dataType": "String",
@@ -294,6 +318,10 @@
         "dataType": "String",
         "value": "Temperature"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "coolerOut"
@@ -329,6 +357,10 @@
         "dataType": "String",
         "value": "Temperature"
       },
+      "Kind": {
+        "dataType": "String",
+        "value": "TI"
+      },
       "Signal": {
         "dataType": "String",
         "value": "temperature"
@@ -363,6 +395,10 @@
       "Description": {
         "dataType": "String",
         "value": "Gap"
+      },
+      "Kind": {
+        "dataType": "String",
+        "value": "ZI"
       },
       "Signal": {
         "dataType": "String",

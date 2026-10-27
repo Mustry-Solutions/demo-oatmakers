@@ -91,9 +91,13 @@ python3 tests/demo/test_database.py
 python3 tests/test_deploy_payload.py    # needs PyYAML
 ```
 
-The views under `views/Demo/`, the page routes, session props and the
-stylesheet are generated: change `tools/demo/build_views.py`, run it, and
-commit the result.
+The views in `views/Pages/`, `views/Templates/`, `views/Popups/` and
+`views/Docks/`, the page routes, session props, stylesheet and the `OatMill`
+tags are generated: change `tools/demo/build_views.py` (SCADA in
+`build_scada.py`), run it, and commit the result. `Pages/` holds one view per
+route, `Templates/` the embedded views, `Popups/` the popups and faceplates and
+`Docks/` the sidebar. The hand-made `Pages/Observatory`,
+`Pages/MakeRamaiGreatAgain` and `Templates/InputFields` are left alone.
 
 ## Licence
 

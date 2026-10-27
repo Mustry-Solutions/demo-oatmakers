@@ -1,0 +1,783 @@
+{
+  "custom": {},
+  "params": {},
+  "propConfig": {},
+  "props": {
+    "defaultSize": {
+      "width": 1740,
+      "height": 910
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "backgroundColor": "transparent",
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.shapes.svg",
+        "meta": {
+          "name": "Piping"
+        },
+        "props": {
+          "viewBox": "0 0 1740 910",
+          "preserveAspectRatio": "none",
+          "elements": [
+            {
+              "type": "path",
+              "name": "path0",
+              "d": "M320 445 H360",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path1",
+              "d": "M360 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path2",
+              "d": "M590 445 H630",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path3",
+              "d": "M630 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path4",
+              "d": "M860 445 H900",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path5",
+              "d": "M900 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path6",
+              "d": "M1130 445 H1150 V215 H1170",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path7",
+              "d": "M1170 215 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path8",
+              "d": "M1130 445 H1150 V445 H1170",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path9",
+              "d": "M1170 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path10",
+              "d": "M1130 445 H1150 V675 H1170",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path11",
+              "d": "M1170 675 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path12",
+              "d": "M1400 215 H1420 V445 H1440",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path13",
+              "d": "M1440 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path14",
+              "d": "M1400 445 H1420 V445 H1440",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path15",
+              "d": "M1440 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path16",
+              "d": "M1400 675 H1420 V445 H1440",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path17",
+              "d": "M1440 445 l-10 -6 v12 Z",
+              "fill": {
+                "paint": "#565957"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path18",
+              "d": "M860 725 H1015 V530",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#c9a54e",
+                "width": "1.7",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path19",
+              "d": "M1015 530 l-6 10 h12 Z",
+              "fill": {
+                "paint": "#c9a54e"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path20",
+              "d": "M90 170 h40",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#565957",
+                "width": "2.2",
+                "linejoin": "round"
+              }
+            },
+            {
+              "type": "path",
+              "name": "path21",
+              "d": "M90 200 h40",
+              "fill": {
+                "paint": "none"
+              },
+              "stroke": {
+                "paint": "#c9a54e",
+                "width": "1.7",
+                "linejoin": "round"
+              }
+            }
+          ],
+          "style": {
+            "pointerEvents": "none",
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "IntakeTile"
+        },
+        "props": {
+          "path": "Templates/Hmi/ProcessArea/Tile",
+          "params": {
+            "tagPath": "[default]OatMill/Intake/Area",
+            "route": "/scada/intake"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 90,
+          "y": 360,
+          "width": 230,
+          "height": 170
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "CleaningTile"
+        },
+        "props": {
+          "path": "Templates/Hmi/ProcessArea/Tile",
+          "params": {
+            "tagPath": "[default]OatMill/Cleaning/Area",
+            "route": "/scada/cleaning"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 360,
+          "y": 360,
+          "width": 230,
+          "height": 170
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "DehullingTile"
+        },
+        "props": {
+          "path": "Templates/Hmi/ProcessArea/Tile",
+          "params": {
+            "tagPath": "[default]OatMill/Dehulling/Area",
+            "route": "/scada/dehulling"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 630,
+          "y": 360,
+          "width": 230,
+          "height": 170
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "KilnTile"
+        },
+        "props": {
+          "path": "Templates/Hmi/ProcessArea/Tile",
+          "params": {
+            "tagPath": "[default]OatMill/Kiln/Area",
+            "route": "/scada/kiln"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 900,
+          "y": 360,
+          "width": 230,
+          "height": 170
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FlakingTile"
+        },
+        "props": {
+          "path": "Templates/Hmi/ProcessArea/Tile",
+          "params": {
+            "tagPath": "[default]OatMill/Flaking/Area",
+            "route": "/scada/flaking"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1170,
+          "y": 130,
+          "width": 230,
+          "height": 170
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "CuttingTile"
+        },
+        "props": {
+          "path": "Templates/Hmi/ProcessArea/Tile",
+          "params": {
+            "tagPath": "[default]OatMill/Cutting/Area",
+            "route": "/scada/cutting"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1170,
+          "y": 360,
+          "width": 230,
+          "height": 170
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MillingTile"
+        },
+        "props": {
+          "path": "Templates/Hmi/ProcessArea/Tile",
+          "params": {
+            "tagPath": "[default]OatMill/Milling/Area",
+            "route": "/scada/milling"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1170,
+          "y": 590,
+          "width": 230,
+          "height": 170
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PackingTile"
+        },
+        "props": {
+          "path": "Templates/Hmi/ProcessArea/Tile",
+          "params": {
+            "tagPath": "[default]OatMill/Packing/Area",
+            "route": "/scada/packing"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1440,
+          "y": 360,
+          "width": 230,
+          "height": 170
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "UtilitiesTile"
+        },
+        "props": {
+          "path": "Templates/Hmi/ProcessArea/Tile",
+          "params": {
+            "tagPath": "[default]OatMill/Utilities/Area",
+            "route": "/scada/utilities"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 630,
+          "y": 640,
+          "width": 230,
+          "height": 170
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text1"
+        },
+        "props": {
+          "text": "RECEIVING",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 90,
+          "y": 320,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text2"
+        },
+        "props": {
+          "text": "GROAT PROCESSING",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 630,
+          "y": 320,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text3"
+        },
+        "props": {
+          "text": "PRODUCTION LINES",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1170,
+          "y": 90,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text4"
+        },
+        "props": {
+          "text": "FINISHED GOODS",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1440,
+          "y": 320,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text5"
+        },
+        "props": {
+          "text": "UTILITIES",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 700,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 630,
+          "y": 610,
+          "width": 300,
+          "height": 13
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text6"
+        },
+        "props": {
+          "text": "Click a process area to open its SCADA screen.",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "14px",
+            "fontWeight": 400,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "18px"
+          }
+        },
+        "position": {
+          "x": 90,
+          "y": 116,
+          "width": 300,
+          "height": 18
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text7"
+        },
+        "props": {
+          "text": "Product flow",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "12px",
+            "fontWeight": 400,
+            "color": "#555",
+            "alignItems": "flex-start",
+            "lineHeight": "16px"
+          }
+        },
+        "position": {
+          "x": 140,
+          "y": 162,
+          "width": 300,
+          "height": 16
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text8"
+        },
+        "props": {
+          "text": "Steam",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "12px",
+            "fontWeight": 400,
+            "color": "#555",
+            "alignItems": "flex-start",
+            "lineHeight": "16px"
+          }
+        },
+        "position": {
+          "x": 140,
+          "y": 192,
+          "width": 300,
+          "height": 16
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text9"
+        },
+        "props": {
+          "text": "Oatmakers plant overview",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "22px",
+            "fontWeight": 600,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "29px"
+          }
+        },
+        "position": {
+          "x": 40,
+          "y": 868,
+          "width": 300,
+          "height": 29
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text10"
+        },
+        "props": {
+          "text": "SIMULATION",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "flex-end",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1400,
+          "y": 880,
+          "width": 300,
+          "height": 13
+        }
+      }
+    ]
+  }
+}
