@@ -21,6 +21,10 @@ def tick():
 		_writeLiveTags(_queryJson('SELECT oat_demo.live_overview()'))
 	except (Exception, JavaException) as exc:
 		system.util.getLogger('Oatmakers.Demo').error('Demo continuity tick failed: {0}'.format(exc))
+	try:
+		_writeScadaTags()
+	except (Exception, JavaException) as exc:
+		system.util.getLogger('Oatmakers.Demo').error('SCADA tag simulation failed: {0}'.format(exc))
 
 
 def health():
@@ -303,89 +307,280 @@ def _writeLiveTags(data):
 		raise ValueError('A demo tag write failed')
 
 
-# The separator is a separate, deterministic process simulation for the reference HMI.
-# It never writes plant tags or control setpoints.
-def _separatorValue(signal, seconds):
+# Process SCADA. Each area has deterministic signals (base, amplitude, period in
+# seconds); the production line areas take throughput, temperature, moisture,
+# steam pressure and power from the recorded line telemetry. The timer writes
+# them into the [default]OatMill UDT instances, which carry the signal name as
+# a parameter; the screens bind to those tags. Read-only: no view writes plant
+# tags or control setpoints.
+SCADA = {
+	'overview': {'title': 'Plant overview', 'line': 0, 'signals': {}},
+	'intake': {'title': 'Intake & raw oat silos', 'line': 0, 'signals': {
+		'intake': (32.0, 3.5, 47.0), 'moistIn': (13.6, 0.3, 83.0), 'elevAmps': (18.4, 1.1, 37.0), 'filterDp': (9.6, 0.6, 61.0),
+		'lvl1': (78.0, 4.0, 900.0), 'lvl2': (61.0, 5.0, 1100.0), 'lvl3': (34.0, 6.0, 1300.0), 'lvl4': (88.0, 2.0, 700.0),
+		'tg1': (14.2, 0.3, 301.0), 'tg2': (13.1, 0.3, 277.0), 'tg3': (15.4, 0.3, 263.0), 'tg4': (12.8, 0.3, 251.0)},
+		'tile': [('Intake', 'intake', 't/h', 1), ('Silo SI101 level', 'lvl1', '%', 0), ('Grain moisture', 'moistIn', '%', 1)]},
+	'cleaning': {'title': 'Cleaning', 'line': 0, 'signals': {
+		'feed': (18.2, 0.6, 53.0), 'sieveAmps': (6.8, 0.3, 41.0), 'aspDp': (7.4, 0.4, 59.0), 'airFlow': (5200.0, 120.0, 71.0),
+		'stonerAmps': (4.1, 0.2, 43.0), 'trieurSpeed': (42.0, 0.4, 67.0), 'rejects': (1.8, 0.25, 47.0), 'purity': (99.6, 0.08, 89.0)},
+		'tile': [('Feed', 'feed', 't/h', 1), ('Purity', 'purity', '%', 1), ('Sorter rejects', 'rejects', '%', 1)]},
+	'dehulling': {'title': 'Dehulling', 'line': 0, 'signals': {
+		'feed': (16.8, 0.5, 53.0), 'rotorSpeed': (1480.0, 12.0, 41.0), 'hullerAmps': (62.0, 2.5, 37.0), 'aspDp': (8.1, 0.4, 59.0),
+		'efficiency': (92.4, 0.8, 73.0), 'broken': (3.1, 0.3, 61.0), 'groats': (11.6, 0.4, 53.0), 'hulls': (4.9, 0.2, 53.0)},
+		'tile': [('Feed', 'feed', 't/h', 1), ('Hulling efficiency', 'efficiency', '%', 1), ('Broken groats', 'broken', '%', 1)]},
+	'kiln': {'title': 'Kilning & stabilisation', 'line': 0, 'signals': {
+		'feed': (11.4, 0.3, 53.0), 'steamFlow': (820.0, 25.0, 47.0), 'steamPressure': (3.2, 0.05, 31.0),
+		'kilnTop': (102.0, 0.8, 67.0), 'kilnMid': (98.5, 0.6, 61.0), 'kilnBottom': (96.2, 0.6, 57.0),
+		'moisture': (9.6, 0.15, 89.0), 'coolerOut': (24.5, 0.6, 71.0)},
+		'tile': [('Kiln temperature', 'kilnMid', u'°C', 1), ('Groat moisture', 'moisture', '%', 1), ('Steam', 'steamFlow', 'kg/h', 0)]},
+	'flaking': {'title': u'Line 01 · Steaming & flaking', 'line': 1, 'flows': ('rollSpeed',), 'signals': {
+		'rate': (1920.0, 60.0, 53.0), 'temperature': (82.0, 1.5, 61.0), 'moisture': (11.4, 0.2, 71.0), 'pressure': (2.4, 0.05, 31.0), 'power': (52.0, 2.0, 43.0),
+		'rollGap': (0.62, 0.01, 97.0), 'rollSpeed': (310.0, 2.0, 43.0), 'dryerTemp': (96.0, 1.2, 71.0), 'coolerOut': (26.0, 0.6, 67.0)},
+		'tile': [('Throughput', 'rate', 'kg/h', 0), ('Flake moisture', 'moisture', '%', 1), ('Steamer', 'temperature', u'°C', 1)]},
+	'cutting': {'title': u'Line 02 · Groat cutting', 'line': 2, 'flows': ('drum1', 'drum2', 'oversize'), 'signals': {
+		'rate': (1500.0, 50.0, 53.0), 'temperature': (82.0, 1.5, 61.0), 'moisture': (11.4, 0.2, 71.0), 'pressure': (2.4, 0.05, 31.0), 'power': (44.0, 2.0, 43.0),
+		'drum1': (58.0, 0.5, 43.0), 'drum2': (58.0, 0.5, 47.0), 'oversize': (6.5, 0.5, 61.0), 'uniformity': (94.2, 0.6, 83.0)},
+		'tile': [('Throughput', 'rate', 'kg/h', 0), ('Moisture', 'moisture', '%', 1), ('Cut uniformity', 'uniformity', '%', 1)]},
+	'milling': {'title': u'Line 03 · Oat flour milling', 'line': 3, 'flows': ('millSpeed', 'pneuDp'), 'signals': {
+		'rate': (1260.0, 40.0, 53.0), 'temperature': (82.0, 1.5, 61.0), 'moisture': (11.4, 0.2, 71.0), 'pressure': (2.4, 0.05, 31.0), 'power': (61.0, 2.0, 43.0),
+		'millSpeed': (2950.0, 15.0, 41.0), 'pneuDp': (42.0, 2.0, 53.0), 'fineness': (212.0, 4.0, 79.0), 'branYield': (18.5, 0.6, 97.0)},
+		'tile': [('Throughput', 'rate', 'kg/h', 0), ('Flour fineness', 'fineness', u'µm', 0), ('Mill power', 'power', 'kW', 0)]},
+	'packing': {'title': 'Packing & palletising', 'line': 0, 'signals': {
+		'lvlA': (64.0, 5.0, 800.0), 'lvlB': (47.0, 6.0, 900.0), 'lvlC': (72.0, 4.0, 700.0),
+		'sackWeight': (25.04, 0.03, 31.0), 'sacksMin': (4.2, 0.2, 47.0), 'weightB': (1003.0, 1.5, 29.0), 'packsB': (48.0, 1.5, 41.0),
+		'weightC': (502.1, 0.9, 29.0), 'packsC': (62.0, 1.8, 43.0), 'rejects': (0.6, 0.15, 61.0), 'pallets': (11.5, 0.4, 97.0)},
+		'tile': [('Rolled oats', 'packsC', 'packs/min', 0), ('Steel-cut oats', 'packsB', 'packs/min', 0), ('Pallets', 'pallets', '/h', 1)]},
+	'utilities': {'title': 'Steam & compressed air', 'line': 0, 'signals': {
+		'boilerPressure': (10.2, 0.12, 37.0), 'steamTemp': (184.0, 1.0, 61.0), 'steamFlow': (3.4, 0.15, 47.0), 'drumLevel': (52.0, 2.5, 53.0),
+		'gasFlow': (265.0, 9.0, 47.0), 'headerPressure': (3.5, 0.05, 31.0), 'feedLevel': (68.0, 3.0, 301.0),
+		'airPressure': (7.2, 0.08, 29.0), 'dewPoint': (-40.5, 0.8, 97.0), 'compAmps': (96.0, 4.0, 41.0)},
+		'tile': [('Steam header', 'headerPressure', 'bar', 2), ('Boiler', 'boilerPressure', 'bar', 1), ('Compressed air', 'airPressure', 'bar', 1)]},
+}
+SCADA_LIVE = ('rate', 'temperature', 'moisture', 'pressure', 'power')
+
+
+def _scadaWave(signal, spec, seconds):
 	import math
-	base, amplitude, period = {
-		'pressure': (3.88, 0.025, 31.0), 'temperature': (25.95, 0.12, 67.0),
-		'level': (47.33, 0.9, 43.0), 'interface': (21.51, 0.65, 59.0),
-		'gas': (9.4, 0.07, 47.0), 'suction': (4.6, 0.04, 41.0),
-		'discharge': (23.4, 0.09, 39.0), 'exportPressure': (23.1, 0.08, 37.0),
-		'flow': (164.3, 1.3, 53.0), 'drain': (85.0, 0.15, 71.0), 'iop': (0.0, 0.0, 1.0)
-	}.get(signal, (0.0, 0.0, 1.0))
-	return base + amplitude * math.sin(seconds / period) + amplitude * 0.2 * math.sin(seconds / 3.1)
+	base, amplitude, period = spec
+	phase = sum(ord(c) for c in signal) % 17
+	return base + amplitude * math.sin(seconds / period + phase) + amplitude * 0.2 * math.sin(seconds / max(3.1, period / 40.0) + phase)
 
 
-def separatorData():
+def _scadaArea(area):
+	if area not in SCADA:
+		raise ValueError('Unknown process area')
+	return SCADA[area]
+
+
+def scadaAreaTitle(area):
+	return _scadaArea(area)['title']
+
+
+def _scadaSimulate(area):
+	spec = _scadaArea(area)
 	seconds = system.date.toMillis(system.date.now()) / 1000.0
-	return dict((key, _separatorValue(key, seconds)) for key in
-		('pressure', 'temperature', 'level', 'interface', 'gas', 'suction', 'discharge', 'exportPressure', 'flow', 'drain', 'iop'))
+	data = dict((key, _scadaWave(key, value, seconds)) for key, value in spec['signals'].items())
+	data['running'] = True
+	data['state'] = 'Running'
+	if spec['line']:
+		row = None
+		for candidate in live().get('lines', []):
+			if int(candidate.get('lineNumber', 0)) == spec['line']:
+				row = candidate
+		if row:
+			state = row.get('state') or 'Running'
+			for key in SCADA_LIVE:
+				if row.get(key) is not None:
+					data[key] = float(row[key])
+			data['state'] = state
+			data['running'] = state not in ('Stopped', 'Changeover')
+			if not data['running']:
+				for key in spec.get('flows', ()):
+					data[key] = 0.0
+	return data
 
 
-def _separatorSvg(content, width, height):
+def _scadaSvg(content, width, height):
 	import base64
 	markup = u'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {0} {1}" preserveAspectRatio="none" width="{0}" height="{1}">{2}</svg>'.format(width, height, content)
 	return 'data:image/svg+xml;base64,' + base64.b64encode(markup.encode('utf-8'))
 
 
-def separatorVesselSvg():
-	data = separatorData()
-	level_y = 260.0 * (1 - data['level'] / 100.0)
-	interface_y = 260.0 * (1 - data['interface'] / 100.0)
-	body = '<defs><clipPath id="vessel"><rect x="2" y="2" width="606" height="256" rx="128"/></clipPath><linearGradient id="gas" x2="0" y2="1"><stop stop-color="#f4ecd4"/><stop offset="1" stop-color="#e6e6df"/></linearGradient></defs>'
-	body += '<g clip-path="url(#vessel)"><rect width="610" height="260" fill="url(#gas)"/>'
-	body += '<rect y="{0:.2f}" width="610" height="260" fill="#99a6b1"/>'.format(level_y)
-	body += '<rect y="{0:.2f}" width="302" height="260" fill="#9dbccd"/>'.format(interface_y)
-	body += '<path d="M303 {0:.2f} V259" stroke="#59605f" stroke-width="5"/></g>'.format(level_y)
-	body += '<rect x="2" y="2" width="606" height="256" rx="128" fill="none" stroke="#616461" stroke-width="3"/>'
-	for i, caption in enumerate(('10','7.5','5','2.5','0')):
-		y = 13 + 29*i
-		body += '<path d="M192 {0} h12" stroke="#d9ba66"/><text x="178" y="{1}" font-family="Arial" font-size="10" fill="#747873" text-anchor="end">{2}</text>'.format(y,y+3,caption)
-	return _separatorSvg(body, 610, 260)
+def _escape(text):
+	return unicode(text).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
 
 
-def separatorTrendSvg(signal, colour, setpoint):
-	seconds = system.date.toMillis(system.date.now()) / 1000.0
-	values = [_separatorValue(signal, seconds - 3600 + i*30) for i in range(121)]
-	span = {'pressure': (0.0,10.0), 'level': (40.0,55.0), 'interface': (15.0,30.0)}.get(signal)
-	if span is None:
-		spread = max(max(values)-min(values), 1.0)
-		span = (min(values)-spread, max(values)+spread)
-	low, high = span
-	points = [(3+i*274.0/120, 65-(value-low)/(high-low)*60) for i,value in enumerate(values)]
+def _scadaFormat(value, unit, decimals):
+	text = u'{0:,.{1}f}'.format(float(value or 0), int(decimals))
+	return text + (u' ' + unit if unit else u'')
+
+
+def scadaSiloSvg(level, product):
+	level = max(0.0, min(100.0, float(level or 0)))
+	top = 6 + 314 * (1 - level / 100.0)
+	body = '<defs><clipPath id="silo"><path d="M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z"/></clipPath></defs>'
+	body += '<path d="M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z" fill="#e9e9e7"/>'
+	body += '<rect clip-path="url(#silo)" y="{0:.1f}" width="110" height="330" fill="#d8cda8"/>'.format(top)
+	body += '<path d="M3 6 Q55 -4 107 6 V240 L64 326 H46 L3 240 Z" fill="none" stroke="#666a68" stroke-width="2"/>'
+	body += u'<rect x="22" y="104" width="66" height="22" rx="11" fill="#f7f7f7" stroke="#a9adab"/><text x="55" y="120" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#333399">{0:.0f} %</text>'.format(level)
+	body += u'<text x="55" y="148" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#565957">{0}</text>'.format(_escape(product))
+	return _scadaSvg(body, 110, 330)
+
+
+def scadaTrendSvg(area, signal, colour, setpoint):
+	spec = _scadaArea(area)
+	end = system.date.toMillis(system.date.now())
+	values = []
+	if spec['line'] and signal in SCADA_LIVE:
+		result = history(end - 3600 * 1000, end, spec['line'], signal)
+		values = [float(p['line' + str(spec['line'])]) for p in result.get('points', []) if p.get('line' + str(spec['line'])) is not None]
+	if len(values) < 2 and signal in spec['signals']:
+		values = [_scadaWave(signal, spec['signals'][signal], end / 1000.0 - 600 + i * 5) for i in range(121)]
+	if len(values) < 2:
+		return _scadaSvg('', 280, 70)
+	low, high = min(values), max(values)
+	if setpoint:
+		low, high = min(low, float(setpoint)), max(high, float(setpoint))
+	spread = max(high - low, abs(high) * 0.02, 0.01)
+	low, high = low - spread * 0.25, high + spread * 0.25
+	step = 274.0 / (len(values) - 1)
+	points = [(3 + i * step, 65 - (value - low) / (high - low) * 60) for i, value in enumerate(values)]
 	body = ''
 	if setpoint:
-		y = 65-(float(setpoint)-low)/(high-low)*60
+		y = 65 - (float(setpoint) - low) / (high - low) * 60
 		body += '<path d="M3 {0:.2f} H277" stroke="#73c9d9" stroke-width="1" stroke-dasharray="4 4" fill="none"/>'.format(y)
-	body += '<polyline points="{0}" stroke="{1}" stroke-width="1" fill="none"/>'.format(' '.join('{0:.2f},{1:.2f}'.format(x,y) for x,y in points), colour)
+	body += '<polyline points="{0}" stroke="{1}" stroke-width="1" fill="none"/>'.format(' '.join('{0:.2f},{1:.2f}'.format(x, y) for x, y in points), _escape(colour))
 	body += '<circle cx="277" cy="{0:.2f}" r="2.2" fill="#df8074"/>'.format(points[-1][1])
-	return _separatorSvg(body, 280, 70)
+	return _scadaSvg(body, 280, 70)
 
 
-def separatorDetailValue(signal):
-	if signal == 'iop':
-		return 'IOP'
-	units = {'pressure':'bar','temperature':u'\u00b0C','level':'%','interface':'%',
-		'gas':'MMSCF/D','suction':'bar','discharge':'bar','exportPressure':'bar','flow':'M3/h','drain':'%'}
-	return u'{0:.2f} {1}'.format(separatorData().get(signal, 0), units.get(signal, ''))
+def showScadaDetail(area, tag, signal, unit, decimals):
+	_scadaArea(area)
+	system.perspective.openPopup('scada-detail', 'Demo/Hmi/Detail',
+		params={'area': area, 'tag': tag, 'signal': signal, 'unit': unit, 'decimals': decimals,
+			'tagPath': scadaSignalPath(area, signal, tag)}, title=tag,
+		position={'width': 520, 'height': 360}, modal=False, draggable=True, resizable=True)
 
 
-def showSeparatorDetail(tag, signal):
-	system.perspective.openPopup('separator-detail', 'Demo/Separator/Detail',
-		params={'tag':tag,'signal':signal}, title=tag,
-		position={'width':520,'height':340}, modal=False, draggable=True, resizable=True)
+SCADA_TAGS = '[default]OatMill'
+_scadaIndex = [0.0, {}]
 
 
+def _parameter(value):
+	# A ParameterValue holds a QualifiedValue; unwrap both to the plain value.
+	while hasattr(value, 'getValue'):
+		value = value.getValue()
+	return unicode(value) if isinstance(value, basestring) else value
 
-def separatorInstrumentSvg(tag, kind, value, colour):
-	def escape(text):
-		return unicode(text).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
-	body = u'<g font-family="Arial" fill="#565957"><text x="0" y="12" font-size="12">{0}</text>'.format(escape(tag))
-	body += u'<circle cx="10" cy="32" r="10" fill="#e6e6e6" stroke="#7d817f" stroke-width="1"/><text x="10" y="35" text-anchor="middle" font-size="8">{0}</text>'.format(escape(kind))
-	pill_width = min(102, max(64, len(unicode(value))*6 + 14))
-	body += u'<rect x="26" y="22" width="{2}" height="20" rx="10" fill="{0}"/><text x="{3}" y="36" text-anchor="middle" font-size="11.5">{1}</text></g>'.format(escape(colour), escape(value), pill_width, 26 + pill_width/2.0)
-	return _separatorSvg(body, 130, 51)
+
+def _scadaTagIndex():
+	# (UDT, path, parameters) per area folder, refreshed every minute so new
+	# instances are picked up without a restart.
+	if _scadaIndex[1] and time.time() - _scadaIndex[0] < 60:
+		return _scadaIndex[1]
+	index = {}
+	for folder in system.tag.getConfiguration(SCADA_TAGS, True)[0]['tags']:
+		entries = []
+		for tag in folder['tags']:
+			if str(tag['tagType']) != 'UdtInstance':
+				continue
+			params = dict((str(key), _parameter(value)) for key, value in dict(tag['parameters']).items())
+			entries.append((str(tag['typeId']).split('/')[-1], '{0}/{1}/{2}'.format(SCADA_TAGS, folder['name'], tag['name']), params))
+		index[str(folder['name']).lower()] = entries
+	_scadaIndex[0], _scadaIndex[1] = time.time(), index
+	return index
+
+
+def _writeScadaTags():
+	import math
+	paths, values = [], []
+	now = system.date.now()
+	seconds = system.date.toMillis(now) / 1000.0
+	for area, entries in _scadaTagIndex().items():
+		if area not in SCADA:
+			continue
+		data = _scadaSimulate(area)
+		running = data['running']
+		for kind, path, params in entries:
+			signal = params.get('Signal')
+			if kind == 'AnalogInput' and signal in data:
+				paths.append(path + '/PV'); values.append(float(data[signal]))
+			elif kind == 'Silo' and signal in data:
+				paths.append(path + '/Level'); values.append(float(data[signal]))
+			elif kind == 'Motor':
+				on = running and params.get('Duty') != 'Standby'
+				if signal in data and signal.endswith('Amps'):
+					current = float(data[signal])
+				else:
+					current = float(params.get('RatedCurrent') or 10.0) * (0.82 + 0.04 * math.sin(seconds / 23.0 + len(path)))
+				paths.extend([path + '/Running', path + '/Current']); values.extend([on, current if on else 0.0])
+			elif kind == 'Valve':
+				control = params.get('Description') == 'Control valve'
+				position = 42.0 + 6.0 * math.sin(seconds / 37.0 + len(path)) if control else 100.0
+				paths.extend([path + '/Open', path + '/Position']); values.extend([running, position if running else 0.0])
+			elif kind == 'ProcessArea':
+				paths.extend([path + '/State', path + '/Running', path + '/LastUpdate']); values.extend([data['state'], running, now])
+	if paths:
+		qualities = system.tag.writeBlocking(paths, values)
+		bad = [path for path, quality in zip(paths, qualities) if not quality.isGood()]
+		if bad:
+			raise ValueError('{0} SCADA tag writes failed, first {1}'.format(len(bad), bad[0]))
+
+
+def scadaSignalPath(area, signal, tag=''):
+	# The instrument's own tag when it measures the signal, else the first one that does.
+	matches = [(name, kind, path) for kind, path, params in _scadaTagIndex().get(area, [])
+		for name in [path.split('/')[-1]] if kind in ('AnalogInput', 'Silo') and params.get('Signal') == signal]
+	matches.sort(key=lambda match: match[0] != tag)
+	for name, kind, path in matches:
+		return path + ('/PV' if kind == 'AnalogInput' else '/Level')
+	return ''
+
+
+def scadaValues(area):
+	keys, paths = [], []
+	for kind, path, params in _scadaTagIndex().get(area, []):
+		if kind in ('AnalogInput', 'Silo') and params.get('Signal') not in keys:
+			keys.append(params['Signal']); paths.append(path + ('/PV' if kind == 'AnalogInput' else '/Level'))
+		elif kind == 'ProcessArea':
+			keys.extend(['state', 'running']); paths.extend([path + '/State', path + '/Running'])
+	if not paths:
+		return {}
+	return dict(zip(keys, [qv.value if qv.quality.isGood() else None for qv in system.tag.readBlocking(paths)]))
+
+
+def scadaEquipmentSvg(body, width, height, padding):
+	# Equipment templates draw their body from (0, 0); padding (left, top, right,
+	# bottom) holds hoppers, heads and stacks, plus 2 px for the outline stroke.
+	left, top, right, bottom = [value + 2 for value in padding]
+	content = u'<g transform="translate({0} {1})" fill="#d7d9d8" stroke="#666a68" stroke-width="1.4">{2}</g>'.format(left, top, body)
+	return _scadaSvg(content, width + left + right, height + top + bottom)
+
+
+def scadaInstrumentSvg(kind, value, colour):
+	# The tag itself is a Label in Demo/Hmi/Instrument, so it follows the label toggle.
+	body = u'<g font-family="Arial" fill="#565957">'
+	body += u'<circle cx="10" cy="32" r="10" fill="#e6e6e6" stroke="#7d817f" stroke-width="1"/><text x="10" y="35" text-anchor="middle" font-size="8">{0}</text>'.format(_escape(kind))
+	pill_width = min(102, max(64, len(unicode(value)) * 6 + 14))
+	body += u'<rect x="26" y="22" width="{2}" height="20" rx="10" fill="{0}"/><text x="{3}" y="36" text-anchor="middle" font-size="11.5">{1}</text></g>'.format(_escape(colour), _escape(value), pill_width, 26 + pill_width / 2.0)
+	return _scadaSvg(body, 130, 51)
+
+
+def scadaTileSvg(area):
+	spec = _scadaArea(area)
+	data = scadaValues(area)
+	state = data.get('state') or 'Starting'
+	pill = {'Stopped': ('#b23b34', '#ffffff'), 'Quality hold': ('#f6dca6', '#6b4a0c'), 'Recovering': ('#c9d9ea', '#24425f')}.get(state, ('#dfe3e6', '#4d555c'))
+	body = '<rect x="1" y="1" width="228" height="168" rx="4" fill="#f4f4f3" stroke="#9a9e9c" stroke-width="1.5"/>'
+	body += u'<text x="14" y="28" font-size="14" font-weight="700" fill="#3f4447">{0}</text>'.format(_escape(spec['title']))
+	body += u'<rect x="14" y="38" width="{0}" height="18" rx="3" fill="{1}"/><text x="20" y="51" font-size="10" font-weight="700" fill="{2}">{3}</text>'.format(len(state) * 6.6 + 12, pill[0], pill[1], _escape(state.upper()))
+	for i, (caption, signal, unit, decimals) in enumerate(spec['tile']):
+		y = 82 + i * 24
+		value = data.get(signal)
+		text = _scadaFormat(value, unit, decimals) if value is not None else '--'
+		body += u'<text x="14" y="{0}" font-size="11.5" fill="#6d7270">{1}</text><text x="216" y="{0}" font-size="13" font-weight="700" text-anchor="end" fill="#333399">{2}</text>'.format(y, _escape(caption), _escape(text))
+	body += '<text x="216" y="158" font-size="10.5" text-anchor="end" fill="#3f5a73" font-weight="700">OPEN SCREEN &#8250;</text>'
+	return _scadaSvg('<g font-family="Arial">' + body + '</g>', 230, 170)
 
 
 def completedOutputBatches():

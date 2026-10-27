@@ -1,0 +1,210 @@
+[
+  {
+    "name": "AnalogInput",
+    "tagType": "UdtType",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": ""
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": ""
+      },
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      }
+    },
+    "tags": [
+      {
+        "name": "PV",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Float8",
+        "engUnit": "{Unit}",
+        "documentation": "{Description}",
+        "formatString": "#,##0.##"
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Float8",
+        "engUnit": "{Unit}",
+        "value": 0.0
+      },
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Float8",
+        "engUnit": "{Unit}",
+        "value": 100.0
+      },
+      {
+        "name": "Alarm",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "Boolean",
+        "expression": "{[.]PV} < {[.]LowLimit} || {[.]PV} > {[.]HighLimit}"
+      }
+    ]
+  },
+  {
+    "name": "Motor",
+    "tagType": "UdtType",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": ""
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 10.0
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      }
+    },
+    "tags": [
+      {
+        "name": "Running",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Boolean"
+      },
+      {
+        "name": "Fault",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Boolean"
+      },
+      {
+        "name": "Mode",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "String",
+        "value": "Auto"
+      },
+      {
+        "name": "Current",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Float8",
+        "engUnit": "A",
+        "documentation": "{Description} current"
+      }
+    ]
+  },
+  {
+    "name": "Valve",
+    "tagType": "UdtType",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": ""
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    },
+    "tags": [
+      {
+        "name": "Open",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Boolean"
+      },
+      {
+        "name": "Position",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Float8",
+        "engUnit": "%",
+        "documentation": "{Description} position"
+      }
+    ]
+  },
+  {
+    "name": "Silo",
+    "tagType": "UdtType",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": ""
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      },
+      "Product": {
+        "dataType": "String",
+        "value": ""
+      },
+      "Capacity": {
+        "dataType": "Int4",
+        "value": 60
+      }
+    },
+    "tags": [
+      {
+        "name": "Level",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Float8",
+        "engUnit": "%",
+        "documentation": "{Description} level"
+      },
+      {
+        "name": "Content",
+        "tagType": "AtomicTag",
+        "valueSource": "expr",
+        "dataType": "Float8",
+        "engUnit": "t",
+        "expression": "{[.]Level} * {Capacity} / 100"
+      }
+    ]
+  },
+  {
+    "name": "ProcessArea",
+    "tagType": "UdtType",
+    "parameters": {
+      "Title": {
+        "dataType": "String",
+        "value": ""
+      }
+    },
+    "tags": [
+      {
+        "name": "State",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "String",
+        "value": "Starting"
+      },
+      {
+        "name": "Running",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Boolean"
+      },
+      {
+        "name": "LastUpdate",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "DateTime"
+      }
+    ]
+  }
+]

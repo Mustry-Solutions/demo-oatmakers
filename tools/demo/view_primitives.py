@@ -96,8 +96,8 @@ def chart(name,series,source='view.custom.data.trend',height='300px'):
 def panel(name,title,subtitle,children,basis=None,grow=1):
     return flex(name,[label(name+'Title',title,'Demo/SectionTitle'),label(name+'Subtitle',subtitle,'Demo/Muted')]+children,classes='Demo/Panel',basis=basis,grow=grow)
 
-def view(name,root,params=None,custom=None,config=None,height=1000):
-    d={'custom':custom or {},'params':params or {},'propConfig':config or {},'props':{'defaultSize':{'width':1280,'height':height}},'root':root}
+def view(name,root,params=None,custom=None,config=None,height=1000,width=1280):
+    d={'custom':custom or {},'params':params or {},'propConfig':config or {},'props':{'defaultSize':{'width':width,'height':height}},'root':root}
     for key in d['params']:d['propConfig'].setdefault('params.'+key,{'paramDirection':'input','persistent':True})
     for key in d['custom']:
         if 'custom.'+key not in d['propConfig']:d['propConfig']['custom.'+key]={'persistent':True}

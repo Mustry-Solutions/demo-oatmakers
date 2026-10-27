@@ -41,7 +41,7 @@
       "viewPath": "Demo/Production"
     },
     "/quality": {
-      "title": "Quality \u0026 traceability",
+      "title": "Quality & traceability",
       "viewPath": "Demo/Quality"
     },
     "/scada": {
@@ -51,6 +51,42 @@
     "/settings": {
       "title": "Settings",
       "viewPath": "Demo/Settings"
+    },
+    "/scada/intake": {
+      "title": "Intake & raw oat silos",
+      "viewPath": "Demo/Hmi/Screen/Intake"
+    },
+    "/scada/cleaning": {
+      "title": "Cleaning",
+      "viewPath": "Demo/Hmi/Screen/Cleaning"
+    },
+    "/scada/dehulling": {
+      "title": "Dehulling",
+      "viewPath": "Demo/Hmi/Screen/Dehulling"
+    },
+    "/scada/kiln": {
+      "title": "Kilning & stabilisation",
+      "viewPath": "Demo/Hmi/Screen/Kiln"
+    },
+    "/scada/flaking": {
+      "title": "Line 01 \u00b7 Steaming & flaking",
+      "viewPath": "Demo/Hmi/Screen/Flaking"
+    },
+    "/scada/cutting": {
+      "title": "Line 02 \u00b7 Groat cutting",
+      "viewPath": "Demo/Hmi/Screen/Cutting"
+    },
+    "/scada/milling": {
+      "title": "Line 03 \u00b7 Oat flour milling",
+      "viewPath": "Demo/Hmi/Screen/Milling"
+    },
+    "/scada/packing": {
+      "title": "Packing & palletising",
+      "viewPath": "Demo/Hmi/Screen/Packing"
+    },
+    "/scada/utilities": {
+      "title": "Steam & compressed air",
+      "viewPath": "Demo/Hmi/Screen/Utilities"
     }
   },
   "sharedDocks": {

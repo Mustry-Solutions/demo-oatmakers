@@ -1,0 +1,1208 @@
+{
+  "custom": {},
+  "params": {},
+  "propConfig": {},
+  "props": {
+    "defaultSize": {
+      "width": 1740,
+      "height": 910
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "backgroundColor": "transparent",
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Piping"
+        },
+        "props": {
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMjQ4IDExMCBIOTk1IFYzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNOTk1IDUxNyBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTk5NSA1OTQgVjYzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05OTUgNzQwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjQ4IDE4MCBINjc1IFYzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNjc1IDUxNyBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTY3NSA1OTQgVjYzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik02NzUgNzQwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjQ4IDI1MCBIMzU1IFYzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMzU1IDUxNyBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTM1NSA1OTQgVjYzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0zNTUgNzQwIFY4MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTEzMCA4MTAgSDExNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTI3MCA4MDUgSDEzMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTM3MCA4MDUgSDE0MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTU1MCA3NjAgSDE1NzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSIxMjM2IiB5PSIxNzYiIHdpZHRoPSIyODgiIGhlaWdodD0iNzgiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjxyZWN0IHg9IjEyMzYiIHk9IjMxNiIgd2lkdGg9IjI4OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHJlY3QgeD0iMTIzNiIgeT0iNDU2IiB3aWR0aD0iMjg4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48L3N2Zz4=",
+          "altText": "Packing & palletising piping",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MW803Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Weigher",
+          "params": {
+            "tag": "MW803",
+            "title": "Weigher",
+            "width": 80,
+            "height": 64,
+            "labelX": 120,
+            "labelY": 30
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 953,
+          "y": 558,
+          "width": 84,
+          "height": 68
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "BG803Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Bagger",
+          "params": {
+            "tag": "BG803",
+            "title": "500 g packs",
+            "width": 90,
+            "height": 110,
+            "labelX": 135,
+            "labelY": 30
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 948,
+          "y": 628,
+          "width": 94,
+          "height": 114
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MW802Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Weigher",
+          "params": {
+            "tag": "MW802",
+            "title": "Weigher",
+            "width": 80,
+            "height": 64,
+            "labelX": 120,
+            "labelY": 30
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 633,
+          "y": 558,
+          "width": 84,
+          "height": 68
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "BG802Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Bagger",
+          "params": {
+            "tag": "BG802",
+            "title": "1 kg packs",
+            "width": 90,
+            "height": 110,
+            "labelX": 135,
+            "labelY": 30
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 628,
+          "y": 628,
+          "width": 94,
+          "height": 114
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "AF801Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Weigher",
+          "params": {
+            "tag": "AF801",
+            "title": "Auger filler",
+            "width": 80,
+            "height": 64,
+            "labelX": 120,
+            "labelY": 30
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 313,
+          "y": 558,
+          "width": 84,
+          "height": 68
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "BG801Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Bagger",
+          "params": {
+            "tag": "BG801",
+            "title": "25 kg sacks",
+            "width": 90,
+            "height": 110,
+            "labelX": 135,
+            "labelY": 30
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 308,
+          "y": 628,
+          "width": 94,
+          "height": 114
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "CV804Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/ChainConveyor",
+          "params": {
+            "tag": "CV804",
+            "title": "Pack collection conveyor",
+            "width": 800,
+            "height": 20,
+            "labelX": 400,
+            "labelY": 46
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 328,
+          "y": 798,
+          "width": 804,
+          "height": 24
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "CW801Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Box",
+          "params": {
+            "tag": "CW801",
+            "title": "Checkweigher",
+            "width": 110,
+            "height": 30,
+            "labelX": 55.0,
+            "labelY": 48
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 1158,
+          "y": 788,
+          "width": 114,
+          "height": 34
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MD801Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/MetalDetector",
+          "params": {
+            "tag": "MD801",
+            "title": "Metal detector",
+            "width": 70,
+            "height": 60,
+            "labelX": 35.0,
+            "labelY": 78
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 1298,
+          "y": 768,
+          "width": 74,
+          "height": 64
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PL801Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Palletiser",
+          "params": {
+            "tag": "PL801",
+            "title": "Palletiser",
+            "width": 130,
+            "height": 120,
+            "labelX": 65.0,
+            "labelY": 138
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 1418,
+          "y": 698,
+          "width": 134,
+          "height": 124
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "RolledOatsFromLine01Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "target": "/scada/flaking",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyMTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE5NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTkzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI5Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Sb2xsZWQgb2F0cyBmcm9tIExpbmUgMDE8L3RleHQ+PC9zdmc+"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 96,
+          "width": 210,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "BN803"
+        },
+        "props": {
+          "path": "Demo/Hmi/Silo",
+          "params": {
+            "area": "packing",
+            "tag": "BN803",
+            "signal": "lvlC",
+            "product": "Rolled oats",
+            "level": 0,
+            "height": 220
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 940,
+          "y": 300,
+          "width": 110,
+          "height": 220
+        },
+        "propConfig": {
+          "props.params.level": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/BN803/Level",
+                "fallbackDelay": 2.5
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "WI803"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "packing",
+            "tag": "WI803",
+            "kind": "WI",
+            "signal": "weightC",
+            "unit": "g",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1070,
+          "y": 380,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/WI803/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} g\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/WI803/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SI803"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "packing",
+            "tag": "SI803",
+            "kind": "SI",
+            "signal": "packsC",
+            "unit": "/min",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1070,
+          "y": 440,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/SI803/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} /min\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/SI803/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SteelCutOatsFromLine02Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "target": "/scada/cutting",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyMTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE5NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTkzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI5Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5TdGVlbC1jdXQgb2F0cyBmcm9tIExpbmUgMDI8L3RleHQ+PC9zdmc+"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 166,
+          "width": 210,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "BN802"
+        },
+        "props": {
+          "path": "Demo/Hmi/Silo",
+          "params": {
+            "area": "packing",
+            "tag": "BN802",
+            "signal": "lvlB",
+            "product": "Steel-cut oats",
+            "level": 0,
+            "height": 220
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 620,
+          "y": 300,
+          "width": 110,
+          "height": 220
+        },
+        "propConfig": {
+          "props.params.level": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/BN802/Level",
+                "fallbackDelay": 2.5
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "WI802"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "packing",
+            "tag": "WI802",
+            "kind": "WI",
+            "signal": "weightB",
+            "unit": "g",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 750,
+          "y": 380,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/WI802/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} g\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/WI802/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SI802"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "packing",
+            "tag": "SI802",
+            "kind": "SI",
+            "signal": "packsB",
+            "unit": "/min",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 750,
+          "y": 440,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/SI802/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} /min\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/SI802/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "OatFlourFromLine03Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "target": "/scada/milling",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyMTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE5NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTkzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI5Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5PYXQgZmxvdXIgZnJvbSBMaW5lIDAzPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 236,
+          "width": 210,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "BN801"
+        },
+        "props": {
+          "path": "Demo/Hmi/Silo",
+          "params": {
+            "area": "packing",
+            "tag": "BN801",
+            "signal": "lvlA",
+            "product": "Oat flour",
+            "level": 0,
+            "height": 220
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 300,
+          "y": 300,
+          "width": 110,
+          "height": 220
+        },
+        "propConfig": {
+          "props.params.level": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/BN801/Level",
+                "fallbackDelay": 2.5
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "WI801"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "packing",
+            "tag": "WI801",
+            "kind": "WI",
+            "signal": "sackWeight",
+            "unit": "kg",
+            "decimals": 2,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 430,
+          "y": 380,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/WI801/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.2f} kg\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/WI801/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SI801"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "packing",
+            "tag": "SI801",
+            "kind": "SI",
+            "signal": "sacksMin",
+            "unit": "/min",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 430,
+          "y": 440,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/SI801/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} /min\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/SI801/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MCV804"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "packing",
+            "tag": "M-CV804",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "compact": true
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 290,
+          "y": 820,
+          "width": 110,
+          "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Packing/M-CV804/Running}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "ToWarehouseLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "target": "",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNDAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDEyNiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjNTk1YzVhIi8+PGNpcmNsZSBjeD0iMTI2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTIzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI1Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5UbyB3YXJlaG91c2U8L3RleHQ+PC9zdmc+"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1570,
+          "y": 746,
+          "width": 140,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "QI801"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "packing",
+            "tag": "QI801",
+            "kind": "QI",
+            "signal": "rejects",
+            "unit": "%",
+            "decimals": 2,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1160,
+          "y": 700,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/QI801/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.2f} %\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/QI801/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FQ801"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "packing",
+            "tag": "FQ801",
+            "kind": "FQ",
+            "signal": "pallets",
+            "unit": "/h",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1560,
+          "y": 640,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Packing/FQ801/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} /h\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Packing/FQ801/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendPacksC"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "packing",
+            "signal": "packsC",
+            "colour": "#626b75",
+            "sp": 62
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1240,
+          "y": 180,
+          "width": 280,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendWeightC"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "packing",
+            "signal": "weightC",
+            "colour": "#626b75",
+            "sp": 500
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1240,
+          "y": 320,
+          "width": 280,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendRejects"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "packing",
+            "signal": "rejects",
+            "colour": "#626b75",
+            "sp": 0
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1240,
+          "y": 460,
+          "width": 280,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text1"
+        },
+        "props": {
+          "text": "Rolled oats line (packs/min)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1240,
+          "y": 159,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text2"
+        },
+        "props": {
+          "text": "Rolled oats pack weight (g)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1240,
+          "y": 299,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text3"
+        },
+        "props": {
+          "text": "Checkweigher rejects (%)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1240,
+          "y": 439,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text4"
+        },
+        "props": {
+          "text": "Packing & palletising",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "22px",
+            "fontWeight": 600,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "29px"
+          }
+        },
+        "position": {
+          "x": 40,
+          "y": 868,
+          "width": 300,
+          "height": 29
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text5"
+        },
+        "props": {
+          "text": "SIMULATION",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "flex-end",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1400,
+          "y": 880,
+          "width": 300,
+          "height": 13
+        }
+      }
+    ]
+  }
+}

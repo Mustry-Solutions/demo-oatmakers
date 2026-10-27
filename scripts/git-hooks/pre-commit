@@ -1,5 +1,5 @@
 #!/bin/bash
-# Revert junk-only resource.json rewrites before they can enter a commit.
+# 1. Revert junk-only resource.json rewrites before they can enter a commit.
 #
 # Ignition restamps a manifest's lastModification/lastModificationSignature
 # whenever it touches the resource, even when nothing real changed. The
@@ -7,4 +7,33 @@
 # churn is invisible on screen and still committed.
 #
 # Files with real edits are never touched.
-exec "$(git rev-parse --show-toplevel)/scripts/clean-ignition-resource-churn.sh" --apply
+#
+# 2. Run iglint, with the same version and iglint.toml as CI, on every project
+# the commit touches. The first run installs iglint into a virtualenv next to
+# the git hooks, shared by all worktrees.
+set -euo pipefail
+
+root="$(git rev-parse --show-toplevel)"
+"$root/scripts/clean-ignition-resource-churn.sh" --apply
+
+IGLINT_VERSION=0.1.0
+projects=$(git diff --cached --name-only --diff-filter=ACMR -- projects/ | cut -d/ -f2 | sort -u)
+[ -n "$projects" ] || exit 0
+
+venv="$(git rev-parse --git-common-dir)/iglint-venv"
+iglint="$venv/bin/iglint"
+if ! "$iglint" --version 2>/dev/null | grep -q "$IGLINT_VERSION"; then
+  echo "pre-commit: installing iglint $IGLINT_VERSION into $venv" >&2
+  python3 -m venv "$venv"
+  "$venv/bin/pip" install --quiet "iglint==$IGLINT_VERSION"
+fi
+
+status=0
+for project in $projects; do
+  [ -d "$root/projects/$project" ] || continue
+  "$iglint" check "$root/projects/$project" || status=1
+done
+if [ "$status" -ne 0 ]; then
+  echo "pre-commit: iglint found problems. Fix them (or the generator that wrote them) and commit again." >&2
+fi
+exit "$status"

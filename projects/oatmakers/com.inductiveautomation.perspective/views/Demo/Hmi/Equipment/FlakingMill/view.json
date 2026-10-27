@@ -1,0 +1,227 @@
+{
+  "custom": {},
+  "params": {
+    "tag": "FM501",
+    "title": "Flaking mill",
+    "width": 170,
+    "height": 150,
+    "labelX": 85.0,
+    "labelY": 168
+  },
+  "propConfig": {
+    "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.title": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.width": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.height": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.labelX": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.labelY": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 174,
+      "height": 172
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Shape"
+        },
+        "props": {
+          "source": "",
+          "altText": "FlakingMill",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "type": "expr-struct",
+              "config": {
+                "waitOnAll": true,
+                "struct": {
+                  "width": "{view.params.width}",
+                  "height": "{view.params.height}"
+                }
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\tw, h = float(value[\"width\"]), float(value[\"height\"])\n\tbody = '<path d=\"M%s -18 h40 l-12 18 h-16 Z\"/><rect width=\"%s\" height=\"%s\" rx=\"4\"/>' % (w/2-20, w, h)\n\tbody += ''.join('<circle cx=\"%s\" cy=\"%s\" r=\"%s\" fill=\"#c9cbca\"/>' % (w/2+d*h*0.24, h*0.45, h*0.23) for d in (-1, 1))\n\treturn application.demo.scadaEquipmentSvg(body, w, h, [0, 18, 0, 0])"
+                }
+              ]
+            }
+          },
+          "props.altText": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(len({view.params.tag}) > 0, {view.params.tag}, \"FlakingMill\")"
+              }
+            }
+          },
+          "position.width": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.width} + 4"
+              }
+            }
+          },
+          "position.height": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.height} + 22"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Tag"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Text Hmi/Tag"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 300,
+          "height": 16
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.tag"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels} && len({view.params.tag}) > 0"
+              }
+            }
+          },
+          "position.x": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelX} + -148"
+              }
+            }
+          },
+          "position.y": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelY} + 8"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Title"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/Text Hmi/Title"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.title"
+              }
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels} && len({view.params.title}) > 0"
+              }
+            }
+          },
+          "position.x": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelX} + -148"
+              }
+            }
+          },
+          "position.y": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.labelY} + 24"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

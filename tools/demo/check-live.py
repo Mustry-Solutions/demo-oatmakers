@@ -25,11 +25,11 @@ for attempt in range(args.attempts):
         assert health['ageSeconds']<=180, 'History stopped advancing'
         assert health['coverageDays']>=88, 'Insufficient rolling history'
         assert health['retentionDays']==90, 'Wrong retention policy'
-        for route in ['/','/production','/scada','/performance','/quality','/operator','/demo/health']:
+        for route in ['/','/production','/scada','/scada/intake','/scada/flaking','/scada/packing','/performance','/quality','/operator','/demo/health']:
             with urllib.request.urlopen(base+'/data/perspective/client/oatmakers'+route,timeout=20) as response:
                 assert response.status==200, 'Page unavailable: '+route
         print(json.dumps(health,indent=2))
-        print('Seven page routes and live data readiness passed.')
+        print('Page routes and live data readiness passed.')
         break
     except (AssertionError, OSError, ValueError) as exc:
         if attempt+1==args.attempts:raise SystemExit(str(exc))

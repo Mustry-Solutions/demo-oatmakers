@@ -1,0 +1,1138 @@
+{
+  "custom": {},
+  "params": {},
+  "propConfig": {},
+  "props": {
+    "defaultSize": {
+      "width": 1740,
+      "height": 910
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "backgroundColor": "transparent",
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Piping"
+        },
+        "props": {
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTk4IDExMCBIMjYwIFYxNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjYwIDI5MCBWMzcwIEg0NDQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNTIyIDQ0MCBINjAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTY2NSAzNjAgVjMwMCBINzMwIFYxNzAgSDc2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGY5NTk5IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjQgMyIvPjxwYXRoIGQ9Ik04MTAgMTEwIFY4MCBIOTAzIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+PHBhdGggZD0iTTgxMCAyODAgVjMzMCBIMTAwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMTMwIDMyNSBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik03MzAgNDcwIEg4MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTA0MCA0NTAgSDE1NDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNOTkwIDQ2NCBWNjUwIEgzMzAgVjQ0MCBIMzk4IiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTcxNSA1MzAgVjc4MCBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMjEwIDI3MiBWMzI1IiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMTcwIDM5NyBWNDUwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMzMwIDM5NyBWNDUwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNDcwIDQyMiBWNDUwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9IjEwNTYiIHk9IjU3NiIgd2lkdGg9IjI0OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHJlY3QgeD0iMTMxNiIgeT0iNTc2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48L3N2Zz4=",
+          "altText": "Dehulling piping",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "BN301Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Bin",
+          "params": {
+            "tag": "BN301",
+            "title": "Huller feed bin",
+            "width": 120,
+            "height": 150,
+            "labelX": 60.0,
+            "labelY": 63.0
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 198,
+          "y": 138,
+          "width": 124,
+          "height": 154
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "HU301Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/ImpactHuller",
+          "params": {
+            "tag": "HU301",
+            "title": "Impact huller",
+            "width": 124,
+            "height": 124,
+            "labelX": 62.0,
+            "labelY": 142
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 396,
+          "y": 358,
+          "width": 128,
+          "height": 146
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "AS301Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Aspirator",
+          "params": {
+            "tag": "AS301",
+            "title": "Hull aspirator",
+            "width": 130,
+            "height": 170,
+            "labelX": 65.0,
+            "labelY": 188
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 598,
+          "y": 358,
+          "width": 134,
+          "height": 174
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "CY301Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Cyclone",
+          "params": {
+            "tag": "CY301",
+            "title": "Hull cyclone",
+            "width": 100,
+            "height": 170,
+            "labelX": 140,
+            "labelY": 59.5
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 758,
+          "y": 108,
+          "width": 104,
+          "height": 174
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "HG301Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/HammerMill",
+          "params": {
+            "tag": "HG301",
+            "title": "Hull grinder",
+            "width": 130,
+            "height": 110,
+            "labelX": 65.0,
+            "labelY": 128
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 998,
+          "y": 268,
+          "width": 134,
+          "height": 114
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "GS301Shape"
+        },
+        "props": {
+          "path": "Demo/Hmi/Equipment/Destoner",
+          "params": {
+            "tag": "GS301",
+            "title": "Groat separator",
+            "width": 220,
+            "height": 130,
+            "labelX": 110.0,
+            "labelY": 148
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false,
+          "style": {
+            "overflow": "visible"
+          }
+        },
+        "position": {
+          "x": 818,
+          "y": 398,
+          "width": 224,
+          "height": 134
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FromCleaningLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "target": "/scada/cleaning",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNjAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE0NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTQ2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTQzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI2Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Gcm9tIGNsZWFuaW5nPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 96,
+          "width": 160,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "VF301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "VF301",
+            "signal": "feed",
+            "unit": "t/h",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "compact": true
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 240,
+          "y": 305,
+          "width": 110,
+          "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/VF301/Running}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MHU301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "M-HU301",
+            "signal": "hullerAmps",
+            "unit": "A",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "compact": true
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 360,
+          "y": 530,
+          "width": 110,
+          "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/M-HU301/Running}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FN301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "FN301",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PC9nPjwvc3ZnPg==",
+            "compact": true
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 900,
+          "y": 50,
+          "width": 110,
+          "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/FN301/Running}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "RV301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "RV301",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=",
+            "compact": true
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 790,
+          "y": 275,
+          "width": 110,
+          "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/RV301/Running}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "HullsToPelletPressLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "target": "",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjNTk1YzVhIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5IdWxscyB0byBwZWxsZXQgcHJlc3M8L3RleHQ+PC9zdmc+"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 311,
+          "width": 180,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MGS301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "M-GS301",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PC9nPjwvc3ZnPg==",
+            "compact": true
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 840,
+          "y": 355,
+          "width": 110,
+          "height": 60
+        },
+        "propConfig": {
+          "props.params.running": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{[default]OatMill/Dehulling/M-GS301/Running}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "ToKilningLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "target": "/scada/kiln",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNjAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE0NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTQ2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTQzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI2Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5UbyBraWxuaW5nPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 436,
+          "width": 160,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "GroatFinesToLine03Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "target": "/scada/milling",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Hcm9hdCBmaW5lcyB0byBMaW5lIDAzPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 766,
+          "width": 180,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FT301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "FT301",
+            "kind": "FI",
+            "signal": "feed",
+            "unit": "t/h",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 60,
+          "y": 330,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/FT301/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/FT301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SI301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "SI301",
+            "kind": "SI",
+            "signal": "rotorSpeed",
+            "unit": "rpm",
+            "decimals": 0,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 150,
+          "y": 500,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/SI301/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.0f} rpm\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/SI301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "II301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "II301",
+            "kind": "II",
+            "signal": "hullerAmps",
+            "unit": "A",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 150,
+          "y": 570,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/II301/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} A\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/II301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PDI301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "PDI301",
+            "kind": "PDI",
+            "signal": "aspDp",
+            "unit": "mbar",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 560,
+          "y": 250,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/PDI301/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} mbar\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/PDI301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FT303"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "FT303",
+            "kind": "FI",
+            "signal": "hulls",
+            "unit": "t/h",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1200,
+          "y": 230,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/FT303/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/FT303/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "QI301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "QI301",
+            "kind": "QI",
+            "signal": "efficiency",
+            "unit": "%",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1160,
+          "y": 355,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/QI301/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/QI301/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "QI302"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "QI302",
+            "kind": "QI",
+            "signal": "broken",
+            "unit": "%",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1320,
+          "y": 355,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/QI302/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/QI302/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FT302"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "FT302",
+            "kind": "FI",
+            "signal": "groats",
+            "unit": "t/h",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1460,
+          "y": 380,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "direct",
+                "tagPath": "[default]OatMill/Dehulling/FT302/PV",
+                "fallbackDelay": 2.5
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
+                }
+              ]
+            }
+          },
+          "props.params.colour": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if({[default]OatMill/Dehulling/FT302/Alarm}, \"#f2b8b3\", \"#f7f7f7\")"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendEfficiency"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "dehulling",
+            "signal": "efficiency",
+            "colour": "#626b75",
+            "sp": 92
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1060,
+          "y": 580,
+          "width": 240,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendRotorSpeed"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "dehulling",
+            "signal": "rotorSpeed",
+            "colour": "#626b75",
+            "sp": 1480
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1320,
+          "y": 580,
+          "width": 240,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text1"
+        },
+        "props": {
+          "text": "Exhaust",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "center",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 890.0,
+          "y": 74,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text2"
+        },
+        "props": {
+          "text": "Unhulled oats return to huller",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "center",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 480.0,
+          "y": 631,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text3"
+        },
+        "props": {
+          "text": "Hulling efficiency (%)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1060,
+          "y": 559,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text4"
+        },
+        "props": {
+          "text": "Huller rotor speed (rpm)",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "11px",
+            "fontWeight": 600,
+            "color": "#6d7270",
+            "alignItems": "flex-start",
+            "lineHeight": "14px"
+          }
+        },
+        "position": {
+          "x": 1320,
+          "y": 559,
+          "width": 300,
+          "height": 14
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.showLabels}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text5"
+        },
+        "props": {
+          "text": "Dehulling",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "22px",
+            "fontWeight": 600,
+            "color": "#5a5e5c",
+            "alignItems": "flex-start",
+            "lineHeight": "29px"
+          }
+        },
+        "position": {
+          "x": 40,
+          "y": 868,
+          "width": 300,
+          "height": 29
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Text6"
+        },
+        "props": {
+          "text": "SIMULATION",
+          "style": {
+            "classes": "Hmi/Text",
+            "fontSize": "10px",
+            "fontWeight": 400,
+            "color": "#777",
+            "alignItems": "flex-end",
+            "lineHeight": "13px"
+          }
+        },
+        "position": {
+          "x": 1400,
+          "y": 880,
+          "width": 300,
+          "height": 13
+        }
+      }
+    ]
+  }
+}

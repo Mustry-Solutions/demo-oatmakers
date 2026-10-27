@@ -1,0 +1,93 @@
+{
+  "custom": {},
+  "params": {
+    "source": "",
+    "target": ""
+  },
+  "propConfig": {
+    "params.source": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.target": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 170,
+      "height": 28
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "cursor": "pointer"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Graphic"
+        },
+        "props": {
+          "source": "",
+          "altText": "Stream",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.source"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    },
+    "events": {
+      "dom": {
+        "onClick": {
+          "type": "script",
+          "scope": "G",
+          "config": {
+            "script": "\tif self.view.params.target:\n\t\tsystem.perspective.navigate(self.view.params.target)"
+          }
+        }
+      }
+    },
+    "propConfig": {
+      "props.style.cursor": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "if(len({view.params.target}) > 0, \"pointer\", \"default\")"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,385 @@
+[
+  {
+    "name": "Area",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/ProcessArea",
+    "parameters": {
+      "Title": {
+        "dataType": "String",
+        "value": "Packing & palletising"
+      }
+    }
+  },
+  {
+    "name": "BN801",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Silo",
+    "parameters": {
+      "Capacity": {
+        "dataType": "Int4",
+        "value": 50
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Oat flour silo"
+      },
+      "Product": {
+        "dataType": "String",
+        "value": "Oat flour"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "lvlA"
+      }
+    }
+  },
+  {
+    "name": "BN802",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Silo",
+    "parameters": {
+      "Capacity": {
+        "dataType": "Int4",
+        "value": 40
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Steel-cut oats silo"
+      },
+      "Product": {
+        "dataType": "String",
+        "value": "Steel-cut oats"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "lvlB"
+      }
+    }
+  },
+  {
+    "name": "BN803",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Silo",
+    "parameters": {
+      "Capacity": {
+        "dataType": "Int4",
+        "value": 60
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Rolled oats silo"
+      },
+      "Product": {
+        "dataType": "String",
+        "value": "Rolled oats"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "lvlC"
+      }
+    }
+  },
+  {
+    "name": "FQ801",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Totalised flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "pallets"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "/h"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 13.1
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 9.9
+      }
+    ]
+  },
+  {
+    "name": "M-CV804",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 28.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "QI801",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 2
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Quality"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "rejects"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "%"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 1.2
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 0.0
+      }
+    ]
+  },
+  {
+    "name": "SI801",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Speed"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "sacksMin"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "/min"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 5.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 3.4
+      }
+    ]
+  },
+  {
+    "name": "SI802",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Speed"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "packsB"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "/min"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 54.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 42.0
+      }
+    ]
+  },
+  {
+    "name": "SI803",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Speed"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "packsC"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "/min"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 69.2
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 54.8
+      }
+    ]
+  },
+  {
+    "name": "WI801",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 2
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Weighed flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "sackWeight"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "kg"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 25.16
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 24.92
+      }
+    ]
+  },
+  {
+    "name": "WI802",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Weighed flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "weightB"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "g"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 1009.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 997.0
+      }
+    ]
+  },
+  {
+    "name": "WI803",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Weighed flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "weightC"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "g"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 505.7
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 498.5
+      }
+    ]
+  }
+]

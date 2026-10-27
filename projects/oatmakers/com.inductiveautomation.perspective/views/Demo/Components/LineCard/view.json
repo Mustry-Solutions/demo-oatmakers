@@ -390,7 +390,7 @@
               "type": "script",
               "scope": "G",
               "config": {
-                "script": "\tself.session.custom.demo.scadaLine = self.view.params.lineNumber\n\tsystem.perspective.navigate(\"/scada\")"
+                "script": "\tsystem.perspective.navigate({1: \"/scada/flaking\", 2: \"/scada/cutting\", 3: \"/scada/milling\"}.get(int(self.view.params.lineNumber), \"/scada\"))"
               }
             }
           }

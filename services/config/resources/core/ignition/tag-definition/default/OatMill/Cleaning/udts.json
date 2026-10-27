@@ -1,0 +1,431 @@
+[
+  {
+    "name": "Area",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/ProcessArea",
+    "parameters": {
+      "Title": {
+        "dataType": "String",
+        "value": "Cleaning"
+      }
+    }
+  },
+  {
+    "name": "FC201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Rotary valve"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 22.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "feed"
+      }
+    }
+  },
+  {
+    "name": "FI201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 0
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "airFlow"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "m³/h"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 5680.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 4720.0
+      }
+    ]
+  },
+  {
+    "name": "FN201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Fan"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 13.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "FT201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Flow"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "feed"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "t/h"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 20.6
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 15.8
+      }
+    ]
+  },
+  {
+    "name": "II201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Motor current"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "sieveAmps"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "A"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 8.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 5.6
+      }
+    ]
+  },
+  {
+    "name": "II202",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Motor current"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "stonerAmps"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "A"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 4.9
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 3.3
+      }
+    ]
+  },
+  {
+    "name": "M-CV205",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 40.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": ""
+      }
+    }
+  },
+  {
+    "name": "M-DS201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 4.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "stonerAmps"
+      }
+    }
+  },
+  {
+    "name": "M-SP201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 34.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "sieveAmps"
+      }
+    }
+  },
+  {
+    "name": "M-TR201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/Motor",
+    "parameters": {
+      "Description": {
+        "dataType": "String",
+        "value": "Motor"
+      },
+      "Duty": {
+        "dataType": "String",
+        "value": "Duty"
+      },
+      "RatedCurrent": {
+        "dataType": "Float8",
+        "value": 10.0
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "trieurSpeed"
+      }
+    }
+  },
+  {
+    "name": "PDI201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 1
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Differential pressure"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "aspDp"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "mbar"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 9.0
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 5.8
+      }
+    ]
+  },
+  {
+    "name": "QI201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 2
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Quality"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "rejects"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "%"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 2.8
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 0.8
+      }
+    ]
+  },
+  {
+    "name": "QI202",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 2
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Quality"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "purity"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "%"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 99.92
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 99.28
+      }
+    ]
+  },
+  {
+    "name": "SI201",
+    "tagType": "UdtInstance",
+    "typeId": "OatMill/AnalogInput",
+    "parameters": {
+      "Decimals": {
+        "dataType": "Int4",
+        "value": 0
+      },
+      "Description": {
+        "dataType": "String",
+        "value": "Speed"
+      },
+      "Signal": {
+        "dataType": "String",
+        "value": "trieurSpeed"
+      },
+      "Unit": {
+        "dataType": "String",
+        "value": "rpm"
+      }
+    },
+    "tags": [
+      {
+        "name": "HighLimit",
+        "tagType": "AtomicTag",
+        "value": 43.6
+      },
+      {
+        "name": "LowLimit",
+        "tagType": "AtomicTag",
+        "value": 40.4
+      }
+    ]
+  }
+]
