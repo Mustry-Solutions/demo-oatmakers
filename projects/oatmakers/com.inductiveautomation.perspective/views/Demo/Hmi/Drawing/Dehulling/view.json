@@ -1,0 +1,704 @@
+{
+  "custom": {
+    "data": {
+      "running": true,
+      "state": ""
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.data": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(1000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.scadaData(\"dehulling\")"
+          }
+        ]
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1740,
+      "height": 910
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "backgroundColor": "transparent",
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Piping"
+        },
+        "props": {
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTk4IDExMCBIMjYwIFYxNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cGF0aCBkPSJNMjAwIDE0MCBIMzIwIFYyNDUuMCBMMjcwLjAgMjkwIEgyNTAuMCBMMjAwIDI0NS4wIFoiLz48L2c+PHBhdGggZD0iTTI2MCAyOTAgVjQwMCBINDIwIFYzNzUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48Y2lyY2xlIGN4PSI0NjAiIGN5PSI0NDAiIHI9IjYyIi8+PGNpcmNsZSBjeD0iNDYwIiBjeT0iNDQwIiByPSIzNC4xIiBmaWxsPSIjYzljYmNhIi8+PHBhdGggZD0iTTQ2MCA0NDAgbDM0LjEgMCIgdHJhbnNmb3JtPSJyb3RhdGUoMCA0NjAgNDQwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTQ2MCA0NDAgbDM0LjEgMCIgdHJhbnNmb3JtPSJyb3RhdGUoNDUgNDYwIDQ0MCkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMyIvPjxwYXRoIGQ9Ik00NjAgNDQwIGwzNC4xIDAiIHRyYW5zZm9ybT0icm90YXRlKDkwIDQ2MCA0NDApIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNDYwIDQ0MCBsMzQuMSAwIiB0cmFuc2Zvcm09InJvdGF0ZSgxMzUgNDYwIDQ0MCkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMyIvPjxwYXRoIGQ9Ik00NjAgNDQwIGwzNC4xIDAiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA0NjAgNDQwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTQ2MCA0NDAgbDM0LjEgMCIgdHJhbnNmb3JtPSJyb3RhdGUoMjI1IDQ2MCA0NDApIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNDYwIDQ0MCBsMzQuMSAwIiB0cmFuc2Zvcm09InJvdGF0ZSgyNzAgNDYwIDQ0MCkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMyIvPjxwYXRoIGQ9Ik00NjAgNDQwIGwzNC4xIDAiIHRyYW5zZm9ybT0icm90YXRlKDMxNSA0NjAgNDQwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzIi8+PC9nPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxwYXRoIGQ9Ik00NDAgMzYwIGg0MCBsLTggMTggaC0yNCBaIi8+PC9nPjxwYXRoIGQ9Ik01MjIgNDQwIEg2MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cmVjdCB4PSI2MDAiIHk9IjM2MCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSIxNzAiIHJ4PSI0Ii8+PHBhdGggZD0iTTYzOS4wIDQxMS4wIGw1Mi4wIDIwIGwtNTIuMCAyMCBsNTIuMCAyMCBsLTUyLjAgMjAiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik02OTcuNSA0NTMuNSB2LTM2IG0tNiA4IGw2IC04IGw2IDgiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMS4yIi8+PC9nPjxwYXRoIGQ9Ik02NjUgMzYwIFYzMDAgSDczMCBWMTcwIEg3NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cGF0aCBkPSJNNzYwIDExMCBIODYwIFYxNzguMCBMODE5LjAgMjgwIEg4MDEuMCBMNzYwIDE3OC4wIFoiLz48L2c+PHBhdGggZD0iTTgxMCAxMTAgVjgwIEg5MDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48dGV4dCB4PSIxMDQwIiB5PSI4NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3Ij5FeGhhdXN0PC90ZXh0PjxwYXRoIGQ9Ik04MTAgMjgwIFYzMzAgSDEwMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cmVjdCB4PSIxMDAwIiB5PSIyNzAiIHdpZHRoPSIxMzAiIGhlaWdodD0iMTEwIiByeD0iNiIvPjxjaXJjbGUgY3g9IjEwNjUuMCIgY3k9IjMyNS4wIiByPSIzNS4yIiBmaWxsPSIjYzljYmNhIi8+PHJlY3QgeD0iMTA2MS4wIiB5PSIyOTIuMCIgd2lkdGg9IjgiIGhlaWdodD0iMTUuNDAwMDAwMDAwMDAwMDAyIiB0cmFuc2Zvcm09InJvdGF0ZSgwIDEwNjUuMCAzMjUuMCkiIGZpbGw9IiM5OTkiLz48cmVjdCB4PSIxMDYxLjAiIHk9IjI5Mi4wIiB3aWR0aD0iOCIgaGVpZ2h0PSIxNS40MDAwMDAwMDAwMDAwMDIiIHRyYW5zZm9ybT0icm90YXRlKDYwIDEwNjUuMCAzMjUuMCkiIGZpbGw9IiM5OTkiLz48cmVjdCB4PSIxMDYxLjAiIHk9IjI5Mi4wIiB3aWR0aD0iOCIgaGVpZ2h0PSIxNS40MDAwMDAwMDAwMDAwMDIiIHRyYW5zZm9ybT0icm90YXRlKDEyMCAxMDY1LjAgMzI1LjApIiBmaWxsPSIjOTk5Ii8+PHJlY3QgeD0iMTA2MS4wIiB5PSIyOTIuMCIgd2lkdGg9IjgiIGhlaWdodD0iMTUuNDAwMDAwMDAwMDAwMDAyIiB0cmFuc2Zvcm09InJvdGF0ZSgxODAgMTA2NS4wIDMyNS4wKSIgZmlsbD0iIzk5OSIvPjxyZWN0IHg9IjEwNjEuMCIgeT0iMjkyLjAiIHdpZHRoPSI4IiBoZWlnaHQ9IjE1LjQwMDAwMDAwMDAwMDAwMiIgdHJhbnNmb3JtPSJyb3RhdGUoMjQwIDEwNjUuMCAzMjUuMCkiIGZpbGw9IiM5OTkiLz48cmVjdCB4PSIxMDYxLjAiIHk9IjI5Mi4wIiB3aWR0aD0iOCIgaGVpZ2h0PSIxNS40MDAwMDAwMDAwMDAwMDIiIHRyYW5zZm9ybT0icm90YXRlKDMwMCAxMDY1LjAgMzI1LjApIiBmaWxsPSIjOTk5Ii8+PC9nPjxwYXRoIGQ9Ik0xMTMwIDMyNSBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik03MzAgNDcwIEg4MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cGF0aCBkPSJNODIwIDQyNi4wIEwxMDQwIDQwMCBWNDU4LjUgTDgyMCA0ODQuNSBaIi8+PHBhdGggZD0iTTg0MCA0ODAuNiBWNTMwIE0xMDIwIDQ1NC42IFY1MzAiIGZpbGw9Im5vbmUiLz48L2c+PHBhdGggZD0iTTEwNDAgNDUwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTk5MCA1MzAgVjY1MCBIMzMwIFY0NDAgSDM5OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjx0ZXh0IHg9IjYzMCIgeT0iNjQyIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciPlVuaHVsbGVkIG9hdHMgcmV0dXJuIHRvIGh1bGxlcjwvdGV4dD48cGF0aCBkPSJNNzE1IDUzMCBWNzgwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEyMTAgMjcyIFYzMjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTExNzAgMzk3IFY0NTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEzMzAgMzk3IFY0NTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0NjAgNTIyIFY0NTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iMTA1NiIgeT0iNTc2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48dGV4dCB4PSIxMDYwIiB5PSI1NzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5IdWxsaW5nIGVmZmljaWVuY3kgKCUpPC90ZXh0PjxyZWN0IHg9IjEzMTYiIHk9IjU3NiIgd2lkdGg9IjI0OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHRleHQgeD0iMTMyMCIgeT0iNTcwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzZkNzI3MCI+SHVsbGVyIHJvdG9yIHNwZWVkIChycG0pPC90ZXh0Pjwvc3ZnPg==",
+          "altText": "Dehulling piping",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FromCleaningLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "From cleaning",
+            "target": "/scada/cleaning",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNjAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE0NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTQ2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTQzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI2Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Gcm9tIGNsZWFuaW5nPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 96,
+          "width": 160,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "VF301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "VF301",
+            "signal": "feed",
+            "unit": "t/h",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+VkYzMDE8L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+VkYzMDE8L3RleHQ+PC9nPjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 240,
+          "y": 305,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "M-HU301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "M-HU301",
+            "signal": "hullerAmps",
+            "unit": "A",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUhVMzAxPC90ZXh0PjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUhVMzAxPC90ZXh0PjwvZz48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 360,
+          "y": 530,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FN301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "FN301",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5GTjMwMTwvdGV4dD48L2c+PC9zdmc+",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5GTjMwMTwvdGV4dD48L2c+PC9zdmc+"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 900,
+          "y": 50,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "RV301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "RV301",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlYzMDE8L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlYzMDE8L3RleHQ+PC9nPjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 790,
+          "y": 275,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "HullsToPelletPressLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Hulls to pellet press",
+            "target": "",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjNTk1YzVhIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5IdWxscyB0byBwZWxsZXQgcHJlc3M8L3RleHQ+PC9zdmc+"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 311,
+          "width": 180,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "M-GS301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "dehulling",
+            "tag": "M-GS301",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUdTMzAxPC90ZXh0PjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUdTMzAxPC90ZXh0PjwvZz48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 840,
+          "y": 355,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "ToKilningLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "To kilning",
+            "target": "/scada/kiln",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNjAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE0NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTQ2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTQzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI2Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5UbyBraWxuaW5nPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 436,
+          "width": 160,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "GroatFinesToLine03Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Groat fines to Line 03",
+            "target": "/scada/milling",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Hcm9hdCBmaW5lcyB0byBMaW5lIDAzPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 766,
+          "width": 180,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FT301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "FT301",
+            "kind": "FI",
+            "signal": "feed",
+            "unit": "t/h",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 60,
+          "y": 330,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.feed}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SI301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "SI301",
+            "kind": "SI",
+            "signal": "rotorSpeed",
+            "unit": "rpm",
+            "decimals": 0,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 150,
+          "y": 500,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.rotorSpeed}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.0f} rpm\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "II301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "II301",
+            "kind": "II",
+            "signal": "hullerAmps",
+            "unit": "A",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 150,
+          "y": 570,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.hullerAmps}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} A\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PDI301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "PDI301",
+            "kind": "PDI",
+            "signal": "aspDp",
+            "unit": "mbar",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 560,
+          "y": 250,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.aspDp}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} mbar\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FT303"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "FT303",
+            "kind": "FI",
+            "signal": "hulls",
+            "unit": "t/h",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1200,
+          "y": 230,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.hulls}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "QI301"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "QI301",
+            "kind": "QI",
+            "signal": "efficiency",
+            "unit": "%",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1160,
+          "y": 355,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.efficiency}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "QI302"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "QI302",
+            "kind": "QI",
+            "signal": "broken",
+            "unit": "%",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1320,
+          "y": 355,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.broken}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FT302"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "dehulling",
+            "tag": "FT302",
+            "kind": "FI",
+            "signal": "groats",
+            "unit": "t/h",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1450,
+          "y": 500,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.groats}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendEfficiency"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "dehulling",
+            "signal": "efficiency",
+            "colour": "#626b75",
+            "sp": 92
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1060,
+          "y": 580,
+          "width": 240,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendRotorSpeed"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "dehulling",
+            "signal": "rotorSpeed",
+            "colour": "#626b75",
+            "sp": 1480
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1320,
+          "y": 580,
+          "width": 240,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Labels"
+        },
+        "props": {
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48dGV4dCB4PSIyNjAuMCIgeT0iMjAzLjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkJOMzAxPC90ZXh0Pjx0ZXh0IHg9IjI2MC4wIiB5PSIyMTcuMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5IdWxsZXIgZmVlZCBiaW48L3RleHQ+PHRleHQgeD0iNDYwIiB5PSI1MjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkhVMzAxPC90ZXh0Pjx0ZXh0IHg9IjQ2MCIgeT0iNTM0IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkltcGFjdCBodWxsZXI8L3RleHQ+PHRleHQgeD0iNjY1LjAiIHk9IjU0OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+QVMzMDE8L3RleHQ+PHRleHQgeD0iNjY1LjAiIHk9IjU2MiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5IdWxsIGFzcGlyYXRvcjwvdGV4dD48dGV4dCB4PSI5MDAiIHk9IjE2OS41IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5DWTMwMTwvdGV4dD48dGV4dCB4PSI5MDAiIHk9IjE4My41IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkh1bGwgY3ljbG9uZTwvdGV4dD48dGV4dCB4PSIxMDY1LjAiIHk9IjM5OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+SEczMDE8L3RleHQ+PHRleHQgeD0iMTA2NS4wIiB5PSI0MTIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+SHVsbCBncmluZGVyPC90ZXh0Pjx0ZXh0IHg9IjkzMC4wIiB5PSI1NDgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkdTMzAxPC90ZXh0Pjx0ZXh0IHg9IjkzMC4wIiB5PSI1NjIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+R3JvYXQgc2VwYXJhdG9yPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSI4OTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWE1ZTVjIiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+RGVodWxsaW5nPC90ZXh0Pjx0ZXh0IHg9IjE3MDAiIHk9Ijg5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+U0lNVUxBVElPTjwvdGV4dD48L3N2Zz4=",
+          "altText": "Dehulling labels",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      }
+    ]
+  }
+}

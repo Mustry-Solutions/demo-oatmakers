@@ -1,0 +1,271 @@
+{
+  "custom": {},
+  "params": {},
+  "propConfig": {},
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 939
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Demo/Page Hmi/Page"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Header"
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "classes": "Demo/PageHeader"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Identity"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Eyebrow"
+                },
+                "props": {
+                  "text": "OATMAKERS / SCADA / RECEIVING",
+                  "style": {
+                    "classes": "Demo/Eyebrow"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Title"
+                },
+                "props": {
+                  "text": "Cleaning",
+                  "style": {
+                    "classes": "Demo/PageTitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Subtitle"
+                },
+                "props": {
+                  "text": "Sieving, aspiration, destoning, length grading and optical sorting. Drag to pan, scroll to zoom.",
+                  "style": {
+                    "classes": "Demo/Subtitle"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0,
+              "grow": 1
+            }
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Navigation"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "classes": "Hmi/Navigation"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "Overview"
+                },
+                "props": {
+                  "text": "\u2039 Plant overview",
+                  "style": {
+                    "classes": "Demo/QuietButton Hmi/NavButton"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "40px"
+                },
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "type": "nav",
+                      "scope": "C",
+                      "config": {
+                        "page": "/scada"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "Previous"
+                },
+                "props": {
+                  "text": "\u2039 Intake & raw oat silos",
+                  "style": {
+                    "classes": "Demo/QuietButton Hmi/NavButton"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "40px"
+                },
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "type": "nav",
+                      "scope": "C",
+                      "config": {
+                        "page": "/scada/intake"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "Next"
+                },
+                "props": {
+                  "text": "Dehulling \u203a",
+                  "style": {
+                    "classes": "Demo/QuietButton Hmi/NavButton"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "40px"
+                },
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "type": "nav",
+                      "scope": "C",
+                      "config": {
+                        "page": "/scada/dehulling"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "Mode"
+            },
+            "props": {
+              "text": "SIMULATED FACTORY",
+              "style": {
+                "classes": "Demo/DemoBadge"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "mustrysolutions.perspective.display.panzoomview",
+        "meta": {
+          "name": "ProcessViewport"
+        },
+        "props": {
+          "config": {
+            "viewPath": "Demo/Hmi/Drawing/Cleaning",
+            "viewParams": [],
+            "contentWidth": 1740,
+            "contentHeight": 910,
+            "minZoom": 0.2,
+            "maxZoom": 4,
+            "zoomStep": 1.25,
+            "wheelZoom": true,
+            "doubleClickZoom": true,
+            "showControls": true,
+            "showMinimap": true,
+            "showPoiList": false,
+            "flyToMs": 250,
+            "home": {
+              "x": -1,
+              "y": -1,
+              "zoom": 0
+            }
+          },
+          "state": {
+            "zoom": 0,
+            "center": {
+              "x": 0,
+              "y": 0
+            },
+            "target": ""
+          },
+          "data": {
+            "pois": []
+          },
+          "style": {
+            "classes": "Hmi/PanZoom",
+            "minHeight": "0px"
+          }
+        },
+        "position": {
+          "shrink": 1,
+          "basis": "0px",
+          "grow": 1
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

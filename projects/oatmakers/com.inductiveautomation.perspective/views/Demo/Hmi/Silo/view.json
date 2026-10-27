@@ -1,0 +1,108 @@
+{
+  "custom": {},
+  "params": {
+    "area": "intake",
+    "tag": "SI101",
+    "signal": "",
+    "level": 0,
+    "product": ""
+  },
+  "propConfig": {
+    "params.area": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.signal": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.level": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.product": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 330
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "cursor": "pointer"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Graphic"
+        },
+        "props": {
+          "source": "",
+          "altText": "Silo",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "type": "expr-struct",
+              "config": {
+                "waitOnAll": true,
+                "struct": {
+                  "level": "{view.params.level}",
+                  "product": "{view.params.product}"
+                }
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn application.demo.scadaSiloSvg(value[\"level\"], value[\"product\"])"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    },
+    "events": {
+      "dom": {
+        "onClick": {
+          "type": "script",
+          "scope": "G",
+          "config": {
+            "script": "\tp = self.view.params\n\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, \"%\", 0)"
+          }
+        }
+      }
+    }
+  }
+}

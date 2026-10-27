@@ -1,0 +1,125 @@
+{
+  "custom": {},
+  "params": {
+    "area": "intake",
+    "tag": "TI101",
+    "kind": "TI",
+    "signal": "",
+    "unit": "",
+    "decimals": 1,
+    "value": "--",
+    "colour": "#f7f7f7"
+  },
+  "propConfig": {
+    "params.area": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.kind": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.signal": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.unit": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.decimals": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.value": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.colour": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 51
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "cursor": "pointer"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Graphic"
+        },
+        "props": {
+          "source": "",
+          "altText": "Instrument",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "type": "expr-struct",
+              "config": {
+                "waitOnAll": true,
+                "struct": {
+                  "tag": "{view.params.tag}",
+                  "kind": "{view.params.kind}",
+                  "value": "{view.params.value}",
+                  "colour": "{view.params.colour}"
+                }
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn application.demo.scadaInstrumentSvg(value[\"tag\"], value[\"kind\"], value[\"value\"], value[\"colour\"])"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    },
+    "events": {
+      "dom": {
+        "onClick": {
+          "type": "script",
+          "scope": "G",
+          "config": {
+            "script": "\tp = self.view.params\n\tif p.signal:\n\t\tapplication.demo.showScadaDetail(p.area, p.tag, p.signal, p.unit, p.decimals)"
+          }
+        }
+      }
+    }
+  }
+}

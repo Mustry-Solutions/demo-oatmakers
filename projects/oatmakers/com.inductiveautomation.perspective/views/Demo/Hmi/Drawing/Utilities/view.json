@@ -1,0 +1,856 @@
+{
+  "custom": {
+    "data": {
+      "running": true,
+      "state": ""
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.data": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(1000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.scadaData(\"utilities\")"
+          }
+        ]
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1740,
+      "height": 910
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "backgroundColor": "transparent",
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Piping"
+        },
+        "props": {
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMTg4IDExMCBIMjMwIiBmaWxsPSJub25lIiBzdHJva2U9IiM5M2JjZDEiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGcgZmlsbD0iI2Q3ZDlkOCIgc3Ryb2tlPSIjNjY2YTY4IiBzdHJva2Utd2lkdGg9IjEuNCI+PHJlY3QgeD0iMjMwIiB5PSI4MCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjEyMCIgcng9IjM1LjAiLz48L2c+PHBhdGggZD0iTTMwMCAxNDAgSDM2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTNiY2QxIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjM2MCIgeT0iMTAwIiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjkwIiByeD0iNDUuMCIvPjwvZz48cGF0aCBkPSJNNTgwIDE0NSBINjAwIFYyOTAgSDcwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTNiY2QxIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9Ijc0MCIgeT0iMTgwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgcng9Ijc1LjAiLz48cmVjdCB4PSI3MDAiIHk9IjIxNy41IiB3aWR0aD0iNDAiIGhlaWdodD0iNzUuMCIvPjxyZWN0IHg9Ijk3MCIgeT0iMTIwIiB3aWR0aD0iMjIiIGhlaWdodD0iNjAiLz48L2c+PHBhdGggZD0iTTE4OCAzNDQgSDcwMCBWMjk1IiBmaWxsPSJub25lIiBzdHJva2U9IiNiM2E0YzkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTk3MCAxODAgVjEzMCBIMTQwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhNTRlIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNDAwIDEzMCBWMzQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMTMwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMjAwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMjcwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0MDAgMzQwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE1NGUiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHRleHQgeD0iNDAiIHk9IjQ4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPkNPTVBSRVNTRUQgQUlSPC90ZXh0PjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjIwMCIgeT0iNTIwIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjkwIiByeD0iNCIvPjwvZz48cGF0aCBkPSJNMzQwIDU2NSBINDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGcgZmlsbD0iI2Q3ZDlkOCIgc3Ryb2tlPSIjNjY2YTY4IiBzdHJva2Utd2lkdGg9IjEuNCI+PHJlY3QgeD0iMjAwIiB5PSI3MjAiIHdpZHRoPSIxNDAiIGhlaWdodD0iOTAiIHJ4PSI0Ii8+PC9nPjxwYXRoIGQ9Ik0zNDAgNzY1IEg0MjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNDIwIDU2NSBWNzY1IiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTQyMCA2NDAgSDUyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGY5NTk5IiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjUyMCIgeT0iNTIwIiB3aWR0aD0iODAiIGhlaWdodD0iMjIwIiByeD0iNDAuMCIvPjwvZz48cGF0aCBkPSJNNjAwIDY0MCBINzAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGcgZmlsbD0iI2Q3ZDlkOCIgc3Ryb2tlPSIjNjY2YTY4IiBzdHJva2Utd2lkdGg9IjEuNCI+PHJlY3QgeD0iNzAwIiB5PSI1ODAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNCIvPjwvZz48cGF0aCBkPSJNODIwIDY0MCBIMTU0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGY5NTk5IiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDEwIDU4MiBWNjQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9Ijk3NiIgeT0iMzk2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48dGV4dCB4PSI5ODAiIHk9IjM5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPlN0ZWFtIGhlYWRlciAoYmFyKTwvdGV4dD48cmVjdCB4PSIxMjY2IiB5PSIzOTYiIHdpZHRoPSIyNDgiIGhlaWdodD0iNzgiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjx0ZXh0IHg9IjEyNzAiIHk9IjM5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPkNvbXByZXNzZWQgYWlyIChiYXIpPC90ZXh0Pjwvc3ZnPg==",
+          "altText": "Steam & compressed air piping",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TownWaterLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Town water",
+            "target": "",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDEzNiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjNTk1YzVhIi8+PGNpcmNsZSBjeD0iMTM2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTMzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI2Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Ub3duIHdhdGVyPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 96,
+          "width": 150,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "P901"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "utilities",
+            "tag": "P901",
+            "signal": "drumLevel",
+            "unit": "%",
+            "decimals": 0,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxjaXJjbGUgY3g9IjM5LjAiIGN5PSI0OC4wIiByPSIyMSIgZmlsbD0iI2MwZGZiOCIgc3Ryb2tlPSIjNTU1IiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMzkuMCA0OC4wIHEtMjIgLTIwIC05IC0xOSBxMTUgLTMgMTMgMTQgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMCAzOS4wIDQ4LjApIiBmaWxsPSIjNTQ4NDU1Ii8+PHBhdGggZD0iTTM5LjAgNDguMCBxLTIyIC0yMCAtOSAtMTkgcTE1IC0zIDEzIDE0IFoiIHRyYW5zZm9ybT0icm90YXRlKDkwIDM5LjAgNDguMCkiIGZpbGw9IiM1NDg0NTUiLz48cGF0aCBkPSJNMzkuMCA0OC4wIHEtMjIgLTIwIC05IC0xOSBxMTUgLTMgMTMgMTQgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIDM5LjAgNDguMCkiIGZpbGw9IiM1NDg0NTUiLz48cGF0aCBkPSJNMzkuMCA0OC4wIHEtMjIgLTIwIC05IC0xOSBxMTUgLTMgMTMgMTQgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMjcwIDM5LjAgNDguMCkiIGZpbGw9IiM1NDg0NTUiLz48Y2lyY2xlIGN4PSIzOS4wIiBjeT0iNDguMCIgcj0iNSIgZmlsbD0iIzU1NSIvPjx0ZXh0IHg9IjYzIiB5PSIxNyIgZm9udC1zaXplPSIxMiI+TTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UDkwMTwvdGV4dD48L2c+PC9zdmc+",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxjaXJjbGUgY3g9IjM5LjAiIGN5PSI0OC4wIiByPSIyMSIgZmlsbD0iI2IzYjNiMyIgc3Ryb2tlPSIjNTU1IiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMzkuMCA0OC4wIHEtMjIgLTIwIC05IC0xOSBxMTUgLTMgMTMgMTQgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMCAzOS4wIDQ4LjApIiBmaWxsPSIjN2M3ZjdkIi8+PHBhdGggZD0iTTM5LjAgNDguMCBxLTIyIC0yMCAtOSAtMTkgcTE1IC0zIDEzIDE0IFoiIHRyYW5zZm9ybT0icm90YXRlKDkwIDM5LjAgNDguMCkiIGZpbGw9IiM3YzdmN2QiLz48cGF0aCBkPSJNMzkuMCA0OC4wIHEtMjIgLTIwIC05IC0xOSBxMTUgLTMgMTMgMTQgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIDM5LjAgNDguMCkiIGZpbGw9IiM3YzdmN2QiLz48cGF0aCBkPSJNMzkuMCA0OC4wIHEtMjIgLTIwIC05IC0xOSBxMTUgLTMgMTMgMTQgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMjcwIDM5LjAgNDguMCkiIGZpbGw9IiM3YzdmN2QiLz48Y2lyY2xlIGN4PSIzOS4wIiBjeT0iNDguMCIgcj0iNSIgZmlsbD0iIzU1NSIvPjx0ZXh0IHg9IjYzIiB5PSIxNyIgZm9udC1zaXplPSIxMiI+TTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UDkwMTwvdGV4dD48L2c+PC9zdmc+"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 601,
+          "y": 242,
+          "width": 78,
+          "height": 88
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "NaturalGasLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Natural gas",
+            "target": "",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDEzNiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjNTk1YzVhIi8+PGNpcmNsZSBjeD0iMTM2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTMzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI2Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5OYXR1cmFsIGdhczwvdGV4dD48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 330,
+          "width": 150,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FCV901"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "utilities",
+            "tag": "FCV901",
+            "signal": "gasFlow",
+            "unit": "Nm\u00b3/h",
+            "decimals": 0,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+RkNWOTAxPC90ZXh0PjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+RkNWOTAxPC90ZXh0PjwvZz48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 421,
+          "y": 296,
+          "width": 78,
+          "height": 88
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PCV901"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "utilities",
+            "tag": "PCV901",
+            "signal": "headerPressure",
+            "unit": "bar",
+            "decimals": 2,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UENWOTAxPC90ZXh0PjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UENWOTAxPC90ZXh0PjwvZz48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1141,
+          "y": 82,
+          "width": 78,
+          "height": 88
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SteamToKilningLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Steam to kilning",
+            "target": "/scada/kiln",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNzAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE1NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTU2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTUzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5TdGVhbSB0byBraWxuaW5nPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 116,
+          "width": 170,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SteamToLine01Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Steam to Line 01",
+            "target": "/scada/flaking",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNzAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE1NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTU2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTUzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5TdGVhbSB0byBMaW5lIDAxPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 186,
+          "width": 170,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SteamToLine02Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Steam to Line 02",
+            "target": "/scada/cutting",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNzAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE1NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTU2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTUzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5TdGVhbSB0byBMaW5lIDAyPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 256,
+          "width": 170,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SteamToLine03Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Steam to Line 03",
+            "target": "/scada/milling",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNzAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE1NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTU2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTUzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5TdGVhbSB0byBMaW5lIDAzPC90ZXh0Pjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 326,
+          "width": 170,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "LI902"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "LI902",
+            "kind": "LI",
+            "signal": "feedLevel",
+            "unit": "%",
+            "decimals": 0,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 420,
+          "y": 235,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.feedLevel}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.0f} %\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PI901"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "PI901",
+            "kind": "PI",
+            "signal": "boilerPressure",
+            "unit": "bar",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1060,
+          "y": 190,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.boilerPressure}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} bar\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TI901"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "TI901",
+            "kind": "TI",
+            "signal": "steamTemp",
+            "unit": "\u00b0C",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1060,
+          "y": 260,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.steamTemp}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "LIC901"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "LIC901",
+            "kind": "LI",
+            "signal": "drumLevel",
+            "unit": "%",
+            "decimals": 1,
+            "colour": "#a7eef0",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 820,
+          "y": 360,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.drumLevel}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FI902"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "FI902",
+            "kind": "FI",
+            "signal": "gasFlow",
+            "unit": "Nm\u00b3/h",
+            "decimals": 0,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 300,
+          "y": 380,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.gasFlow}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.0f} Nm\u00b3/h\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FI901"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "FI901",
+            "kind": "FI",
+            "signal": "steamFlow",
+            "unit": "t/h",
+            "decimals": 2,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1250,
+          "y": 160,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.steamFlow}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.2f} t/h\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PIC902"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "PIC902",
+            "kind": "PI",
+            "signal": "headerPressure",
+            "unit": "bar",
+            "decimals": 2,
+            "colour": "#ffe044",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1250,
+          "y": 230,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.headerPressure}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.2f} bar\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "M-AC901"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "utilities",
+            "tag": "M-AC901",
+            "signal": "compAmps",
+            "unit": "A",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUFDOTAxPC90ZXh0PjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUFDOTAxPC90ZXh0PjwvZz48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 250,
+          "y": 455,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "M-AC902"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "utilities",
+            "tag": "M-AC902",
+            "signal": "",
+            "unit": "A",
+            "decimals": 1,
+            "running": false,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUFDOTAyPC90ZXh0PjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTUiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48dGV4dCB4PSIyMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiPk08L3RleHQ+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5NLUFDOTAyPC90ZXh0PjwvZz48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 250,
+          "y": 655,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "CompressedAirToPlantLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Compressed air to plant",
+            "target": "",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxOTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE3NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjNTk1YzVhIi8+PGNpcmNsZSBjeD0iMTc2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTczIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI4Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Db21wcmVzc2VkIGFpciB0byBwbGFudDwvdGV4dD48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 626,
+          "width": 190,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "II901"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "II901",
+            "kind": "II",
+            "signal": "compAmps",
+            "unit": "A",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 450,
+          "y": 470,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.compAmps}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} A\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PI903"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "PI903",
+            "kind": "PI",
+            "signal": "airPressure",
+            "unit": "bar",
+            "decimals": 2,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1000,
+          "y": 540,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.airPressure}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.2f} bar\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TI903"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "utilities",
+            "tag": "TI903",
+            "kind": "TI",
+            "signal": "dewPoint",
+            "unit": "\u00b0C",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 860,
+          "y": 720,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.dewPoint}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendHeaderPressure"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "utilities",
+            "signal": "headerPressure",
+            "colour": "#626b75",
+            "sp": 3.5
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 980,
+          "y": 400,
+          "width": 240,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendAirPressure"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "utilities",
+            "signal": "airPressure",
+            "colour": "#626b75",
+            "sp": 7.2
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1270,
+          "y": 400,
+          "width": 240,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Labels"
+        },
+        "props": {
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48dGV4dCB4PSIyNjUuMCIgeT0iMjE4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5XVDkwMTwvdGV4dD48dGV4dCB4PSIyNjUuMCIgeT0iMjMyIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPlNvZnRlbmVyPC90ZXh0Pjx0ZXh0IHg9IjQ3MC4wIiB5PSIyMDgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkZXOTAxPC90ZXh0Pjx0ZXh0IHg9IjQ3MC4wIiB5PSIyMjIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+RmVlZHdhdGVyIHRhbms8L3RleHQ+PHRleHQgeD0iODkwLjAiIHk9IjI1OS4wIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5COTAxPC90ZXh0Pjx0ZXh0IHg9Ijg5MC4wIiB5PSIyNzMuMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5TdGVhbSBib2lsZXI8L3RleHQ+PHRleHQgeD0iMjcwLjAiIHk9IjYyOCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+QUM5MDE8L3RleHQ+PHRleHQgeD0iMjcwLjAiIHk9IjY0MiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5Db21wcmVzc29yIChkdXR5KTwvdGV4dD48dGV4dCB4PSIyNzAuMCIgeT0iODI4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5BQzkwMjwvdGV4dD48dGV4dCB4PSIyNzAuMCIgeT0iODQyIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkNvbXByZXNzb3IgKHN0YW5kYnkpPC90ZXh0Pjx0ZXh0IHg9IjU2MC4wIiB5PSI3NTgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkFSOTAxPC90ZXh0Pjx0ZXh0IHg9IjU2MC4wIiB5PSI3NzIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+QWlyIHJlY2VpdmVyPC90ZXh0Pjx0ZXh0IHg9Ijc2MC4wIiB5PSI3MTgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkFEOTAxPC90ZXh0Pjx0ZXh0IHg9Ijc2MC4wIiB5PSI3MzIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+QWRzb3JwdGlvbiBkcnllcjwvdGV4dD48dGV4dCB4PSI0MCIgeT0iODkwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVhNWU1YyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPlN0ZWFtICZhbXA7IGNvbXByZXNzZWQgYWlyPC90ZXh0Pjx0ZXh0IHg9IjE3MDAiIHk9Ijg5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+U0lNVUxBVElPTjwvdGV4dD48L3N2Zz4=",
+          "altText": "Steam & compressed air labels",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      }
+    ]
+  }
+}

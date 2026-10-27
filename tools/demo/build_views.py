@@ -47,7 +47,7 @@ for key in ['temperature','moisture','pressure']:
     b=button(key.title(),'',script='\tapplication.demo.showHistory(self.view.params.lineNumber, '+json.dumps(key)+')',classes='Demo/ReadingButton')
     b['position']={'basis':'90px','grow':1,'shrink':1}
     b['propConfig']={'props.text':bind_script('view.params.'+key,'\treturn u"{0:.1f} {1}".format(value or 0, '+'u'+json.dumps(METRICS[key][2])+')')};readings.append(b)
-line_children += [flex('Readings',readings,'row','Demo/Wrap'),button('Scada','Open SCADA',script='\tself.session.custom.demo.scadaLine = self.view.params.lineNumber\n\tsystem.perspective.navigate("/scada")',classes='Demo/QuietButton')]
+line_children += [flex('Readings',readings,'row','Demo/Wrap'),button('Scada','Open SCADA',script='\tsystem.perspective.navigate({1: "/scada/flaking", 2: "/scada/cutting", 3: "/scada/milling"}.get(int(self.view.params.lineNumber), "/scada"))',classes='Demo/QuietButton')]
 line_root=flex('root',line_children,classes='Demo/Panel');line_root['children'][0]['children'][1]['propConfig']['props.style.color']=prop('view.params.colour')
 view('Demo/Components/LineCard',line_root,params={'lineNumber':1,'name':'','state':'','product':'','rate':0,'temperature':0,'moisture':0,'pressure':0,'colour':'#2d8962'},height=270)
 
@@ -169,8 +169,8 @@ for key in ('custom.batches','custom.records','custom.selected'):
     operator['propConfig'][key]['persistent']=True
 write(operator_file,operator)
 
-from build_separator import build_separator, SEPARATOR_CSS
-build_separator()
+from build_scada import build_scada, SCADA_CSS, AREAS
+scada_routes=build_scada()
 
 popup_history=embed('History','Demo/HistoryChart',{'showSelectors':False},basis='0px',grow=1);popup_history['position']['shrink']=1;popup_history['propConfig']={'props.params.lineNumber':prop('view.params.lineNumber'),'props.params.metric':prop('view.params.metric')}
 view('Demo/TagHistory',flex('root',[bound_label('Title','view.params.title','Demo/SectionTitle'),bound_label('Tag','view.params.tagPath','Demo/Muted'),popup_history],classes='Demo/PopupRoot'),params={'lineNumber':1,'metric':'temperature','title':'Temperature','tagPath':''},height=560)
@@ -183,12 +183,20 @@ page('Demo/Health','Demo health','Data freshness and automatic retention.',[flex
 routes=[('/','Factory overview','Demo/Overview'),('/scada','SCADA','Demo/SCADA'),('/production','Production planning','Demo/Production'),('/performance','Performance','Demo/Performance'),('/quality','Quality & traceability','Demo/Quality'),('/operator','Batch output','Demo/Operator')]
 logo=base64.b64encode((ROOT/'tools/demo/scada-assets/oatmakers-logo.svg').read_bytes()).decode()
 nav=[node('ia.display.image','Brand',{'source':'data:image/svg+xml;base64,'+logo,'altText':'Oatmakers','fit':{'mode':'contain'},'style':{'classes':'Demo/BrandLogo'}},basis='74px'),label('BrandDetail','CONNECTED OPERATIONS','Demo/NavEyebrow'),label('DemoLabel','LIVE SIMULATION','Demo/NavBadge')]
-for i,(path,title,_) in enumerate(routes):
-    b=button('Nav'+str(i),title,page=path,classes='Demo/NavButton');b['position']['basis']='45px';b['propConfig']={'props.style.backgroundColor':expr('if({page.props.path} = '+json.dumps(path)+', "#3d474f", "transparent")')};nav.append(b)
-nav += [flex('Spacer',[],grow=1),button('Health','Demo health',page='/demo/health',classes='Demo/NavButton'),label('Footer','Mustry Solutions','Demo/NavFooter')]
+# The SCADA entry drills down into process groups and their area screens.
+def item(title,target='',icon='',children=None):
+    return {'target':target,'items':children or [],'navIcon':{'path':'material/chevron_right' if children else ''},'label':{'text':title,'icon':{'path':icon}},'visible':True,'enabled':True,'showHeader':True,'resetOnClick':False,'backActionText':'','style':{'classes':''}}
+groups={}
+for route,title,_ in scada_routes:groups.setdefault(next(a[3] for a in AREAS if a[1]==route),[]).append(item(title,route))
+scada_menu=[item('Plant overview','/scada','material/dashboard')]+[item(g,icon=i,children=children) for (g,children),i in zip(groups.items(),['material/local_shipping','material/grain','material/layers','material/archive','material/build'])]
+menu_items=[item('Factory overview','/','material/home'),item('SCADA',icon='material/device_hub',children=scada_menu)]+[item(t,r,i) for (r,t,_),i in zip(routes[2:],['material/event','material/timeline','material/verified_user','material/assignment'])]
+menu=node('ia.navigation.menutree','Menu',{'items':menu_items,'layoutAlignment':'left','backActionText':'Back','itemStyle':{'classes':'Demo/MenuItem'},'headerStyle':{'classes':'Demo/MenuHeader'},'backActionStyle':{'classes':'Demo/MenuBack'},'style':{'classes':'Demo/Menu'}},basis='auto',grow=1)
+menu['propConfig']={'props.items':bind_script('page.props.path','\titems = system.util.jsonDecode('+json.dumps(json.dumps(menu_items))+')\n\tdef mark(nodes):\n\t\tfound = False\n\t\tfor n in nodes:\n\t\t\tchild = mark(n["items"])\n\t\t\tactive = n["target"] == value\n\t\t\tn["style"]["classes"] = "Demo/MenuActive" if active else ("Demo/MenuTrail" if child else "")\n\t\t\tfound = found or active or child\n\t\treturn found\n\tmark(items)\n\treturn items')}
+nav.append(menu)
+nav += [button('Health','Demo health',page='/demo/health',classes='Demo/NavButton'),label('Footer','Mustry Solutions','Demo/NavFooter')]
 view('Sidenav',flex('root',nav,classes='Demo/Navigation'),height=900)
 config=json.loads((P/'page-config/config.json').read_text());config['pages'].pop('/components',None)
-for route,title,path in routes:config['pages'][route]={'title':title,'viewPath':path}
+for route,title,path in routes+scada_routes:config['pages'][route]={'title':title,'viewPath':path}
 config['pages']['/process']={'title':'SCADA','viewPath':'Demo/SCADA'};config['pages']['/demo/health']={'title':'Demo health','viewPath':'Demo/Health'}
 config['pages']['/oee']={'title':'Performance','viewPath':'Demo/Performance'};config['pages']['/demo/input-fields']={'title':'Batch output','viewPath':'Demo/Operator'}
 nav_docks=config.get('sharedDocks', {})
@@ -199,7 +207,7 @@ for route,definition in config['pages'].items():
 config['sharedDocks']=copy.deepcopy(nav_docks)
 write(P/'page-config/config.json',config)
 write(P/'session-props/props.json',{'custom':{'demo':{'scadaLine':1,'scadaArea':'peeling','scadaMetric':'temperature'}},'props':{'theme':'light'}});resource(P/'session-props',['props.json'])
-for old in ['Demo/ComponentsGallery','Demo/Process']:
+for old in ['Demo/ComponentsGallery','Demo/Process','Demo/Separator']:
     if (V/old).exists():shutil.rmtree(V/old)
 
 css='''
@@ -272,5 +280,5 @@ css='''
 @container demo (max-width:900px) { .psc-Demo\\/Workspace { flex-wrap:wrap !important; } .psc-Demo\\/Workspace > * { flex-basis:100% !important; } .psc-Demo\\/PageHeader { flex-wrap:wrap !important; } }
 @media(max-width:650px) { .psc-Demo\\/Page { padding:14px; } .psc-Demo\\/PageTitle { font-size:24px; } .psc-Demo\\/Filters { flex-wrap:wrap !important; } }
 '''
-p=P/'stylesheet';(p/'stylesheet.css').write_text(css+SEPARATOR_CSS);resource(p,['stylesheet.css'])
-print('Built operational screens with Mustry UI, SCADA and range-controlled history.')
+p=P/'stylesheet';(p/'stylesheet.css').write_text(css+SCADA_CSS);resource(p,['stylesheet.css'])
+print('Built operational screens with Mustry UI, drill-down SCADA and range-controlled history.')

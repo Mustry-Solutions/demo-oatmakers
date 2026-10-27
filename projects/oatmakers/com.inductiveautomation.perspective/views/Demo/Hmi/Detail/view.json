@@ -1,0 +1,205 @@
+{
+  "custom": {},
+  "params": {
+    "area": "intake",
+    "tag": "",
+    "signal": "",
+    "unit": "",
+    "decimals": 1
+  },
+  "propConfig": {
+    "params.area": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tag": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.signal": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.unit": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.decimals": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 300
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Demo/PopupRoot"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Title"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Demo/SectionTitle"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.tag"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Mode"
+        },
+        "props": {
+          "text": "Read-only process simulation",
+          "style": {
+            "classes": "Demo/Muted"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Value"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Hmi/DetailValue"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr-struct",
+              "config": {
+                "waitOnAll": true,
+                "struct": {
+                  "tick": "now(1000)",
+                  "area": "{view.params.area}",
+                  "signal": "{view.params.signal}",
+                  "unit": "{view.params.unit}",
+                  "decimals": "{view.params.decimals}"
+                }
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn application.demo.scadaDetailValue(value[\"area\"], value[\"signal\"], value[\"unit\"], value[\"decimals\"])"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "Trend"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "colour": "#626b75",
+            "sp": 0
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "160px"
+        },
+        "propConfig": {
+          "props.params.area": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.area"
+              }
+            }
+          },
+          "props.params.signal": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "view.params.signal"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "Caption"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "Demo/Muted"
+          }
+        },
+        "position": {
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.area}"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn application.demo.scadaAreaTitle(value) + \" | recent trend\""
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "position": {
+      "shrink": 0
+    }
+  }
+}

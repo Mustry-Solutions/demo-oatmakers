@@ -1,0 +1,830 @@
+{
+  "custom": {
+    "data": {
+      "running": true,
+      "state": ""
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.data": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(1000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\treturn application.demo.scadaData(\"kiln\")"
+          }
+        ]
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1740,
+      "height": 910
+    }
+  },
+  "root": {
+    "type": "ia.container.coord",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "fixed",
+      "style": {
+        "backgroundColor": "transparent",
+        "overflow": "visible"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Piping"
+        },
+        "props": {
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48cGF0aCBkPSJNMjA4IDExMCBIMjYwIFYxNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZyBmaWxsPSIjZDdkOWQ4IiBzdHJva2U9IiM2NjZhNjgiIHN0cm9rZS13aWR0aD0iMS40Ij48cGF0aCBkPSJNMjAwIDE0MCBIMzIwIFYyNDUuMCBMMjcwLjAgMjkwIEgyNTAuMCBMMjAwIDI0NS4wIFoiLz48L2c+PHBhdGggZD0iTTI2MCAyOTAgVjM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTY1OTU3IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxyZWN0IHg9IjIzMCIgeT0iMzgyIiB3aWR0aD0iMjQwIiBoZWlnaHQ9IjIwIiByeD0iMTAiLz48cGF0aCBkPSJNMjQ0IDM4NiBsNiAxMiBsNiAtMTIiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0yNTYgMzg2IGw2IDEyIGw2IC0xMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTI2OCAzODYgbDYgMTIgbDYgLTEyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMjgwIDM4NiBsNiAxMiBsNiAtMTIiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0yOTIgMzg2IGw2IDEyIGw2IC0xMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMwNCAzODYgbDYgMTIgbDYgLTEyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMzE2IDM4NiBsNiAxMiBsNiAtMTIiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0zMjggMzg2IGw2IDEyIGw2IC0xMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTM0MCAzODYgbDYgMTIgbDYgLTEyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMzUyIDM4NiBsNiAxMiBsNiAtMTIiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0zNjQgMzg2IGw2IDEyIGw2IC0xMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTM3NiAzODYgbDYgMTIgbDYgLTEyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMzg4IDM4NiBsNiAxMiBsNiAtMTIiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik00MDAgMzg2IGw2IDEyIGw2IC0xMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTQxMiAzODYgbDYgMTIgbDYgLTEyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNNDI0IDM4NiBsNiAxMiBsNiAtMTIiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik00MzYgMzg2IGw2IDEyIGw2IC0xMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9nPjxwYXRoIGQ9Ik00NzAgMzkyIEg1MjAgVjEwMCBINjAwIFYxMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU2NTk1NyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjM4IDY1NCBINDIwIFY0MDIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YTU0ZSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNDIwIDY1NCBINTQwIFY0MDAgSDU2MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhNTRlIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIGZpbGw9IiNkN2Q5ZDgiIHN0cm9rZT0iIzY2NmE2OCIgc3Ryb2tlLXdpZHRoPSIxLjQiPjxwYXRoIGQ9Ik01NjAgMTUwIFE2MzAuMCAxMTYgNzAwIDE1MCBWNDIwIEw2NDIuMCA0NjAgSDYxOC4wIEw1NjAgNDIwIFoiLz48cGF0aCBkPSJNNTYzIDIyOS4wIGgxMzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YTU0ZSIgc3Ryb2tlLXdpZHRoPSIyLjUiLz48cGF0aCBkPSJNNTYzIDI5NS4wIGgxMzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YTU0ZSIgc3Ryb2tlLXdpZHRoPSIyLjUiLz48cGF0aCBkPSJNNTYzIDM2MS4wIGgxMzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YTU0ZSIgc3Ryb2tlLXdpZHRoPSIyLjUiLz48L2c+PHBhdGggZD0iTTY3MCAxMjAgVjgwIEg3NjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmOTU5OSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSI0IDMiLz48dGV4dCB4PSI5MDAiIHk9Ijg1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciPktpbG4gZXhoYXVzdDwvdGV4dD48cGF0aCBkPSJNNjMwIDQ2MCBWNTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGcgZmlsbD0iI2Q3ZDlkOCIgc3Ryb2tlPSIjNjY2YTY4IiBzdHJva2Utd2lkdGg9IjEuNCI+PHJlY3QgeD0iNTYwIiB5PSI1NjAiIHdpZHRoPSIxNDAiIGhlaWdodD0iMTkwIiByeD0iNCIvPjxwYXRoIGQ9Ik01NzIgNjE3LjAgbDE0IC0xMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTU5NCA2MTcuMCBsMTQgLTEwIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNNjE2IDYxNy4wIGwxNCAtMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik02MzggNjE3LjAgbDE0IC0xMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTY2MCA2MTcuMCBsMTQgLTEwIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNNTcyIDY2NC41IGwxNCAtMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik01OTQgNjY0LjUgbDE0IC0xMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTYxNiA2NjQuNSBsMTQgLTEwIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNNjM4IDY2NC41IGwxNCAtMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik02NjAgNjY0LjUgbDE0IC0xMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTU3MiA3MTIuMCBsMTQgLTEwIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNNTk0IDcxMi4wIGwxNCAtMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik02MTYgNzEyLjAgbDE0IC0xMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTYzOCA3MTIuMCBsMTQgLTEwIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNNjYwIDcxMi4wIGwxNCAtMTAiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48cGF0aCBkPSJNNzAwIDY0MCBINzQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4Zjk1OTkiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+PHBhdGggZD0iTTYzMCA3NTAgVjc5MCBIOTIwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGcgZmlsbD0iI2Q3ZDlkOCIgc3Ryb2tlPSIjNjY2YTY4IiBzdHJva2Utd2lkdGg9IjEuNCI+PHJlY3QgeD0iOTIwIiB5PSI3NDAuMCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIxNS4wIi8+PHJlY3QgeD0iOTIwIiB5PSI3NTUuMCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIxNS4wIi8+PHJlY3QgeD0iOTIwIiB5PSI3NzAuMCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIxNS4wIi8+PHJlY3QgeD0iOTIwIiB5PSI3ODUuMCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIxNS4wIi8+PHJlY3QgeD0iOTIwIiB5PSI4MDAuMCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIxNS4wIi8+PHJlY3QgeD0iOTIwIiB5PSI4MTUuMCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIxNS4wIi8+PC9nPjxwYXRoIGQ9Ik0xMDkwIDc4NSBIMTIwMCBWMjAwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEyMDAgMzMwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEyMDAgNDYwIEgxNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1NjU5NTciIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHJlY3QgeD0iODk2IiB5PSIxNzYiIHdpZHRoPSIyNjgiIGhlaWdodD0iNzgiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iI2MyYzVjMyIvPjx0ZXh0IHg9IjkwMCIgeT0iMTcwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzZkNzI3MCI+S2lsbiB0ZW1wZXJhdHVyZSAowrBDKTwvdGV4dD48cmVjdCB4PSI4OTYiIHk9IjMyNiIgd2lkdGg9IjI2OCIgaGVpZ2h0PSI3OCIgZmlsbD0iI2VlZWVlZSIgc3Ryb2tlPSIjYzJjNWMzIi8+PHRleHQgeD0iOTAwIiB5PSIzMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNmQ3MjcwIj5Hcm9hdCBtb2lzdHVyZSBhZnRlciBjb29sZXIgKCUpPC90ZXh0PjxyZWN0IHg9Ijg5NiIgeT0iNDc2IiB3aWR0aD0iMjY4IiBoZWlnaHQ9Ijc4IiBmaWxsPSIjZWVlZWVlIiBzdHJva2U9IiNjMmM1YzMiLz48dGV4dCB4PSI5MDAiIHk9IjQ3MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM2ZDcyNzAiPkNvb2xlciBvdXRsZXQgKMKwQyk8L3RleHQ+PC9zdmc+",
+          "altText": "Kilning & stabilisation piping",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FromDehullingLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "From dehulling",
+            "target": "/scada/dehulling",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNzAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE1NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTU2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTUzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Gcm9tIGRlaHVsbGluZzwvdGV4dD48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 96,
+          "width": 170,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "RV401"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "kiln",
+            "tag": "RV401",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlY0MDE8L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlY0MDE8L3RleHQ+PC9nPjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 240,
+          "y": 300,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SteamFromBoilerHouseLink"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Steam from boiler house",
+            "target": "/scada/utilities",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyMDAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE4NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTg2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTgzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI4Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5TdGVhbSBmcm9tIGJvaWxlciBob3VzZTwvdGV4dD48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 38,
+          "y": 640,
+          "width": 200,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FCV401"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "kiln",
+            "tag": "FCV401",
+            "signal": "steamFlow",
+            "unit": "kg/h",
+            "decimals": 0,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+RkNWNDAxPC90ZXh0PjwvZz48L3N2Zz4=",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI1LjAgMjYuMCBhMTQgMTIgMCAwIDEgMjggMCBaIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHRleHQgeD0iNTkuMCIgeT0iMjUuMCIgZm9udC1zaXplPSIxMiI+QTwvdGV4dD48dGV4dCB4PSIzOS4wIiB5PSI4MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+RkNWNDAxPC90ZXh0PjwvZz48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 261,
+          "y": 606,
+          "width": 78,
+          "height": 88
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FN402"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "kiln",
+            "tag": "FN402",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5GTjQwMjwvdGV4dD48L2c+PC9zdmc+",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5GTjQwMjwvdGV4dD48L2c+PC9zdmc+"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 760,
+          "y": 50,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "RV402"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "kiln",
+            "tag": "RV402",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlY0MDI8L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTQiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAzMCBoMjggTTIwIDE2IHYyOCBNMTAgMjAgbDIwIDIwIE0zMCAyMCBsLTIwIDIwIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMSIvPjx0ZXh0IHg9IjQyIiB5PSIzNCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+UlY0MDI8L3RleHQ+PC9nPjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 610,
+          "y": 480,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FN401"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "kiln",
+            "tag": "FN401",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5GTjQwMTwvdGV4dD48L2c+PC9zdmc+",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMTAgNjAiPjxnIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iIzU1NSI+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMCIgcj0iMTciIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMjAgMzAgcS0zIC0xMiA3IC0xMyBxNCA2IC03IDEzIFoiIHRyYW5zZm9ybT0icm90YXRlKDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHBhdGggZD0iTTIwIDMwIHEtMyAtMTIgNyAtMTMgcTQgNiAtNyAxMyBaIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDAgMjAgMzApIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNDIiIHk9IjM0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5GTjQwMTwvdGV4dD48L2c+PC9zdmc+"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 740,
+          "y": 610,
+          "width": 110,
+          "height": 60
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SDV411"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "kiln",
+            "tag": "SDV411",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjx0ZXh0IHg9IjM5LjAiIHk9IjgzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5TRFY0MTE8L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjx0ZXh0IHg9IjM5LjAiIHk9IjgzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5TRFY0MTE8L3RleHQ+PC9nPjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1361,
+          "y": 152,
+          "width": 78,
+          "height": 88
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "GroatsToLine01Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Groats to Line 01",
+            "target": "/scada/flaking",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Hcm9hdHMgdG8gTGluZSAwMTwvdGV4dD48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 186,
+          "width": 180,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SDV412"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "kiln",
+            "tag": "SDV412",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjx0ZXh0IHg9IjM5LjAiIHk9IjgzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5TRFY0MTI8L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjx0ZXh0IHg9IjM5LjAiIHk9IjgzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5TRFY0MTI8L3RleHQ+PC9nPjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1361,
+          "y": 282,
+          "width": 78,
+          "height": 88
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "GroatsToLine02Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Groats to Line 02",
+            "target": "/scada/cutting",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Hcm9hdHMgdG8gTGluZSAwMjwvdGV4dD48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 316,
+          "width": 180,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "SDV413"
+        },
+        "props": {
+          "path": "Demo/Hmi/Device",
+          "params": {
+            "area": "kiln",
+            "tag": "SDV413",
+            "signal": "",
+            "unit": "",
+            "decimals": 1,
+            "running": true,
+            "on": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNhN2RmYTUiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYTdkZmE1IiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjx0ZXh0IHg9IjM5LjAiIHk9IjgzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5TRFY0MTM8L3RleHQ+PC9nPjwvc3ZnPg==",
+            "off": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3OCIgaGVpZ2h0PSI4OCIgdmlld0JveD0iMCAwIDc4IDg4Ij48ZyBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM1NTUiPjxwYXRoIGQ9Ik0yNC4wIDQwLjAgTDU0LjAgNTYuMCBWNDAuMCBMMjQuMCA1Ni4wIFoiIGZpbGw9IiNiM2IzYjMiIHN0cm9rZT0iIzU1NSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNMzkuMCAyNi4wIFY0OC4wIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMjkuMCIgeT0iMTQuMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjYjNiM2IzIiBzdHJva2U9IiM1NTUiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHBhdGggZD0iTTI5LjAgMjAuMCBoMjAgTTM5LjAgMTQuMCB2MTIiIHN0cm9rZT0iIzU1NSIvPjx0ZXh0IHg9IjM5LjAiIHk9IjgzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5TRFY0MTM8L3RleHQ+PC9nPjwvc3ZnPg=="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1361,
+          "y": 412,
+          "width": 78,
+          "height": 88
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "GroatsToLine03Link"
+        },
+        "props": {
+          "path": "Demo/Hmi/Stream",
+          "params": {
+            "text": "Groats to Line 03",
+            "target": "/scada/milling",
+            "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxODAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE2NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTY2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTYzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI3Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Hcm9hdHMgdG8gTGluZSAwMzwvdGV4dD48L3N2Zz4="
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 1540,
+          "y": 446,
+          "width": 180,
+          "height": 28
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "PI401"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "kiln",
+            "tag": "PI401",
+            "kind": "PI",
+            "signal": "steamPressure",
+            "unit": "bar",
+            "decimals": 2,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 90,
+          "y": 560,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.steamPressure}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.2f} bar\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FIC401"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "kiln",
+            "tag": "FIC401",
+            "kind": "FI",
+            "signal": "steamFlow",
+            "unit": "kg/h",
+            "decimals": 0,
+            "colour": "#ffe044",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 330,
+          "y": 560,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.steamFlow}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.0f} kg/h\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TIC401"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "kiln",
+            "tag": "TIC401",
+            "kind": "TI",
+            "signal": "kilnTop",
+            "unit": "\u00b0C",
+            "decimals": 1,
+            "colour": "#ffe044",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 720,
+          "y": 180,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.kilnTop}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TI402"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "kiln",
+            "tag": "TI402",
+            "kind": "TI",
+            "signal": "kilnMid",
+            "unit": "\u00b0C",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 720,
+          "y": 260,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.kilnMid}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TI403"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "kiln",
+            "tag": "TI403",
+            "kind": "TI",
+            "signal": "kilnBottom",
+            "unit": "\u00b0C",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 720,
+          "y": 340,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.kilnBottom}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "MI401"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "kiln",
+            "tag": "MI401",
+            "kind": "MI",
+            "signal": "moisture",
+            "unit": "%",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 760,
+          "y": 690,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.moisture}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} %\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TI404"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "kiln",
+            "tag": "TI404",
+            "kind": "TI",
+            "signal": "coolerOut",
+            "unit": "\u00b0C",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 420,
+          "y": 700,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.coolerOut}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} \u00b0C\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "FT401"
+        },
+        "props": {
+          "path": "Demo/Hmi/Instrument",
+          "params": {
+            "area": "kiln",
+            "tag": "FT401",
+            "kind": "FI",
+            "signal": "feed",
+            "unit": "t/h",
+            "decimals": 1,
+            "colour": "#f7f7f7",
+            "value": "--"
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 60,
+          "y": 330,
+          "width": 130,
+          "height": 51
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "try({view.custom.data.feed}, 0)"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\treturn u\"{0:,.1f} t/h\".format(value or 0)"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendKilnMid"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "kiln",
+            "signal": "kilnMid",
+            "colour": "#626b75",
+            "sp": 98
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 900,
+          "y": 180,
+          "width": 260,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendMoisture"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "kiln",
+            "signal": "moisture",
+            "colour": "#626b75",
+            "sp": 9.6
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 900,
+          "y": 330,
+          "width": 260,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.view",
+        "meta": {
+          "name": "TrendCoolerOut"
+        },
+        "props": {
+          "path": "Demo/Hmi/Trend",
+          "params": {
+            "area": "kiln",
+            "signal": "coolerOut",
+            "colour": "#626b75",
+            "sp": 25
+          },
+          "useDefaultViewWidth": false,
+          "useDefaultViewHeight": false
+        },
+        "position": {
+          "x": 900,
+          "y": 480,
+          "width": 260,
+          "height": 70
+        }
+      },
+      {
+        "type": "ia.display.image",
+        "meta": {
+          "name": "Labels"
+        },
+        "props": {
+          "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzQwIiBoZWlnaHQ9IjkxMCIgdmlld0JveD0iMCAwIDE3NDAgOTEwIj48dGV4dCB4PSIyNjAuMCIgeT0iMjAzLjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkJONDAxPC90ZXh0Pjx0ZXh0IHg9IjI2MC4wIiB5PSIyMTcuMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIHN0cm9rZT0iI2U2ZTZlNiIgc3Ryb2tlLXdpZHRoPSI0IiBwYWludC1vcmRlcj0ic3Ryb2tlIj5Hcm9hdCBidWZmZXIgYmluPC90ZXh0Pjx0ZXh0IHg9IjM1MC4wIiB5PSI0MTgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPlNDNDAxPC90ZXh0Pjx0ZXh0IHg9IjM1MC4wIiB5PSI0MzIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+U3RlYW0gY29uZGl0aW9uZXI8L3RleHQ+PHRleHQgeD0iNjMwIiB5PSIyNTIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPktMNDAxPC90ZXh0Pjx0ZXh0IHg9IjYzMCIgeT0iMjY2IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPktpbG48L3RleHQ+PHRleHQgeD0iNDkwIiB5PSI2MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkNMNDAxPC90ZXh0Pjx0ZXh0IHg9IjQ5MCIgeT0iNjE0IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjQwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgc3Ryb2tlPSIjZTZlNmU2IiBzdHJva2Utd2lkdGg9IjQiIHBhaW50LW9yZGVyPSJzdHJva2UiPkNvdW50ZXJmbG93IGNvb2xlcjwvdGV4dD48dGV4dCB4PSIxMDA1LjAiIHk9Ijg0OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+R1I0MDE8L3RleHQ+PHRleHQgeD0iMTAwNS4wIiB5PSI4NjIiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+R3JvYXQgZ3JhZGVyPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSI4OTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjYwMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWE1ZTVjIiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+S2lsbmluZyAmYW1wOyBzdGFiaWxpc2F0aW9uPC90ZXh0Pjx0ZXh0IHg9IjE3MDAiIHk9Ijg5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNDAwIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNzc3IiBzdHJva2U9IiNlNmU2ZTYiIHN0cm9rZS13aWR0aD0iNCIgcGFpbnQtb3JkZXI9InN0cm9rZSI+U0lNVUxBVElPTjwvdGV4dD48L3N2Zz4=",
+          "altText": "Kilning & stabilisation labels",
+          "fit": {
+            "mode": "fill"
+          },
+          "style": {
+            "pointerEvents": "none"
+          }
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1740,
+          "height": 910
+        }
+      }
+    ]
+  }
+}

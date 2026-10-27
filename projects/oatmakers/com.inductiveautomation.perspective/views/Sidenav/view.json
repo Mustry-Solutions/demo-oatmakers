@@ -73,239 +73,495 @@
         }
       },
       {
-        "type": "ia.input.button",
+        "type": "ia.navigation.menutree",
         "meta": {
-          "name": "Nav0"
+          "name": "Menu"
         },
         "props": {
-          "text": "Factory overview",
+          "items": [
+            {
+              "target": "/",
+              "items": [],
+              "navIcon": {
+                "path": ""
+              },
+              "label": {
+                "text": "Factory overview",
+                "icon": {
+                  "path": "material/home"
+                }
+              },
+              "visible": true,
+              "enabled": true,
+              "showHeader": true,
+              "resetOnClick": false,
+              "backActionText": "",
+              "style": {
+                "classes": ""
+              }
+            },
+            {
+              "target": "",
+              "items": [
+                {
+                  "target": "/scada",
+                  "items": [],
+                  "navIcon": {
+                    "path": ""
+                  },
+                  "label": {
+                    "text": "Plant overview",
+                    "icon": {
+                      "path": "material/dashboard"
+                    }
+                  },
+                  "visible": true,
+                  "enabled": true,
+                  "showHeader": true,
+                  "resetOnClick": false,
+                  "backActionText": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                {
+                  "target": "",
+                  "items": [
+                    {
+                      "target": "/scada/intake",
+                      "items": [],
+                      "navIcon": {
+                        "path": ""
+                      },
+                      "label": {
+                        "text": "Intake & raw oat silos",
+                        "icon": {
+                          "path": ""
+                        }
+                      },
+                      "visible": true,
+                      "enabled": true,
+                      "showHeader": true,
+                      "resetOnClick": false,
+                      "backActionText": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    {
+                      "target": "/scada/cleaning",
+                      "items": [],
+                      "navIcon": {
+                        "path": ""
+                      },
+                      "label": {
+                        "text": "Cleaning",
+                        "icon": {
+                          "path": ""
+                        }
+                      },
+                      "visible": true,
+                      "enabled": true,
+                      "showHeader": true,
+                      "resetOnClick": false,
+                      "backActionText": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  ],
+                  "navIcon": {
+                    "path": "material/chevron_right"
+                  },
+                  "label": {
+                    "text": "Receiving",
+                    "icon": {
+                      "path": "material/local_shipping"
+                    }
+                  },
+                  "visible": true,
+                  "enabled": true,
+                  "showHeader": true,
+                  "resetOnClick": false,
+                  "backActionText": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                {
+                  "target": "",
+                  "items": [
+                    {
+                      "target": "/scada/dehulling",
+                      "items": [],
+                      "navIcon": {
+                        "path": ""
+                      },
+                      "label": {
+                        "text": "Dehulling",
+                        "icon": {
+                          "path": ""
+                        }
+                      },
+                      "visible": true,
+                      "enabled": true,
+                      "showHeader": true,
+                      "resetOnClick": false,
+                      "backActionText": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    {
+                      "target": "/scada/kiln",
+                      "items": [],
+                      "navIcon": {
+                        "path": ""
+                      },
+                      "label": {
+                        "text": "Kilning & stabilisation",
+                        "icon": {
+                          "path": ""
+                        }
+                      },
+                      "visible": true,
+                      "enabled": true,
+                      "showHeader": true,
+                      "resetOnClick": false,
+                      "backActionText": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  ],
+                  "navIcon": {
+                    "path": "material/chevron_right"
+                  },
+                  "label": {
+                    "text": "Groat processing",
+                    "icon": {
+                      "path": "material/grain"
+                    }
+                  },
+                  "visible": true,
+                  "enabled": true,
+                  "showHeader": true,
+                  "resetOnClick": false,
+                  "backActionText": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                {
+                  "target": "",
+                  "items": [
+                    {
+                      "target": "/scada/flaking",
+                      "items": [],
+                      "navIcon": {
+                        "path": ""
+                      },
+                      "label": {
+                        "text": "Line 01 \u00b7 Steaming & flaking",
+                        "icon": {
+                          "path": ""
+                        }
+                      },
+                      "visible": true,
+                      "enabled": true,
+                      "showHeader": true,
+                      "resetOnClick": false,
+                      "backActionText": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    {
+                      "target": "/scada/cutting",
+                      "items": [],
+                      "navIcon": {
+                        "path": ""
+                      },
+                      "label": {
+                        "text": "Line 02 \u00b7 Groat cutting",
+                        "icon": {
+                          "path": ""
+                        }
+                      },
+                      "visible": true,
+                      "enabled": true,
+                      "showHeader": true,
+                      "resetOnClick": false,
+                      "backActionText": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    {
+                      "target": "/scada/milling",
+                      "items": [],
+                      "navIcon": {
+                        "path": ""
+                      },
+                      "label": {
+                        "text": "Line 03 \u00b7 Oat flour milling",
+                        "icon": {
+                          "path": ""
+                        }
+                      },
+                      "visible": true,
+                      "enabled": true,
+                      "showHeader": true,
+                      "resetOnClick": false,
+                      "backActionText": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  ],
+                  "navIcon": {
+                    "path": "material/chevron_right"
+                  },
+                  "label": {
+                    "text": "Production lines",
+                    "icon": {
+                      "path": "material/layers"
+                    }
+                  },
+                  "visible": true,
+                  "enabled": true,
+                  "showHeader": true,
+                  "resetOnClick": false,
+                  "backActionText": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                {
+                  "target": "",
+                  "items": [
+                    {
+                      "target": "/scada/packing",
+                      "items": [],
+                      "navIcon": {
+                        "path": ""
+                      },
+                      "label": {
+                        "text": "Packing & palletising",
+                        "icon": {
+                          "path": ""
+                        }
+                      },
+                      "visible": true,
+                      "enabled": true,
+                      "showHeader": true,
+                      "resetOnClick": false,
+                      "backActionText": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  ],
+                  "navIcon": {
+                    "path": "material/chevron_right"
+                  },
+                  "label": {
+                    "text": "Finished goods",
+                    "icon": {
+                      "path": "material/archive"
+                    }
+                  },
+                  "visible": true,
+                  "enabled": true,
+                  "showHeader": true,
+                  "resetOnClick": false,
+                  "backActionText": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                {
+                  "target": "",
+                  "items": [
+                    {
+                      "target": "/scada/utilities",
+                      "items": [],
+                      "navIcon": {
+                        "path": ""
+                      },
+                      "label": {
+                        "text": "Steam & compressed air",
+                        "icon": {
+                          "path": ""
+                        }
+                      },
+                      "visible": true,
+                      "enabled": true,
+                      "showHeader": true,
+                      "resetOnClick": false,
+                      "backActionText": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  ],
+                  "navIcon": {
+                    "path": "material/chevron_right"
+                  },
+                  "label": {
+                    "text": "Utilities",
+                    "icon": {
+                      "path": "material/build"
+                    }
+                  },
+                  "visible": true,
+                  "enabled": true,
+                  "showHeader": true,
+                  "resetOnClick": false,
+                  "backActionText": "",
+                  "style": {
+                    "classes": ""
+                  }
+                }
+              ],
+              "navIcon": {
+                "path": "material/chevron_right"
+              },
+              "label": {
+                "text": "SCADA",
+                "icon": {
+                  "path": "material/device_hub"
+                }
+              },
+              "visible": true,
+              "enabled": true,
+              "showHeader": true,
+              "resetOnClick": false,
+              "backActionText": "",
+              "style": {
+                "classes": ""
+              }
+            },
+            {
+              "target": "/production",
+              "items": [],
+              "navIcon": {
+                "path": ""
+              },
+              "label": {
+                "text": "Production planning",
+                "icon": {
+                  "path": "material/event"
+                }
+              },
+              "visible": true,
+              "enabled": true,
+              "showHeader": true,
+              "resetOnClick": false,
+              "backActionText": "",
+              "style": {
+                "classes": ""
+              }
+            },
+            {
+              "target": "/performance",
+              "items": [],
+              "navIcon": {
+                "path": ""
+              },
+              "label": {
+                "text": "Performance",
+                "icon": {
+                  "path": "material/timeline"
+                }
+              },
+              "visible": true,
+              "enabled": true,
+              "showHeader": true,
+              "resetOnClick": false,
+              "backActionText": "",
+              "style": {
+                "classes": ""
+              }
+            },
+            {
+              "target": "/quality",
+              "items": [],
+              "navIcon": {
+                "path": ""
+              },
+              "label": {
+                "text": "Quality & traceability",
+                "icon": {
+                  "path": "material/verified_user"
+                }
+              },
+              "visible": true,
+              "enabled": true,
+              "showHeader": true,
+              "resetOnClick": false,
+              "backActionText": "",
+              "style": {
+                "classes": ""
+              }
+            },
+            {
+              "target": "/operator",
+              "items": [],
+              "navIcon": {
+                "path": ""
+              },
+              "label": {
+                "text": "Batch output",
+                "icon": {
+                  "path": "material/assignment"
+                }
+              },
+              "visible": true,
+              "enabled": true,
+              "showHeader": true,
+              "resetOnClick": false,
+              "backActionText": "",
+              "style": {
+                "classes": ""
+              }
+            }
+          ],
+          "layoutAlignment": "left",
+          "backActionText": "Back",
+          "itemStyle": {
+            "classes": "Demo/MenuItem"
+          },
+          "headerStyle": {
+            "classes": "Demo/MenuHeader"
+          },
+          "backActionStyle": {
+            "classes": "Demo/MenuBack"
+          },
           "style": {
-            "classes": "Demo/NavButton"
+            "classes": "Demo/Menu"
           }
         },
         "position": {
           "shrink": 0,
-          "basis": "45px"
-        },
-        "events": {
-          "dom": {
-            "onClick": {
-              "type": "nav",
-              "scope": "C",
-              "config": {
-                "page": "/"
-              }
-            }
-          }
-        },
-        "propConfig": {
-          "props.style.backgroundColor": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({page.props.path} = \"/\", \"#3d474f\", \"transparent\")"
-              }
-            }
-          }
-        }
-      },
-      {
-        "type": "ia.input.button",
-        "meta": {
-          "name": "Nav1"
-        },
-        "props": {
-          "text": "SCADA",
-          "style": {
-            "classes": "Demo/NavButton"
-          }
-        },
-        "position": {
-          "shrink": 0,
-          "basis": "45px"
-        },
-        "events": {
-          "dom": {
-            "onClick": {
-              "type": "nav",
-              "scope": "C",
-              "config": {
-                "page": "/scada"
-              }
-            }
-          }
-        },
-        "propConfig": {
-          "props.style.backgroundColor": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({page.props.path} = \"/scada\", \"#3d474f\", \"transparent\")"
-              }
-            }
-          }
-        }
-      },
-      {
-        "type": "ia.input.button",
-        "meta": {
-          "name": "Nav2"
-        },
-        "props": {
-          "text": "Production planning",
-          "style": {
-            "classes": "Demo/NavButton"
-          }
-        },
-        "position": {
-          "shrink": 0,
-          "basis": "45px"
-        },
-        "events": {
-          "dom": {
-            "onClick": {
-              "type": "nav",
-              "scope": "C",
-              "config": {
-                "page": "/production"
-              }
-            }
-          }
-        },
-        "propConfig": {
-          "props.style.backgroundColor": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({page.props.path} = \"/production\", \"#3d474f\", \"transparent\")"
-              }
-            }
-          }
-        }
-      },
-      {
-        "type": "ia.input.button",
-        "meta": {
-          "name": "Nav3"
-        },
-        "props": {
-          "text": "Performance",
-          "style": {
-            "classes": "Demo/NavButton"
-          }
-        },
-        "position": {
-          "shrink": 0,
-          "basis": "45px"
-        },
-        "events": {
-          "dom": {
-            "onClick": {
-              "type": "nav",
-              "scope": "C",
-              "config": {
-                "page": "/performance"
-              }
-            }
-          }
-        },
-        "propConfig": {
-          "props.style.backgroundColor": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({page.props.path} = \"/performance\", \"#3d474f\", \"transparent\")"
-              }
-            }
-          }
-        }
-      },
-      {
-        "type": "ia.input.button",
-        "meta": {
-          "name": "Nav4"
-        },
-        "props": {
-          "text": "Quality & traceability",
-          "style": {
-            "classes": "Demo/NavButton"
-          }
-        },
-        "position": {
-          "shrink": 0,
-          "basis": "45px"
-        },
-        "events": {
-          "dom": {
-            "onClick": {
-              "type": "nav",
-              "scope": "C",
-              "config": {
-                "page": "/quality"
-              }
-            }
-          }
-        },
-        "propConfig": {
-          "props.style.backgroundColor": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({page.props.path} = \"/quality\", \"#3d474f\", \"transparent\")"
-              }
-            }
-          }
-        }
-      },
-      {
-        "type": "ia.input.button",
-        "meta": {
-          "name": "Nav5"
-        },
-        "props": {
-          "text": "Batch output",
-          "style": {
-            "classes": "Demo/NavButton"
-          }
-        },
-        "position": {
-          "shrink": 0,
-          "basis": "45px"
-        },
-        "events": {
-          "dom": {
-            "onClick": {
-              "type": "nav",
-              "scope": "C",
-              "config": {
-                "page": "/operator"
-              }
-            }
-          }
-        },
-        "propConfig": {
-          "props.style.backgroundColor": {
-            "binding": {
-              "type": "expr",
-              "config": {
-                "expression": "if({page.props.path} = \"/operator\", \"#3d474f\", \"transparent\")"
-              }
-            }
-          }
-        }
-      },
-      {
-        "type": "ia.container.flex",
-        "meta": {
-          "name": "Spacer"
-        },
-        "props": {
-          "direction": "column"
-        },
-        "children": [],
-        "position": {
-          "shrink": 0,
+          "basis": "auto",
           "grow": 1
+        },
+        "propConfig": {
+          "props.items": {
+            "binding": {
+              "type": "property",
+              "config": {
+                "path": "page.props.path"
+              },
+              "transforms": [
+                {
+                  "type": "script",
+                  "code": "\titems = system.util.jsonDecode(\"[{\\\"target\\\": \\\"/\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Factory overview\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/home\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"\\\", \\\"items\\\": [{\\\"target\\\": \\\"/scada\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Plant overview\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/dashboard\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"\\\", \\\"items\\\": [{\\\"target\\\": \\\"/scada/intake\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Intake & raw oat silos\\\", \\\"icon\\\": {\\\"path\\\": \\\"\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"/scada/cleaning\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Cleaning\\\", \\\"icon\\\": {\\\"path\\\": \\\"\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}], \\\"navIcon\\\": {\\\"path\\\": \\\"material/chevron_right\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Receiving\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/local_shipping\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"\\\", \\\"items\\\": [{\\\"target\\\": \\\"/scada/dehulling\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Dehulling\\\", \\\"icon\\\": {\\\"path\\\": \\\"\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"/scada/kiln\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Kilning & stabilisation\\\", \\\"icon\\\": {\\\"path\\\": \\\"\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}], \\\"navIcon\\\": {\\\"path\\\": \\\"material/chevron_right\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Groat processing\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/grain\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"\\\", \\\"items\\\": [{\\\"target\\\": \\\"/scada/flaking\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Line 01 \\\\u00b7 Steaming & flaking\\\", \\\"icon\\\": {\\\"path\\\": \\\"\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"/scada/cutting\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Line 02 \\\\u00b7 Groat cutting\\\", \\\"icon\\\": {\\\"path\\\": \\\"\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"/scada/milling\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Line 03 \\\\u00b7 Oat flour milling\\\", \\\"icon\\\": {\\\"path\\\": \\\"\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}], \\\"navIcon\\\": {\\\"path\\\": \\\"material/chevron_right\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Production lines\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/layers\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"\\\", \\\"items\\\": [{\\\"target\\\": \\\"/scada/packing\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Packing & palletising\\\", \\\"icon\\\": {\\\"path\\\": \\\"\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}], \\\"navIcon\\\": {\\\"path\\\": \\\"material/chevron_right\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Finished goods\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/archive\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"\\\", \\\"items\\\": [{\\\"target\\\": \\\"/scada/utilities\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Steam & compressed air\\\", \\\"icon\\\": {\\\"path\\\": \\\"\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}], \\\"navIcon\\\": {\\\"path\\\": \\\"material/chevron_right\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Utilities\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/build\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}], \\\"navIcon\\\": {\\\"path\\\": \\\"material/chevron_right\\\"}, \\\"label\\\": {\\\"text\\\": \\\"SCADA\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/device_hub\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"/production\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Production planning\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/event\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"/performance\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Performance\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/timeline\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"/quality\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Quality & traceability\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/verified_user\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}, {\\\"target\\\": \\\"/operator\\\", \\\"items\\\": [], \\\"navIcon\\\": {\\\"path\\\": \\\"\\\"}, \\\"label\\\": {\\\"text\\\": \\\"Batch output\\\", \\\"icon\\\": {\\\"path\\\": \\\"material/assignment\\\"}}, \\\"visible\\\": true, \\\"enabled\\\": true, \\\"showHeader\\\": true, \\\"resetOnClick\\\": false, \\\"backActionText\\\": \\\"\\\", \\\"style\\\": {\\\"classes\\\": \\\"\\\"}}]\")\n\tdef mark(nodes):\n\t\tfound = False\n\t\tfor n in nodes:\n\t\t\tchild = mark(n[\"items\"])\n\t\t\tactive = n[\"target\"] == value\n\t\t\tn[\"style\"][\"classes\"] = \"Demo/MenuActive\" if active else (\"Demo/MenuTrail\" if child else \"\")\n\t\t\tfound = found or active or child\n\t\treturn found\n\tmark(items)\n\treturn items"
+                }
+              ]
+            }
+          }
         }
       },
       {

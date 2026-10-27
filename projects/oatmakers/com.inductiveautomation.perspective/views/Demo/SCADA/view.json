@@ -16,7 +16,7 @@
     "props": {
       "direction": "column",
       "style": {
-        "classes": "Demo/Page Separator/Page"
+        "classes": "Demo/Page Hmi/Page"
       }
     },
     "children": [
@@ -48,7 +48,7 @@
                   "name": "Eyebrow"
                 },
                 "props": {
-                  "text": "OATMAKERS / LIVE OPERATIONS",
+                  "text": "OATMAKERS / SCADA",
                   "style": {
                     "classes": "Demo/Eyebrow"
                   }
@@ -64,7 +64,7 @@
                   "name": "Title"
                 },
                 "props": {
-                  "text": "SCADA",
+                  "text": "Plant overview",
                   "style": {
                     "classes": "Demo/PageTitle"
                   }
@@ -80,7 +80,7 @@
                   "name": "Subtitle"
                 },
                 "props": {
-                  "text": "Separator A. Drag to pan, scroll to zoom.",
+                  "text": "From truck intake to pallet: live status of every process area. Drag to pan, scroll to zoom.",
                   "style": {
                     "classes": "Demo/Subtitle"
                   }
@@ -94,6 +94,22 @@
             "position": {
               "shrink": 0,
               "grow": 1
+            }
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Navigation"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "classes": "Hmi/Navigation"
+              }
+            },
+            "children": [],
+            "position": {
+              "shrink": 0
             }
           },
           {
@@ -124,7 +140,7 @@
         },
         "props": {
           "config": {
-            "viewPath": "Demo/Separator/Process",
+            "viewPath": "Demo/Hmi/Drawing/Overview",
             "viewParams": [],
             "contentWidth": 1740,
             "contentHeight": 910,
@@ -155,7 +171,7 @@
             "pois": []
           },
           "style": {
-            "classes": "Separator/PanZoom",
+            "classes": "Hmi/PanZoom",
             "minHeight": "0px"
           }
         },
