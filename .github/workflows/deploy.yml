@@ -185,6 +185,20 @@ jobs:
               exit 1
             fi
             git archive "refs/tags/$tag" -- "projects/$name" | tar -x -C payload
+            python3 - "$name" "$version" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          project_json = Path("payload/projects") / sys.argv[1] / "project.json"
+          data = json.loads(project_json.read_text())
+          version = sys.argv[2]
+          description = data.get("description", "")
+          suffix = f" ({version})"
+          if not description.endswith(suffix):
+              data["description"] = description + suffix
+          project_json.write_text(json.dumps(data, indent=2) + "\n")
+          PY
             echo "  projects/$name <- $tag ($(git rev-parse --short "refs/tags/$tag^{commit}"))"
           done < "$RUNNER_TEMP/pins.env"
 

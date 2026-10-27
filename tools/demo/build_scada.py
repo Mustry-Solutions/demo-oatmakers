@@ -144,7 +144,7 @@ def components():
     plot=embed('Trend',HMI+'Trend',{'colour':'#626b75','sp':0},basis='160px')
     plot['propConfig']={'props.params.area':bind('view.params.area'),'props.params.signal':bind('view.params.signal')}
     caption=label('Caption','','Demo/Muted');caption['propConfig']={'props.text':script_expr('{view.params.area}','\treturn application.demo.scadaAreaTitle(value) + " | recent trend"')}
-    view(HMI+'Detail',flex('root',[bound_label('Title','view.params.tag','Demo/SectionTitle'),bound_label('Path','view.params.tagPath','Demo/Muted'),label('Mode','Read-only process simulation','Demo/Muted'),value,plot,caption],classes='Demo/PopupRoot'),params={'area':'intake','tag':'','signal':'','unit':'','decimals':1,'tagPath':''},height=360,width=520)
+    view(HMI+'Detail',theme_root(flex('root',[bound_label('Title','view.params.tag','Demo/SectionTitle'),bound_label('Path','view.params.tagPath','Demo/Muted'),label('Mode','Read-only process simulation','Demo/Muted'),value,plot,caption],classes='Demo/PopupRoot')),params={'area':'intake','tag':'','signal':'','unit':'','decimals':1,'tagPath':''},height=360,width=520)
 
 # Equipment templates, ISA-101 greyscale. Each is an embedded view under
 # Demo/Hmi/Equipment/ that draws its outline from its width and height params;
@@ -603,14 +603,14 @@ def page(name,title,subtitle,drawing,area=None):
     switch=node('ia.input.toggle-switch','LabelSwitch',{'selected':True})
     switch['propConfig']={'props.selected':{'binding':{'type':'property','config':{'path':'session.custom.showLabels','bidirectional':True}}}}
     nav.insert(0,flex('Labels',[label('Caption','Labels','Demo/Muted'),switch],'row','Hmi/LabelToggle'))
-    header=flex('Header',[flex('Identity',[label('Eyebrow','OATMAKERS / SCADA'+(' / '+group.upper() if group else ''),'Demo/Eyebrow'),label('Title',title,'Demo/PageTitle'),label('Subtitle',subtitle+' Drag to pan, scroll to zoom.','Demo/Subtitle')],grow=1),flex('Navigation',nav,'row','Hmi/Navigation'),label('Mode','SIMULATED FACTORY','Demo/DemoBadge')],'row','Demo/PageHeader')
+    header=flex('Header',[flex('Identity',[label('Eyebrow','OATMAKERS / SCADA'+(' / '+group.upper() if group else ''),'Demo/Eyebrow'),label('Title',title,'Demo/PageTitle'),label('Subtitle',subtitle+' Drag to pan, scroll to zoom.','Demo/Subtitle')],grow=1),flex('Navigation',nav,'row','Hmi/Navigation'),theme_badge(label('Mode','SIMULATED FACTORY','Demo/DemoBadge'))],'row','Demo/PageHeader')
     pan=node('mustrysolutions.perspective.display.panzoomview','ProcessViewport',{
         'config':{'viewPath':drawing,'viewParams':[],'contentWidth':W,'contentHeight':H,'minZoom':0.2,'maxZoom':4,
                   'zoomStep':1.25,'wheelZoom':True,'doubleClickZoom':True,'showControls':True,'showMinimap':True,'showPoiList':False,
                   'flyToMs':250,'home':{'x':-1,'y':-1,'zoom':0}},
         'state':{'zoom':0,'center':{'x':0,'y':0},'target':''},'data':{'pois':[]},'style':{'classes':'Hmi/PanZoom','minHeight':'0px'}},basis='0px',grow=1)
     pan['position']['shrink']=1
-    view(name,flex('root',[header,pan],classes='Demo/Page Hmi/Page'),height=939)
+    view(name,theme_root(flex('root',[header,pan],classes='Demo/Page Hmi/Page')),height=939)
 
 def build_scada():
     components()

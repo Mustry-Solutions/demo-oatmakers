@@ -5,7 +5,8 @@
       "scadaLine": 1,
       "scadaArea": "peeling",
       "scadaMetric": "temperature"
-    }
+    },
+    "theme": "standard"
   },
   "props": {
     "theme": "light"
