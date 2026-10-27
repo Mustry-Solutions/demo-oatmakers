@@ -200,7 +200,7 @@
             "binding": {
               "type": "expr",
               "config": {
-                "expression": "if({view.custom.mode} = \"Off\", \"OFF\", \"HAND\")"
+                "expression": "if({view.custom.mode} = \"Off\", \"OFF\", \"MAN\")"
               }
             }
           },

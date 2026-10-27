@@ -5,11 +5,17 @@
     "product": "",
     "description": "",
     "alarm": "",
+    "lowLimit": "",
+    "highLimit": "",
     "hours": 1,
     "history": {
       "points": [],
       "unit": "",
       "message": ""
+    },
+    "edit": {
+      "lowLimit": 0,
+      "highLimit": 0
     }
   },
   "params": {
@@ -86,6 +92,42 @@
       },
       "persistent": true
     },
+    "custom.lowLimit": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/LowLimit",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true,
+      "onChange": {
+        "enabled": null,
+        "script": "\tself.custom.edit.lowLimit = currentValue.value"
+      }
+    },
+    "custom.highLimit": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/HighLimit",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
+      "persistent": true,
+      "onChange": {
+        "enabled": null,
+        "script": "\tself.custom.edit.highLimit = currentValue.value"
+      }
+    },
     "custom.history": {
       "binding": {
         "type": "expr-struct",
@@ -112,12 +154,15 @@
     },
     "custom.hours": {
       "persistent": true
+    },
+    "custom.edit": {
+      "persistent": true
     }
   },
   "props": {
     "defaultSize": {
-      "width": 760,
-      "height": 640
+      "width": 780,
+      "height": 700
     }
   },
   "root": {
@@ -400,14 +445,9 @@
                 "propConfig": {
                   "props.value": {
                     "binding": {
-                      "type": "tag",
+                      "type": "property",
                       "config": {
-                        "mode": "indirect",
-                        "tagPath": "{path}/LowLimit",
-                        "references": {
-                          "path": "{view.params.tagPath}"
-                        },
-                        "fallbackDelay": 2.5,
+                        "path": "view.custom.edit.lowLimit",
                         "bidirectional": true
                       }
                     }
@@ -470,14 +510,9 @@
                 "propConfig": {
                   "props.value": {
                     "binding": {
-                      "type": "tag",
+                      "type": "property",
                       "config": {
-                        "mode": "indirect",
-                        "tagPath": "{path}/HighLimit",
-                        "references": {
-                          "path": "{view.params.tagPath}"
-                        },
-                        "fallbackDelay": 2.5,
+                        "path": "view.custom.edit.highLimit",
                         "bidirectional": true
                       }
                     }
@@ -488,6 +523,123 @@
             "position": {
               "shrink": 0,
               "basis": "190px"
+            }
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Actions"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "classes": "Hmi/FaceplateActions"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "Write"
+                },
+                "props": {
+                  "text": "Write",
+                  "style": {
+                    "classes": "Demo/Button Hmi/ActionButton"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "40px"
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tedit = self.view.custom.edit\n\tsystem.tag.writeBlocking([self.view.params.tagPath + \"/LowLimit\", self.view.params.tagPath + \"/HighLimit\"], [edit.lowLimit, edit.highLimit])"
+                      }
+                    }
+                  }
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.edit.lowLimit} != {view.custom.lowLimit} || {view.custom.edit.highLimit} != {view.custom.highLimit}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "Cancel"
+                },
+                "props": {
+                  "text": "Cancel",
+                  "style": {
+                    "classes": "Demo/QuietButton Hmi/ActionButton"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "40px"
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tc = self.view.custom\n\tc.edit.lowLimit = c.lowLimit\n\tc.edit.highLimit = c.highLimit\n"
+                      }
+                    }
+                  }
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.edit.lowLimit} != {view.custom.lowLimit} || {view.custom.edit.highLimit} != {view.custom.highLimit}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Pending"
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "classes": "Demo/Muted"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "if({view.custom.edit.lowLimit} != {view.custom.lowLimit} || {view.custom.edit.highLimit} != {view.custom.highLimit}, \"Changes not written yet\", \"\")"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0
             }
           }
         ],

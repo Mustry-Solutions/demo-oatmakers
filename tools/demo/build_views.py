@@ -231,6 +231,13 @@ for route,definition in config['pages'].items():
 config['sharedDocks']=copy.deepcopy(nav_docks)
 for dock in config['sharedDocks'].get('left',[]):
     if dock.get('id')=='sidenav':dock['viewPath']='Docks/Sidenav'
+# A slim header dock on every page: where you are, and the session-wide label switch.
+titles={route:definition.get('title','') for route,definition in config['pages'].items()}
+where=label('Where','','Hmi/HeaderWhere');where['position']['grow']=1;where['propConfig']={'props.text':bind_script('page.props.path','\ttitles = system.util.jsonDecode('+json.dumps(json.dumps(titles))+')\n\treturn "OATMAKERS / " + titles.get(value, "").upper()')}
+switch=node('ia.input.toggle-switch','LabelSwitch',{'selected':True})
+switch['propConfig']={'props.selected':{'binding':{'type':'property','config':{'path':'session.custom.showLabels','bidirectional':True}}}}
+view('Docks/Header',theme_root(flex('root',[where,flex('Labels',[label('Caption','Labels','Demo/Muted'),switch],'row','Hmi/LabelToggle')],'row','Hmi/HeaderDock')),height=40)
+config['sharedDocks']['top']=[{'anchor':'fixed','autoBreakpoint':0,'content':'push','handle':'hide','iconUrl':'','id':'header','modal':False,'resizable':False,'show':'visible','size':40,'viewParams':{},'viewPath':'Docks/Header'}]
 write(P/'page-config/config.json',config)
 write(P/'session-props/props.json',{'custom':{'showLabels':True,'demo':{'scadaLine':1,'scadaArea':'peeling','scadaMetric':'temperature'},'theme':'standard'},'props':{'theme':'light'}});resource(P/'session-props',['props.json'])
 # Views live in Pages (one per route), Templates (embedded), Popups and Docks.

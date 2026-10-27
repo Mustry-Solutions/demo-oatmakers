@@ -106,6 +106,22 @@
         "viewParams": {},
         "viewPath": "Docks/Sidenav"
       }
+    ],
+    "top": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 0,
+        "content": "push",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "header",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 40,
+        "viewParams": {},
+        "viewPath": "Docks/Header"
+      }
     ]
   }
 }

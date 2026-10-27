@@ -41,7 +41,7 @@ def info(name,param,dataType='String'):
 
 
 # Templates and faceplates get the full instance path and read everything from
-# these members. Mode, PositionSP and the alarm limits are written from the
+# these members. Mode, the Manual commands, PositionSP and the alarm limits are written from the
 # faceplates; the simulation writes the rest.
 UDTS=[
  udt('AnalogInput',{'Kind':'','Description':'','Signal':'','Unit':'','Decimals':1},[
@@ -50,12 +50,14 @@ UDTS=[
   member('Alarm','Boolean',valueSource='expr',expression='{[.]PV} < {[.]LowLimit} || {[.]PV} > {[.]HighLimit}'),
   info('Kind','Kind'),info('Description','Description'),info('Unit','Unit'),info('Decimals','Decimals','Int4')]),
  udt('Motor',{'Description':'','Signal':'','RatedCurrent':10.0,'Duty':'Duty'},[
-  member('Running','Boolean'),member('Fault','Boolean'),member('Mode','String',value='Auto',documentation='Auto, Hand or Off'),
+  member('Running','Boolean'),member('Fault','Boolean'),member('Mode','String',value='Auto',documentation='Auto, Manual or Off'),
+  member('ManualRun','Boolean',value=False,documentation='Run command in Manual'),
   member('Current','Float8',engUnit='A',documentation=bound('Description')),
   info('Description','Description'),info('Duty','Duty'),info('RatedCurrent','RatedCurrent','Float8')]),
  udt('Valve',{'Description':'','Signal':''},[
   member('Open','Boolean'),member('Position','Float8',engUnit='%',documentation=bound('Description')),
-  member('Mode','String',value='Auto',documentation='Auto, Hand or Off'),member('PositionSP','Float8',engUnit='%',value=50.0,documentation='Position in Hand'),
+  member('Mode','String',value='Auto',documentation='Auto, Manual or Off'),member('ManualOpen','Boolean',value=False,documentation='Open command in Manual'),
+  member('PositionSP','Float8',engUnit='%',value=50.0,documentation='Control valve position in Manual'),
   info('Description','Description')]),
  udt('Silo',{'Description':'','Signal':'','Product':'','Capacity':60},[
   member('Level','Float8',engUnit='%',documentation=bound('Description')),

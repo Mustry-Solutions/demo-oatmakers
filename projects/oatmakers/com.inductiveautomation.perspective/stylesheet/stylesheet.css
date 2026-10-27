@@ -157,6 +157,13 @@
 .psc-Hmi\/ModeButtons { height:32px; font-size:12px; }
 .psc-Hmi\/FaceplateRanges { gap:6px; align-items:center; }
 .psc-Hmi\/RangeButton { flex:0 0 auto !important; height:30px; padding:4px 12px; font-size:12px; }
+.psc-Hmi\/ActionButton { flex:0 0 auto !important; height:32px; padding:4px 16px; font-size:12px; }
+.psc-Hmi\/ActionButton:disabled,.psc-Hmi\/ActionButton.ia_button--disabled { opacity:0.45; box-shadow:none; cursor:default; }
+.psc-Hmi\/FaceplateActions { gap:8px; align-items:flex-end; align-self:flex-end; }
+.psc-Hmi\/Faceplate,.psc-Hmi\/Faceplate .psc-Hmi\/FaceplateSettings,.psc-Hmi\/Faceplate .psc-Hmi\/FaceplateRanges,.psc-Hmi\/FieldGroup,.psc-Hmi\/FaceplateActions,.psc-Hmi\/ModeButtons,.psc-Hmi\/Navigation,.psc-Hmi\/HeaderDock,.psc-Hmi\/LabelToggle { overflow:visible !important; }
+.psc-Hmi\/FaceplateRanges,.psc-Hmi\/FaceplateSettings,.psc-Hmi\/Navigation { padding-bottom:4px; }
+.psc-Hmi\/HeaderDock { height:100%; align-items:center; justify-content:space-between; padding:0 20px; background:#f4f5f5; border-bottom:1px solid #dde1e4; }
+.psc-Hmi\/HeaderWhere { font-size:11px; font-weight:700; letter-spacing:1.2px; color:#6d7270; }
 .psc-Hmi\/RangeActive { background:#3f5a73 !important; color:#fff !important; border-color:#3f5a73 !important; }
 .psc-Demo\/Menu { background:transparent; color:#d5dade; font-size:12px; }
 .psc-Demo\/Menu .menu-wrapper,.psc-Demo\/Menu .wrapper-submenu { background:#2b3238 !important; height:100%; }

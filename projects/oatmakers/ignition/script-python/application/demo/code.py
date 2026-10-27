@@ -533,9 +533,10 @@ def _writeScadaTags():
 	now = system.date.now()
 	seconds = system.date.toMillis(now) / 1000.0
 	index = _scadaTagIndex()
-	# Operator settings written from the faceplates: Mode (Auto, Hand, Off) and the valve position in Hand.
+	# Operator settings written from the faceplates: Mode (Auto, Manual, Off), the
+	# Manual run or open command and the control valve position in Manual.
 	settings = [path + member for entries in index.values() for kind, path, params in entries if kind in ('Motor', 'Valve')
-		for member in (('/Mode', '/PositionSP') if kind == 'Valve' else ('/Mode',))]
+		for member in (('/Mode', '/ManualOpen', '/PositionSP') if kind == 'Valve' else ('/Mode', '/ManualRun'))]
 	operator = dict(zip(settings, [qv.value for qv in system.tag.readBlocking(settings)])) if settings else {}
 	for area, entries in index.items():
 		if area not in SCADA:
@@ -550,7 +551,10 @@ def _writeScadaTags():
 				paths.append(path + '/Level'); values.append(float(data[signal]))
 			elif kind == 'Motor':
 				mode = operator.get(path + '/Mode') or 'Auto'
-				on = mode == 'Hand' or (mode == 'Auto' and running and params.get('Duty') != 'Standby')
+				if mode == 'Manual':
+					on = bool(operator.get(path + '/ManualRun'))
+				else:
+					on = mode == 'Auto' and running and params.get('Duty') != 'Standby'
 				if signal in data and signal.endswith('Amps'):
 					current = float(data[signal])
 				else:
@@ -560,9 +564,12 @@ def _writeScadaTags():
 				mode = operator.get(path + '/Mode') or 'Auto'
 				control = params.get('Description') == 'Control valve'
 				position = 42.0 + 6.0 * math.sin(seconds / 37.0 + len(path)) if control else 100.0
-				if mode == 'Hand':
-					position = float(operator.get(path + '/PositionSP') or 0.0)
-				opened = mode == 'Hand' or (mode == 'Auto' and running)
+				if mode == 'Manual':
+					opened = bool(operator.get(path + '/ManualOpen'))
+					if control:
+						position = float(operator.get(path + '/PositionSP') or 0.0)
+				else:
+					opened = mode == 'Auto' and running
 				paths.extend([path + '/Open', path + '/Position']); values.extend([opened and position > 0, position if opened else 0.0])
 			elif kind == 'ProcessArea':
 				paths.extend([path + '/State', path + '/Running', path + '/LastUpdate']); values.extend([data['state'], running, now])

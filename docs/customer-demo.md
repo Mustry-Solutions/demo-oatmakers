@@ -2,7 +2,7 @@
 
 Open https://cloud.mustrysolutions.com/data/perspective/client/oatmakers/ or launch **Oatmakers | Connected factory demo** from the Perspective launcher. Reload an existing session after a release.
 
-All measurements and orders are simulated. Writes are confined to the `oat_demo` database schema and the `[default]OatmakersDemo` and `[default]OatMill` memory tags. The SCADA faceplates write operator settings (mode, valve position, alarm limits) to the simulated `OatMill` tags; no screen controls real equipment or changes customer records.
+All measurements and orders are simulated. Writes are confined to the `oat_demo` database schema and the `[default]OatmakersDemo` and `[default]OatMill` memory tags. The SCADA faceplates write operator settings (mode, Manual commands, valve position, alarm limits) to the simulated `OatMill` tags; no screen controls real equipment or changes customer records.
 
 ## Screens
 
@@ -106,7 +106,8 @@ All graphics are Perspective drawings (`ia.shapes.svg`), never images: the
 piping is one drawing per area, live state binds to drawing element properties
 (fill paint, path, width, viewBox), and every text is a Label component. The
 session property `showLabels` (default on) shows or hides all labels; the Labels
-switch in the SCADA header toggles it. Blue stream links navigate to the area
+switch in the header dock (`Docks/Header`, on every page next to the breadcrumb)
+toggles it. Blue stream links navigate to the area
 that supplies or receives the product; grey links leave the plant. The page
 header has previous and next buttons in process order.
 
@@ -115,19 +116,24 @@ header has previous and next buttons in process order.
 Clicking an instrument, motor, valve or silo opens its faceplate
 `Popups/Faceplates/<UDT>` with the instance path. A faceplate shows the name,
 description and full tag path, the live value with status, the operator
-settings, and a chart with time and value axes over a 1 h, 8 h or 24 h preset:
+settings, the Manual commands, and a chart with time and value axes over a 1 h,
+8 h or 24 h preset. Settings are staged: edit them, then press Write to send them
+to the tag (Cancel takes the live values back). Manual commands act immediately
+and are only enabled in Manual:
 
 | Faceplate | Writes | Chart |
 |---|---|---|
 | `AnalogInput` | `LowLimit`, `HighLimit` | measured value and alarm limits |
-| `Motor` | `Mode` (Auto, Hand, Off) | motor current |
-| `Valve` | `Mode`, `PositionSP` (in Hand) | valve position |
+| `Motor` | `Mode` (Auto, Manual, Off); Start and Stop in Manual (`ManualRun`) | motor current |
+| `Valve` | `Mode`, `PositionSP` (control valves in Manual); Open and Close in Manual (`ManualOpen`) | valve position |
 | `Silo` | `LowLimit`, `HighLimit` | level and limits |
 
 The chart uses the recorded line history for the line measurements and the
 same deterministic model that drives the tags elsewhere. Written settings act
-immediately: Off stops a drive or closes a valve, Hand runs it whatever the
-process state, and a limit change switches the alarm.
+at once: Off stops a drive or closes a valve, Manual hands it to the Start/Stop
+or Open/Close commands whatever the process state, and a limit change switches
+the alarm. Switching to Manual is bumpless: the Manual command starts from the
+current running or open state.
 
 ### Tags
 
@@ -139,15 +145,15 @@ read them from the instance path:
 | UDT | Process members | Settings (written from faceplates) | Parameter members |
 |---|---|---|---|
 | `OatMill/AnalogInput` | `PV`, `Alarm` | `LowLimit`, `HighLimit` | `Kind`, `Description`, `Unit`, `Decimals` |
-| `OatMill/Motor` | `Running`, `Fault`, `Current` | `Mode` | `Description`, `Duty`, `RatedCurrent` |
-| `OatMill/Valve` | `Open`, `Position` | `Mode`, `PositionSP` | `Description` |
+| `OatMill/Motor` | `Running`, `Fault`, `Current` | `Mode`, `ManualRun` | `Description`, `Duty`, `RatedCurrent` |
+| `OatMill/Valve` | `Open`, `Position` | `Mode`, `ManualOpen`, `PositionSP` | `Description` |
 | `OatMill/Silo` | `Level`, `Content`, `Alarm` | `LowLimit`, `HighLimit` | `Description`, `Product`, `Capacity` |
 | `OatMill/ProcessArea` | `State`, `Running`, `LastUpdate` | | `Title` |
 
 The `DemoContinuity` gateway timer writes the simulation into the process
 members every second. It finds the instances by browsing `[default]OatMill`,
 reads which model signal each carries from its `Signal` parameter, and respects
-the written `Mode` and `PositionSP`. The line areas take throughput,
+the written `Mode`, Manual commands and `PositionSP`. The line areas take throughput,
 temperature, moisture, steam pressure and power from the recorded line
 telemetry and follow the line state: a stopped line stops its drives and closes
 its valves (in Auto). A plain tag property does not substitute UDT parameters,

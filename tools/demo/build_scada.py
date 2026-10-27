@@ -186,10 +186,10 @@ def components():
         compact=w==110
         tag=at(node('ia.display.label','Tag',{'text':'','style':{'classes':'Hmi/Tag','alignItems':'flex-start' if compact else 'center'}}),42 if compact else 0,22 if compact else h-17,w-42 if compact else w,15)
         tag['propConfig']={'props.text':expr(TAG_NAME),'meta.visible':expr(SHOW_LABELS)}
-        # Hand or Off overrides the process: shown as a small mode flag.
+        # Manual or Off overrides the process: shown as a small mode flag.
         mode=text_label('Mode','',(2 if compact else w-30),(2 if compact else 2),28,12,8,700,'#ffffff')
         mode['props']['style'].update({'backgroundColor':'#6b4a0c','borderRadius':'2px'})
-        mode['propConfig']={'props.text':expr('if({view.custom.mode} = "Off", "OFF", "HAND")'),'meta.visible':expr('{view.custom.mode} != "Auto" && len({view.custom.mode}) > 0')}
+        mode['propConfig']={'props.text':expr('if({view.custom.mode} = "Off", "OFF", "MAN")'),'meta.visible':expr('{view.custom.mode} != "Auto" && len({view.custom.mode}) > 0')}
         children+=[tag,mode]
         udt='Motor' if kind in DRIVES else 'Valve'
         view(HMI+'Device/'+name,clickable(children,faceplate(udt),mode='fixed'),params={'tagPath':'[default]OatMill/Intake/M-CV101'},custom={'running':False,'mode':'Auto'},
@@ -244,45 +244,46 @@ def components():
 
 
 # Faceplates: one popup per UDT, opened with the full instance path. They show the
-# live state, write the operator settings back to the instance and chart its history
-# over a preset range.
-FACEPLATES={
- # udt: (value member, value series title, extra status, writable fields, limit series)
- 'AnalogInput':('PV','Measured value',[('Alarm','if({view.custom.alarm}, "ALARM", "NORMAL")','if({view.custom.alarm}, "#b23b34", "#4d555c")')],
-                [('LowLimit','Low alarm limit','numeric'),('HighLimit','High alarm limit','numeric')],True),
- 'Motor':('Current','Motor current',[('Running','if({view.custom.running}, "RUNNING", "STOPPED")','if({view.custom.running}, "#2d6a35", "#4d555c")'),
-                                    ('Duty','upper({view.custom.duty})','"#4d555c"')],
-          [('Mode','Mode','mode')],False),
- 'Valve':('Position','Valve position',[('Open','if({view.custom.open}, "OPEN", "CLOSED")','if({view.custom.open}, "#2d6a35", "#4d555c")')],
-          [('Mode','Mode','mode'),('PositionSP','Position in Hand (%)','numeric')],False),
- 'Silo':('Level','Silo level',[('Alarm','if({view.custom.alarm}, "ALARM", "NORMAL")','if({view.custom.alarm}, "#b23b34", "#4d555c")'),
-                               ('Content','numberFormat({view.custom.content}, "#,##0.0") + " t " + {view.custom.product}','"#4d555c"')],
-         [('LowLimit','Low level limit (%)','numeric'),('HighLimit','High level limit (%)','numeric')],True),
-}
-READ={'AnalogInput':['PV','Unit','Decimals','Description','Alarm'],'Motor':['Current','Running','Duty','Description','Mode'],
-      'Valve':['Position','Open','Description','Mode'],'Silo':['Level','Content','Product','Description','Alarm']}
+# live state, stage operator settings until Write is pressed, offer the Manual
+# commands, and chart the instance's history over a preset range.
+MODES=('Auto','Manual','Off')
+MODE_INDEX='case({view.custom.mode}, "Manual", 1, "Off", 2, 0)'
 RANGES=[(1,'1 h'),(8,'8 h'),(24,'24 h')]
-MODES=('Auto','Hand','Off')
+STATUS={
+ 'alarm':('if({view.custom.alarm}, "ALARM", "NORMAL")','if({view.custom.alarm}, "#b23b34", "#4d555c")'),
+ 'running':('if({view.custom.running}, "RUNNING", "STOPPED")','if({view.custom.running}, "#2d6a35", "#4d555c")'),
+ 'open':('if({view.custom.open}, "OPEN", "CLOSED")','if({view.custom.open}, "#2d6a35", "#4d555c")'),
+ 'mode':('"MODE " + upper({view.custom.mode})','if({view.custom.mode} = "Auto", "#4d555c", "#6b4a0c")'),
+ 'duty':('upper({view.custom.duty})','"#4d555c"'),
+ 'content':('numberFormat({view.custom.content}, "#,##0.0") + " t " + {view.custom.product}','"#4d555c"'),
+}
+FACEPLATES={
+ # udt: (value member, chart title, status chips, staged settings (member, caption, kind), manual commands, limit series)
+ 'AnalogInput':('PV','Measured value',['alarm'],[('LowLimit','Low alarm limit','numeric'),('HighLimit','High alarm limit','numeric')],[],True),
+ 'Motor':('Current','Motor current',['running','mode','duty'],[('Mode','Mode','mode')],[('Start','ManualRun',True),('Stop','ManualRun',False)],False),
+ 'Valve':('Position','Valve position',['open','mode'],[('Mode','Mode','mode'),('PositionSP','Position in Manual (%)','numeric')],[('Open','ManualOpen',True),('Close','ManualOpen',False)],False),
+ 'Silo':('Level','Silo level',['alarm','content'],[('LowLimit','Low level limit (%)','numeric'),('HighLimit','High level limit (%)','numeric')],[],True),
+}
+READ={'AnalogInput':['PV','Unit','Decimals','Description','Alarm','LowLimit','HighLimit'],'Motor':['Current','Running','Duty','Description','Mode','ManualRun'],
+      'Valve':['Position','Open','Description','Mode','PositionSP','ManualOpen'],'Silo':['Level','Content','Product','Description','Alarm','LowLimit','HighLimit']}
 
 def custom_name(member):return 'pv' if member=='PV' else member[0].lower()+member[1:]
 
 def field(member,caption,kind):
+    key=custom_name(member)
     if kind=='mode':
-        # The multi-state button only indicates numeric state values: 0 Auto, 1 Hand, 2 Off.
+        # The multi-state button only indicates numeric state values: 0 Auto, 1 Manual, 2 Off.
         states=[{'text':t,'value':v,'selectedStyle':{'classes':'','backgroundColor':'#3f5a73','color':'#ffffff'},'unselectedStyle':{'classes':'','backgroundColor':'#eceeef','color':'#3f4447'}} for v,t in enumerate(MODES)]
         n=node('ia.input.multi-state-button',member,{'states':states,'orientation':'row','controlValue':0,'indicatorValue':0,'defaultSelectedStyle':{'backgroundColor':'#3f5a73','color':'#ffffff'},
                                                     'defaultUnselectedStyle':{'backgroundColor':'#eceeef','color':'#3f4447'},'style':{'classes':'Hmi/ModeButtons'}},basis='34px')
-        write='\tif previousValue is not None and currentValue.value is not None:\n\t\tsystem.tag.writeBlocking([self.view.params.tagPath + "/%s"], [%r[int(currentValue.value)]])'%(member,list(MODES))
-        n['propConfig']={'props.indicatorValue':expr('case({view.custom.%s}, "Hand", 1, "Off", 2, 0)'%custom_name(member)),
-                         'props.controlValue':{'onChange':{'enabled':None,'script':write}}}
+        n['propConfig']={'props.controlValue':prop('view.custom.edit.'+key,True),'props.indicatorValue':bind('this.props.controlValue')}
     else:
         n=node('ia.input.numeric-entry-field',member,{'value':0,'format':'0,0.##','spinner':{'enabled':False},'style':{'classes':'Hmi/Field'}},basis='34px')
-        n['propConfig']={'props.value':tag_write(member)}
-        if member=='PositionSP':n['propConfig']['props.enabled']=expr('{view.custom.mode} = "Hand"')
+        n['propConfig']={'props.value':prop('view.custom.edit.'+key,True)}
     return flex(member+'Field',[label(member+'Caption',caption,'Demo/Muted'),n],classes='Hmi/FieldGroup',basis='190px')
 
 def faceplates():
-    for udt,(member,title,status,fields,limits) in FACEPLATES.items():
+    for udt,(member,title,status,fields,commands,limits) in FACEPLATES.items():
         name=label('Name','','Demo/SectionTitle');name['propConfig']={'props.text':expr(TAG_NAME)}
         description=label('Description','','Demo/Muted');description['propConfig']={'props.text':bind('view.custom.description')}
         path=label('Path','','Hmi/TagPath');path['propConfig']={'props.text':bind('view.params.tagPath')}
@@ -293,16 +294,42 @@ def faceplates():
             text='numberFormat({view.custom.%s}, "#,##0.0") + " %s"'%(custom_name(member),{'Motor':'A','Valve':'%','Silo':'%'}[udt])
         value=label('Value','','Hmi/DetailValue');value['propConfig']={'props.text':expr(text)}
         chips=[]
-        for key,chip_text,chip_colour in status:
-            chip=label(key+'Chip','','Hmi/Chip');chip['propConfig']={'props.text':expr(chip_text),'props.style.backgroundColor':expr(chip_colour)};chips.append(chip)
-        values=flex('Values',[value]+chips,'row','Hmi/FaceplateValues')
-        settings=flex('Settings',[field(*f) for f in fields],'row','Hmi/FaceplateSettings')
+        for key in status:
+            chip_text,chip_colour=STATUS[key]
+            chip=label(key.title()+'Chip','','Hmi/Chip');chip['propConfig']={'props.text':expr(chip_text),'props.style.backgroundColor':expr(chip_colour)};chips.append(chip)
+        sections=[flex('Header',[name,description,path],classes='Hmi/FaceplateHeader'),flex('Values',[value]+chips,'row','Hmi/FaceplateValues')]
+        # Staged settings: edit locally, Write sends them all, Cancel takes the live values back.
+        current={custom_name(m):(MODE_INDEX if k=='mode' else '{view.custom.%s}'%custom_name(m)) for m,_,k in fields}
+        dirty=' || '.join('{view.custom.edit.%s} != %s'%(key,value_) for key,value_ in current.items())
+        writes=', '.join('self.view.params.tagPath + "/%s"'%m for m,_,_ in fields)
+        values=', '.join(('%r[int(edit.%s)]'%(list(MODES),custom_name(m)) if k=='mode' else 'edit.%s'%custom_name(m)) for m,_,k in fields)
+        script='\tedit = self.view.custom.edit\n'
+        if udt in ('Motor','Valve'):
+            # Bumpless switch to Manual: the Manual command starts from the current state.
+            command,state=('ManualRun','running') if udt=='Motor' else ('ManualOpen','open')
+            script+='\tif int(edit.mode) == 1 and self.view.custom.mode != "Manual":\n\t\tsystem.tag.writeBlocking([self.view.params.tagPath + "/%s"], [bool(self.view.custom.%s)])\n'%(command,state)
+        script+='\tsystem.tag.writeBlocking([%s], [%s])'%(writes,values)
+        write=button('Write','Write',script=script,classes='Demo/Button Hmi/ActionButton')
+        write['propConfig']={'props.enabled':expr(dirty)}
+        reset='\tc = self.view.custom\n'+''.join(('\tc.edit.%s = %d if c.mode == "Manual" else (2 if c.mode == "Off" else 0)\n'%(custom_name(m),1)) if k=='mode' else '\tc.edit.%s = c.%s\n'%(custom_name(m),custom_name(m)) for m,_,k in fields)
+        cancel=button('Cancel','Cancel',script=reset,classes='Demo/QuietButton Hmi/ActionButton');cancel['propConfig']={'props.enabled':expr(dirty)}
+        pending=label('Pending','','Demo/Muted');pending['propConfig']={'props.text':expr('if(%s, "Changes not written yet", "")'%dirty)}
+        sections.append(flex('Settings',[field(*f) for f in fields]+[flex('Actions',[write,cancel,pending],'row','Hmi/FaceplateActions')],'row','Hmi/FaceplateSettings'))
+        if commands:
+            buttons=[]
+            for caption,cmd,state in commands:
+                b=button(caption,caption,script='\tsystem.tag.writeBlocking([self.view.params.tagPath + "/%s"], [%s])'%(cmd,state),classes='Demo/QuietButton Hmi/ActionButton')
+                b['propConfig']={'props.enabled':expr('{view.custom.mode} = "Manual"'),
+                                 'props.style.classes':expr('if({view.custom.%s} = %s && {view.custom.mode} = "Manual", "Demo/QuietButton Hmi/ActionButton Hmi/RangeActive", "Demo/QuietButton Hmi/ActionButton")'%(custom_name(cmd),'true' if state else 'false'))}
+                buttons.append(b)
+            hint=label('ManualHint','','Demo/Muted');hint['propConfig']={'props.text':expr('if({view.custom.mode} = "Manual", "Commands act immediately.", "Write Mode Manual to enable the commands.")')}
+            sections.append(flex('Commands',[label('CommandsCaption','Manual control','Demo/Muted')]+buttons+[hint],'row','Hmi/FaceplateRanges'))
         buttons=[]
         for hours,caption in RANGES:
             b=button('Range%dh'%hours,caption,script='\tself.view.custom.hours = %d'%hours,classes='Demo/QuietButton Hmi/RangeButton')
             b['propConfig']={'props.style.classes':expr('if({view.custom.hours} = %d, "Demo/QuietButton Hmi/RangeButton Hmi/RangeActive", "Demo/QuietButton Hmi/RangeButton")'%hours)}
             buttons.append(b)
-        ranges=flex('Ranges',[label('HistoryCaption','History','Demo/Muted')]+buttons,'row','Hmi/FaceplateRanges')
+        sections.append(flex('Ranges',[label('HistoryCaption','History','Demo/Muted')]+buttons,'row','Hmi/FaceplateRanges'))
         series=[('value',title,'#3f5a73')]+([('low','Low limit','#b23b34'),('high','High limit','#b23b34')] if limits else [])
         plot=chart('History',series,source='view.custom.history.points',height='260px')
         plot['props']['yAxes'][0]['value']['range']['min']='';plot['props']['xAxes'][0]['date']['format']='HH:mm'
@@ -313,12 +340,21 @@ def faceplates():
             if s_['name']!=title:s_['line']['appearance']['stroke']['dashArray']='4,3';s_['line']['appearance']['stroke']['width']=1;s_['line']['appearance']['fill']['opacity']=0
         plot['position'].update({'grow':1,'shrink':1})
         message=label('HistoryMessage','','Demo/Muted');message['propConfig']={'props.text':bind('view.custom.history.message')}
-        custom={custom_name(m):'' for m in READ[udt]};custom.update({'hours':1,'history':{'points':[],'unit':'','message':''}})
-        config={'custom.'+custom_name(m):dict(tag_member(m),persistent=True) for m in READ[udt]}
+        sections+=[plot,message]
+        custom={custom_name(m):'' for m in READ[udt]};custom.update({'hours':1,'history':{'points':[],'unit':'','message':''},'edit':{custom_name(m):0 for m,_,_ in fields}})
+        config={}
+        for m in READ[udt]:
+            config['custom.'+custom_name(m)]=dict(tag_member(m),persistent=True)
+        # A live value that changes refreshes the staged copy, so the form starts from the tag.
+        for m,_,k in fields:
+            key=custom_name(m)
+            source='mode' if k=='mode' else key
+            script='\tself.custom.edit.%s = %s'%(key,'{"Manual": 1, "Off": 2}.get(currentValue.value, 0)' if k=='mode' else 'currentValue.value')
+            config['custom.'+source]['onChange']={'enabled':None,'script':script}
         config['custom.history']={'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'path':'{view.params.tagPath}','hours':'{view.custom.hours}','tick':'now(10000)'}},
             'transforms':[{'type':'script','code':'\treturn application.demo.faceplateHistory(value["path"], value["hours"])'}]},'persistent':True}
-        root=theme_root(flex('root',[flex('Header',[name,description,path],classes='Hmi/FaceplateHeader'),values,settings,ranges,plot,message],classes='Demo/PopupRoot Hmi/Faceplate'))
-        view('Popups/Faceplates/'+udt,root,params={'tagPath':''},custom=custom,config=config,height=640,width=760)
+        root=theme_root(flex('root',sections,classes='Demo/PopupRoot Hmi/Faceplate'))
+        view('Popups/Faceplates/'+udt,root,params={'tagPath':''},custom=custom,config=config,height=700,width=780)
 
 
 # Equipment templates, ISA-101 greyscale. Each is an embedded view under
@@ -774,10 +810,7 @@ def page(name,title,subtitle,drawing,area=None):
         if i<len(keys)-1:nav.append(button('Next',TITLE[keys[i+1]]+' ›',page=ROUTE[keys[i+1]],classes='Demo/QuietButton'))
     group=next((a[3] for a in AREAS if a[0]==area),'')
     for b in nav:b['props'].setdefault('style',{})['classes']='Demo/QuietButton Hmi/NavButton'
-    switch=node('ia.input.toggle-switch','LabelSwitch',{'selected':True})
-    switch['propConfig']={'props.selected':{'binding':{'type':'property','config':{'path':'session.custom.showLabels','bidirectional':True}}}}
-    nav.insert(0,flex('Labels',[label('Caption','Labels','Demo/Muted'),switch],'row','Hmi/LabelToggle'))
-    header=flex('Header',[flex('Identity',[label('Eyebrow','OATMAKERS / SCADA'+(' / '+group.upper() if group else ''),'Demo/Eyebrow'),label('Title',title,'Demo/PageTitle'),label('Subtitle',subtitle+' Drag to pan, scroll to zoom.','Demo/Subtitle')],grow=1),flex('Navigation',nav,'row','Hmi/Navigation'),theme_badge(label('Mode','SIMULATED FACTORY','Demo/DemoBadge'))],'row','Demo/PageHeader')
+    header=flex('Header',[flex('Identity',[label('Eyebrow','OATMAKERS / SCADA'+(' / '+group.upper() if group else ''),'Demo/Eyebrow'),label('Title',title,'Demo/PageTitle')],grow=1),flex('Navigation',nav,'row','Hmi/Navigation'),theme_badge(label('Mode','SIMULATED FACTORY','Demo/DemoBadge'))],'row','Demo/PageHeader')
     pan=node('mustrysolutions.perspective.display.panzoomview','ProcessViewport',{
         'config':{'viewPath':drawing,'viewParams':[],'contentWidth':W,'contentHeight':H,'minZoom':0.2,'maxZoom':4,
                   'zoomStep':1.25,'wheelZoom':True,'doubleClickZoom':True,'showControls':True,'showMinimap':True,'showPoiList':False,
@@ -822,6 +855,13 @@ SCADA_CSS='''
 .psc-Hmi\\/ModeButtons { height:32px; font-size:12px; }
 .psc-Hmi\\/FaceplateRanges { gap:6px; align-items:center; }
 .psc-Hmi\\/RangeButton { flex:0 0 auto !important; height:30px; padding:4px 12px; font-size:12px; }
+.psc-Hmi\\/ActionButton { flex:0 0 auto !important; height:32px; padding:4px 16px; font-size:12px; }
+.psc-Hmi\\/ActionButton:disabled,.psc-Hmi\\/ActionButton.ia_button--disabled { opacity:0.45; box-shadow:none; cursor:default; }
+.psc-Hmi\\/FaceplateActions { gap:8px; align-items:flex-end; align-self:flex-end; }
+.psc-Hmi\\/Faceplate,.psc-Hmi\\/Faceplate .psc-Hmi\\/FaceplateSettings,.psc-Hmi\\/Faceplate .psc-Hmi\\/FaceplateRanges,.psc-Hmi\\/FieldGroup,.psc-Hmi\\/FaceplateActions,.psc-Hmi\\/ModeButtons,.psc-Hmi\\/Navigation,.psc-Hmi\\/HeaderDock,.psc-Hmi\\/LabelToggle { overflow:visible !important; }
+.psc-Hmi\\/FaceplateRanges,.psc-Hmi\\/FaceplateSettings,.psc-Hmi\\/Navigation { padding-bottom:4px; }
+.psc-Hmi\\/HeaderDock { height:100%; align-items:center; justify-content:space-between; padding:0 20px; background:#f4f5f5; border-bottom:1px solid #dde1e4; }
+.psc-Hmi\\/HeaderWhere { font-size:11px; font-weight:700; letter-spacing:1.2px; color:#6d7270; }
 .psc-Hmi\\/RangeActive { background:#3f5a73 !important; color:#fff !important; border-color:#3f5a73 !important; }
 .psc-Demo\\/Menu { background:transparent; color:#d5dade; font-size:12px; }
 .psc-Demo\\/Menu .menu-wrapper,.psc-Demo\\/Menu .wrapper-submenu { background:#2b3238 !important; height:100%; }

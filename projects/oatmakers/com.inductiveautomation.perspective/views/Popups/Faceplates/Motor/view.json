@@ -5,11 +5,15 @@
     "duty": "",
     "description": "",
     "mode": "",
+    "manualRun": "",
     "hours": 1,
     "history": {
       "points": [],
       "unit": "",
       "message": ""
+    },
+    "edit": {
+      "mode": 0
     }
   },
   "params": {
@@ -84,6 +88,24 @@
           "fallbackDelay": 2.5
         }
       },
+      "persistent": true,
+      "onChange": {
+        "enabled": null,
+        "script": "\tself.custom.edit.mode = {\"Manual\": 1, \"Off\": 2}.get(currentValue.value, 0)"
+      }
+    },
+    "custom.manualRun": {
+      "binding": {
+        "type": "tag",
+        "config": {
+          "mode": "indirect",
+          "tagPath": "{path}/ManualRun",
+          "references": {
+            "path": "{view.params.tagPath}"
+          },
+          "fallbackDelay": 2.5
+        }
+      },
       "persistent": true
     },
     "custom.history": {
@@ -112,12 +134,15 @@
     },
     "custom.hours": {
       "persistent": true
+    },
+    "custom.edit": {
+      "persistent": true
     }
   },
   "props": {
     "defaultSize": {
-      "width": 760,
-      "height": 640
+      "width": 780,
+      "height": 700
     }
   },
   "root": {
@@ -302,6 +327,40 @@
           {
             "type": "ia.display.label",
             "meta": {
+              "name": "ModeChip"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Hmi/Chip"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"MODE \" + upper({view.custom.mode})"
+                  }
+                }
+              },
+              "props.style.backgroundColor": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if({view.custom.mode} = \"Auto\", \"#4d555c\", \"#6b4a0c\")"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
               "name": "DutyChip"
             },
             "props": {
@@ -400,7 +459,7 @@
                       }
                     },
                     {
-                      "text": "Hand",
+                      "text": "Manual",
                       "value": 1,
                       "selectedStyle": {
                         "classes": "",
@@ -448,18 +507,21 @@
                   "basis": "34px"
                 },
                 "propConfig": {
-                  "props.indicatorValue": {
+                  "props.controlValue": {
                     "binding": {
-                      "type": "expr",
+                      "type": "property",
                       "config": {
-                        "expression": "case({view.custom.mode}, \"Hand\", 1, \"Off\", 2, 0)"
+                        "path": "view.custom.edit.mode",
+                        "bidirectional": true
                       }
                     }
                   },
-                  "props.controlValue": {
-                    "onChange": {
-                      "enabled": null,
-                      "script": "\tif previousValue is not None and currentValue.value is not None:\n\t\tsystem.tag.writeBlocking([self.view.params.tagPath + \"/Mode\"], [['Auto', 'Hand', 'Off'][int(currentValue.value)]])"
+                  "props.indicatorValue": {
+                    "binding": {
+                      "type": "property",
+                      "config": {
+                        "path": "this.props.controlValue"
+                      }
                     }
                   }
                 }
@@ -468,6 +530,272 @@
             "position": {
               "shrink": 0,
               "basis": "190px"
+            }
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "Actions"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "classes": "Hmi/FaceplateActions"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "Write"
+                },
+                "props": {
+                  "text": "Write",
+                  "style": {
+                    "classes": "Demo/Button Hmi/ActionButton"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "40px"
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tedit = self.view.custom.edit\n\tif int(edit.mode) == 1 and self.view.custom.mode != \"Manual\":\n\t\tsystem.tag.writeBlocking([self.view.params.tagPath + \"/ManualRun\"], [bool(self.view.custom.running)])\n\tsystem.tag.writeBlocking([self.view.params.tagPath + \"/Mode\"], [['Auto', 'Manual', 'Off'][int(edit.mode)]])"
+                      }
+                    }
+                  }
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.edit.mode} != case({view.custom.mode}, \"Manual\", 1, \"Off\", 2, 0)"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "Cancel"
+                },
+                "props": {
+                  "text": "Cancel",
+                  "style": {
+                    "classes": "Demo/QuietButton Hmi/ActionButton"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "40px"
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tc = self.view.custom\n\tc.edit.mode = 1 if c.mode == \"Manual\" else (2 if c.mode == \"Off\" else 0)\n"
+                      }
+                    }
+                  }
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.edit.mode} != case({view.custom.mode}, \"Manual\", 1, \"Off\", 2, 0)"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "Pending"
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "classes": "Demo/Muted"
+                  }
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "auto"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "if({view.custom.edit.mode} != case({view.custom.mode}, \"Manual\", 1, \"Off\", 2, 0), \"Changes not written yet\", \"\")"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "position": {
+              "shrink": 0
+            }
+          }
+        ],
+        "position": {
+          "shrink": 0
+        }
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "Commands"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "classes": "Hmi/FaceplateRanges"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "CommandsCaption"
+            },
+            "props": {
+              "text": "Manual control",
+              "style": {
+                "classes": "Demo/Muted"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "Start"
+            },
+            "props": {
+              "text": "Start",
+              "style": {
+                "classes": "Demo/QuietButton Hmi/ActionButton"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "40px"
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "type": "script",
+                  "scope": "G",
+                  "config": {
+                    "script": "\tsystem.tag.writeBlocking([self.view.params.tagPath + \"/ManualRun\"], [True])"
+                  }
+                }
+              }
+            },
+            "propConfig": {
+              "props.enabled": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.mode} = \"Manual\""
+                  }
+                }
+              },
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if({view.custom.manualRun} = true && {view.custom.mode} = \"Manual\", \"Demo/QuietButton Hmi/ActionButton Hmi/RangeActive\", \"Demo/QuietButton Hmi/ActionButton\")"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "Stop"
+            },
+            "props": {
+              "text": "Stop",
+              "style": {
+                "classes": "Demo/QuietButton Hmi/ActionButton"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "40px"
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "type": "script",
+                  "scope": "G",
+                  "config": {
+                    "script": "\tsystem.tag.writeBlocking([self.view.params.tagPath + \"/ManualRun\"], [False])"
+                  }
+                }
+              }
+            },
+            "propConfig": {
+              "props.enabled": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.mode} = \"Manual\""
+                  }
+                }
+              },
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if({view.custom.manualRun} = false && {view.custom.mode} = \"Manual\", \"Demo/QuietButton Hmi/ActionButton Hmi/RangeActive\", \"Demo/QuietButton Hmi/ActionButton\")"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "ManualHint"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "classes": "Demo/Muted"
+              }
+            },
+            "position": {
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if({view.custom.mode} = \"Manual\", \"Commands act immediately.\", \"Write Mode Manual to enable the commands.\")"
+                  }
+                }
+              }
             }
           }
         ],

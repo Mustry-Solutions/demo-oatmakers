@@ -139,7 +139,15 @@
         "valueSource": "memory",
         "dataType": "String",
         "value": "Auto",
-        "documentation": "Auto, Hand or Off"
+        "documentation": "Auto, Manual or Off"
+      },
+      {
+        "name": "ManualRun",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Boolean",
+        "value": false,
+        "documentation": "Run command in Manual"
       },
       {
         "name": "Current",
@@ -212,7 +220,15 @@
         "valueSource": "memory",
         "dataType": "String",
         "value": "Auto",
-        "documentation": "Auto, Hand or Off"
+        "documentation": "Auto, Manual or Off"
+      },
+      {
+        "name": "ManualOpen",
+        "tagType": "AtomicTag",
+        "valueSource": "memory",
+        "dataType": "Boolean",
+        "value": false,
+        "documentation": "Open command in Manual"
       },
       {
         "name": "PositionSP",
@@ -221,7 +237,7 @@
         "dataType": "Float8",
         "engUnit": "%",
         "value": 50.0,
-        "documentation": "Position in Hand"
+        "documentation": "Control valve position in Manual"
       },
       {
         "name": "Description",
