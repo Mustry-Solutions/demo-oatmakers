@@ -469,7 +469,6 @@ jobs:
       - validate-projects
       - validate-release
       - validate-gateway-payload
-      - demo
       - lint-workflows
       - workflow-hygiene
     if: always()
