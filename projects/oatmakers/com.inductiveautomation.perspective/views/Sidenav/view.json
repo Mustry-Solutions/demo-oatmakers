@@ -529,15 +529,6 @@
           ],
           "layoutAlignment": "left",
           "backActionText": "Back",
-          "itemStyle": {
-            "classes": "Demo/MenuItem"
-          },
-          "headerStyle": {
-            "classes": "Demo/MenuHeader"
-          },
-          "backActionStyle": {
-            "classes": "Demo/MenuBack"
-          },
           "style": {
             "classes": "Demo/Menu"
           }

@@ -72,7 +72,6 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
-            "text": "Rolled oats from Line 01",
             "target": "/scada/flaking",
             "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyMTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE5NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTkzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI5Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5Sb2xsZWQgb2F0cyBmcm9tIExpbmUgMDE8L3RleHQ+PC9zdmc+"
           },
@@ -214,7 +213,6 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
-            "text": "Steel-cut oats from Line 02",
             "target": "/scada/cutting",
             "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyMTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE5NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTkzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI5Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5TdGVlbC1jdXQgb2F0cyBmcm9tIExpbmUgMDI8L3RleHQ+PC9zdmc+"
           },
@@ -356,7 +354,6 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
-            "text": "Oat flour from Line 03",
             "target": "/scada/milling",
             "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyMTAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDE5NiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjM2Y1YTczIi8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTkzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI5Mi41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5PYXQgZmxvdXIgZnJvbSBMaW5lIDAzPC90ZXh0Pjwvc3ZnPg=="
           },
@@ -525,7 +522,6 @@
         "props": {
           "path": "Demo/Hmi/Stream",
           "params": {
-            "text": "To warehouse",
             "target": "",
             "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNDAgMjgiPjxwYXRoIGQ9Ik0wIDAgSDEyNiBhMTQgMTQgMCAwIDEgMCAyOCBIMCBaIiBmaWxsPSIjNTk1YzVhIi8+PGNpcmNsZSBjeD0iMTI2IiBjeT0iMTQiIHI9IjkiIGZpbGw9IiNjZGQwY2QiLz48cGF0aCBkPSJNMTIzIDggbDcgNiAtNyA2IFoiIGZpbGw9IiM2MDY0NWYiLz48dGV4dCB4PSI1Ny41IiB5PSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwLjUiIGZpbGw9IndoaXRlIj5UbyB3YXJlaG91c2U8L3RleHQ+PC9zdmc+"
           },

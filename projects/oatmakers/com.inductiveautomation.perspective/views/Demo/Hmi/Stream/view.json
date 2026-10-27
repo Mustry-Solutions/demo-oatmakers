@@ -1,15 +1,10 @@
 {
   "custom": {},
   "params": {
-    "text": "",
     "source": "",
     "target": ""
   },
   "propConfig": {
-    "params.text": {
-      "paramDirection": "input",
-      "persistent": true
-    },
     "params.source": {
       "paramDirection": "input",
       "persistent": true

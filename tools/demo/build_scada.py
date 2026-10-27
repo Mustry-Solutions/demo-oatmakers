@@ -98,7 +98,7 @@ def components():
     link=full(image('Graphic','','Stream'));link['propConfig']={'props.source':bind('view.params.source')}
     root=clickable([link],'\tif self.view.params.target:\n\t\tsystem.perspective.navigate(self.view.params.target)')
     root['propConfig']={'props.style.cursor':{'binding':{'type':'expr','config':{'expression':'if(len({view.params.target}) > 0, "pointer", "default")'}}}}
-    view(HMI+'Stream',root,params={'text':'','source':'','target':''},height=28)
+    view(HMI+'Stream',root,params={'source':'','target':''},height=28)
     trend=full(image('Plot','','Trend'))
     trend['propConfig']={'props.source':{'binding':{'type':'expr-struct','config':{'waitOnAll':True,'struct':{'tick':'now(2000)','area':'{view.params.area}','signal':'{view.params.signal}','colour':'{view.params.colour}','sp':'{view.params.sp}'}},'transforms':[{'type':'script','code':'\treturn application.demo.scadaTrendSvg(value["area"], value["signal"], value["colour"], value["sp"])'}]}}}
     view(HMI+'Trend',node('ia.container.coord','root',{'mode':'percent'},[trend]),params={'area':'intake','signal':'','colour':'#626b75','sp':0},height=70)
@@ -230,7 +230,7 @@ class Scene:
         self.parts.append(at(n,x,y,w,h))
         self.text(x+w/2+6,y-8,tag,12,600,'start',layer=self.over)
     def stream(self,text,x,y,w=170,target=None):
-        n=embed(''.join(c for c in text.title() if c.isalnum())+'Link',HMI+'Stream',{'text':text,'target':ROUTE.get(target,''),'source':b64(stream_svg(text,w,target))})
+        n=embed(''.join(c for c in text.title() if c.isalnum())+'Link',HMI+'Stream',{'target':ROUTE.get(target,''),'source':b64(stream_svg(text,w,target))})
         self.parts.append(at(n,x,y,w,28))
     def trend(self,signal,x,y,w,h,caption,colour='#626b75',sp=0):
         self.frame(x,y,w,h,caption)

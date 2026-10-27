@@ -190,7 +190,7 @@ groups={}
 for route,title,_ in scada_routes:groups.setdefault(next(a[3] for a in AREAS if a[1]==route),[]).append(item(title,route))
 scada_menu=[item('Plant overview','/scada','material/dashboard')]+[item(g,icon=i,children=children) for (g,children),i in zip(groups.items(),['material/local_shipping','material/grain','material/layers','material/archive','material/build'])]
 menu_items=[item('Factory overview','/','material/home'),item('SCADA',icon='material/device_hub',children=scada_menu)]+[item(t,r,i) for (r,t,_),i in zip(routes[2:],['material/event','material/timeline','material/verified_user','material/assignment'])]
-menu=node('ia.navigation.menutree','Menu',{'items':menu_items,'layoutAlignment':'left','backActionText':'Back','itemStyle':{'classes':'Demo/MenuItem'},'headerStyle':{'classes':'Demo/MenuHeader'},'backActionStyle':{'classes':'Demo/MenuBack'},'style':{'classes':'Demo/Menu'}},basis='auto',grow=1)
+menu=node('ia.navigation.menutree','Menu',{'items':menu_items,'layoutAlignment':'left','backActionText':'Back','style':{'classes':'Demo/Menu'}},basis='auto',grow=1)
 menu['propConfig']={'props.items':bind_script('page.props.path','\titems = system.util.jsonDecode('+json.dumps(json.dumps(menu_items))+')\n\tdef mark(nodes):\n\t\tfound = False\n\t\tfor n in nodes:\n\t\t\tchild = mark(n["items"])\n\t\t\tactive = n["target"] == value\n\t\t\tn["style"]["classes"] = "Demo/MenuActive" if active else ("Demo/MenuTrail" if child else "")\n\t\t\tfound = found or active or child\n\t\treturn found\n\tmark(items)\n\treturn items')}
 nav.append(menu)
 nav += [button('Health','Demo health',page='/demo/health',classes='Demo/NavButton'),label('Footer','Mustry Solutions','Demo/NavFooter')]
