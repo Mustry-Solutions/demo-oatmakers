@@ -4,6 +4,18 @@
       "title": "Factory overview",
       "viewPath": "Demo/Overview"
     },
+    "/demo/health": {
+      "title": "Demo health",
+      "viewPath": "Demo/Health"
+    },
+    "/demo/input-fields": {
+      "title": "Batch output",
+      "viewPath": "Demo/Operator"
+    },
+    "/makeramaigreatagain": {
+      "title": "",
+      "viewPath": "Demo/MakeRamaiGreatAgain"
+    },
     "/observatory": {
       "title": "Gateway Observatory",
       "viewPath": "Showcase/Gateway Observatory"
@@ -12,33 +24,25 @@
       "title": "Performance",
       "viewPath": "Demo/Performance"
     },
-    "/production": {
-      "title": "Production planning",
-      "viewPath": "Demo/Production"
-    },
-    "/process": {
-      "title": "SCADA",
-      "viewPath": "Demo/SCADA"
+    "/operator": {
+      "title": "Batch output",
+      "viewPath": "Demo/Operator"
     },
     "/performance": {
       "title": "Performance",
       "viewPath": "Demo/Performance"
     },
+    "/process": {
+      "title": "SCADA",
+      "viewPath": "Demo/SCADA"
+    },
+    "/production": {
+      "title": "Production planning",
+      "viewPath": "Demo/Production"
+    },
     "/quality": {
-      "title": "Quality & traceability",
+      "title": "Quality \u0026 traceability",
       "viewPath": "Demo/Quality"
-    },
-    "/operator": {
-      "title": "Batch output",
-      "viewPath": "Demo/Operator"
-    },
-    "/demo/health": {
-      "title": "Demo health",
-      "viewPath": "Demo/Health"
-    },
-    "/demo/input-fields": {
-      "title": "Batch output",
-      "viewPath": "Demo/Operator"
     },
     "/scada": {
       "title": "SCADA",
