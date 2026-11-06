@@ -28,6 +28,37 @@
     "valueSource": "memory"
   },
   {
+    "name": "Producing",
+    "tagType": "AtomicTag",
+    "valueSource": "expr",
+    "dataType": "Boolean",
+    "expression": "{[.]Throughput} > 0",
+    "documentation": "True while the line produces",
+    "historyEnabled": true,
+    "historyProvider": "OatmakersHistory",
+    "historicalDeadband": 0.0,
+    "historyMaxAge": 1,
+    "historyMaxAgeUnits": "MIN",
+    "historyTimeDeadband": 60,
+    "historyTimeDeadbandUnits": "SEC"
+  },
+  {
+    "name": "SpeedPct",
+    "tagType": "AtomicTag",
+    "valueSource": "expr",
+    "dataType": "Float8",
+    "engUnit": "%",
+    "expression": "{[.]Throughput} / 1920 * 100",
+    "documentation": "Throughput as a percentage of the nominal 32 kg/min of oat_demo.line",
+    "historyEnabled": true,
+    "historyProvider": "OatmakersHistory",
+    "historicalDeadband": 0.0,
+    "historyMaxAge": 1,
+    "historyMaxAgeUnits": "MIN",
+    "historyTimeDeadband": 60,
+    "historyTimeDeadbandUnits": "SEC"
+  },
+  {
     "dataType": "String",
     "defaultValue": "Starting",
     "name": "State",
@@ -39,7 +70,14 @@
     "defaultValue": 0.0,
     "name": "Temperature",
     "tagType": "AtomicTag",
-    "valueSource": "memory"
+    "valueSource": "memory",
+    "historyEnabled": true,
+    "historyProvider": "OatmakersHistory",
+    "historicalDeadband": 0.0,
+    "historyMaxAge": 1,
+    "historyMaxAgeUnits": "MIN",
+    "historyTimeDeadband": 60,
+    "historyTimeDeadbandUnits": "SEC"
   },
   {
     "dataType": "Float8",
