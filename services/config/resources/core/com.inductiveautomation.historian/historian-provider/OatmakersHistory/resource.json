@@ -1,0 +1,14 @@
+{
+  "scope": "A",
+  "description": "Line tag history in the demo database (timescaledb extension).",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "config.json"
+  ],
+  "attributes": {
+    "uuid": "a59343b6-9bba-4012-985b-24bf96f721be",
+    "enabled": true
+  }
+}

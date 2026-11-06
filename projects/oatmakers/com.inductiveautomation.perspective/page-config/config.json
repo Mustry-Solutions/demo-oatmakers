@@ -87,6 +87,10 @@
     "/scada/utilities": {
       "title": "Steam & compressed air",
       "viewPath": "Pages/Scada/Utilities"
+    },
+    "/line-stops": {
+      "title": "Line stops",
+      "viewPath": "Pages/LineStops"
     }
   },
   "sharedDocks": {

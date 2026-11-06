@@ -117,6 +117,46 @@ page('Pages/Performance','Performance & history','Pick exact dates or a live pre
  history,repeater('Metrics','Templates/Cards/Metric','view.custom.summary.metrics','auto'),
  grid('Losses','view.custom.summary.losses',[('reason','Loss reason',250),('minutes','Line minutes',140),('lost_kg','Lost output kg',160)],key='reason',height='250px')],custom={'summary':{'metrics':[],'losses':[]}},config={'custom.summary':struct_binding({'start':'try({/root/History.props.params.range.start}, 0)','end':'try({/root/History.props.params.range.end}, 0)','line':'{/root/History.props.params.lineNumber}','refresh':'now(10000)'},'\treturn application.demo.rangeSnapshot(value["start"], value["end"], value["line"])')},live_header=False)
 
+# Line stops: three charts over one picker range, from the line tags' history.
+# The XY chart has no annotations, so the at-speed band and the red stops are
+# filled series on the speed chart. They stay connected: with the second
+# time unit a break in the line would split the fill at every row.
+def line_stops_chart(name,source,low,high):
+    n=chart(name,[(f'line{i}',title,COLORS[i-1]) for i,title in LINES if i],source='view.custom.trend.'+source,height='0px')
+    n['position'].update({'grow':1,'shrink':1});n['props']['style'].update({'minHeight':'170px'})
+    for s in n['props']['series']:
+        s['line']['appearance']['fill']['opacity']=0;s['line']['appearance']['stroke']['width']=2
+    x=n['props']['xAxes'][0];x['date']['format']='dd MMM HH:mm';x['appearance']['grid']['minDistance']=110
+    x['date']['baseInterval'].update({'enabled':True,'count':1,'timeUnit':'second'})
+    y=n['props']['yAxes'][0];y['value']['range'].update({'min':low,'max':high,'useStrict':True});y['appearance']['inside']=True
+    n['props']['cursor']['behavior']='none'
+    theme_series(n,COLORS);return n
+def area_series(proto,name,source,field,colour,opacity,low=None):
+    s=copy.deepcopy(proto);s.update({'name':name,'hiddenInLegend':True,'data':{'source':source,'x':'ts','y':field}})
+    s['tooltip']['enabled']=False
+    s['line']['appearance']['stroke'].update({'opacity':0,'color':colour});s['line']['appearance']['fill']={'color':colour,'opacity':opacity}
+    if low:s['line']['open']={'x':'ts','y':low}
+    return s
+speed_chart=line_stops_chart('Speed','speed',0,120)
+proto=speed_chart['props']['series'][0]
+speed_chart['props']['series']+=[area_series(proto,'At speed','history','high','#9aa3ab',0.25,low='low'),area_series(proto,'Unplanned stop','history','stop','#b23b34',0.2)]
+temperature_chart=line_stops_chart('Temperature','temperature',50,90)
+producing_chart=line_stops_chart('Producing','producing',-0.1,1.1)
+for n in (speed_chart,temperature_chart):n['props']['legend']['enabled']=False
+stops_picker=picker();stops_picker['props']['config']['spanDays']['max']=7
+stops_picker['props']['config']['presets']=[p for p in stops_picker['props']['config']['presets'] if p['label']!='Last 30 days']
+stops_picker['props']['selection']={'rollingAmount':8,'rollingUnit':'hours'}
+def chart_panel(name,title,n):
+    p=panel(name,title,'',[n]);p['children'].pop(1);p['position'].update({'basis':'0px','grow':1,'shrink':1});p['props']['style'].update({'minHeight':'230px','padding':'12px 16px'})
+    return p
+page('Pages/LineStops','Line stops','Unplanned stops per line. Red: below 50 % of nominal output for more than 10 minutes.',[
+ flex('Controls',[stops_picker],'row','Demo/Filters'),
+ chart_panel('SpeedPanel','Line speed (% of nominal)',speed_chart),chart_panel('TemperaturePanel','Temperature (°C)',temperature_chart),chart_panel('ProducingPanel','Producing',producing_chart),
+ bound_label('TrendMessage','view.custom.trend.message','Demo/Muted')],
+ custom={'trend':{'speed':[],'temperature':[],'producing':[],'message':'Loading line history...'}},
+ config={'custom.trend':struct_binding({'start':'try({/root/Controls/DateRange.props.output.startEpochMs}, 0)','end':'try({/root/Controls/DateRange.props.output.endEpochMs}, 0)','valid':'try({/root/Controls/DateRange.props.output.isValid}, false)','refresh':'now(30000)'},
+  '\tif not value["valid"]:\n\t\treturn {"speed": [], "temperature": [], "producing": [], "message": "Loading line history..."}\n\treturn application.lineStops.trend(value["start"], value["end"])')},live_header=False)
+
 # One modern record grid, with an explicit inspect action.
 quality_picker=picker('QualityRange')
 quality_picker['props']['selection']['rollingAmount']=24
@@ -194,7 +234,7 @@ theme_picker=select('Theme',THEMES,'session.custom.theme',width='40px');theme_pi
 page('Pages/Settings','Settings','Choose how the demo looks for this session.',[
  panel('Appearance','Theme','Standard follows high-performance HMI practice. Hello Kitty is the pink edition.',[theme_picker],grow=0)],live_header=False)
 
-routes=[('/','Factory overview','Pages/Overview'),('/scada','SCADA','Pages/Scada/Overview'),('/production','Production planning','Pages/Production'),('/performance','Performance','Pages/Performance'),('/quality','Quality & traceability','Pages/Quality'),('/operator','Batch output','Pages/Operator')]
+routes=[('/','Factory overview','Pages/Overview'),('/scada','SCADA','Pages/Scada/Overview'),('/production','Production planning','Pages/Production'),('/performance','Performance','Pages/Performance'),('/line-stops','Line stops','Pages/LineStops'),('/quality','Quality & traceability','Pages/Quality'),('/operator','Batch output','Pages/Operator')]
 logo=base64.b64encode((ROOT/'tools/demo/scada-assets/oatmakers-logo.svg').read_bytes()).decode()
 kitty=base64.b64encode((ROOT/'tools/demo/scada-assets/hello-kitty.png').read_bytes()).decode()
 brand=node('ia.display.image','Brand',{'source':'data:image/svg+xml;base64,'+logo,'altText':'Oatmakers','fit':{'mode':'contain'},'style':{'classes':'Demo/BrandLogo'}},basis='74px')
@@ -208,7 +248,7 @@ def item(title,target='',icon='',children=None):
 groups={}
 for route,title,_ in scada_routes:groups.setdefault(next(a[3] for a in AREAS if a[1]==route),[]).append(item(title,route))
 scada_menu=[item('Plant overview','/scada','material/dashboard')]+[item(g,icon=i,children=children) for (g,children),i in zip(groups.items(),['material/local_shipping','material/grain','material/layers','material/archive','material/build'])]
-menu_items=[item('Factory overview','/','material/home'),item('SCADA',icon='material/device_hub',children=scada_menu)]+[item(t,r,i) for (r,t,_),i in zip(routes[2:],['material/event','material/timeline','material/verified_user','material/assignment'])]
+menu_items=[item('Factory overview','/','material/home'),item('SCADA',icon='material/device_hub',children=scada_menu)]+[item(t,r,i) for (r,t,_),i in zip(routes[2:],['material/event','material/timeline','material/report','material/verified_user','material/assignment'])]
 menu=node('ia.navigation.menutree','Menu',{'items':menu_items,'layoutAlignment':'left','backActionText':'Back','style':{'classes':'Demo/Menu'}},basis='auto',grow=1)
 menu['propConfig']={'props.items':bind_script('page.props.path','\titems = system.util.jsonDecode('+json.dumps(json.dumps(menu_items))+')\n\tdef mark(nodes):\n\t\tfound = False\n\t\tfor n in nodes:\n\t\t\tchild = mark(n["items"])\n\t\t\tactive = n["target"] == value\n\t\t\tn["style"]["classes"] = "Demo/MenuActive" if active else ("Demo/MenuTrail" if child else "")\n\t\t\tfound = found or active or child\n\t\treturn found\n\tmark(items)\n\treturn items')}
 nav.append(menu)
