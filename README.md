@@ -51,7 +51,8 @@ you put in `jar-files/jar/` loads after `docker compose restart gateway`.
 Flint? `flint.config.json` points it at the local gateway, and the Project
 Scan Endpoint module (in `third-party-modules/`) lets it refresh open
 Designers after a save; `setup.sh` writes the token file Flint reads. The gateway runs in
-two-hour trial mode; `scripts/reset-trial.sh` resets it. Stop everything with
+two-hour trial mode and resets it by itself when it expires (a watcher the
+container starts at boot); `scripts/reset-trial.sh` is the manual fallback. Stop everything with
 `scripts/teardown.sh` (add `--volumes` for a factory reset).
 
 ## How a change reaches production
