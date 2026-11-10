@@ -27,8 +27,16 @@ name: oatmakers
 # everything the gateway writes into the bind mounts 644/755, group read-only,
 # so despite group_add + setgid you could not edit or delete those files.
 # With 0002 they land 664/775, group-owned by you via the setgid dirs.
+# Before that, local-development/trial-auto-reset.sh starts the watcher that
+# resets the two-hour trial when it expires; it never blocks the start.
 x-ignition-entrypoint: &ignition-entrypoint
-  ["/bin/sh", "-c", 'umask 0002 && exec docker-entrypoint.sh "$@"', "--"]
+  ["/bin/sh", "-c", 'umask 0002 && { bash /usr/local/bin/trial-auto-reset.sh || true; } && exec docker-entrypoint.sh "$@"', "--"]
+
+x-trial-auto-reset-script: &trial-auto-reset-script
+  type: bind
+  source: ./local-development/trial-auto-reset.sh
+  target: /usr/local/bin/trial-auto-reset.sh
+  read_only: true
 
 x-ignition-environment: &ignition-environment
   ACCEPT_IGNITION_EULA: "Y"
@@ -45,6 +53,9 @@ x-ignition-environment: &ignition-environment
   # manifest alone.
   ACCEPT_MODULE_LICENSES: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components"
   ACCEPT_MODULE_CERTS: "com.mustry.historian.timescaledb,com.mustrysolutions.perspective.components"
+  # Reset the trial automatically when it expires. These gateways run without a
+  # config mode, so the script's default (auto: tst/stg only) would not fire.
+  TRIAL_AUTO_RESET: "true"
 
 # Library JARs from jar-files/jar/ load from their own directory, added to the
 # gateway's classpath next to the image's lib/core/gateway. The local gateway
@@ -90,6 +101,7 @@ services:
       # `environment` secret provider that reads /run/secrets/ on production
       # reads these here.
       - ./local-development/secrets:/run/secrets:ro
+      - *trial-auto-reset-script
       # The repo's library JARs, straight from your working tree: drop a JAR
       # in jar-files/jar/ and restart the gateway to load it.
       - type: bind
@@ -179,6 +191,7 @@ services:
       # boot: the scan API only accepts tokens the gateway has already loaded.
       - test-gateway-data:/usr/local/bin/ignition/data
       - ./local-development/secrets:/run/secrets:ro
+      - *trial-auto-reset-script
       # The third-party modules and JARs your test workflow ships, kept
       # across a recreate (like production's volumes). Only the workflow
       # writes here.

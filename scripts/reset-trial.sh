@@ -18,6 +18,12 @@
 # gateway's seeded API token) to solve a problem one HTTP call solves.
 # Restarting the container does not help either — the clock survives it.
 #
+# Both gateways normally do this themselves: docker-compose.yaml starts
+# local-development/trial-auto-reset.sh at boot, which resets the trial within
+# seconds of expiry. This script is the fallback, for example on a gateway's
+# very first boot, where the gateway answers that watcher with 403 until one
+# restart.
+#
 # Safe to run unconditionally: it reads the trial state first and only POSTs
 # when the trial has actually expired.
 #
@@ -54,7 +60,7 @@ explicit=0
 while [ $# -gt 0 ]; do
   case "$1" in
     -h|--help)
-      sed -n '2,40p' "$0" | sed 's/^# \{0,1\}//'
+      sed -n '2,46p' "$0" | sed 's/^# \{0,1\}//'
       exit 0
       ;;
     local|test)
